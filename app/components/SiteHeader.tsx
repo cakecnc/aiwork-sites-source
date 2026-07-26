@@ -37,7 +37,7 @@ export default function SiteHeader({
         <Link className="brand" href="/" aria-label="AIWORK 홈페이지">
           <Image
             className="brand-avatar"
-            src="/images/aiwork-agent-yellow.webp"
+            src="/images/aiwork-anime-profile-v1.webp"
             alt=""
             width="40"
             height="40"

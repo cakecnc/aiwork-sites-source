@@ -3,9 +3,9 @@ import Link from "next/link";
 import DetailPage from "../../components/DetailPage";
 
 export const metadata: Metadata = {
-  title: "AIWORK 시작하기 | 첫 프로젝트 만들기",
+  title: "AIWORK 프로젝트 흐름 | 로드맵 안내",
   description:
-    "프로젝트 목적 설정, 자료 추가, 첫 질문 작성, 출처 확인과 결과 저장까지 AIWORK의 기본 시작 절차를 안내합니다.",
+    "아직 구현되지 않은 AIWORK 프로젝트 기능의 목표 설정·자료 선택·검토 원칙을 로드맵 참고로 안내합니다.",
 };
 
 const steps = [
@@ -40,7 +40,7 @@ export default function GettingStartedPage() {
     <DetailPage
       active="guide"
       eyebrow="GUIDE 01 · GETTING STARTED"
-      status="기본 안내"
+      status="로드맵 안내 · 현재 미구현"
       title={
         <>
           첫 프로젝트를
@@ -48,9 +48,18 @@ export default function GettingStartedPage() {
           만드는 방법.
         </>
       }
-      description="좋은 결과는 많은 자료보다 분명한 목표에서 시작합니다. 아래 여섯 단계를 따라 첫 작업의 범위를 정해 보세요."
+      description="프로젝트 생성과 AI 결과 작성은 현재 Browser RC에 구현되지 않았습니다. 아래 내용은 후속 제품을 위한 업무 설계 참고입니다."
       imageLabel="GETTING STARTED"
     >
+      <section className="warning-panel" role="note">
+        <strong>로드맵 참고</strong>
+        <p>
+          현재 설치 가능한 공개 제품 절차가 아닙니다. Browser RC의 실제 범위는
+          현재 탭 수집·미리보기와 승인 후 Drive 저장이며, 프로젝트·AI 추론·RAG는
+          후속 개발 항목입니다.
+        </p>
+      </section>
+
       <section className="content-section">
         <ol className="process-list process-list-detailed">
           {steps.map((step, index) => (

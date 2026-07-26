@@ -231,7 +231,7 @@ export default function Home() {
         <Link className="brand" href="/" aria-label={copy.aria.home}>
           <Image
             className="brand-avatar"
-            src="/images/aiwork-agent-yellow.webp"
+            src="/images/aiwork-anime-profile-v1.webp"
             alt=""
             width="40"
             height="40"
@@ -436,7 +436,7 @@ export default function Home() {
             <div className="ai-response">
               <Image
                 className="assistant-avatar"
-                src="/images/aiwork-agent-yellow.webp"
+                src="/images/aiwork-anime-profile-v1.webp"
                 alt={copy.aria.assistantAvatar}
                 width="42"
                 height="42"
@@ -578,7 +578,7 @@ export default function Home() {
 
         <div className="support-card">
           <Image
-            src="/images/aiwork-agent-yellow.webp"
+            src="/images/aiwork-anime-profile-v1.webp"
             alt=""
             width="64"
             height="64"

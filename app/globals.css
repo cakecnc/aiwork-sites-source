@@ -554,7 +554,7 @@ a { color: inherit; text-decoration: none; }
 }
 :root[data-theme="synthwave"] .hero::before {
   z-index: -2;
-  background: url("/images/aiwork-synthwave-hero-v2.png") center / cover no-repeat;
+  background: url("/images/aiwork-synthwave-hero-v2.webp") center / cover no-repeat;
   transform: scale(1.01);
 }
 :root[data-theme="synthwave"] .hero::after {

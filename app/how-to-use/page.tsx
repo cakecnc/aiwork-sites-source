@@ -3,9 +3,9 @@ import Link from "next/link";
 import DetailPage from "../components/DetailPage";
 
 export const metadata: Metadata = {
-  title: "AIWORK 사용법 | 처음 시작하는 방법",
+  title: "AIWORK 사용 흐름 | Browser RC와 로드맵 안내",
   description:
-    "AIWORK 설치 상태 확인부터 프로젝트 생성, 자료 연결, 질문, 출처 검토와 선택적 기억 저장까지 기본 사용 흐름을 안내합니다.",
+    "현재 Browser RC 사용 범위와 프로젝트·문서·웹 조사·Daum 메일 로드맵 예시를 구분해 안내합니다.",
 };
 
 const steps = [
@@ -77,7 +77,7 @@ export default function HowToUsePage() {
     <DetailPage
       active="guide"
       eyebrow="HOW TO USE AIWORK"
-      status="사용법 허브"
+      status="Browser RC + 로드맵 안내"
       title={
         <>
           처음 시작하는
@@ -85,9 +85,18 @@ export default function HowToUsePage() {
           AIWORK.
         </>
       }
-      description="AIWORK는 ‘자료를 모두 연결’하는 것보다 ‘이번 작업에 필요한 자료를 선택’하는 것에서 시작합니다. 현재 공개 상태와 데이터 범위를 확인한 뒤 아래 흐름을 따라가세요."
+      description="현재 구현된 Browser RC는 사용자가 실행한 현재 탭 수집·미리보기와 승인 후 Drive 저장까지입니다. 아래 프로젝트·문서·조사·메일 흐름은 후속 제품 설계 참고입니다."
       imageLabel="YOUR AIWORK GUIDE"
     >
+      <section className="warning-panel" role="note">
+        <strong>현재 제공 범위</strong>
+        <p>
+          AI 추론·RAG·프로젝트 생성·문서 업로드·Daum 메일 연결·업무 자동화는
+          현재 Browser RC에 구현되지 않았습니다. 아래 예시는 설치 후 실행할 수 있는
+          기능 설명이 아니라 후속 제품의 사용 원칙과 설계 방향입니다.
+        </p>
+      </section>
+
       <section className="content-section">
         <div className="content-heading">
           <span>QUICK START</span>

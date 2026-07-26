@@ -3,9 +3,9 @@ import Link from "next/link";
 import DetailPage from "../../components/DetailPage";
 
 export const metadata: Metadata = {
-  title: "AIWORK Daum 메일 연결 안내 | 읽기 전용 워크플로",
+  title: "AIWORK Daum 메일 설계 안내 | 현재 미구현",
   description:
-    "Daum IMAP 활성화, 앱 비밀번호, AIWORK 읽기 전용 연결 테스트와 단계별 제공 상태를 안전하게 안내합니다.",
+    "현재 Browser RC에 구현되지 않은 Daum 메일 읽기 전용 연동의 보안 설계와 향후 검증 순서를 안내합니다.",
 };
 
 const setupSteps = [
@@ -73,7 +73,7 @@ export default function DaumEmailGuidePage() {
     <DetailPage
       active="guide"
       eyebrow="GUIDE 04 · DAUM EMAIL"
-      status="단계적으로 검증 중"
+      status="현재 미구현 · 설계 참고"
       title={
         <>
           Daum 메일을
@@ -81,15 +81,15 @@ export default function DaumEmailGuidePage() {
           읽기 전용으로 연결.
         </>
       }
-      description="이 기능은 일반 공개 상태가 아닐 수 있습니다. 실제 제공 여부는 설치된 AIWORK 배포판의 기능 상태를 먼저 확인하고, 계정 비밀번호가 아닌 앱 비밀번호를 사용하세요."
+      description="Daum IMAP·SMTP·메일 검색·분류는 현재 Browser RC에 구현되지 않았습니다. 구현·보안 검증 완료 전에는 AIWORK에 계정 또는 앱 비밀번호를 입력하지 마세요."
       imageLabel="SAFE EMAIL GUIDE"
     >
       <section className="warning-panel" role="note">
-        <strong>중요</strong>
+        <strong>현재 연결 화면이 없습니다</strong>
         <p>
-          메일 앱 비밀번호, 계정 비밀번호, 인증 코드와 복구 코드를 AIWORK 문의
-          이메일이나 일반 문서에 보내지 마세요. 연결 화면이 아닌 곳에서 요구하면
-          입력을 중단해야 합니다.
+          아래 단계는 향후 구현 검토용이며 지금 실행하는 절차가 아닙니다. 메일 앱
+          비밀번호, 계정 비밀번호, 인증 코드와 복구 코드를 AIWORK 문의 이메일,
+          확장프로그램 또는 일반 문서에 입력하지 마세요.
         </p>
       </section>
 

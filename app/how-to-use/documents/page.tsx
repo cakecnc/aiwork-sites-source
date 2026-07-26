@@ -23,7 +23,7 @@ export default function DocumentsGuidePage() {
     <DetailPage
       active="guide"
       eyebrow="GUIDE 02 · DOCUMENTS"
-      status="문서 기능 지원 방향"
+      status="로드맵 · 현재 미구현"
       title={
         <>
           회사 문서를
@@ -31,12 +31,20 @@ export default function DocumentsGuidePage() {
           업무 지식으로.
         </>
       }
-      description="문서를 올리는 것만으로 끝내지 않고, 처리 범위와 결과의 근거를 확인한 뒤 필요한 내용만 다시 활용하는 흐름입니다."
-      image="/images/aiwork-synthwave-hero-v2.png"
+      description="문서 업로드·분석·RAG는 현재 Browser RC에 구현되지 않았습니다. 아래 내용은 후속 문서 기능의 처리 원칙과 지원 목표입니다."
+      image="/images/aiwork-synthwave-hero-v2.webp"
       imageAlt="문서와 업무가 연결되는 AIWORK 콘셉트 이미지"
       imageLabel="DOCUMENT WORKFLOW CONCEPT"
       imageTone="wide"
     >
+      <section className="warning-panel" role="note">
+        <strong>현재 파일 업로드 기능 없음</strong>
+        <p>
+          PDF·TXT·Markdown·CSV·XLSX 처리와 AI 요약은 로드맵입니다. 민감 문서를
+          현재 확장프로그램이나 문의 이메일로 보내지 마세요.
+        </p>
+      </section>
+
       <section className="content-section split-section">
         <div className="content-heading">
           <span>SUPPORTED DIRECTION</span>

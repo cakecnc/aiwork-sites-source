@@ -22,7 +22,7 @@ export default function DetailPage({
   title,
   description,
   status,
-  image = "/images/aiwork-agent-yellow.webp",
+  image = "/images/aiwork-anime-profile-v1.webp",
   imageAlt = "윙크하며 안내하는 AIWORK 에이전트",
   imageLabel = "AIWORK GUIDE AGENT",
   imageTone = "agent",

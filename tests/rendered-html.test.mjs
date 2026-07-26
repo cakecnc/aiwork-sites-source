@@ -127,31 +127,36 @@ test("renders the public AIWORK Browser privacy policy", async () => {
 });
 
 const detailRoutes = [
-  ["/product", "AIWORK PRODUCT"],
-  ["/features", "CONNECTED INTELLIGENCE"],
-  ["/security", "SECURITY BY BOUNDARY"],
-  ["/pricing", "GLOBAL PAYMENTS"],
-  ["/download", "DOWNLOAD &amp; RELEASE"],
-  ["/contact", "CONTACT AIWORK"],
-  ["/how-to-use", "HOW TO USE AIWORK"],
-  ["/how-to-use/getting-started", "GETTING STARTED"],
-  ["/how-to-use/documents", "DOCUMENTS"],
-  ["/how-to-use/web-research", "WEB RESEARCH"],
-  ["/how-to-use/daum-email", "DAUM EMAIL"],
+  ["/product", "AIWORK PRODUCT", "플랫폼 로드맵"],
+  ["/features", "CONNECTED INTELLIGENCE", "미구현 · 설계 검증"],
+  ["/security", "SECURITY BY BOUNDARY", "향후 기본 허용 목표"],
+  ["/pricing", "GLOBAL PAYMENTS", "아직 일반 출시되지 않았습니다"],
+  ["/download", "DOWNLOAD &amp; RELEASE", "배포 파일 준비 중"],
+  ["/contact", "CONTACT AIWORK", "운영 사업자 정보"],
+  ["/how-to-use", "HOW TO USE AIWORK", "로드맵 안내"],
+  ["/how-to-use/getting-started", "GETTING STARTED", "현재 미구현"],
+  ["/how-to-use/documents", "DOCUMENTS", "현재 파일 업로드 기능 없음"],
+  ["/how-to-use/web-research", "WEB RESEARCH", "현재 자동 Research 기능 없음"],
+  ["/how-to-use/daum-email", "DAUM EMAIL", "현재 연결 화면이 없습니다"],
 ];
 
 test("renders every section as an individual page", async () => {
-  for (const [pathname, marker] of detailRoutes) {
+  for (const [pathname, marker, scopeMarker] of detailRoutes) {
     const response = await render(pathname);
     assert.equal(response.status, 200, `${pathname} must render`);
     assertSecurityHeaders(response);
 
     const html = await response.text();
     assert.match(html, new RegExp(marker, "i"), `${pathname} marker is missing`);
+    assert.match(
+      html,
+      new RegExp(scopeMarker, "i"),
+      `${pathname} implementation-scope marker is missing`,
+    );
     assert.match(html, /주식회사 씨엔씨코퍼레이션/);
     assert.match(html, /140-81-50087/);
     assert.match(html, /What’s past is prologue/);
-    assert.match(html, /aiwork-agent-yellow\.webp/);
+    assert.match(html, /aiwork-anime-profile-v1\.webp/);
   }
 });
 
@@ -168,13 +173,13 @@ test("keeps every branded image referenced by the website", async () => {
   await Promise.all([
     access(
       new URL(
-        "../public/images/aiwork-agent-yellow-192.png",
+        "../public/images/aiwork-anime-profile-192.png",
         import.meta.url,
       ),
     ),
     access(
       new URL(
-        "../public/images/aiwork-agent-yellow.webp",
+        "../public/images/aiwork-anime-profile-v1.webp",
         import.meta.url,
       ),
     ),

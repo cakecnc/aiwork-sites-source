@@ -3,9 +3,9 @@ import Link from "next/link";
 import DetailPage from "../components/DetailPage";
 
 export const metadata: Metadata = {
-  title: "AIWORK 제품 소개 | 연결된 AI 업무 공간",
+  title: "AIWORK 제품 방향 | Browser RC와 플랫폼 로드맵",
   description:
-    "문서, 웹, 이메일과 프로젝트 자료를 연결해 조사·제작·검토·기억으로 이어가는 AIWORK의 제품 방향을 소개합니다.",
+    "현재 구현된 AIWORK Browser RC와 문서·웹·이메일·프로젝트 플랫폼 로드맵을 구분해 소개합니다.",
 };
 
 const productLayers = [
@@ -49,7 +49,7 @@ export default function ProductPage() {
     <DetailPage
       active="product"
       eyebrow="AIWORK PRODUCT"
-      status="제품 기반 구축 · 공개 출시 준비"
+      status="Browser RC 구현 · 플랫폼 로드맵"
       title={
         <>
           자료를 연결하고,
@@ -57,8 +57,8 @@ export default function ProductPage() {
           생각을 결과로.
         </>
       }
-      description="AIWORK는 흩어진 업무 자료를 하나의 맥락으로 정리해 조사에서 제작, 검토와 다음 작업까지 연결하는 로컬 우선 비즈니스 AI 플랫폼을 지향합니다."
-      image="/images/aiwork-synthwave-hero-v2.png"
+      description="현재 구현 범위는 사용자가 실행한 현재 탭 수집·미리보기와 승인 후 Drive 저장입니다. 문서·AI 추론·RAG·이메일·업무 자동화는 후속 플랫폼 로드맵입니다."
+      image="/images/aiwork-synthwave-hero-v2.webp"
       imageAlt="AIWORK의 미래지향적인 연결형 업무 공간 콘셉트"
       imageLabel="AIWORK PRODUCT CONCEPT"
       imageTone="wide"

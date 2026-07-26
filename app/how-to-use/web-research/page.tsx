@@ -36,7 +36,7 @@ export default function WebResearchGuidePage() {
     <DetailPage
       active="guide"
       eyebrow="GUIDE 03 · WEB RESEARCH"
-      status="출처 기반 업무 사례"
+      status="로드맵 업무 사례 · 현재 미구현"
       title={
         <>
           웹 자료를
@@ -44,12 +44,20 @@ export default function WebResearchGuidePage() {
           근거 있는 실행안으로.
         </>
       }
-      description="검색 결과를 길게 모으는 대신, 결정 질문과 평가 기준을 먼저 정하고 출처·날짜·후속 검증을 함께 관리합니다."
-      image="/images/aiwork-synthwave-hero-v2.png"
+      description="자동 웹 검색·AI 분석·보고서 작성은 현재 Browser RC에 구현되지 않았습니다. 아래 내용은 후속 Research 기능을 위한 업무 사례입니다."
+      image="/images/aiwork-synthwave-hero-v2.webp"
       imageAlt="웹 리서치와 출처 연결을 표현한 AIWORK 콘셉트"
       imageLabel="SOURCE-AWARE RESEARCH"
       imageTone="wide"
     >
+      <section className="warning-panel" role="note">
+        <strong>현재 자동 Research 기능 없음</strong>
+        <p>
+          Browser RC는 사용자가 실행한 현재 탭만 수집합니다. 검색 자동화, RAG,
+          후보 발굴과 AI 보고서 작성은 후속 개발 항목입니다.
+        </p>
+      </section>
+
       <section className="content-section">
         <ol className="process-list process-list-detailed">
           {researchSteps.map((step, index) => (

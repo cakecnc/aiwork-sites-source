@@ -18,9 +18,9 @@ export const metadata: Metadata = {
   description:
     "사용자가 명시적으로 실행한 현재 탭을 수집하고 민감정보를 제거한 뒤, 승인된 자료만 Google Drive appDataFolder에 저장하는 Chrome 확장프로그램 Release Candidate입니다.",
   icons: {
-    icon: "/images/aiwork-agent-yellow-192.png",
-    shortcut: "/images/aiwork-agent-yellow-192.png",
-    apple: "/images/aiwork-agent-yellow-192.png",
+    icon: "/images/aiwork-anime-profile-192.png",
+    shortcut: "/images/aiwork-anime-profile-192.png",
+    apple: "/images/aiwork-anime-profile-192.png",
   },
 };
 
