@@ -41,7 +41,7 @@ const paymentLinks = [
 ];
 
 const supportLink =
-  "https://www.paypal.com/donate/?hosted_button_id=R3NBTNC3KYCVE";
+  "https://www.paypal.com/ncp/payment/R3NBTNC3KYCVE";
 
 const defaultColors = {
   accent: "#ff3dbb",
