@@ -14,12 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AIWORK | 업무를 연결하다",
+  title: "AIWORK Browser | Chrome 확장프로그램 Release Candidate",
   description:
-    "웹, 문서, 이메일과 업무 도구를 연결해 조사부터 제작, 검토까지 하나의 흐름으로 완성하는 AI 업무 플랫폼입니다.",
-  other: {
-    "codex-preview": "development",
-  },
+    "사용자가 명시적으로 실행한 현재 탭을 수집하고 민감정보를 제거한 뒤, 승인된 자료만 Google Drive appDataFolder에 저장하는 Chrome 확장프로그램 Release Candidate입니다.",
   icons: {
     icon: "/images/aiwork-agent-yellow-192.png",
     shortcut: "/images/aiwork-agent-yellow-192.png",

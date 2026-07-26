@@ -64,7 +64,7 @@ async function render(pathname = "/") {
   );
 }
 
-test("renders development preview metadata", async () => {
+test("renders honest release-candidate product status", async () => {
   const response = await render("/");
 
   assert.equal(response.status, 200);
@@ -75,8 +75,13 @@ test("renders development preview metadata", async () => {
   assertSecurityHeaders(response);
 
   const html = await response.text();
-  assert.match(html, developmentPreviewMeta);
+  assert.doesNotMatch(html, developmentPreviewMeta);
   assert.match(html, /AIWORK/);
+  assert.match(html, /Release Candidate/);
+  assert.match(html, /현재 탭/);
+  assert.match(html, /로드맵/);
+  assert.doesNotMatch(html, /AIWORK ASSISTANT/);
+  assert.doesNotMatch(html, /근거 자료[\s\S]{0,20}>8</);
   const releaseNotice =
     "Professional과 Business는 아직 일반 출시되지 않았습니다";
   assert.notEqual(html.indexOf(releaseNotice), -1);

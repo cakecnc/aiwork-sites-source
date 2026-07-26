@@ -53,6 +53,13 @@ type MessageSet = {
     customTitle: string;
     customNote: string;
   };
+  status: {
+    releaseCandidate: string;
+    current: string;
+    roadmap: string;
+    productVision: string;
+    browserCapture: string;
+  };
   hero: {
     eyebrow: string;
     title: [string, string];
@@ -159,9 +166,9 @@ type MessageSet = {
 export const messages: Record<Locale, MessageSet> = {
   ko: {
     metadata: {
-      title: "AIWORK | AI와 업무를 연결하는 지능형 업무 플랫폼",
+      title: "AIWORK Browser RC | 현재 탭 수집·Drive 저장",
       description:
-        "AIWORK는 웹, 문서, 이메일과 업무 도구를 연결해 조사부터 제작·검토까지 더 빠르게 완성하는 AI 업무 플랫폼입니다.",
+        "사용자가 명시적으로 실행한 현재 탭을 수집·미리보기하고, 별도 승인과 OAuth 후 Google Drive appDataFolder에 저장하는 Chrome 확장프로그램 출시 후보입니다. AI 분석·RAG·이메일·업무 도구 연동은 로드맵입니다.",
     },
     language: {
       trigger: "언어",
@@ -174,7 +181,7 @@ export const messages: Record<Locale, MessageSet> = {
       security: "보안",
       payments: "결제",
       contact: "문의",
-      install: "설치하기",
+      install: "출시 알림",
     },
     themes: {
       system: { name: "시스템", note: "기기 설정에 맞춤" },
@@ -192,26 +199,33 @@ export const messages: Record<Locale, MessageSet> = {
       customTitle: "컬러 커스텀",
       customNote: "브랜드 컬러를 직접 지정",
     },
+    status: {
+      releaseCandidate: "출시 후보",
+      current: "현재 · BROWSER RC",
+      roadmap: "로드맵",
+      productVision: "AIWORK BROWSER / RC",
+      browserCapture: "현재 탭 수집 미리보기",
+    },
     hero: {
-      eyebrow: "AI 업무의 새로운 기준",
-      title: ["흩어진 업무를 연결하고,", "생각을 결과로."],
+      eyebrow: "CHROME 확장프로그램 · RELEASE CANDIDATE",
+      title: ["사용자가 실행한 현재 탭을", "안전하게 수집·저장합니다."],
       description: [
-        "AIWORK는 웹, 문서, 이메일과 업무 도구를 하나로 연결해",
-        "조사부터 제작, 검토까지 더 빠르고 명확하게 완성합니다.",
+        "제목·URL·본문 또는 선택 영역을 민감정보 패턴 제거 후 미리보기하고,",
+        "별도 승인과 OAuth 설정 후 Google Drive appDataFolder에 저장합니다.",
       ],
-      primaryAction: "AIWORK 시작하기",
-      secondaryAction: "서비스 알아보기",
-      trust: ["사용자 승인 중심", "선택한 자료만 연결", "다국어 지원 인터페이스"],
+      primaryAction: "출시 알림 받기",
+      secondaryAction: "현재 범위 확인",
+      trust: ["사용자 명시 실행", "민감정보 패턴 제거", "승인·OAuth 후 Drive 저장"],
     },
     workspace: {
-      sources: ["웹페이지 조사", "Google Drive", "업무 이메일", "프로젝트 문서"],
-      userPrompt: "이 자료를 바탕으로 시장 기회와 다음 실행안을 정리해줘.",
-      responseTitle: "핵심 기회 3가지를 확인했습니다.",
+      sources: ["현재 탭", "선택 영역", "민감정보 패턴 제거", "Drive · OAuth 후"],
+      userPrompt: "현재 탭에서 선택한 내용을 저장 전 미리보기로 준비해 주세요.",
+      responseTitle: "현재 탭을 수집했습니다.",
       responseBody:
-        "자료의 근거를 연결해 우선순위, 위험 요소, 바로 실행할 작업으로 나누어 정리하겠습니다.",
-      nextWork: "다음 작업",
-      tasks: ["시장조사 보고서", "제안서 초안", "실행 체크리스트"],
-      evidenceLabel: "근거 자료",
+        "제목·URL·본문 또는 선택 영역을 민감정보 패턴 제거 후 임시 미리보기로 준비했습니다. 별도 승인과 OAuth 설정 후 appDataFolder에 저장할 수 있습니다.",
+      nextWork: "현재 제공 동작",
+      tasks: ["Drive 저장 승인", "저장 기록 확인", "삭제·연결 해제"],
+      evidenceLabel: "현재 탭 1개",
     },
     features: {
       eyebrow: "CONNECTED INTELLIGENCE",
@@ -220,43 +234,43 @@ export const messages: Record<Locale, MessageSet> = {
       cards: [
         {
           label: "BROWSER",
-          title: "보고 있는 화면에서 바로",
+          title: "명시적으로 실행한 현재 탭",
           description:
-            "웹페이지를 읽고, 핵심을 정리하고, 다음 업무를 사이드 패널에서 이어갑니다.",
+            "Toolbar·수집 단축키·Context Menu로 실행한 탭을 수집하고 저장 전 미리봅니다.",
         },
         {
           label: "WORKFLOW",
-          title: "반복 업무를 하나의 흐름으로",
+          title: "업무 연동은 로드맵",
           description:
-            "조사, 문서, 이미지, 검토와 승인까지 업무 단계를 끊김 없이 연결합니다.",
+            "문서·이메일·업무 도구 자동화는 현재 Browser RC에 포함되지 않습니다.",
         },
         {
           label: "MEMORY",
-          title: "자료가 쌓일수록 더 정확하게",
+          title: "AI·Memory는 로드맵",
           description:
-            "사용자가 선택한 자료와 결정 사항을 업무 맥락으로 정리해 다시 활용합니다.",
+            "AI 분석·RAG·장기 Memory는 Backend 또는 로컬 Provider 경계에서 후속 개발합니다.",
         },
       ],
     },
     workflow: {
       eyebrow: "HOW IT WORKS",
-      title: ["복잡한 업무도", "세 단계면 충분합니다."],
-      description: "연결 범위와 실행 단계를 사용자가 직접 확인하고 결정합니다.",
+      title: ["현재 Browser RC는", "세 단계로 동작합니다."],
+      description: "수집과 Drive 저장은 각각 사용자가 직접 실행하고 승인합니다.",
       steps: [
         {
           number: "01",
-          title: "자료 연결",
-          description: "웹, 문서, 이메일과 필요한 업무 자료를 선택합니다.",
+          title: "현재 탭에서 실행",
+          description: "Toolbar·수집 단축키·Context Menu로 읽을 탭을 명시합니다.",
         },
         {
           number: "02",
-          title: "AIWORK 실행",
-          description: "목표에 맞는 분석과 제작 워크플로를 시작합니다.",
+          title: "미리보기·승인",
+          description: "민감정보 패턴이 제거된 결과를 확인하고 저장 여부를 결정합니다.",
         },
         {
           number: "03",
-          title: "검토·완성",
-          description: "근거와 결과를 확인하고 다음 작업으로 연결합니다.",
+          title: "Drive 저장",
+          description: "별도 동의와 OAuth 후 승인한 기록만 appDataFolder에 저장합니다.",
         },
       ],
     },
@@ -333,9 +347,9 @@ export const messages: Record<Locale, MessageSet> = {
   },
   en: {
     metadata: {
-      title: "AIWORK | Connected AI for Modern Work",
+      title: "AIWORK Browser RC | Current-tab capture and Drive storage",
       description:
-        "AIWORK connects the web, documents, email, and work tools so teams can move faster from research to creation and review.",
+        "A Chrome extension release candidate that captures and previews a user-invoked current tab, then stores approved records in Google Drive appDataFolder after OAuth. AI analysis, RAG, email, and work-tool integrations are roadmap items.",
     },
     language: {
       trigger: "Language",
@@ -348,7 +362,7 @@ export const messages: Record<Locale, MessageSet> = {
       security: "Security",
       payments: "Payments",
       contact: "Contact",
-      install: "Install",
+      install: "Release updates",
     },
     themes: {
       system: { name: "System", note: "Matches your device" },
@@ -366,27 +380,33 @@ export const messages: Record<Locale, MessageSet> = {
       customTitle: "Custom colors",
       customNote: "Set your own brand colors",
     },
+    status: {
+      releaseCandidate: "RELEASE CANDIDATE",
+      current: "CURRENT · BROWSER RC",
+      roadmap: "ROADMAP",
+      productVision: "AIWORK BROWSER / RC",
+      browserCapture: "CURRENT-TAB CAPTURE PREVIEW",
+    },
     hero: {
-      eyebrow: "A NEW STANDARD FOR AI WORK",
-      title: ["Connect scattered work.", "Turn ideas into outcomes."],
+      eyebrow: "CHROME EXTENSION · RELEASE CANDIDATE",
+      title: ["Capture the tab you invoke.", "Preview and store it safely."],
       description: [
-        "AIWORK brings the web, documents, email, and work tools together",
-        "so research, creation, and review move faster and stay clear.",
+        "Preview the title, URL, body, or selection after sensitive-pattern removal,",
+        "then save approved records to Google Drive appDataFolder after OAuth.",
       ],
-      primaryAction: "Get started with AIWORK",
-      secondaryAction: "Explore the service",
-      trust: ["User approval first", "Only selected sources connect", "Multilingual interface"],
+      primaryAction: "Get release updates",
+      secondaryAction: "See the current scope",
+      trust: ["Explicit user action", "Sensitive-pattern removal", "Drive after consent and OAuth"],
     },
     workspace: {
-      sources: ["Web research", "Google Drive", "Work email", "Project documents"],
-      userPrompt:
-        "Using these materials, summarize the market opportunities and recommended next actions.",
-      responseTitle: "I found three key opportunities.",
+      sources: ["Current tab", "Selected text", "Sensitive-pattern removal", "Drive · after OAuth"],
+      userPrompt: "Prepare the selected current-tab content for preview before saving.",
+      responseTitle: "The current tab was captured.",
       responseBody:
-        "I’ll link each insight to its source and organize the result into priorities, risks, and actions you can take now.",
-      nextWork: "Next actions",
-      tasks: ["Market research report", "Proposal draft", "Action checklist"],
-      evidenceLabel: "Evidence sources",
+        "The title, URL, body, or selection is shown temporarily after sensitive-pattern removal. You can save it to appDataFolder after separate approval and OAuth setup.",
+      nextWork: "Available actions",
+      tasks: ["Approve Drive save", "Review saved records", "Delete or disconnect"],
+      evidenceLabel: "1 current tab",
     },
     features: {
       eyebrow: "CONNECTED INTELLIGENCE",
@@ -395,42 +415,42 @@ export const messages: Record<Locale, MessageSet> = {
       cards: [
         {
           label: "BROWSER",
-          title: "Work right where you browse",
+          title: "The current tab you explicitly invoke",
           description:
-            "Read pages, capture the essentials, and continue the task from the side panel.",
+            "Capture a tab through the toolbar, capture shortcut, or context menu and preview it before saving.",
         },
         {
           label: "WORKFLOW",
-          title: "Turn repeat work into one flow",
+          title: "Work integrations are roadmap",
           description:
-            "Connect research, documents, images, review, and approval in one continuous flow.",
+            "Document, email, and work-tool automation are not included in the current Browser RC.",
         },
         {
           label: "MEMORY",
-          title: "Smarter with every source",
-          description: "Turn selected sources and decisions into reusable work context.",
+          title: "AI and Memory are roadmap",
+          description: "AI analysis, RAG, and long-term Memory will be built behind backend or local-provider boundaries.",
         },
       ],
     },
     workflow: {
       eyebrow: "HOW IT WORKS",
-      title: ["Complex work,", "simplified in three steps."],
-      description: "You stay in control of what connects and what each workflow executes.",
+      title: ["The current Browser RC", "works in three steps."],
+      description: "You explicitly invoke capture and separately approve Drive storage.",
       steps: [
         {
           number: "01",
-          title: "Connect sources",
-          description: "Choose the web, documents, email, and work sources you need.",
+          title: "Invoke on the current tab",
+          description: "Use the toolbar, capture shortcut, or context menu on the tab to read.",
         },
         {
           number: "02",
-          title: "Run AIWORK",
-          description: "Start the analysis and creation workflow for your goal.",
+          title: "Preview and approve",
+          description: "Review the result after sensitive-pattern removal and decide whether to save.",
         },
         {
           number: "03",
-          title: "Review and complete",
-          description: "Verify the evidence and results, then move to the next task.",
+          title: "Save to Drive",
+          description: "After separate consent and OAuth, save only approved records to appDataFolder.",
         },
       ],
     },
@@ -507,9 +527,9 @@ export const messages: Record<Locale, MessageSet> = {
   },
   ja: {
     metadata: {
-      title: "AIWORK｜AIと業務をつなぐワークプラットフォーム",
+      title: "AIWORK Browser RC｜現在のタブ収集・Drive保存",
       description:
-        "AIWORKはWeb、文書、メール、業務ツールをつなぎ、調査から制作・レビューまでをより速く明確に進めるAIワークプラットフォームです。",
+        "ユーザーが明示的に実行した現在のタブを収集・プレビューし、別途承認とOAuth後にGoogle Drive appDataFolderへ保存するChrome拡張機能のリリース候補です。AI分析・RAG・メール・業務ツール連携はロードマップです。",
     },
     language: {
       trigger: "言語",
@@ -522,7 +542,7 @@ export const messages: Record<Locale, MessageSet> = {
       security: "セキュリティ",
       payments: "お支払い",
       contact: "お問い合わせ",
-      install: "インストール",
+      install: "リリース通知",
     },
     themes: {
       system: { name: "システム", note: "端末設定に合わせる" },
@@ -540,26 +560,33 @@ export const messages: Record<Locale, MessageSet> = {
       customTitle: "カスタムカラー",
       customNote: "ブランドカラーを直接設定",
     },
+    status: {
+      releaseCandidate: "リリース候補",
+      current: "現在 · BROWSER RC",
+      roadmap: "ロードマップ",
+      productVision: "AIWORK BROWSER / RC",
+      browserCapture: "現在のタブ収集プレビュー",
+    },
     hero: {
-      eyebrow: "AIワークの新しいスタンダード",
-      title: ["散らばる業務をつなぎ、", "思考を成果へ。"],
+      eyebrow: "CHROME拡張機能 · リリース候補",
+      title: ["明示的に実行した現在のタブを", "安全に収集・保存します。"],
       description: [
-        "AIWORKはWeb、文書、メール、業務ツールをひとつにつなぎ、",
-        "調査から制作、レビューまでをより速く明確に進めます。",
+        "タイトル・URL・本文または選択範囲を機密パターン除去後にプレビューし、",
+        "別途承認とOAuth設定後にGoogle Drive appDataFolderへ保存します。",
       ],
-      primaryAction: "AIWORKを始める",
-      secondaryAction: "サービスを見る",
-      trust: ["ユーザー確認を最優先", "選択した資料だけを接続", "多言語インターフェース"],
+      primaryAction: "リリース通知を受け取る",
+      secondaryAction: "現在の範囲を見る",
+      trust: ["ユーザーの明示操作", "機密パターン除去", "承認・OAuth後にDrive保存"],
     },
     workspace: {
-      sources: ["Webページ調査", "Google Drive", "業務メール", "プロジェクト文書"],
-      userPrompt: "この資料をもとに、市場機会と次の実行案をまとめてください。",
-      responseTitle: "3つの重要な機会を確認しました。",
+      sources: ["現在のタブ", "選択範囲", "機密パターン除去", "Drive · OAuth後"],
+      userPrompt: "現在のタブで選択した内容を保存前プレビューにしてください。",
+      responseTitle: "現在のタブを収集しました。",
       responseBody:
-        "資料の根拠を結び付け、優先順位、リスク、すぐに実行できる作業に分けて整理します。",
-      nextWork: "次の作業",
-      tasks: ["市場調査レポート", "提案書ドラフト", "実行チェックリスト"],
-      evidenceLabel: "根拠資料",
+        "タイトル・URL・本文または選択範囲を機密パターン除去後の一時プレビューとして表示します。別途承認とOAuth設定後にappDataFolderへ保存できます。",
+      nextWork: "現在利用できる操作",
+      tasks: ["Drive保存を承認", "保存記録を確認", "削除・接続解除"],
+      evidenceLabel: "現在のタブ 1件",
     },
     features: {
       eyebrow: "CONNECTED INTELLIGENCE",
@@ -568,43 +595,43 @@ export const messages: Record<Locale, MessageSet> = {
       cards: [
         {
           label: "BROWSER",
-          title: "見ている画面から、そのまま",
+          title: "明示的に実行した現在のタブ",
           description:
-            "ページを読み、要点を整理し、次の作業をサイドパネルで続けられます。",
+            "ツールバー・収集ショートカット・コンテキストメニューからタブを収集し、保存前にプレビューします。",
         },
         {
           label: "WORKFLOW",
-          title: "繰り返す業務をひとつの流れに",
+          title: "業務連携はロードマップ",
           description:
-            "調査、文書、画像、レビュー、承認までを途切れなくつなぎます。",
+            "文書・メール・業務ツール自動化は現在のBrowser RCには含まれません。",
         },
         {
           label: "MEMORY",
-          title: "資料が増えるほど、より的確に",
+          title: "AI・Memoryはロードマップ",
           description:
-            "選んだ資料と意思決定を業務コンテキストとして整理し、再活用します。",
+            "AI分析・RAG・長期MemoryはBackendまたはローカルProvider境界で後続開発します。",
         },
       ],
     },
     workflow: {
       eyebrow: "HOW IT WORKS",
-      title: ["複雑な業務も", "3ステップで完結。"],
-      description: "接続範囲と実行ステップは、ユーザーが確認して決定します。",
+      title: ["現在のBrowser RCは", "3ステップで動作します。"],
+      description: "収集とDrive保存は、それぞれユーザーが明示的に実行・承認します。",
       steps: [
         {
           number: "01",
-          title: "資料を接続",
-          description: "Web、文書、メールから必要な業務資料を選びます。",
+          title: "現在のタブで実行",
+          description: "ツールバー・収集ショートカット・コンテキストメニューで対象タブを明示します。",
         },
         {
           number: "02",
-          title: "AIWORKを実行",
-          description: "目的に合った分析・制作ワークフローを開始します。",
+          title: "プレビュー・承認",
+          description: "機密パターン除去後の結果を確認し、保存するか決定します。",
         },
         {
           number: "03",
-          title: "確認・完成",
-          description: "根拠と成果を確認し、次の作業へつなげます。",
+          title: "Driveへ保存",
+          description: "別途同意とOAuth後、承認した記録だけをappDataFolderへ保存します。",
         },
       ],
     },
@@ -681,9 +708,9 @@ export const messages: Record<Locale, MessageSet> = {
   },
   "zh-CN": {
     metadata: {
-      title: "AIWORK｜连接 AI 与工作的智能平台",
+      title: "AIWORK Browser RC｜当前标签页采集与Drive存储",
       description:
-        "AIWORK 连接网页、文档、电子邮件与工作工具，帮助团队更快、更清晰地完成调研、创作与审核。",
+        "Chrome扩展发布候选版：采集并预览用户明确触发的当前标签页，在单独批准与OAuth后将记录保存到Google Drive appDataFolder。AI分析、RAG、邮件和工作工具集成属于路线图。",
     },
     language: {
       trigger: "语言",
@@ -696,7 +723,7 @@ export const messages: Record<Locale, MessageSet> = {
       security: "安全",
       payments: "支付",
       contact: "联系",
-      install: "安装",
+      install: "发布通知",
     },
     themes: {
       system: { name: "系统", note: "跟随设备设置" },
@@ -714,25 +741,32 @@ export const messages: Record<Locale, MessageSet> = {
       customTitle: "自定义颜色",
       customNote: "设置专属品牌颜色",
     },
+    status: {
+      releaseCandidate: "发布候选版",
+      current: "当前 · BROWSER RC",
+      roadmap: "路线图",
+      productVision: "AIWORK BROWSER / RC",
+      browserCapture: "当前标签页采集预览",
+    },
     hero: {
-      eyebrow: "AI 工作的新标准",
-      title: ["连接分散的工作，", "让想法成为成果。"],
+      eyebrow: "CHROME扩展 · 发布候选版",
+      title: ["采集您明确触发的当前标签页，", "安全预览并保存。"],
       description: [
-        "AIWORK 将网页、文档、电子邮件和工作工具连接在一起，",
-        "让调研、创作与审核更快、更清晰地完成。",
+        "移除敏感信息模式后预览标题、URL、正文或选中内容，",
+        "经单独批准与OAuth设置后保存到Google Drive appDataFolder。",
       ],
-      primaryAction: "开始使用 AIWORK",
-      secondaryAction: "了解服务",
-      trust: ["以用户确认为中心", "仅连接所选资料", "多语言界面"],
+      primaryAction: "获取发布通知",
+      secondaryAction: "查看当前范围",
+      trust: ["用户明确操作", "移除敏感信息模式", "同意与OAuth后保存到Drive"],
     },
     workspace: {
-      sources: ["网页调研", "Google Drive", "工作邮件", "项目文档"],
-      userPrompt: "请根据这些资料，梳理市场机会和下一步行动方案。",
-      responseTitle: "已发现三个关键机会。",
-      responseBody: "我会关联资料依据，并按优先级、风险和可立即执行的任务进行整理。",
-      nextWork: "下一步工作",
-      tasks: ["市场调研报告", "提案初稿", "执行清单"],
-      evidenceLabel: "依据资料",
+      sources: ["当前标签页", "选中内容", "移除敏感信息模式", "Drive · OAuth后"],
+      userPrompt: "请在保存前预览当前标签页中选中的内容。",
+      responseTitle: "已采集当前标签页。",
+      responseBody: "标题、URL、正文或选中内容会在移除敏感信息模式后临时显示。单独批准并设置OAuth后，可保存到appDataFolder。",
+      nextWork: "当前可用操作",
+      tasks: ["批准Drive保存", "查看保存记录", "删除或断开连接"],
+      evidenceLabel: "1个当前标签页",
     },
     features: {
       eyebrow: "CONNECTED INTELLIGENCE",
@@ -741,40 +775,40 @@ export const messages: Record<Locale, MessageSet> = {
       cards: [
         {
           label: "BROWSER",
-          title: "就在浏览的页面中开始",
-          description: "读取网页、提炼重点，并在侧边面板中继续下一步工作。",
+          title: "您明确触发的当前标签页",
+          description: "通过工具栏、采集快捷键或上下文菜单采集标签页，并在保存前预览。",
         },
         {
           label: "WORKFLOW",
-          title: "将重复工作连成一个流程",
-          description: "从调研、文档、图像到审核和批准，让每个环节顺畅衔接。",
+          title: "工作集成属于路线图",
+          description: "文档、邮件与工作工具自动化不包含在当前Browser RC中。",
         },
         {
           label: "MEMORY",
-          title: "资料越丰富，结果越精准",
-          description: "将所选资料与决策整理成可复用的工作上下文。",
+          title: "AI与Memory属于路线图",
+          description: "AI分析、RAG与长期Memory将在Backend或本地Provider边界后续开发。",
         },
       ],
     },
     workflow: {
       eyebrow: "HOW IT WORKS",
-      title: ["复杂工作", "三步即可完成。"],
-      description: "连接范围和执行步骤均由用户亲自确认和决定。",
+      title: ["当前Browser RC", "通过三步运行。"],
+      description: "采集与Drive存储均由用户分别明确触发和批准。",
       steps: [
         {
           number: "01",
-          title: "连接资料",
-          description: "从网页、文档和电子邮件中选择所需的工作资料。",
+          title: "在当前标签页触发",
+          description: "使用工具栏、采集快捷键或上下文菜单明确指定要读取的标签页。",
         },
         {
           number: "02",
-          title: "运行 AIWORK",
-          description: "启动符合目标的分析与创作工作流。",
+          title: "预览并批准",
+          description: "查看移除敏感信息模式后的结果，并决定是否保存。",
         },
         {
           number: "03",
-          title: "审核并完成",
-          description: "核对依据与结果，再衔接下一项工作。",
+          title: "保存到Drive",
+          description: "单独同意并完成OAuth后，仅将批准记录保存到appDataFolder。",
         },
       ],
     },
@@ -851,9 +885,9 @@ export const messages: Record<Locale, MessageSet> = {
   },
   ar: {
     metadata: {
-      title: "AIWORK | منصة ذكية تربط الذكاء الاصطناعي بالعمل",
+      title: "AIWORK Browser RC | التقاط علامة التبويب الحالية وحفظها في Drive",
       description:
-        "يربط AIWORK الويب والمستندات والبريد الإلكتروني وأدوات العمل، ليساعد الفرق على إنجاز البحث والإنتاج والمراجعة بسرعة ووضوح أكبر.",
+        "مرشح إصدار لإضافة Chrome تلتقط وتعاين علامة التبويب الحالية التي يشغّلها المستخدم صراحة، ثم تحفظ السجلات المعتمدة في Google Drive appDataFolder بعد موافقة منفصلة وOAuth. تحليل AI وRAG والبريد وأدوات العمل ضمن خارطة الطريق.",
     },
     language: {
       trigger: "اللغة",
@@ -866,7 +900,7 @@ export const messages: Record<Locale, MessageSet> = {
       security: "الأمان",
       payments: "الدفع",
       contact: "تواصل معنا",
-      install: "تثبيت",
+      install: "تحديثات الإصدار",
     },
     themes: {
       system: { name: "النظام", note: "وفق إعدادات جهازك" },
@@ -884,27 +918,33 @@ export const messages: Record<Locale, MessageSet> = {
       customTitle: "ألوان مخصصة",
       customNote: "حدّد ألوان علامتك التجارية",
     },
+    status: {
+      releaseCandidate: "مرشح للإصدار",
+      current: "الحالي · BROWSER RC",
+      roadmap: "خارطة الطريق",
+      productVision: "AIWORK BROWSER / RC",
+      browserCapture: "معاينة التقاط علامة التبويب الحالية",
+    },
     hero: {
-      eyebrow: "معيار جديد للعمل بالذكاء الاصطناعي",
-      title: ["اربط أعمالك المتفرقة،", "وحوّل الأفكار إلى نتائج."],
+      eyebrow: "إضافة CHROME · مرشح للإصدار",
+      title: ["التقط علامة التبويب التي تشغّلها صراحة،", "وعاينها واحفظها بأمان."],
       description: [
-        "يجمع AIWORK الويب والمستندات والبريد الإلكتروني وأدوات العمل،",
-        "لتنجز البحث والإنتاج والمراجعة بسرعة ووضوح أكبر.",
+        "عاين العنوان والرابط والنص أو التحديد بعد إزالة أنماط البيانات الحساسة،",
+        "ثم احفظ السجلات المعتمدة في Google Drive appDataFolder بعد OAuth.",
       ],
-      primaryAction: "ابدأ مع AIWORK",
-      secondaryAction: "استكشف الخدمة",
-      trust: ["موافقة المستخدم أولاً", "ربط المصادر المحددة فقط", "واجهة متعددة اللغات"],
+      primaryAction: "احصل على تحديثات الإصدار",
+      secondaryAction: "اعرض النطاق الحالي",
+      trust: ["إجراء صريح من المستخدم", "إزالة أنماط حساسة", "Drive بعد الموافقة وOAuth"],
     },
     workspace: {
-      sources: ["بحث الويب", "Google Drive", "بريد العمل", "مستندات المشروع"],
-      userPrompt:
-        "استناداً إلى هذه المواد، لخّص فرص السوق والإجراءات التالية الموصى بها.",
-      responseTitle: "حددت ثلاث فرص رئيسية.",
+      sources: ["علامة التبويب الحالية", "النص المحدد", "إزالة الأنماط الحساسة", "Drive · بعد OAuth"],
+      userPrompt: "جهّز المحتوى المحدد من علامة التبويب الحالية للمعاينة قبل الحفظ.",
+      responseTitle: "تم التقاط علامة التبويب الحالية.",
       responseBody:
-        "سأربط كل نتيجة بمصدرها، ثم أنظمها حسب الأولويات والمخاطر والإجراءات القابلة للتنفيذ فوراً.",
-      nextWork: "الإجراءات التالية",
-      tasks: ["تقرير أبحاث السوق", "مسودة عرض", "قائمة تنفيذ"],
-      evidenceLabel: "مصادر الأدلة",
+        "يُعرض العنوان والرابط والنص أو التحديد مؤقتاً بعد إزالة الأنماط الحساسة. يمكن الحفظ في appDataFolder بعد موافقة منفصلة وإعداد OAuth.",
+      nextWork: "الإجراءات المتاحة",
+      tasks: ["الموافقة على حفظ Drive", "مراجعة السجلات", "الحذف أو قطع الاتصال"],
+      evidenceLabel: "علامة تبويب حالية واحدة",
     },
     features: {
       eyebrow: "CONNECTED INTELLIGENCE",
@@ -913,44 +953,43 @@ export const messages: Record<Locale, MessageSet> = {
       cards: [
         {
           label: "BROWSER",
-          title: "اعمل مباشرة من صفحة التصفح",
+          title: "علامة التبويب التي تشغّلها صراحة",
           description:
-            "اقرأ الصفحات، واستخلص أهم النقاط، وتابع المهمة من اللوحة الجانبية.",
+            "التقطها عبر شريط الأدوات أو اختصار الالتقاط أو قائمة السياق وعاينها قبل الحفظ.",
         },
         {
           label: "WORKFLOW",
-          title: "حوّل العمل المتكرر إلى تدفق واحد",
+          title: "تكاملات العمل ضمن خارطة الطريق",
           description:
-            "اربط البحث والمستندات والصور والمراجعة والموافقة في مسار متواصل.",
+            "أتمتة المستندات والبريد وأدوات العمل غير مضمنة في Browser RC الحالي.",
         },
         {
           label: "MEMORY",
-          title: "دقة أكبر مع كل مصدر",
+          title: "AI وMemory ضمن خارطة الطريق",
           description:
-            "حوّل المصادر والقرارات المحددة إلى سياق عمل قابل لإعادة الاستخدام.",
+            "سيُطوّر تحليل AI وRAG والذاكرة طويلة الأمد خلف حدود Backend أو Provider محلي.",
         },
       ],
     },
     workflow: {
       eyebrow: "HOW IT WORKS",
-      title: ["بسّط الأعمال المعقدة", "في ثلاث خطوات."],
-      description: "تبقى متحكماً في المصادر المتصلة وما ينفذه كل سير عمل.",
+      title: ["يعمل Browser RC الحالي", "في ثلاث خطوات."],
+      description: "يشغّل المستخدم الالتقاط ويوافق على حفظ Drive كلٌ على حدة.",
       steps: [
         {
           number: "01",
-          title: "اربط المصادر",
-          description:
-            "اختر ما تحتاجه من الويب والمستندات والبريد الإلكتروني ومصادر العمل.",
+          title: "شغّل من علامة التبويب الحالية",
+          description: "استخدم شريط الأدوات أو اختصار الالتقاط أو قائمة السياق على علامة التبويب.",
         },
         {
           number: "02",
-          title: "شغّل AIWORK",
-          description: "ابدأ سير التحليل والإنتاج المناسب لهدفك.",
+          title: "عاين ووافق",
+          description: "راجع النتيجة بعد إزالة الأنماط الحساسة وقرّر إن كنت تريد حفظها.",
         },
         {
           number: "03",
-          title: "راجع وأكمل",
-          description: "تحقق من الأدلة والنتائج، ثم انتقل إلى المهمة التالية.",
+          title: "احفظ في Drive",
+          description: "بعد موافقة منفصلة وOAuth، احفظ السجلات المعتمدة فقط في appDataFolder.",
         },
       ],
     },
@@ -1035,9 +1074,9 @@ export const messages: Record<Locale, MessageSet> = {
   },
   es: {
     metadata: {
-      title: "AIWORK | IA conectada para el trabajo moderno",
+      title: "AIWORK Browser RC | Captura de la pestaña actual y Drive",
       description:
-        "AIWORK conecta la web, los documentos, el correo y las herramientas de trabajo para agilizar la investigación, la creación y la revisión.",
+        "Versión candidata de una extensión de Chrome que captura y previsualiza la pestaña actual invocada por el usuario, y guarda los registros aprobados en Google Drive appDataFolder tras consentimiento y OAuth. El análisis con IA, RAG, correo e integraciones son hoja de ruta.",
     },
     language: {
       trigger: "Idioma",
@@ -1050,7 +1089,7 @@ export const messages: Record<Locale, MessageSet> = {
       security: "Seguridad",
       payments: "Pagos",
       contact: "Contacto",
-      install: "Instalar",
+      install: "Avisos de lanzamiento",
     },
     themes: {
       system: { name: "Sistema", note: "Se adapta a tu dispositivo" },
@@ -1068,36 +1107,42 @@ export const messages: Record<Locale, MessageSet> = {
       customTitle: "Colores personalizados",
       customNote: "Define los colores de tu marca",
     },
+    status: {
+      releaseCandidate: "VERSIÓN CANDIDATA",
+      current: "ACTUAL · BROWSER RC",
+      roadmap: "HOJA DE RUTA",
+      productVision: "AIWORK BROWSER / RC",
+      browserCapture: "VISTA PREVIA DE LA PESTAÑA ACTUAL",
+    },
     hero: {
-      eyebrow: "UN NUEVO ESTÁNDAR PARA EL TRABAJO CON IA",
-      title: ["Conecta el trabajo disperso.", "Convierte ideas en resultados."],
+      eyebrow: "EXTENSIÓN DE CHROME · VERSIÓN CANDIDATA",
+      title: ["Captura la pestaña que invocas.", "Previsualízala y guárdala con seguridad."],
       description: [
-        "AIWORK reúne la web, los documentos, el correo y las herramientas de trabajo",
-        "para agilizar la investigación, la creación y la revisión.",
+        "Previsualiza título, URL, cuerpo o selección tras eliminar patrones sensibles,",
+        "y guarda registros aprobados en Google Drive appDataFolder después de OAuth.",
       ],
-      primaryAction: "Empezar con AIWORK",
-      secondaryAction: "Explorar el servicio",
+      primaryAction: "Recibir avisos de lanzamiento",
+      secondaryAction: "Ver el alcance actual",
       trust: [
-        "Aprobación del usuario primero",
-        "Solo se conectan las fuentes elegidas",
-        "Interfaz multilingüe",
+        "Acción explícita del usuario",
+        "Eliminación de patrones sensibles",
+        "Drive tras consentimiento y OAuth",
       ],
     },
     workspace: {
       sources: [
-        "Investigación web",
-        "Google Drive",
-        "Correo de trabajo",
-        "Documentos del proyecto",
+        "Pestaña actual",
+        "Texto seleccionado",
+        "Eliminación de patrones sensibles",
+        "Drive · tras OAuth",
       ],
-      userPrompt:
-        "Con estos materiales, resume las oportunidades de mercado y las próximas acciones recomendadas.",
-      responseTitle: "He encontrado tres oportunidades clave.",
+      userPrompt: "Prepara una vista previa del contenido seleccionado antes de guardarlo.",
+      responseTitle: "Se capturó la pestaña actual.",
       responseBody:
-        "Vincularé cada conclusión con su fuente y organizaré el resultado por prioridades, riesgos y acciones inmediatas.",
-      nextWork: "Próximas acciones",
-      tasks: ["Informe de mercado", "Borrador de propuesta", "Lista de acciones"],
-      evidenceLabel: "Fuentes de evidencia",
+        "El título, la URL, el cuerpo o la selección se muestran temporalmente tras eliminar patrones sensibles. Puedes guardar en appDataFolder tras aprobación y OAuth.",
+      nextWork: "Acciones disponibles",
+      tasks: ["Aprobar guardado en Drive", "Revisar registros", "Eliminar o desconectar"],
+      evidenceLabel: "1 pestaña actual",
     },
     features: {
       eyebrow: "CONNECTED INTELLIGENCE",
@@ -1106,46 +1151,43 @@ export const messages: Record<Locale, MessageSet> = {
       cards: [
         {
           label: "BROWSER",
-          title: "Trabaja donde navegas",
+          title: "La pestaña actual que invocas",
           description:
-            "Lee páginas, extrae lo esencial y continúa la tarea desde el panel lateral.",
+            "Captura mediante la barra, el atajo o el menú contextual y previsualiza antes de guardar.",
         },
         {
           label: "WORKFLOW",
-          title: "Unifica el trabajo repetitivo",
+          title: "Las integraciones son hoja de ruta",
           description:
-            "Conecta investigación, documentos, imágenes, revisión y aprobación en un flujo continuo.",
+            "La automatización de documentos, correo y herramientas no está en el Browser RC actual.",
         },
         {
           label: "MEMORY",
-          title: "Más precisión con cada fuente",
+          title: "IA y Memory son hoja de ruta",
           description:
-            "Convierte las fuentes y decisiones seleccionadas en contexto de trabajo reutilizable.",
+            "El análisis con IA, RAG y Memory a largo plazo se desarrollará tras límites Backend o Provider local.",
         },
       ],
     },
     workflow: {
       eyebrow: "HOW IT WORKS",
-      title: ["Trabajo complejo,", "simplificado en tres pasos."],
-      description: "Tú decides qué se conecta y qué ejecuta cada flujo de trabajo.",
+      title: ["El Browser RC actual", "funciona en tres pasos."],
+      description: "Invocas la captura y apruebas por separado el guardado en Drive.",
       steps: [
         {
           number: "01",
-          title: "Conecta las fuentes",
-          description:
-            "Elige la web, los documentos, el correo y las fuentes de trabajo que necesites.",
+          title: "Invoca en la pestaña actual",
+          description: "Usa la barra, el atajo de captura o el menú contextual en la pestaña.",
         },
         {
           number: "02",
-          title: "Ejecuta AIWORK",
-          description:
-            "Inicia el flujo de análisis y creación adecuado para tu objetivo.",
+          title: "Previsualiza y aprueba",
+          description: "Revisa el resultado tras eliminar patrones sensibles y decide si guardarlo.",
         },
         {
           number: "03",
-          title: "Revisa y finaliza",
-          description:
-            "Verifica las evidencias y los resultados antes de pasar a la siguiente tarea.",
+          title: "Guarda en Drive",
+          description: "Tras consentimiento y OAuth, guarda solo registros aprobados en appDataFolder.",
         },
       ],
     },
@@ -1235,9 +1277,9 @@ export const messages: Record<Locale, MessageSet> = {
   },
   fr: {
     metadata: {
-      title: "AIWORK | L’IA connectée au travail moderne",
+      title: "AIWORK Browser RC | Capture de l’onglet actuel et Drive",
       description:
-        "AIWORK relie le web, les documents, les e-mails et les outils de travail pour accélérer la recherche, la création et la validation.",
+        "Version candidate d’une extension Chrome qui capture et prévisualise l’onglet actuel invoqué par l’utilisateur, puis enregistre les éléments approuvés dans Google Drive appDataFolder après consentement et OAuth. L’analyse IA, RAG, les e-mails et intégrations sont sur la feuille de route.",
     },
     language: {
       trigger: "Langue",
@@ -1250,7 +1292,7 @@ export const messages: Record<Locale, MessageSet> = {
       security: "Sécurité",
       payments: "Paiements",
       contact: "Contact",
-      install: "Installer",
+      install: "Actualités de sortie",
     },
     themes: {
       system: { name: "Système", note: "Suit les réglages de l’appareil" },
@@ -1268,40 +1310,46 @@ export const messages: Record<Locale, MessageSet> = {
       customTitle: "Couleurs personnalisées",
       customNote: "Définissez les couleurs de votre marque",
     },
+    status: {
+      releaseCandidate: "VERSION CANDIDATE",
+      current: "ACTUEL · BROWSER RC",
+      roadmap: "FEUILLE DE ROUTE",
+      productVision: "AIWORK BROWSER / RC",
+      browserCapture: "APERÇU DE L’ONGLET ACTUEL",
+    },
     hero: {
-      eyebrow: "UNE NOUVELLE NORME POUR LE TRAVAIL AVEC L’IA",
-      title: ["Reliez vos tâches dispersées.", "Transformez les idées en résultats."],
+      eyebrow: "EXTENSION CHROME · VERSION CANDIDATE",
+      title: ["Capturez l’onglet que vous invoquez.", "Prévisualisez et stockez en sécurité."],
       description: [
-        "AIWORK réunit le web, les documents, les e-mails et les outils de travail",
-        "pour accélérer la recherche, la création et la validation.",
+        "Prévisualisez titre, URL, corps ou sélection après suppression des motifs sensibles,",
+        "puis enregistrez les éléments approuvés dans appDataFolder après OAuth.",
       ],
-      primaryAction: "Démarrer avec AIWORK",
-      secondaryAction: "Découvrir le service",
+      primaryAction: "Recevoir les actualités de sortie",
+      secondaryAction: "Voir le périmètre actuel",
       trust: [
-        "Validation de l’utilisateur d’abord",
-        "Connexion des seules sources choisies",
-        "Interface multilingue",
+        "Action explicite de l’utilisateur",
+        "Suppression des motifs sensibles",
+        "Drive après consentement et OAuth",
       ],
     },
     workspace: {
       sources: [
-        "Recherche web",
-        "Google Drive",
-        "E-mail professionnel",
-        "Documents du projet",
+        "Onglet actuel",
+        "Texte sélectionné",
+        "Suppression des motifs sensibles",
+        "Drive · après OAuth",
       ],
-      userPrompt:
-        "À partir de ces éléments, résumez les opportunités de marché et les prochaines actions recommandées.",
-      responseTitle: "J’ai identifié trois opportunités clés.",
+      userPrompt: "Préparez un aperçu du contenu sélectionné avant l’enregistrement.",
+      responseTitle: "L’onglet actuel a été capturé.",
       responseBody:
-        "Je relierai chaque conclusion à sa source, puis organiserai le résultat par priorités, risques et actions immédiates.",
-      nextWork: "Prochaines actions",
+        "Le titre, l’URL, le corps ou la sélection s’affichent temporairement après suppression des motifs sensibles. L’enregistrement dans appDataFolder nécessite une approbation et OAuth.",
+      nextWork: "Actions disponibles",
       tasks: [
-        "Rapport d’étude de marché",
-        "Projet de proposition",
-        "Liste d’actions",
+        "Approuver l’enregistrement Drive",
+        "Vérifier les éléments",
+        "Supprimer ou déconnecter",
       ],
-      evidenceLabel: "Sources probantes",
+      evidenceLabel: "1 onglet actuel",
     },
     features: {
       eyebrow: "CONNECTED INTELLIGENCE",
@@ -1310,47 +1358,44 @@ export const messages: Record<Locale, MessageSet> = {
       cards: [
         {
           label: "BROWSER",
-          title: "Travaillez là où vous naviguez",
+          title: "L’onglet actuel que vous invoquez",
           description:
-            "Lisez les pages, retenez l’essentiel et poursuivez la tâche depuis le panneau latéral.",
+            "Capturez via la barre, le raccourci ou le menu contextuel, puis prévisualisez avant d’enregistrer.",
         },
         {
           label: "WORKFLOW",
-          title: "Unifiez les tâches répétitives",
+          title: "Les intégrations sont sur la feuille de route",
           description:
-            "Reliez recherche, documents, images, validation et approbation dans un flux continu.",
+            "L’automatisation des documents, e-mails et outils n’est pas incluse dans le Browser RC actuel.",
         },
         {
           label: "MEMORY",
-          title: "Plus précis à chaque source",
+          title: "IA et Memory sont sur la feuille de route",
           description:
-            "Transformez les sources et décisions sélectionnées en contexte de travail réutilisable.",
+            "L’analyse IA, RAG et Memory durable seront développés derrière des limites Backend ou Provider local.",
         },
       ],
     },
     workflow: {
       eyebrow: "HOW IT WORKS",
-      title: ["Le travail complexe,", "simplifié en trois étapes."],
+      title: ["Le Browser RC actuel", "fonctionne en trois étapes."],
       description:
-        "Vous gardez le contrôle sur les connexions et les actions de chaque workflow.",
+        "Vous invoquez la capture et approuvez séparément l’enregistrement Drive.",
       steps: [
         {
           number: "01",
-          title: "Connectez les sources",
-          description:
-            "Choisissez les sources web, les documents, les e-mails et les outils nécessaires.",
+          title: "Invoquez sur l’onglet actuel",
+          description: "Utilisez la barre, le raccourci de capture ou le menu contextuel de l’onglet.",
         },
         {
           number: "02",
-          title: "Lancez AIWORK",
-          description:
-            "Démarrez le workflow d’analyse et de création adapté à votre objectif.",
+          title: "Prévisualisez et approuvez",
+          description: "Vérifiez le résultat après suppression des motifs sensibles et décidez de l’enregistrer.",
         },
         {
           number: "03",
-          title: "Validez et finalisez",
-          description:
-            "Vérifiez les preuves et les résultats, puis passez à la tâche suivante.",
+          title: "Enregistrez dans Drive",
+          description: "Après consentement et OAuth, enregistrez uniquement les éléments approuvés dans appDataFolder.",
         },
       ],
     },
@@ -1440,9 +1485,9 @@ export const messages: Record<Locale, MessageSet> = {
   },
   de: {
     metadata: {
-      title: "AIWORK | Vernetzte KI für moderne Arbeit",
+      title: "AIWORK Browser RC | Aktuellen Tab erfassen und in Drive speichern",
       description:
-        "AIWORK verbindet Web, Dokumente, E-Mail und Arbeitstools, damit Teams schneller von Recherche zu Erstellung und Prüfung gelangen.",
+        "Release Candidate einer Chrome-Erweiterung, die den ausdrücklich ausgelösten aktuellen Tab erfasst und voranzeigt und freigegebene Einträge nach Zustimmung und OAuth in Google Drive appDataFolder speichert. KI-Analyse, RAG, E-Mail und Tool-Integrationen sind Roadmap.",
     },
     language: {
       trigger: "Sprache",
@@ -1455,7 +1500,7 @@ export const messages: Record<Locale, MessageSet> = {
       security: "Sicherheit",
       payments: "Zahlungen",
       contact: "Kontakt",
-      install: "Installieren",
+      install: "Release-Updates",
     },
     themes: {
       system: { name: "System", note: "Folgt den Geräteeinstellungen" },
@@ -1473,43 +1518,49 @@ export const messages: Record<Locale, MessageSet> = {
       customTitle: "Eigene Farben",
       customNote: "Legen Sie Ihre Markenfarben fest",
     },
+    status: {
+      releaseCandidate: "RELEASE CANDIDATE",
+      current: "AKTUELL · BROWSER RC",
+      roadmap: "ROADMAP",
+      productVision: "AIWORK BROWSER / RC",
+      browserCapture: "VORSCHAU DES AKTUELLEN TABS",
+    },
     hero: {
-      eyebrow: "EIN NEUER STANDARD FÜR KI-GESTÜTZTE ARBEIT",
+      eyebrow: "CHROME-ERWEITERUNG · RELEASE CANDIDATE",
       title: [
-        "Verteilen Sie Arbeit nicht länger.",
-        "Machen Sie Ideen zu Ergebnissen.",
+        "Erfassen Sie den Tab, den Sie auslösen.",
+        "Sicher voranzeigen und speichern.",
       ],
       description: [
-        "AIWORK vereint Web, Dokumente, E-Mail und Arbeitstools,",
-        "damit Recherche, Erstellung und Prüfung schneller und klarer werden.",
+        "Titel, URL, Text oder Auswahl nach Entfernung sensibler Muster voranzeigen,",
+        "dann freigegebene Einträge nach OAuth in Google Drive appDataFolder speichern.",
       ],
-      primaryAction: "Mit AIWORK starten",
-      secondaryAction: "Service entdecken",
+      primaryAction: "Release-Updates erhalten",
+      secondaryAction: "Aktuellen Umfang ansehen",
       trust: [
-        "Nutzerfreigabe zuerst",
-        "Nur ausgewählte Quellen werden verbunden",
-        "Mehrsprachige Oberfläche",
+        "Explizite Nutzeraktion",
+        "Entfernung sensibler Muster",
+        "Drive nach Zustimmung und OAuth",
       ],
     },
     workspace: {
       sources: [
-        "Webrecherche",
-        "Google Drive",
-        "Geschäftliche E-Mail",
-        "Projektdokumente",
+        "Aktueller Tab",
+        "Ausgewählter Text",
+        "Entfernung sensibler Muster",
+        "Drive · nach OAuth",
       ],
-      userPrompt:
-        "Fassen Sie anhand dieser Unterlagen die Marktchancen und empfohlenen nächsten Schritte zusammen.",
-      responseTitle: "Ich habe drei zentrale Chancen identifiziert.",
+      userPrompt: "Bereiten Sie den ausgewählten Inhalt vor dem Speichern als Vorschau vor.",
+      responseTitle: "Der aktuelle Tab wurde erfasst.",
       responseBody:
-        "Ich verknüpfe jede Erkenntnis mit ihrer Quelle und ordne das Ergebnis nach Prioritäten, Risiken und sofort umsetzbaren Maßnahmen.",
-      nextWork: "Nächste Schritte",
+        "Titel, URL, Text oder Auswahl werden nach Entfernung sensibler Muster vorübergehend angezeigt. Das Speichern in appDataFolder erfordert Freigabe und OAuth.",
+      nextWork: "Verfügbare Aktionen",
       tasks: [
-        "Marktforschungsbericht",
-        "Angebotsentwurf",
-        "Maßnahmen-Checkliste",
+        "Drive-Speicherung freigeben",
+        "Einträge prüfen",
+        "Löschen oder trennen",
       ],
-      evidenceLabel: "Belegquellen",
+      evidenceLabel: "1 aktueller Tab",
     },
     features: {
       eyebrow: "CONNECTED INTELLIGENCE",
@@ -1518,47 +1569,44 @@ export const messages: Record<Locale, MessageSet> = {
       cards: [
         {
           label: "BROWSER",
-          title: "Arbeiten Sie direkt beim Browsen",
+          title: "Der ausdrücklich ausgelöste aktuelle Tab",
           description:
-            "Lesen Sie Seiten, erfassen Sie das Wesentliche und setzen Sie die Aufgabe im Seitenpanel fort.",
+            "Über Symbolleiste, Erfassungs-Shortcut oder Kontextmenü erfassen und vor dem Speichern prüfen.",
         },
         {
           label: "WORKFLOW",
-          title: "Wiederkehrende Arbeit in einem Ablauf",
+          title: "Arbeitsintegrationen sind Roadmap",
           description:
-            "Verbinden Sie Recherche, Dokumente, Bilder, Prüfung und Freigabe ohne Unterbrechung.",
+            "Dokument-, E-Mail- und Tool-Automatisierung ist im aktuellen Browser RC nicht enthalten.",
         },
         {
           label: "MEMORY",
-          title: "Präziser mit jeder Quelle",
+          title: "KI und Memory sind Roadmap",
           description:
-            "Machen Sie ausgewählte Quellen und Entscheidungen zu wiederverwendbarem Arbeitskontext.",
+            "KI-Analyse, RAG und langfristiges Memory werden hinter Backend- oder lokalen Provider-Grenzen entwickelt.",
         },
       ],
     },
     workflow: {
       eyebrow: "HOW IT WORKS",
-      title: ["Komplexe Arbeit,", "vereinfacht in drei Schritten."],
+      title: ["Der aktuelle Browser RC", "arbeitet in drei Schritten."],
       description:
-        "Sie bestimmen, was verbunden wird und was jeder Workflow ausführt.",
+        "Sie lösen die Erfassung aus und genehmigen die Drive-Speicherung separat.",
       steps: [
         {
           number: "01",
-          title: "Quellen verbinden",
-          description:
-            "Wählen Sie benötigte Webinhalte, Dokumente, E-Mails und Arbeitsquellen aus.",
+          title: "Im aktuellen Tab auslösen",
+          description: "Symbolleiste, Erfassungs-Shortcut oder Kontextmenü des Tabs verwenden.",
         },
         {
           number: "02",
-          title: "AIWORK ausführen",
-          description:
-            "Starten Sie den Analyse- und Erstellungsworkflow für Ihr Ziel.",
+          title: "Vorschau und Freigabe",
+          description: "Ergebnis nach Entfernung sensibler Muster prüfen und über das Speichern entscheiden.",
         },
         {
           number: "03",
-          title: "Prüfen und abschließen",
-          description:
-            "Prüfen Sie Belege und Ergebnisse und wechseln Sie zur nächsten Aufgabe.",
+          title: "In Drive speichern",
+          description: "Nach Zustimmung und OAuth nur freigegebene Einträge in appDataFolder speichern.",
         },
       ],
     },

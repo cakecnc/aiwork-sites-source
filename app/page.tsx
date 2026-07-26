@@ -415,14 +415,14 @@ export default function Home() {
 
       <section className="product-panel" id="product">
         <div className="panel-topline">
-          <span>AIWORK / WORKSPACE</span>
+          <span>{copy.status.productVision}</span>
           <span className="live">
-            <i /> READY
+            <i /> {copy.status.releaseCandidate}
           </span>
         </div>
         <div className="workspace-grid">
           <aside className="source-column">
-            <small>SOURCES</small>
+            <small>{copy.status.current}</small>
             {copy.workspace.sources.map((source, index) => (
               <div className={index === 0 ? "source active" : "source"} key={source}>
                 <span>{sourceIcons[index]}</span>
@@ -431,7 +431,7 @@ export default function Home() {
             ))}
           </aside>
           <div className="conversation-column">
-            <small>AIWORK ASSISTANT</small>
+            <small>{copy.status.browserCapture}</small>
             <div className="user-bubble">{copy.workspace.userPrompt}</div>
             <div className="ai-response">
               <Image
@@ -445,16 +445,11 @@ export default function Home() {
               <div>
                 <strong>{copy.workspace.responseTitle}</strong>
                 <p>{copy.workspace.responseBody}</p>
-                <div className="progress-lines">
-                  <i />
-                  <i />
-                  <i />
-                </div>
               </div>
             </div>
           </div>
           <aside className="studio-column">
-            <small>STUDIO PANEL</small>
+            <small>{copy.status.current}</small>
             <strong>{copy.workspace.nextWork}</strong>
             {copy.workspace.tasks.map((item, index) => (
               <button key={item}>
@@ -464,7 +459,7 @@ export default function Home() {
               </button>
             ))}
             <div className="source-badge">
-              {copy.workspace.evidenceLabel} <strong>8</strong>
+              {copy.workspace.evidenceLabel}
             </div>
           </aside>
         </div>
@@ -483,7 +478,9 @@ export default function Home() {
           {copy.features.cards.map((card, index) => (
             <article key={card.label}>
               <span className="feature-icon">{featureIcons[index]}</span>
-              <small>{card.label}</small>
+              <small>
+                {card.label} · {index === 0 ? copy.status.current : copy.status.roadmap}
+              </small>
               <h3>{card.title}</h3>
               <p>{card.description}</p>
               <Link
