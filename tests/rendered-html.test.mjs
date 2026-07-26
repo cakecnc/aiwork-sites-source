@@ -116,6 +116,38 @@ test("renders the public AIWORK Browser privacy policy", async () => {
   assert.match(html, /광고·맞춤형[\s\S]{0,80}추적 쿠키/);
   assert.match(html, /ENGLISH SUMMARY/);
   assert.match(html, /cakecnc@daum\.net/);
+  assert.match(html, /주식회사 씨엔씨코퍼레이션/);
+  assert.match(html, /140-81-50087/);
+  assert.match(html, /What’s past is prologue/);
+});
+
+const detailRoutes = [
+  ["/product", "AIWORK PRODUCT"],
+  ["/features", "CONNECTED INTELLIGENCE"],
+  ["/security", "SECURITY BY BOUNDARY"],
+  ["/pricing", "GLOBAL PAYMENTS"],
+  ["/download", "DOWNLOAD &amp; RELEASE"],
+  ["/contact", "CONTACT AIWORK"],
+  ["/how-to-use", "HOW TO USE AIWORK"],
+  ["/how-to-use/getting-started", "GETTING STARTED"],
+  ["/how-to-use/documents", "DOCUMENTS"],
+  ["/how-to-use/web-research", "WEB RESEARCH"],
+  ["/how-to-use/daum-email", "DAUM EMAIL"],
+];
+
+test("renders every section as an individual page", async () => {
+  for (const [pathname, marker] of detailRoutes) {
+    const response = await render(pathname);
+    assert.equal(response.status, 200, `${pathname} must render`);
+    assertSecurityHeaders(response);
+
+    const html = await response.text();
+    assert.match(html, new RegExp(marker, "i"), `${pathname} marker is missing`);
+    assert.match(html, /주식회사 씨엔씨코퍼레이션/);
+    assert.match(html, /140-81-50087/);
+    assert.match(html, /What’s past is prologue/);
+    assert.match(html, /aiwork-agent-yellow\.webp/);
+  }
 });
 
 test("keeps every branded image referenced by the website", async () => {
@@ -131,13 +163,13 @@ test("keeps every branded image referenced by the website", async () => {
   await Promise.all([
     access(
       new URL(
-        "../public/images/aiwork-anime-profile-192.png",
+        "../public/images/aiwork-agent-yellow-192.png",
         import.meta.url,
       ),
     ),
     access(
       new URL(
-        "../public/images/aiwork-anime-profile-v1.webp",
+        "../public/images/aiwork-agent-yellow.webp",
         import.meta.url,
       ),
     ),

@@ -10,6 +10,7 @@ import {
   type Locale,
   type ThemeKey,
 } from "./i18n";
+import SiteFooter from "./components/SiteFooter";
 
 const themeKeys: ThemeKey[] = [
   "system",
@@ -213,10 +214,10 @@ export default function Home() {
       <div className="ambient ambient-two" />
 
       <header className="topbar">
-        <a className="brand" href="#home" aria-label={copy.aria.home}>
+        <Link className="brand" href="/" aria-label={copy.aria.home}>
           <Image
             className="brand-avatar"
-            src="/images/aiwork-anime-profile-v1.webp"
+            src="/images/aiwork-agent-yellow.webp"
             alt=""
             width="40"
             height="40"
@@ -224,14 +225,15 @@ export default function Home() {
           />
           <span>AIWORK</span>
           <small>work, connected.</small>
-        </a>
+        </Link>
 
         <nav className="main-nav" aria-label={copy.aria.mainNavigation}>
-          <a href="#product">{copy.nav.product}</a>
-          <a href="#workflow">{copy.nav.features}</a>
-          <a href="#security">{copy.nav.security}</a>
-          <a href="#payments">{copy.nav.payments}</a>
-          <a href="#contact">{copy.nav.contact}</a>
+          <Link href="/product">{copy.nav.product}</Link>
+          <Link href="/features">{copy.nav.features}</Link>
+          <Link href="/how-to-use">GUIDE</Link>
+          <Link href="/security">{copy.nav.security}</Link>
+          <Link href="/pricing">{copy.nav.payments}</Link>
+          <Link href="/contact">{copy.nav.contact}</Link>
         </nav>
 
         <div className="header-actions">
@@ -360,9 +362,9 @@ export default function Home() {
               </div>
             )}
           </div>
-          <a className="install-small" href="#download">
+          <Link className="install-small" href="/download">
             {copy.nav.install}
-          </a>
+          </Link>
         </div>
       </header>
 
@@ -381,12 +383,12 @@ export default function Home() {
           {copy.hero.description[1]}
         </p>
         <div className="hero-actions">
-          <a className="primary-button" href="#download">
+          <Link className="primary-button" href="/download">
             {copy.hero.primaryAction} <span>↗</span>
-          </a>
-          <a className="secondary-button" href="#product">
+          </Link>
+          <Link className="secondary-button" href="/product">
             {copy.hero.secondaryAction} <span>↓</span>
-          </a>
+          </Link>
         </div>
         <div className="trust-row">
           {copy.hero.trust.map((item) => (
@@ -420,7 +422,7 @@ export default function Home() {
             <div className="ai-response">
               <Image
                 className="assistant-avatar"
-                src="/images/aiwork-anime-profile-v1.webp"
+                src="/images/aiwork-agent-yellow.webp"
                 alt={copy.aria.assistantAvatar}
                 width="42"
                 height="42"
@@ -470,13 +472,23 @@ export default function Home() {
               <small>{card.label}</small>
               <h3>{card.title}</h3>
               <p>{card.description}</p>
-              <a href="#contact">{copy.features.details} →</a>
+              <Link
+                href={
+                  index === 0
+                    ? "/features"
+                    : index === 1
+                      ? "/how-to-use"
+                      : "/security"
+                }
+              >
+                {copy.features.details} →
+              </Link>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="workflow-section" id="security">
+      <section className="workflow-section" id="how-it-works">
         <div>
           <span className="section-kicker">{copy.workflow.eyebrow}</span>
           <h2>
@@ -555,7 +567,7 @@ export default function Home() {
 
         <div className="support-card">
           <Image
-            src="/images/aiwork-anime-profile-v1.webp"
+            src="/images/aiwork-agent-yellow.webp"
             alt=""
             width="64"
             height="64"
@@ -591,31 +603,13 @@ export default function Home() {
           >
             {copy.cta.releaseAlert} <span>↗</span>
           </a>
-          <a className="secondary-button" href="#contact">
+          <Link className="secondary-button" href="/contact">
             {copy.cta.consultation}
-          </a>
+          </Link>
         </div>
       </section>
 
-      <footer id="contact">
-        <div className="brand footer-brand">
-          <Image
-            className="brand-avatar"
-            src="/images/aiwork-anime-profile-v1.webp"
-            alt=""
-            width="36"
-            height="36"
-            unoptimized
-          />
-          <span>AIWORK</span>
-        </div>
-        <p>{copy.footer.tagline}</p>
-        <div className="footer-links">
-          <Link href="/privacy">Privacy</Link>
-          <a href="mailto:cakecnc@daum.net">cakecnc@daum.net</a>
-        </div>
-        <small>{copy.footer.copyright}</small>
-      </footer>
+      <SiteFooter />
 
       {customOpen && (
         <div

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import SiteFooter from "../components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "AIWORK Browser 개인정보처리방침",
@@ -21,7 +22,7 @@ export default function PrivacyPolicy() {
         <Link className="brand" href="/" aria-label="AIWORK 홈페이지">
           <Image
             className="brand-avatar"
-            src="/images/aiwork-anime-profile-v1.webp"
+            src="/images/aiwork-agent-yellow.webp"
             alt=""
             width="40"
             height="40"
@@ -285,7 +286,7 @@ export default function PrivacyPolicy() {
               상태를 그대로 간주하지 않고 확장프로그램에서 다시 안내합니다.
             </p>
             <p>
-              운영 주체: AIWORK · 개인정보 문의:
+              운영 주체: 주식회사 씨엔씨코퍼레이션(AIWORK) · 개인정보 문의:
               {" "}
               <a href="mailto:cakecnc@daum.net">cakecnc@daum.net</a>
               {" "}· 공식 홈페이지: <Link href="/">https://aiwork.to</Link>
@@ -338,25 +339,7 @@ export default function PrivacyPolicy() {
           </p>
         </section>
 
-        <footer className="privacy-footer">
-          <Link className="brand footer-brand" href="/">
-            <Image
-              className="brand-avatar"
-              src="/images/aiwork-anime-profile-v1.webp"
-              alt=""
-              width="36"
-              height="36"
-              unoptimized
-            />
-            <span>AIWORK</span>
-          </Link>
-          <p>사용자가 요청한 범위만, 사용자가 선택한 저장소에.</p>
-          <div className="footer-links">
-            <Link href="/">홈</Link>
-            <a href="mailto:cakecnc@daum.net">문의</a>
-          </div>
-          <small>© 2026 AIWORK. All rights reserved.</small>
-        </footer>
+        <SiteFooter />
       </article>
     </main>
   );

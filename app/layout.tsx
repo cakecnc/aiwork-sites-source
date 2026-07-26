@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import ThemeBoot from "./theme-boot";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,9 +21,9 @@ export const metadata: Metadata = {
     "codex-preview": "development",
   },
   icons: {
-    icon: "/images/aiwork-anime-profile-192.png",
-    shortcut: "/images/aiwork-anime-profile-192.png",
-    apple: "/images/aiwork-anime-profile-192.png",
+    icon: "/images/aiwork-agent-yellow-192.png",
+    shortcut: "/images/aiwork-agent-yellow-192.png",
+    apple: "/images/aiwork-agent-yellow-192.png",
   },
 };
 
@@ -36,6 +37,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <ThemeBoot />
         {children}
       </body>
     </html>
