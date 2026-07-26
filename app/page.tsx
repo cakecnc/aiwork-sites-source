@@ -131,12 +131,20 @@ export default function Home() {
   }, [theme]);
 
   useEffect(() => {
+    const root = document.documentElement;
+
     if (customEnabled) {
-      document.documentElement.dataset.custom = "true";
+      root.style.setProperty("--custom-accent", custom.accent);
+      root.style.setProperty("--custom-secondary", custom.secondary);
+      root.style.setProperty("--custom-background", custom.background);
+      root.dataset.custom = "true";
     } else {
-      delete document.documentElement.dataset.custom;
+      delete root.dataset.custom;
+      root.style.removeProperty("--custom-accent");
+      root.style.removeProperty("--custom-secondary");
+      root.style.removeProperty("--custom-background");
     }
-  }, [customEnabled]);
+  }, [custom, customEnabled]);
 
   useEffect(() => {
     localStorage.setItem("aiwork-locale", locale);
@@ -162,6 +170,12 @@ export default function Home() {
       url.searchParams.set("lang", locale);
     }
     window.history.replaceState({}, "", url);
+
+    return () => {
+      document.documentElement.lang = "ko";
+      document.documentElement.dir = "ltr";
+      delete document.documentElement.dataset.locale;
+    };
   }, [copy.metadata.description, copy.metadata.title, locale, localeMeta.htmlLang]);
 
   useEffect(() => {
