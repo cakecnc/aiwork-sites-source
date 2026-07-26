@@ -750,7 +750,7 @@ a { color: inherit; text-decoration: none; }
 .support-card > div > span { color: var(--accent-2); font-size: 10px; font-weight: 800; letter-spacing: .1em; }
 .support-card p { margin: 6px 0 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
 .payment-disclaimer {
-  margin: 14px 0 0;
+  margin: 14px 0 18px;
   padding: 13px 16px;
   border-inline-start: 2px solid var(--accent-2);
   color: var(--muted);

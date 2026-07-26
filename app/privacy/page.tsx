@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     "AIWORK Browser의 현재 탭 수집, 로컬 저장, Google Drive appDataFolder 사용과 삭제·철회 절차를 설명합니다.",
 };
 
-const policyVersion = "1.0.0";
+const policyVersion = "2026-07-26";
 const effectiveDate = "2026-07-26";
 
 export default function PrivacyPolicy() {
@@ -262,9 +262,13 @@ export default function PrivacyPolicy() {
           <div className="privacy-copy">
             <p>
               <Link href="/">aiwork.to</Link>는 언어, 테마와 사용자 지정 색상을 브라우저
-              Local Storage에만 저장합니다. 쿠키, 회원가입, 광고 추적, 분석 도구,
-              서버 주문 저장은 현재 사용하지 않습니다. PayPal 결제 또는 이메일
-              문의 링크를 선택하면 해당 외부 서비스의 개인정보처리방침이 적용됩니다.
+              Local Storage에만 저장합니다. AIWORK 애플리케이션 코드는 광고·맞춤형
+              추적 쿠키나 분석 도구를 사용하지 않습니다. 다만 Sites와 Cloudflare
+              호스팅 플랫폼은 서비스 보호와 봇 방지를 위해 <code>__cf_bm</code> 같은
+              필수 보안 쿠키를 설정할 수 있습니다. 이 쿠키는 AIWORK의 광고,
+              사용자 프로파일링 또는 행동 분석에 사용되지 않습니다. 회원가입과 서버
+              주문 저장은 현재 사용하지 않으며, PayPal 결제 또는 이메일 문의 링크를
+              선택하면 해당 외부 서비스의 개인정보처리방침이 적용됩니다.
             </p>
           </div>
         </section>
@@ -315,6 +319,12 @@ export default function PrivacyPolicy() {
               only classify a page that you explicitly capture. AIWORK has no
               telemetry, ads, sale of data, or use of your content for model
               training.
+            </li>
+            <li>
+              The AIWORK website does not set advertising, profiling, or
+              analytics cookies. Sites and Cloudflare may set strictly
+              necessary security or bot-protection cookies such as
+              <code>__cf_bm</code>.
             </li>
             <li>
               You can delete individual Drive records, disconnect Drive,

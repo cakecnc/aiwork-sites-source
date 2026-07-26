@@ -58,6 +58,10 @@ function isLocale(value: string | null): value is Locale {
   return Boolean(value && supportedLocales.includes(value as Locale));
 }
 
+function isHexColor(value: unknown): value is string {
+  return typeof value === "string" && /^#[0-9a-f]{6}$/iu.test(value);
+}
+
 function detectLocale(): Locale {
   const queryLocale = new URLSearchParams(window.location.search).get("lang");
   if (isLocale(queryLocale)) return queryLocale;
@@ -102,9 +106,9 @@ export default function Home() {
         if (savedColors) {
           const parsed = JSON.parse(savedColors);
           if (
-            typeof parsed?.accent === "string" &&
-            typeof parsed?.secondary === "string" &&
-            typeof parsed?.background === "string"
+            isHexColor(parsed?.accent) &&
+            isHexColor(parsed?.secondary) &&
+            isHexColor(parsed?.background)
           ) {
             setCustom(parsed);
             setCustomEnabled(true);
@@ -514,6 +518,8 @@ export default function Home() {
           </div>
         </div>
 
+        <p className="payment-disclaimer">{copy.payments.disclaimer}</p>
+
         <div className="pricing-grid">
           {copy.payments.products.map((product, index) => (
             <article
@@ -568,7 +574,6 @@ export default function Home() {
             {copy.payments.supportAction} <span>↗</span>
           </a>
         </div>
-        <p className="payment-disclaimer">{copy.payments.disclaimer}</p>
       </section>
 
       <section className="cta-section" id="download">

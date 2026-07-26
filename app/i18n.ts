@@ -262,25 +262,25 @@ export const messages: Record<Locale, MessageSet> = {
     },
     payments: {
       eyebrow: "GLOBAL PAYMENTS",
-      title: ["필요한 기능을", "1회 결제로 시작하세요."],
+      title: ["제공 범위를 확인하고,", "1회 결제로 시작하세요."],
       description:
-        "상품 단가와 PayPal 결제 링크가 연결되어 있습니다. 결제는 PayPal 공식 페이지에서 처리됩니다.",
+        "Professional과 Business는 정식 출시 전 사전 구매 상품이며, 스마트스토어 실무팩은 현재 제공되는 디지털 상품입니다. 결제는 PayPal 공식 페이지에서 처리됩니다.",
       statusLabel: "결제 상태",
-      status: "PayPal 결제 링크 연결 완료",
+      status: "출시 전 제공 조건 표시",
       products: [
         {
           name: "AIWORK Professional",
           price: "USD 19",
-          billing: "1회 결제",
-          features: ["Chrome Extension", "Google Drive Workspace", "Document·Research Studio"],
-          action: "Professional 구매",
+          billing: "사전 구매 · 1회 결제",
+          features: ["정식 출시 전 사전 구매", "Chrome Extension은 공개 출시 후 제공", "Google Drive는 OAuth 승인 후 활성화"],
+          action: "Professional 사전 구매",
         },
         {
           name: "AIWORK Business",
           price: "USD 49",
-          billing: "1회 결제",
-          features: ["Business Workspace", "고급 Market Research", "우선 지원"],
-          action: "Business 구매",
+          billing: "사전 구매 · 1회 결제",
+          features: ["Professional 사전 구매 범위 포함", "Business Workspace는 개발 중", "우선 지원은 이메일로 제공"],
+          action: "Business 사전 구매",
         },
         {
           name: "네이버 스마트스토어 실무팩",
@@ -295,7 +295,7 @@ export const messages: Record<Locale, MessageSet> = {
         "AIWORK 개발, 문서화, 서비스 개선과 사용자 지원을 위한 자발적 후원입니다.",
       supportAction: "PayPal로 후원",
       disclaimer:
-        "결제 후 PayPal 영수증과 거래 ID를 보관해 주세요. 현재는 거래 확인 후 운영자가 상품 또는 라이선스를 수동으로 제공합니다.",
+        "Professional과 Business는 아직 일반 출시되지 않았습니다. Chrome Extension은 공개 출시 후, Google Drive 기능은 Google OAuth 승인 완료 후 제공됩니다. 결제 전에 cakecnc@daum.net으로 제공 범위와 일정을 확인해 주세요. 거래 확인과 상품·라이선스 제공은 수동으로 진행되며 PayPal 영수증과 거래 ID를 보관해야 합니다.",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",
@@ -436,25 +436,25 @@ export const messages: Record<Locale, MessageSet> = {
     },
     payments: {
       eyebrow: "GLOBAL PAYMENTS",
-      title: ["Start with the tools you need", "in one purchase."],
+      title: ["Review what is available,", "then choose a one-time purchase."],
       description:
-        "Product prices and PayPal checkout links are connected. Payments are processed on PayPal’s official pages.",
+        "Professional and Business are pre-release purchases. The SmartStore pack is a currently available digital product. Payments are processed on PayPal’s official pages.",
       statusLabel: "Payment status",
-      status: "PayPal checkout links connected",
+      status: "Pre-release terms displayed",
       products: [
         {
           name: "AIWORK Professional",
           price: "USD 19",
-          billing: "one-time",
-          features: ["Chrome Extension", "Google Drive Workspace", "Document & Research Studio"],
-          action: "Buy Professional",
+          billing: "pre-release · one-time",
+          features: ["Pre-release purchase", "Chrome Extension after public release", "Google Drive after OAuth approval"],
+          action: "Pre-purchase Professional",
         },
         {
           name: "AIWORK Business",
           price: "USD 49",
-          billing: "one-time",
-          features: ["Business Workspace", "Advanced Market Research", "Priority support"],
-          action: "Buy Business",
+          billing: "pre-release · one-time",
+          features: ["Includes the Professional pre-release scope", "Business Workspace is in development", "Priority support is provided by email"],
+          action: "Pre-purchase Business",
         },
         {
           name: "Naver SmartStore Operations Pack",
@@ -469,7 +469,7 @@ export const messages: Record<Locale, MessageSet> = {
         "Voluntary contributions support AIWORK development, documentation, service improvements, and user support.",
       supportAction: "Support with PayPal",
       disclaimer:
-        "Keep your PayPal receipt and transaction ID. Products and licenses are currently delivered manually after the transaction is verified.",
+        "Professional and Business are not yet generally available. The Chrome Extension will be provided after public release, and Google Drive features after Google OAuth approval. Before paying, confirm the delivery scope and timing at cakecnc@daum.net. Transactions and product or license delivery are verified manually; keep your PayPal receipt and transaction ID.",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",
@@ -610,25 +610,25 @@ export const messages: Record<Locale, MessageSet> = {
     },
     payments: {
       eyebrow: "GLOBAL PAYMENTS",
-      title: ["必要な機能を", "一回購入で始めましょう。"],
+      title: ["提供範囲を確認してから", "一回購入を選択してください。"],
       description:
-        "商品価格とPayPal決済リンクは接続済みです。決済はPayPal公式ページで処理されます。",
+        "ProfessionalとBusinessは正式リリース前の事前購入商品です。SmartStore実務パックは現在提供中のデジタル商品です。決済はPayPal公式ページで処理されます。",
       statusLabel: "決済状況",
-      status: "PayPal決済リンク接続済み",
+      status: "リリース前の提供条件を表示",
       products: [
         {
           name: "AIWORK Professional",
           price: "USD 19",
-          billing: "一回購入",
-          features: ["Chrome Extension", "Google Drive Workspace", "Document・Research Studio"],
-          action: "Professionalを購入",
+          billing: "事前購入・一回払い",
+          features: ["正式リリース前の事前購入", "Chrome Extensionは公開後に提供", "Google DriveはOAuth承認後に有効化"],
+          action: "Professionalを事前購入",
         },
         {
           name: "AIWORK Business",
           price: "USD 49",
-          billing: "一回購入",
-          features: ["Business Workspace", "高度なMarket Research", "優先サポート"],
-          action: "Businessを購入",
+          billing: "事前購入・一回払い",
+          features: ["Professionalの事前購入範囲を含む", "Business Workspaceは開発中", "優先サポートはメールで提供"],
+          action: "Businessを事前購入",
         },
         {
           name: "Naver SmartStore 実務パック",
@@ -643,7 +643,7 @@ export const messages: Record<Locale, MessageSet> = {
         "AIWORKの開発、文書化、サービス改善、ユーザーサポートのための任意の支援です。",
       supportAction: "PayPalで支援",
       disclaimer:
-        "PayPalの領収書と取引IDを保管してください。現在は取引確認後、運営者が商品またはライセンスを手動で提供します。",
+        "ProfessionalとBusinessはまだ一般公開されていません。Chrome Extensionは公開後、Google Drive機能はGoogle OAuth承認後に提供されます。決済前にcakecnc@daum.netで提供範囲と時期をご確認ください。取引確認と商品・ライセンス提供は手動で行われるため、PayPalの領収書と取引IDを保管してください。",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",
@@ -780,25 +780,25 @@ export const messages: Record<Locale, MessageSet> = {
     },
     payments: {
       eyebrow: "GLOBAL PAYMENTS",
-      title: ["按需选择功能，", "一次购买即可开始。"],
+      title: ["确认当前提供范围后，", "再选择一次性购买。"],
       description:
-        "商品价格与 PayPal 付款链接已连接，付款将在 PayPal 官方页面处理。",
+        "Professional 和 Business 为正式发布前的预购商品；SmartStore 实务包是目前可提供的数字商品。付款将在 PayPal 官方页面处理。",
       statusLabel: "付款状态",
-      status: "PayPal 付款链接已连接",
+      status: "已显示发布前提供条件",
       products: [
         {
           name: "AIWORK Professional",
           price: "USD 19",
-          billing: "一次购买",
-          features: ["Chrome Extension", "Google Drive Workspace", "Document・Research Studio"],
-          action: "购买 Professional",
+          billing: "预购 · 一次付款",
+          features: ["正式发布前预购", "Chrome Extension 在公开发布后提供", "Google Drive 在 OAuth 获批后启用"],
+          action: "预购 Professional",
         },
         {
           name: "AIWORK Business",
           price: "USD 49",
-          billing: "一次购买",
-          features: ["Business Workspace", "高级 Market Research", "优先支持"],
-          action: "购买 Business",
+          billing: "预购 · 一次付款",
+          features: ["包含 Professional 预购范围", "Business Workspace 仍在开发", "通过电子邮件提供优先支持"],
+          action: "预购 Business",
         },
         {
           name: "Naver SmartStore 实务包",
@@ -813,7 +813,7 @@ export const messages: Record<Locale, MessageSet> = {
         "自愿支持将用于 AIWORK 开发、文档、服务改进与用户支持。",
       supportAction: "通过 PayPal 支持",
       disclaimer:
-        "请保留 PayPal 收据和交易 ID。目前由运营人员在确认交易后手动提供商品或许可证。",
+        "Professional 和 Business 尚未正式公开发布。Chrome Extension 将在公开发布后提供，Google Drive 功能将在 Google OAuth 获批后提供。付款前请通过 cakecnc@daum.net 确认交付范围和时间。交易确认及商品或许可证交付均为人工处理，请保留 PayPal 收据和交易 ID。",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",
@@ -956,29 +956,29 @@ export const messages: Record<Locale, MessageSet> = {
     },
     payments: {
       eyebrow: "GLOBAL PAYMENTS",
-      title: ["ابدأ بالميزات التي تحتاجها", "مقابل دفعة واحدة."],
+      title: ["راجع نطاق التوفر الحالي", "ثم اختر الشراء لمرة واحدة."],
       description:
-        "تم ربط أسعار المنتجات بروابط الدفع عبر PayPal. تتم معالجة المدفوعات على صفحات PayPal الرسمية.",
+        "Professional وBusiness منتجان للشراء المسبق قبل الإطلاق الرسمي، بينما حزمة SmartStore منتج رقمي متاح حالياً. تتم معالجة المدفوعات على صفحات PayPal الرسمية.",
       statusLabel: "حالة الدفع",
-      status: "تم ربط روابط الدفع عبر PayPal",
+      status: "شروط ما قبل الإطلاق معروضة",
       products: [
         {
           name: "AIWORK Professional",
           price: "USD 19",
-          billing: "دفعة واحدة",
+          billing: "شراء مسبق · دفعة واحدة",
           features: [
-            "Chrome Extension",
-            "Google Drive Workspace",
-            "Document & Research Studio",
+            "شراء مسبق قبل الإطلاق الرسمي",
+            "يتوفر Chrome Extension بعد الإطلاق العام",
+            "يُفعّل Google Drive بعد موافقة OAuth",
           ],
-          action: "شراء Professional",
+          action: "شراء Professional مسبقاً",
         },
         {
           name: "AIWORK Business",
           price: "USD 49",
-          billing: "دفعة واحدة",
-          features: ["مساحة عمل للأعمال", "أبحاث سوق متقدمة", "دعم ذو أولوية"],
-          action: "شراء Business",
+          billing: "شراء مسبق · دفعة واحدة",
+          features: ["يشمل نطاق Professional المسبق", "Business Workspace قيد التطوير", "دعم ذو أولوية عبر البريد الإلكتروني"],
+          action: "شراء Business مسبقاً",
         },
         {
           name: "حزمة تشغيل Naver SmartStore",
@@ -997,7 +997,7 @@ export const messages: Record<Locale, MessageSet> = {
         "مساهمات طوعية لدعم تطوير AIWORK وتوثيقه وتحسين الخدمة ودعم المستخدمين.",
       supportAction: "ادعم عبر PayPal",
       disclaimer:
-        "يرجى الاحتفاظ بإيصال PayPal ومعرّف المعاملة. تُسلَّم المنتجات أو التراخيص حالياً يدوياً بعد التحقق من المعاملة.",
+        "لم يُطرح Professional وBusiness للعامة بعد. سيتوفر Chrome Extension بعد الإطلاق العام، وستتوفر ميزات Google Drive بعد موافقة Google OAuth. قبل الدفع، أكّد نطاق التسليم وموعده عبر cakecnc@daum.net. يتم التحقق من المعاملة وتسليم المنتج أو الترخيص يدوياً؛ احتفظ بإيصال PayPal ومعرّف المعاملة.",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",
@@ -1151,33 +1151,33 @@ export const messages: Record<Locale, MessageSet> = {
     },
     payments: {
       eyebrow: "GLOBAL PAYMENTS",
-      title: ["Empieza con las funciones que necesitas", "con un único pago."],
+      title: ["Revisa lo que está disponible", "antes de elegir un pago único."],
       description:
-        "Los precios y los enlaces de pago de PayPal están conectados. Los pagos se procesan en las páginas oficiales de PayPal.",
+        "Professional y Business son compras anticipadas antes del lanzamiento oficial. El paquete SmartStore es un producto digital disponible actualmente. Los pagos se procesan en las páginas oficiales de PayPal.",
       statusLabel: "Estado del pago",
-      status: "Enlaces de pago de PayPal conectados",
+      status: "Condiciones de prelanzamiento visibles",
       products: [
         {
           name: "AIWORK Professional",
           price: "USD 19",
-          billing: "pago único",
+          billing: "compra anticipada · pago único",
           features: [
-            "Chrome Extension",
-            "Google Drive Workspace",
-            "Document & Research Studio",
+            "Compra anticipada antes del lanzamiento",
+            "Chrome Extension después del lanzamiento público",
+            "Google Drive después de la aprobación OAuth",
           ],
-          action: "Comprar Professional",
+          action: "Reservar Professional",
         },
         {
           name: "AIWORK Business",
           price: "USD 49",
-          billing: "pago único",
+          billing: "compra anticipada · pago único",
           features: [
-            "Espacio de trabajo empresarial",
-            "Investigación de mercado avanzada",
-            "Soporte prioritario",
+            "Incluye el alcance anticipado de Professional",
+            "Business Workspace está en desarrollo",
+            "Soporte prioritario por correo electrónico",
           ],
-          action: "Comprar Business",
+          action: "Reservar Business",
         },
         {
           name: "Paquete operativo para Naver SmartStore",
@@ -1196,7 +1196,7 @@ export const messages: Record<Locale, MessageSet> = {
         "Las aportaciones voluntarias apoyan el desarrollo, la documentación, la mejora del servicio y la atención a usuarios de AIWORK.",
       supportAction: "Apoyar con PayPal",
       disclaimer:
-        "Conserva el recibo de PayPal y el ID de la transacción. Por ahora, los productos y las licencias se entregan manualmente tras verificar la transacción.",
+        "Professional y Business aún no están disponibles de forma general. Chrome Extension se entregará tras el lanzamiento público y Google Drive tras la aprobación de Google OAuth. Antes de pagar, confirma el alcance y la fecha de entrega en cakecnc@daum.net. La transacción y la entrega del producto o licencia se verifican manualmente; conserva el recibo de PayPal y el ID de la transacción.",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",
@@ -1356,33 +1356,33 @@ export const messages: Record<Locale, MessageSet> = {
     },
     payments: {
       eyebrow: "GLOBAL PAYMENTS",
-      title: ["Accédez aux fonctions nécessaires", "avec un paiement unique."],
+      title: ["Vérifiez ce qui est disponible", "avant de choisir un paiement unique."],
       description:
-        "Les prix et les liens de paiement PayPal sont connectés. Les paiements sont traités sur les pages officielles de PayPal.",
+        "Professional et Business sont des préachats avant leur lancement officiel. Le pack SmartStore est un produit numérique actuellement disponible. Les paiements sont traités sur les pages officielles de PayPal.",
       statusLabel: "État du paiement",
-      status: "Liens de paiement PayPal connectés",
+      status: "Conditions de prélancement affichées",
       products: [
         {
           name: "AIWORK Professional",
           price: "USD 19",
-          billing: "paiement unique",
+          billing: "préachat · paiement unique",
           features: [
-            "Chrome Extension",
-            "Google Drive Workspace",
-            "Document & Research Studio",
+            "Préachat avant le lancement officiel",
+            "Chrome Extension après le lancement public",
+            "Google Drive après l’approbation OAuth",
           ],
-          action: "Acheter Professional",
+          action: "Préacheter Professional",
         },
         {
           name: "AIWORK Business",
           price: "USD 49",
-          billing: "paiement unique",
+          billing: "préachat · paiement unique",
           features: [
-            "Espace de travail professionnel",
-            "Études de marché avancées",
-            "Support prioritaire",
+            "Inclut le périmètre de préachat Professional",
+            "Business Workspace est en développement",
+            "Support prioritaire par e-mail",
           ],
-          action: "Acheter Business",
+          action: "Préacheter Business",
         },
         {
           name: "Pack opérationnel Naver SmartStore",
@@ -1401,7 +1401,7 @@ export const messages: Record<Locale, MessageSet> = {
         "Les contributions volontaires soutiennent le développement, la documentation, l’amélioration du service et l’assistance aux utilisateurs d’AIWORK.",
       supportAction: "Soutenir via PayPal",
       disclaimer:
-        "Conservez votre reçu PayPal et l’identifiant de transaction. Les produits et licences sont actuellement livrés manuellement après vérification de la transaction.",
+        "Professional et Business ne sont pas encore disponibles au public. Chrome Extension sera fourni après le lancement public et Google Drive après l’approbation Google OAuth. Avant de payer, confirmez le périmètre et le calendrier de livraison à cakecnc@daum.net. La transaction et la livraison du produit ou de la licence sont vérifiées manuellement ; conservez votre reçu PayPal et l’identifiant de transaction.",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",
@@ -1564,33 +1564,33 @@ export const messages: Record<Locale, MessageSet> = {
     },
     payments: {
       eyebrow: "GLOBAL PAYMENTS",
-      title: ["Starten Sie mit den benötigten Funktionen", "per Einmalzahlung."],
+      title: ["Prüfen Sie den aktuellen Umfang", "vor der Einmalzahlung."],
       description:
-        "Produktpreise und PayPal-Zahlungslinks sind verknüpft. Zahlungen werden auf den offiziellen PayPal-Seiten verarbeitet.",
+        "Professional und Business sind Vorabkäufe vor der offiziellen Veröffentlichung. Das SmartStore-Paket ist ein derzeit verfügbares Digitalprodukt. Zahlungen werden auf den offiziellen PayPal-Seiten verarbeitet.",
       statusLabel: "Zahlungsstatus",
-      status: "PayPal-Zahlungslinks verbunden",
+      status: "Vorabbedingungen werden angezeigt",
       products: [
         {
           name: "AIWORK Professional",
           price: "USD 19",
-          billing: "Einmalzahlung",
+          billing: "Vorabkauf · Einmalzahlung",
           features: [
-            "Chrome Extension",
-            "Google Drive Workspace",
-            "Document & Research Studio",
+            "Vorabkauf vor der Veröffentlichung",
+            "Chrome Extension nach öffentlicher Veröffentlichung",
+            "Google Drive nach OAuth-Genehmigung",
           ],
-          action: "Professional kaufen",
+          action: "Professional vorab kaufen",
         },
         {
           name: "AIWORK Business",
           price: "USD 49",
-          billing: "Einmalzahlung",
+          billing: "Vorabkauf · Einmalzahlung",
           features: [
-            "Business-Arbeitsbereich",
-            "Erweiterte Marktforschung",
-            "Bevorzugter Support",
+            "Umfasst den Professional-Vorabumfang",
+            "Business Workspace ist in Entwicklung",
+            "Bevorzugter Support per E-Mail",
           ],
-          action: "Business kaufen",
+          action: "Business vorab kaufen",
         },
         {
           name: "Naver SmartStore Praxispaket",
@@ -1609,7 +1609,7 @@ export const messages: Record<Locale, MessageSet> = {
         "Freiwillige Beiträge unterstützen die Entwicklung, Dokumentation, Serviceverbesserung und Nutzerbetreuung von AIWORK.",
       supportAction: "Mit PayPal unterstützen",
       disclaimer:
-        "Bewahren Sie Ihren PayPal-Beleg und die Transaktions-ID auf. Produkte und Lizenzen werden derzeit nach Prüfung der Transaktion manuell bereitgestellt.",
+        "Professional und Business sind noch nicht allgemein verfügbar. Chrome Extension wird nach der öffentlichen Veröffentlichung, Google Drive nach der Google-OAuth-Genehmigung bereitgestellt. Bestätigen Sie vor der Zahlung Umfang und Termin unter cakecnc@daum.net. Transaktion und Produkt- oder Lizenzbereitstellung werden manuell geprüft; bewahren Sie PayPal-Beleg und Transaktions-ID auf.",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",
