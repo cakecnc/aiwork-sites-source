@@ -13,14 +13,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Starter Project",
-  description: "A clean starting point for building your site.",
+  title: "AIWORK | 업무를 연결하다",
+  description:
+    "웹, 문서, 이메일과 업무 도구를 연결해 조사부터 제작, 검토까지 하나의 흐름으로 완성하는 AI 업무 플랫폼입니다.",
   other: {
     "codex-preview": "development",
   },
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: "/images/aiwork-anime-profile-192.png",
+    shortcut: "/images/aiwork-anime-profile-192.png",
+    apple: "/images/aiwork-anime-profile-192.png",
   },
 };
 
@@ -30,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

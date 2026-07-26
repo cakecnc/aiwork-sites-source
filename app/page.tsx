@@ -1,83 +1,174 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
+import {
+  localeInfo,
+  messages,
+  supportedLocales,
+  type Locale,
+  type ThemeKey,
+} from "./i18n";
 
-type ThemeKey =
-  | "system"
-  | "light"
-  | "dark"
-  | "aurora"
-  | "editorial"
-  | "console";
-
-const themes: Array<{
-  key: ThemeKey;
-  name: string;
-  note: string;
-  colors: string[];
-}> = [
-  { key: "system", name: "시스템", note: "기기 설정에 맞춤", colors: ["#f8fafc", "#111827", "#7357ff"] },
-  { key: "light", name: "라이트", note: "맑고 선명하게", colors: ["#ffffff", "#182033", "#2563eb"] },
-  { key: "dark", name: "다크", note: "눈이 편안하게", colors: ["#090d18", "#eaf0ff", "#8b5cf6"] },
-  { key: "aurora", name: "프리미엄 오로라", note: "딥네이비 · 퍼플", colors: ["#07091a", "#a78bfa", "#22d3ee"] },
-  { key: "editorial", name: "에디토리얼 워크플로", note: "아이보리 · 블루", colors: ["#f4f0e7", "#17336b", "#dc6b3f"] },
-  { key: "console", name: "운영 콘솔", note: "차콜 · 민트", colors: ["#101614", "#62f5c3", "#1f332d"] },
+const themeKeys: ThemeKey[] = [
+  "system",
+  "light",
+  "dark",
+  "aurora",
+  "editorial",
+  "console",
+  "synthwave",
 ];
 
-const featureCards = [
-  {
-    label: "BROWSER",
-    title: "보고 있는 화면에서 바로",
-    description: "웹페이지를 읽고, 핵심을 정리하고, 다음 업무를 사이드 패널에서 이어갑니다.",
-    icon: "↗",
-  },
-  {
-    label: "WORKFLOW",
-    title: "반복 업무를 하나의 흐름으로",
-    description: "조사, 문서, 이미지, 검토와 승인까지 업무 단계를 끊김 없이 연결합니다.",
-    icon: "⌁",
-  },
-  {
-    label: "MEMORY",
-    title: "자료가 쌓일수록 더 정확하게",
-    description: "사용자가 선택한 자료와 결정 사항을 업무 맥락으로 정리해 다시 활용합니다.",
-    icon: "◫",
-  },
+const themeColors: Record<ThemeKey, string[]> = {
+  system: ["#f8fafc", "#111827", "#7357ff"],
+  light: ["#ffffff", "#182033", "#2563eb"],
+  dark: ["#090d18", "#eaf0ff", "#8b5cf6"],
+  aurora: ["#07091a", "#a78bfa", "#22d3ee"],
+  editorial: ["#f4f0e7", "#17336b", "#dc6b3f"],
+  console: ["#101614", "#62f5c3", "#1f332d"],
+  synthwave: ["#07071b", "#ff3dbb", "#18d8ff"],
+};
+
+const sourceIcons = ["⌘", "◇", "✉", "▤"];
+const taskIcons = ["▥", "◇", "✓"];
+const featureIcons = ["↗", "⌁", "◫"];
+
+const paymentLinks = [
+  "https://www.paypal.com/ncp/payment/TF7HCLYC5PM8S",
+  "https://www.paypal.com/ncp/payment/WTD5ZEKLT5GJS",
+  "https://www.paypal.com/ncp/payment/H5SXU7HJ8GVRE",
 ];
 
-const steps = [
-  ["01", "자료 연결", "웹, 문서, 이메일과 필요한 업무 자료를 선택합니다."],
-  ["02", "AIWORK 실행", "목표에 맞는 분석과 제작 워크플로를 시작합니다."],
-  ["03", "검토·완성", "근거와 결과를 확인하고 다음 작업으로 연결합니다."],
-];
+const supportLink =
+  "https://www.paypal.com/donate/?hosted_button_id=R3NBTNC3KYCVE";
+
+const defaultColors = {
+  accent: "#ff3dbb",
+  secondary: "#18d8ff",
+  background: "#07071b",
+};
+
+function isTheme(value: string | null): value is ThemeKey {
+  return Boolean(value && themeKeys.includes(value as ThemeKey));
+}
+
+function isLocale(value: string | null): value is Locale {
+  return Boolean(value && supportedLocales.includes(value as Locale));
+}
+
+function detectLocale(): Locale {
+  const queryLocale = new URLSearchParams(window.location.search).get("lang");
+  if (isLocale(queryLocale)) return queryLocale;
+
+  const savedLocale = localStorage.getItem("aiwork-locale");
+  if (isLocale(savedLocale)) return savedLocale;
+
+  const browserLanguage = navigator.language.toLowerCase();
+  if (browserLanguage.startsWith("ar")) return "ar";
+  if (browserLanguage.startsWith("es")) return "es";
+  if (browserLanguage.startsWith("fr")) return "fr";
+  if (browserLanguage.startsWith("de")) return "de";
+  if (browserLanguage.startsWith("ja")) return "ja";
+  if (browserLanguage.startsWith("zh")) return "zh-CN";
+  if (browserLanguage.startsWith("en")) return "en";
+  return "ko";
+}
+
+function replaceName(template: string, name: string) {
+  return template.replace("{name}", name);
+}
 
 export default function Home() {
-  const [theme, setTheme] = useState<ThemeKey>(() => {
-    if (typeof window === "undefined") return "aurora";
-    const saved = localStorage.getItem("aiwork-theme") as ThemeKey | null;
-    return saved && themes.some((item) => item.key === saved) ? saved : "aurora";
-  });
+  const [theme, setTheme] = useState<ThemeKey>("synthwave");
+  const [locale, setLocale] = useState<Locale>("ko");
   const [themeOpen, setThemeOpen] = useState(false);
+  const [languageOpen, setLanguageOpen] = useState(false);
   const [customOpen, setCustomOpen] = useState(false);
-  const [custom, setCustom] = useState(() => {
-    const fallback = {
-      accent: "#8b5cf6",
-      secondary: "#22d3ee",
-      background: "#07091a",
-    };
-    if (typeof window === "undefined") return fallback;
-    try {
-      const saved = localStorage.getItem("aiwork-custom-colors");
-      return saved ? JSON.parse(saved) : fallback;
-    } catch {
-      return fallback;
-    }
-  });
+  const [customEnabled, setCustomEnabled] = useState(false);
+  const [custom, setCustom] = useState(defaultColors);
+
+  const copy = messages[locale];
+  const localeMeta = localeInfo[locale];
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      const savedTheme = localStorage.getItem("aiwork-theme");
+      if (isTheme(savedTheme)) setTheme(savedTheme);
+
+      try {
+        const savedColors = localStorage.getItem("aiwork-custom-colors");
+        if (savedColors) {
+          const parsed = JSON.parse(savedColors);
+          if (
+            typeof parsed?.accent === "string" &&
+            typeof parsed?.secondary === "string" &&
+            typeof parsed?.background === "string"
+          ) {
+            setCustom(parsed);
+            setCustomEnabled(true);
+          }
+        }
+      } catch {
+        localStorage.removeItem("aiwork-custom-colors");
+      }
+
+      setLocale(detectLocale());
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("aiwork-theme", theme);
     document.documentElement.dataset.theme = theme;
   }, [theme]);
+
+  useEffect(() => {
+    if (customEnabled) {
+      document.documentElement.dataset.custom = "true";
+    } else {
+      delete document.documentElement.dataset.custom;
+    }
+  }, [customEnabled]);
+
+  useEffect(() => {
+    localStorage.setItem("aiwork-locale", locale);
+    document.documentElement.lang = localeMeta.htmlLang;
+    document.documentElement.dir = locale === "ar" ? "rtl" : "ltr";
+    document.documentElement.dataset.locale = locale;
+    document.title = copy.metadata.title;
+
+    let description = document.querySelector<HTMLMetaElement>(
+      'meta[name="description"]',
+    );
+    if (!description) {
+      description = document.createElement("meta");
+      description.name = "description";
+      document.head.appendChild(description);
+    }
+    description.content = copy.metadata.description;
+
+    const url = new URL(window.location.href);
+    if (locale === "ko") {
+      url.searchParams.delete("lang");
+    } else {
+      url.searchParams.set("lang", locale);
+    }
+    window.history.replaceState({}, "", url);
+  }, [copy.metadata.description, copy.metadata.title, locale, localeMeta.htmlLang]);
+
+  useEffect(() => {
+    const closeMenus = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setThemeOpen(false);
+        setLanguageOpen(false);
+        setCustomOpen(false);
+      }
+    };
+    window.addEventListener("keydown", closeMenus);
+    return () => window.removeEventListener("keydown", closeMenus);
+  }, []);
 
   const customStyle = useMemo(
     () =>
@@ -94,75 +185,155 @@ export default function Home() {
     setThemeOpen(false);
   }
 
+  function chooseLocale(next: Locale) {
+    setLocale(next);
+    setLanguageOpen(false);
+  }
+
   function saveCustom() {
     localStorage.setItem("aiwork-custom-colors", JSON.stringify(custom));
-    document.documentElement.dataset.custom = "true";
+    setCustomEnabled(true);
     setCustomOpen(false);
   }
 
   function resetCustom() {
-    const reset = { accent: "#8b5cf6", secondary: "#22d3ee", background: "#07091a" };
-    setCustom(reset);
+    setCustom(defaultColors);
+    setCustomEnabled(false);
     localStorage.removeItem("aiwork-custom-colors");
-    delete document.documentElement.dataset.custom;
   }
 
   return (
-    <main className="site-shell" style={customStyle}>
+    <main className="site-shell" id="main-content" style={customStyle}>
       <div className="ambient ambient-one" />
       <div className="ambient ambient-two" />
 
       <header className="topbar">
-        <a className="brand" href="#home" aria-label="AIWORK 홈">
-          <span className="brand-mark">A</span>
+        <a className="brand" href="#home" aria-label={copy.aria.home}>
+          <Image
+            className="brand-avatar"
+            src="/images/aiwork-anime-profile-v1.webp"
+            alt=""
+            width="40"
+            height="40"
+            unoptimized
+          />
           <span>AIWORK</span>
           <small>work, connected.</small>
         </a>
 
-        <nav className="main-nav" aria-label="주요 메뉴">
-          <a href="#product">제품</a>
-          <a href="#workflow">기능</a>
-          <a href="#security">보안</a>
-          <a href="#contact">문의</a>
+        <nav className="main-nav" aria-label={copy.aria.mainNavigation}>
+          <a href="#product">{copy.nav.product}</a>
+          <a href="#workflow">{copy.nav.features}</a>
+          <a href="#security">{copy.nav.security}</a>
+          <a href="#payments">{copy.nav.payments}</a>
+          <a href="#contact">{copy.nav.contact}</a>
         </nav>
 
         <div className="header-actions">
+          <div className="language-anchor">
+            <button
+              className="language-trigger"
+              type="button"
+              aria-expanded={languageOpen}
+              aria-label={copy.aria.languageMenu}
+              onClick={() => {
+                setLanguageOpen((value) => !value);
+                setThemeOpen(false);
+              }}
+            >
+              <span aria-hidden="true">◎</span>
+              <b>{localeMeta.shortName}</b>
+              <span className="chevron">{languageOpen ? "▲" : "▼"}</span>
+            </button>
+
+            {languageOpen && (
+              <div className="language-menu" role="menu">
+                <div className="theme-menu-head">
+                  <div>
+                    <strong>{copy.language.title}</strong>
+                    <span>{copy.language.note}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setLanguageOpen(false)}
+                    aria-label={copy.aria.close}
+                  >
+                    ×
+                  </button>
+                </div>
+                <div className="language-list">
+                  {supportedLocales.map((item) => (
+                    <button
+                      className={`language-option ${locale === item ? "active" : ""}`}
+                      type="button"
+                      role="menuitem"
+                      key={item}
+                      onClick={() => chooseLocale(item)}
+                      aria-label={replaceName(
+                        copy.aria.selectLanguage,
+                        localeInfo[item].nativeName,
+                      )}
+                    >
+                      <span>{localeInfo[item].shortName}</span>
+                      <strong>{localeInfo[item].nativeName}</strong>
+                      {locale === item && <b>✓</b>}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
           <div className="theme-anchor">
             <button
               className="theme-trigger"
               type="button"
               aria-expanded={themeOpen}
-              onClick={() => setThemeOpen((value) => !value)}
+              aria-label={copy.aria.themeMenu}
+              onClick={() => {
+                setThemeOpen((value) => !value);
+                setLanguageOpen(false);
+              }}
             >
               <span className="palette-icon">◐</span>
-              테마
+              <span className="trigger-label">{copy.themeMenu.trigger}</span>
               <span className="chevron">{themeOpen ? "▲" : "▼"}</span>
             </button>
             {themeOpen && (
               <div className="theme-menu">
                 <div className="theme-menu-head">
                   <div>
-                    <strong>화면 테마</strong>
-                    <span>원하는 분위기를 선택하세요</span>
+                    <strong>{copy.themeMenu.title}</strong>
+                    <span>{copy.themeMenu.note}</span>
                   </div>
-                  <button type="button" onClick={() => setThemeOpen(false)} aria-label="닫기">×</button>
+                  <button
+                    type="button"
+                    onClick={() => setThemeOpen(false)}
+                    aria-label={copy.aria.close}
+                  >
+                    ×
+                  </button>
                 </div>
                 <div className="theme-grid">
-                  {themes.map((item) => (
+                  {themeKeys.map((item) => (
                     <button
-                      className={`theme-option ${theme === item.key ? "active" : ""}`}
+                      className={`theme-option ${theme === item ? "active" : ""}`}
                       type="button"
-                      key={item.key}
-                      onClick={() => chooseTheme(item.key)}
+                      key={item}
+                      onClick={() => chooseTheme(item)}
+                      aria-label={replaceName(
+                        copy.aria.selectTheme,
+                        copy.themes[item].name,
+                      )}
                     >
                       <span className="swatches">
-                        {item.colors.map((color) => (
+                        {themeColors[item].map((color) => (
                           <i key={color} style={{ background: color }} />
                         ))}
                       </span>
-                      <strong>{item.name}</strong>
-                      <small>{item.note}</small>
-                      {theme === item.key && <b>✓</b>}
+                      <strong>{copy.themes[item].name}</strong>
+                      <small>{copy.themes[item].note}</small>
+                      {theme === item && <b>✓</b>}
                     </button>
                   ))}
                 </div>
@@ -175,89 +346,126 @@ export default function Home() {
                   }}
                 >
                   <span>✦</span>
-                  <span><strong>컬러 커스텀</strong><small>브랜드 컬러를 직접 지정</small></span>
+                  <span>
+                    <strong>{copy.themeMenu.customTitle}</strong>
+                    <small>{copy.themeMenu.customNote}</small>
+                  </span>
                   <b>→</b>
                 </button>
               </div>
             )}
           </div>
-          <a className="install-small" href="#download">설치하기</a>
+          <a className="install-small" href="#download">
+            {copy.nav.install}
+          </a>
         </div>
       </header>
 
       <section className="hero" id="home">
-        <div className="eyebrow"><span /> AI 업무의 새로운 기준</div>
+        <div className="eyebrow">
+          <span /> {copy.hero.eyebrow}
+        </div>
         <h1>
-          흩어진 업무를 연결하고,
+          {copy.hero.title[0]}
           <br />
-          <em>생각을 결과로.</em>
+          <em>{copy.hero.title[1]}</em>
         </h1>
         <p>
-          AIWORK는 웹, 문서, 이메일과 업무 도구를 하나로 연결해
+          {copy.hero.description[0]}
           <br className="desktop-only" />
-          조사부터 제작, 검토까지 더 빠르고 명확하게 완성합니다.
+          {copy.hero.description[1]}
         </p>
         <div className="hero-actions">
-          <a className="primary-button" href="#download">AIWORK 시작하기 <span>↗</span></a>
-          <a className="secondary-button" href="#product">서비스 알아보기 <span>↓</span></a>
+          <a className="primary-button" href="#download">
+            {copy.hero.primaryAction} <span>↗</span>
+          </a>
+          <a className="secondary-button" href="#product">
+            {copy.hero.secondaryAction} <span>↓</span>
+          </a>
         </div>
         <div className="trust-row">
-          <span><i>✓</i> 사용자 승인 중심</span>
-          <span><i>✓</i> 선택한 자료만 연결</span>
-          <span><i>✓</i> 한국어 중심 인터페이스</span>
+          {copy.hero.trust.map((item) => (
+            <span key={item}>
+              <i>✓</i> {item}
+            </span>
+          ))}
         </div>
       </section>
 
       <section className="product-panel" id="product">
         <div className="panel-topline">
           <span>AIWORK / WORKSPACE</span>
-          <span className="live"><i /> READY</span>
+          <span className="live">
+            <i /> READY
+          </span>
         </div>
         <div className="workspace-grid">
           <aside className="source-column">
             <small>SOURCES</small>
-            {["웹페이지 조사", "Google Drive", "업무 이메일", "프로젝트 문서"].map((source, index) => (
+            {copy.workspace.sources.map((source, index) => (
               <div className={index === 0 ? "source active" : "source"} key={source}>
-                <span>{["⌘", "◇", "✉", "▤"][index]}</span>{source}
+                <span>{sourceIcons[index]}</span>
+                {source}
               </div>
             ))}
           </aside>
           <div className="conversation-column">
             <small>AIWORK ASSISTANT</small>
-            <div className="user-bubble">이 자료를 바탕으로 시장 기회와 다음 실행안을 정리해줘.</div>
+            <div className="user-bubble">{copy.workspace.userPrompt}</div>
             <div className="ai-response">
-              <span className="mini-mark">A</span>
+              <Image
+                className="assistant-avatar"
+                src="/images/aiwork-anime-profile-v1.webp"
+                alt={copy.aria.assistantAvatar}
+                width="42"
+                height="42"
+                unoptimized
+              />
               <div>
-                <strong>핵심 기회 3가지를 확인했습니다.</strong>
-                <p>자료의 근거를 연결해 우선순위, 위험 요소, 바로 실행할 작업으로 나누어 정리하겠습니다.</p>
-                <div className="progress-lines"><i /><i /><i /></div>
+                <strong>{copy.workspace.responseTitle}</strong>
+                <p>{copy.workspace.responseBody}</p>
+                <div className="progress-lines">
+                  <i />
+                  <i />
+                  <i />
+                </div>
               </div>
             </div>
           </div>
           <aside className="studio-column">
             <small>STUDIO PANEL</small>
-            <strong>다음 작업</strong>
-            {["시장조사 보고서", "제안서 초안", "실행 체크리스트"].map((item, index) => (
-              <button key={item}><span>{["▥", "◇", "✓"][index]}</span>{item}<b>＋</b></button>
+            <strong>{copy.workspace.nextWork}</strong>
+            {copy.workspace.tasks.map((item, index) => (
+              <button key={item}>
+                <span>{taskIcons[index]}</span>
+                {item}
+                <b>＋</b>
+              </button>
             ))}
-            <div className="source-badge">근거 자료 <strong>8</strong></div>
+            <div className="source-badge">
+              {copy.workspace.evidenceLabel} <strong>8</strong>
+            </div>
           </aside>
         </div>
       </section>
 
       <section className="feature-section" id="workflow">
         <div className="section-heading">
-          <span>CONNECTED INTELLIGENCE</span>
-          <h2>업무의 모든 순간을<br />하나의 흐름으로</h2>
+          <span>{copy.features.eyebrow}</span>
+          <h2>
+            {copy.features.title[0]}
+            <br />
+            {copy.features.title[1]}
+          </h2>
         </div>
         <div className="feature-grid">
-          {featureCards.map((card) => (
-            <article key={card.title}>
-              <span className="feature-icon">{card.icon}</span>
+          {copy.features.cards.map((card, index) => (
+            <article key={card.label}>
+              <span className="feature-icon">{featureIcons[index]}</span>
               <small>{card.label}</small>
               <h3>{card.title}</h3>
               <p>{card.description}</p>
-              <a href="#contact">자세히 보기 →</a>
+              <a href="#contact">{copy.features.details} →</a>
             </article>
           ))}
         </div>
@@ -265,69 +473,209 @@ export default function Home() {
 
       <section className="workflow-section" id="security">
         <div>
-          <span className="section-kicker">HOW IT WORKS</span>
-          <h2>복잡한 업무도<br />세 단계면 충분합니다.</h2>
-          <p>연결 범위와 실행 단계를 사용자가 직접 확인하고 결정합니다.</p>
+          <span className="section-kicker">{copy.workflow.eyebrow}</span>
+          <h2>
+            {copy.workflow.title[0]}
+            <br />
+            {copy.workflow.title[1]}
+          </h2>
+          <p>{copy.workflow.description}</p>
         </div>
         <div className="steps">
-          {steps.map(([number, title, text]) => (
-            <article key={number}>
-              <span>{number}</span>
-              <div><h3>{title}</h3><p>{text}</p></div>
+          {copy.workflow.steps.map((step) => (
+            <article key={step.number}>
+              <span>{step.number}</span>
+              <div>
+                <h3>{step.title}</h3>
+                <p>{step.description}</p>
+              </div>
             </article>
           ))}
         </div>
       </section>
 
+      <section className="payment-section" id="payments">
+        <div className="payment-heading">
+          <div>
+            <span className="section-kicker">{copy.payments.eyebrow}</span>
+            <h2>
+              {copy.payments.title[0]}
+              <br />
+              {copy.payments.title[1]}
+            </h2>
+            <p>{copy.payments.description}</p>
+          </div>
+          <div className="payment-status">
+            <span>{copy.payments.statusLabel}</span>
+            <strong>
+              <i /> {copy.payments.status}
+            </strong>
+          </div>
+        </div>
+
+        <div className="pricing-grid">
+          {copy.payments.products.map((product, index) => (
+            <article
+              className={`price-card ${index === 0 ? "featured" : ""}`}
+              key={product.name}
+            >
+              {index === 0 && <span className="recommended">RECOMMENDED</span>}
+              <small className="product-name">{product.name}</small>
+              <div className="price">
+                <strong>
+                  <bdi dir="ltr">{product.price}</bdi>
+                </strong>
+                <span>{product.billing}</span>
+              </div>
+              <ul>
+                {product.features.map((feature) => (
+                  <li key={feature}>
+                    <i>✓</i> {feature}
+                  </li>
+                ))}
+              </ul>
+              <a
+                className={index === 0 ? "primary-button payment-button" : "secondary-button payment-button"}
+                href={paymentLinks[index]}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {product.action} <span>↗</span>
+              </a>
+            </article>
+          ))}
+        </div>
+
+        <div className="support-card">
+          <Image
+            src="/images/aiwork-anime-profile-v1.webp"
+            alt=""
+            width="64"
+            height="64"
+            unoptimized
+          />
+          <div>
+            <span>{copy.payments.supportTitle}</span>
+            <p>{copy.payments.supportDescription}</p>
+          </div>
+          <a
+            className="secondary-button"
+            href={supportLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {copy.payments.supportAction} <span>↗</span>
+          </a>
+        </div>
+        <p className="payment-disclaimer">{copy.payments.disclaimer}</p>
+      </section>
+
       <section className="cta-section" id="download">
-        <span>AIWORK BROWSER</span>
-        <h2>업무가 있는 곳에서<br />AIWORK를 시작하세요.</h2>
-        <p>Chrome 확장프로그램과 데스크톱 앱을 준비하고 있습니다.</p>
+        <span>{copy.cta.eyebrow}</span>
+        <h2>
+          {copy.cta.title[0]}
+          <br />
+          {copy.cta.title[1]}
+        </h2>
+        <p>{copy.cta.description}</p>
         <div>
-          <button className="primary-button" type="button">출시 알림 신청 <span>↗</span></button>
-          <a className="secondary-button" href="#contact">도입 상담</a>
+          <a
+            className="primary-button"
+            href={`mailto:cakecnc@daum.net?subject=${encodeURIComponent("AIWORK release update")}`}
+          >
+            {copy.cta.releaseAlert} <span>↗</span>
+          </a>
+          <a className="secondary-button" href="#contact">
+            {copy.cta.consultation}
+          </a>
         </div>
       </section>
 
       <footer id="contact">
-        <div className="brand footer-brand"><span className="brand-mark">A</span><span>AIWORK</span></div>
-        <p>AI와 업무를 연결하는 새로운 방식.</p>
+        <div className="brand footer-brand">
+          <Image
+            className="brand-avatar"
+            src="/images/aiwork-anime-profile-v1.webp"
+            alt=""
+            width="36"
+            height="36"
+            unoptimized
+          />
+          <span>AIWORK</span>
+        </div>
+        <p>{copy.footer.tagline}</p>
         <a href="mailto:cakecnc@daum.net">cakecnc@daum.net</a>
-        <small>© 2026 AIWORK. All rights reserved.</small>
+        <small>{copy.footer.copyright}</small>
       </footer>
 
       {customOpen && (
-        <div className="custom-overlay" role="dialog" aria-modal="true" aria-labelledby="custom-title">
-          <button className="overlay-close" aria-label="닫기" onClick={() => setCustomOpen(false)} />
+        <div
+          className="custom-overlay"
+          role="dialog"
+          aria-modal="true"
+          aria-label={copy.aria.customColorDialog}
+        >
+          <button
+            className="overlay-close"
+            aria-label={copy.aria.close}
+            onClick={() => setCustomOpen(false)}
+          />
           <section className="custom-panel">
             <div className="custom-head">
-              <div><span>COLOR LAB</span><h2 id="custom-title">컬러 커스텀</h2><p>AIWORK를 사용자 브랜드에 맞게 조정하세요.</p></div>
-              <button type="button" onClick={() => setCustomOpen(false)} aria-label="닫기">×</button>
+              <div>
+                <span>{copy.customColors.eyebrow}</span>
+                <h2>{copy.customColors.title}</h2>
+                <p>{copy.customColors.description}</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setCustomOpen(false)}
+                aria-label={copy.aria.close}
+              >
+                ×
+              </button>
             </div>
             <div className="custom-preview" style={{ background: custom.background }}>
               <span style={{ background: custom.accent }}>AIWORK</span>
-              <strong style={{ color: custom.secondary }}>Work, connected.</strong>
-              <i style={{ background: `linear-gradient(90deg, ${custom.accent}, ${custom.secondary})` }} />
+              <strong style={{ color: custom.secondary }}>
+                {copy.customColors.previewTagline}
+              </strong>
+              <i
+                style={{
+                  background: `linear-gradient(90deg, ${custom.accent}, ${custom.secondary})`,
+                }}
+              />
             </div>
             <div className="color-controls">
-              {([
-                ["accent", "포인트 컬러"],
-                ["secondary", "보조 컬러"],
-                ["background", "배경 컬러"],
-              ] as const).map(([key, label]) => (
+              {(
+                [
+                  ["accent", copy.customColors.accent],
+                  ["secondary", copy.customColors.secondary],
+                  ["background", copy.customColors.background],
+                ] as const
+              ).map(([key, label]) => (
                 <label key={key}>
-                  <span>{label}<small>{custom[key].toUpperCase()}</small></span>
+                  <span>
+                    {label}
+                    <small>{custom[key].toUpperCase()}</small>
+                  </span>
                   <input
                     type="color"
                     value={custom[key]}
-                    onChange={(event) => setCustom({ ...custom, [key]: event.target.value })}
+                    onChange={(event) =>
+                      setCustom({ ...custom, [key]: event.target.value })
+                    }
                   />
                 </label>
               ))}
             </div>
             <div className="custom-actions">
-              <button type="button" onClick={resetCustom}>기본값 복원</button>
-              <button type="button" className="save-custom" onClick={saveCustom}>컬러 적용하기</button>
+              <button type="button" onClick={resetCustom}>
+                {copy.customColors.reset}
+              </button>
+              <button type="button" className="save-custom" onClick={saveCustom}>
+                {copy.customColors.apply}
+              </button>
             </div>
           </section>
         </div>
