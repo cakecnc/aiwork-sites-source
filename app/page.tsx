@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   localeInfo,
   messages,
@@ -604,7 +605,10 @@ export default function Home() {
           <span>AIWORK</span>
         </div>
         <p>{copy.footer.tagline}</p>
-        <a href="mailto:cakecnc@daum.net">cakecnc@daum.net</a>
+        <div className="footer-links">
+          <Link href="/privacy">Privacy</Link>
+          <a href="mailto:cakecnc@daum.net">cakecnc@daum.net</a>
+        </div>
         <small>{copy.footer.copyright}</small>
       </footer>
 

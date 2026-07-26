@@ -4,13 +4,16 @@ import test from "node:test";
 const developmentPreviewMeta =
   /<meta(?=[^>]*\bname=["']codex-preview["'])(?=[^>]*\bcontent=["']development["'])[^>]*>/i;
 
-test("renders development preview metadata", async () => {
+async function render(pathname = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
+  workerUrl.searchParams.set(
+    "test",
+    `${process.pid}-${Date.now()}-${encodeURIComponent(pathname)}`,
+  );
   const { default: worker } = await import(workerUrl.href);
 
-  const response = await worker.fetch(
-    new Request("http://localhost/", {
+  return worker.fetch(
+    new Request(`http://localhost${pathname}`, {
       headers: { accept: "text/html" },
     }),
     {
@@ -23,11 +26,37 @@ test("renders development preview metadata", async () => {
       passThroughOnException() {},
     },
   );
+}
+
+test("renders development preview metadata", async () => {
+  const response = await render("/");
 
   assert.equal(response.status, 200);
   assert.match(
     response.headers.get("content-type") ?? "",
     /^text\/html\b/i,
   );
-  assert.match(await response.text(), developmentPreviewMeta);
+  const html = await response.text();
+  assert.match(html, developmentPreviewMeta);
+  assert.match(html, /AIWORK/);
+  assert.match(html, /R3NBTNC3KYCVE/);
+});
+
+test("renders the public AIWORK Browser privacy policy", async () => {
+  const response = await render("/privacy");
+
+  assert.equal(response.status, 200);
+  assert.match(
+    response.headers.get("content-type") ?? "",
+    /^text\/html\b/i,
+  );
+
+  const html = await response.text();
+  assert.match(html, /AIWORK Browser 개인정보처리방침/);
+  assert.match(html, /activeTab/);
+  assert.match(html, /drive\.appdata/);
+  assert.match(html, /appDataFolder/);
+  assert.match(html, /1,000,000 bytes/);
+  assert.match(html, /ENGLISH SUMMARY/);
+  assert.match(html, /cakecnc@daum\.net/);
 });
