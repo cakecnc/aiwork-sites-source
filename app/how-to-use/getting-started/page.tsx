@@ -3,35 +3,35 @@ import Link from "next/link";
 import DetailPage from "../../components/DetailPage";
 
 export const metadata: Metadata = {
-  title: "AIWORK 프로젝트 흐름 | 로드맵 안내",
+  title: "AIWORK Browser 시작하기 | 설치·동의·첫 수집",
   description:
-    "아직 구현되지 않은 AIWORK 프로젝트 기능의 목표 설정·자료 선택·검토 원칙을 로드맵 참고로 안내합니다.",
+    "AIWORK Browser 1.0 RC의 설치 조건, 초기 동의, 언어·테마 설정, Drive 연결과 첫 페이지 수집 준비를 안내합니다.",
 };
 
 const steps = [
   {
-    title: "프로젝트 이름 정하기",
-    body: "누가 보더라도 목적을 알 수 있게 ‘시장 조사’, ‘제품 상세페이지’, ‘주간 이메일 브리핑’처럼 정합니다.",
+    title: "공식 공개 상태 확인",
+    body: "현재는 공개 배포 전입니다. Chrome Web Store의 공식 AIWORK 항목이 공개된 뒤 Chrome 116 이상에서 설치합니다.",
   },
   {
-    title: "완성할 결과 정의하기",
-    body: "보고서, 제안서, 체크리스트, 이메일 초안 등 최종 산출물과 사용할 언어를 적습니다.",
+    title: "페이지 처리 동의 검토",
+    body: "현재 활성 페이지를 사용자가 직접 수집할 때 처리되는 제목·URL·선택 영역·본문 범위를 읽고 동의 여부를 선택합니다.",
   },
   {
-    title: "자료 범위 선택하기",
-    body: "이번 작업과 직접 관련된 문서와 URL부터 추가합니다. 민감정보는 필요하지 않다면 제외합니다.",
+    title: "Drive 저장 동의 분리 확인",
+    body: "페이지 처리와 Drive 저장은 별도 동의입니다. Drive에 저장하지 않고 미리보기만 확인할 수 있는 범위도 구분합니다.",
   },
   {
-    title: "첫 질문 작성하기",
-    body: "대상, 판단 기준, 분량, 형식과 제외할 항목을 한 문장에 함께 넣습니다.",
+    title: "언어와 화면 설정",
+    body: "설정에서 8개 언어, 7개 테마와 사용자 색상을 선택합니다. 이 값은 AIWORK Browser의 로컬 설정에 저장됩니다.",
   },
   {
-    title: "근거와 상태 확인하기",
-    body: "출처의 날짜와 원문, 실제 구현 상태와 계획을 구분해 검토합니다.",
+    title: "필요할 때 Drive 연결",
+    body: "Google 연결은 사용자가 시작합니다. AIWORK는 drive.appdata 범위만 사용하며 일반 Drive 파일 목록에는 접근하지 않습니다.",
   },
   {
-    title: "저장하거나 다음 작업으로 연결하기",
-    body: "재사용할 결과만 저장하고, 외부 전송이나 게시가 필요하면 승인 단계를 확인합니다.",
+    title: "민감하지 않은 페이지로 첫 수집",
+    body: "공개 문서처럼 민감정보가 없는 페이지에서 Toolbar 아이콘, 수집 단축키 또는 Context Menu를 사용해 미리보기 흐름을 먼저 확인합니다.",
   },
 ];
 
@@ -40,23 +40,23 @@ export default function GettingStartedPage() {
     <DetailPage
       active="guide"
       eyebrow="GUIDE 01 · GETTING STARTED"
-      status="로드맵 안내 · 현재 미구현"
+      status="Browser 1.0 RC · 공개 배포 전"
       title={
         <>
-          첫 프로젝트를
+          첫 실행을
           <br />
-          만드는 방법.
+          안전하게 준비하는 방법.
         </>
       }
-      description="프로젝트 생성과 AI 결과 작성은 현재 Browser RC에 구현되지 않았습니다. 아래 내용은 후속 제품을 위한 업무 설계 참고입니다."
+      description="공식 배포 확인부터 초기 동의, 화면 설정, Drive 연결과 첫 페이지 수집까지 AIWORK Browser 1.0의 시작 순서를 안내합니다."
       imageLabel="GETTING STARTED"
     >
       <section className="warning-panel" role="note">
-        <strong>로드맵 참고</strong>
+        <strong>공개 전 안내</strong>
         <p>
-          현재 설치 가능한 공개 제품 절차가 아닙니다. Browser RC의 실제 범위는
-          현재 탭 수집·미리보기와 승인 후 Drive 저장이며, 프로젝트·AI 추론·RAG는
-          후속 개발 항목입니다.
+          최종 Store 패키지는 준비됐지만 아직 일반 사용자가 설치할 수 없습니다.
+          공개 전 비공식 ZIP을 설치하거나 Google 계정, 비밀번호, 인증 코드를
+          전달하지 마세요.
         </p>
       </section>
 
@@ -76,27 +76,27 @@ export default function GettingStartedPage() {
 
       <section className="prompt-example">
         <div>
-          <span className="section-kicker">COPY &amp; START</span>
-          <h2>바로 사용할 첫 요청</h2>
+          <span className="section-kicker">FIRST CAPTURE</span>
+          <h2>첫 수집 체크리스트</h2>
         </div>
         <blockquote>
-          “이 프로젝트의 목적은 [목적]입니다. 연결한 자료만 사용해 [결과물]을 만들고,
-          중요한 주장마다 근거를 표시해 주세요. 확인되지 않은 내용은 추정하지 말고
-          ‘확인 필요’로 구분해 주세요.”
+          “공개 페이지인가? · 비밀번호나 개인정보가 보이지 않는가? · 선택 영역이
+          필요한 범위인가? · [REDACTED]와 경고를 확인했는가? · 저장 종류와
+          Drive 동의를 확인했는가?”
         </blockquote>
       </section>
 
       <section className="detail-cta">
         <div>
           <span>NEXT GUIDE</span>
-          <h2>이제 자료 유형에 맞는 안내를 선택하세요.</h2>
+          <h2>이제 실제 Browser 수집 흐름을 확인하세요.</h2>
         </div>
         <div className="detail-actions">
-          <Link className="primary-button" href="/how-to-use/documents">
-            문서 활용 <span>↗</span>
+          <Link className="primary-button" href="/how-to-use/browser">
+            Browser 사용법 <span>↗</span>
           </Link>
-          <Link className="secondary-button" href="/how-to-use/web-research">
-            웹 조사
+          <Link className="secondary-button" href="/privacy">
+            개인정보처리방침
           </Link>
         </div>
       </section>

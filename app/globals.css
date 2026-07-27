@@ -167,9 +167,9 @@ a { color: inherit; text-decoration: none; }
   overflow: hidden;
   position: relative;
   background:
-    radial-gradient(circle at 15% 0%, rgba(255, 61, 187, .18), transparent 28%),
-    radial-gradient(circle at 85% 15%, rgba(24, 216, 255, .15), transparent 27%),
-    linear-gradient(180deg, #090720, #07071b 35%, #08091f);
+    radial-gradient(circle at 15% 0%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 28%),
+    radial-gradient(circle at 85% 15%, color-mix(in srgb, var(--accent-2) 15%, transparent), transparent 27%),
+    linear-gradient(180deg, color-mix(in srgb, var(--bg) 92%, var(--accent) 8%), var(--bg) 35%, color-mix(in srgb, var(--bg) 96%, var(--accent-2) 4%));
 }
 .privacy-topbar {
   width: min(1120px, calc(100% - 40px));
@@ -183,7 +183,7 @@ a { color: inherit; text-decoration: none; }
   justify-content: space-between;
   border: 1px solid var(--line);
   border-radius: 18px;
-  background: rgba(7, 7, 27, .78);
+  background: var(--nav);
   backdrop-filter: blur(20px);
   box-shadow: 0 12px 38px rgba(0, 0, 0, .14);
 }
@@ -230,6 +230,13 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   flex-wrap: wrap;
   gap: 9px;
+}
+.privacy-language-note {
+  margin-top: 22px !important;
+  color: var(--accent-2) !important;
+  font-size: 11px !important;
+  font-weight: 800;
+  letter-spacing: .04em;
 }
 .policy-meta span {
   padding: 8px 11px;
@@ -430,7 +437,8 @@ a { color: inherit; text-decoration: none; }
 .brand small { margin-left: 2px; color: var(--muted); font-size: 10px; font-weight: 500; letter-spacing: .05em; }
 .main-nav { display: flex; gap: 25px; font-size: 13px; color: var(--muted); }
 .main-nav a:hover { color: var(--text); }
-.header-actions { display: flex; align-items: center; gap: 10px; }
+.header-actions,
+.preference-actions { display: flex; align-items: center; gap: 10px; }
 .theme-anchor, .language-anchor { position: relative; }
 .theme-trigger, .language-trigger, .install-small {
   height: 40px; padding: 0 15px; border: 1px solid var(--line); border-radius: 11px; background: var(--surface-soft); color: var(--text);
@@ -1127,7 +1135,7 @@ a { color: inherit; text-decoration: none; }
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(180deg, transparent 62%, rgba(7, 7, 27, .88));
+  background: linear-gradient(180deg, transparent 62%, color-mix(in srgb, var(--bg) 88%, transparent));
 }
 
 .detail-visual > span {

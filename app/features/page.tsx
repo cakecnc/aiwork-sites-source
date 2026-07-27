@@ -31,11 +31,32 @@ const features = [
       "최근 대화, 사용자·회사·프로젝트 맥락과 사용자가 선택한 결과를 구분해 다시 활용하는 구조를 지향합니다.",
   },
   {
-    status: "공개 준비",
+    status: "RC 구현 · 공개 준비",
     label: "AIWORK BROWSER",
     title: "현재 탭 자료 수집",
     description:
-      "사용자가 직접 실행한 현재 탭만 읽고, 별도 동의를 거쳐 선택한 Source·Memory·Research 기록을 저장하도록 설계했습니다.",
+      "사용자가 직접 실행한 현재 탭만 읽고, 안전 미리보기와 별도 동의를 거쳐 선택한 Source·Memory·Research 기록을 Drive appDataFolder에 저장합니다.",
+  },
+  {
+    status: "RC 구현 · 공개 준비",
+    label: "TEMPLATES",
+    title: "업무 템플릿·메모·태그",
+    description:
+      "수집한 페이지에 작업 템플릿을 적용하고 메모와 태그를 검토해 저장 맥락을 정리합니다.",
+  },
+  {
+    status: "RC 구현 · 공개 준비",
+    label: "LIBRARY",
+    title: "Source·Memory·Research 자료함",
+    description:
+      "사용자가 선택한 기록 종류별로 Library에서 항목을 확인하고 개별 기록을 삭제할 수 있습니다.",
+  },
+  {
+    status: "RC 구현 · 공개 준비",
+    label: "QUEUE",
+    title: "저장·동기화 상태 확인",
+    description:
+      "Queue에서 백그라운드 저장, Drive 동기화와 제한된 재시도 상태를 확인합니다. 범용 자동화 예약 기능은 아닙니다.",
   },
   {
     status: "미구현 · 설계 검증",
@@ -111,11 +132,11 @@ export default function FeaturesPage() {
         <div>
           <span>LEARN BY DOING</span>
           <h2>기능별 사용 흐름을 먼저 살펴보세요.</h2>
-          <p>시작하기, 문서, 웹 조사와 Daum 메일 연결 안내를 나누어 정리했습니다.</p>
+          <p>현재 Browser 사용법과 후속 프로젝트·문서·웹 조사·Daum 메일 안내를 구분했습니다.</p>
         </div>
         <div className="detail-actions">
-          <Link className="primary-button" href="/how-to-use">
-            사용법 허브 <span>↗</span>
+          <Link className="primary-button" href="/how-to-use/browser">
+            Browser 사용법 <span>↗</span>
           </Link>
           <Link className="secondary-button" href="/contact">
             도입 문의

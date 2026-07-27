@@ -58,6 +58,21 @@ export default function WebResearchGuidePage() {
         </p>
       </section>
 
+      <section className="callout-panel">
+        <div>
+          <span>CURRENT MANUAL FLOW</span>
+          <h2>현재 페이지를 Research 기록으로 저장할 수 있습니다.</h2>
+        </div>
+        <p>
+          자동 검색이나 AI 보고서 생성은 없지만, 사용자가 직접 연 조사 페이지를
+          Browser로 수집하고 미리보기를 검토한 뒤 Research 종류로 저장하는 수동
+          흐름은 1.0 RC에 포함됩니다.
+        </p>
+        <Link className="secondary-button" href="/how-to-use/browser">
+          Browser 수집 방법 <span>↗</span>
+        </Link>
+      </section>
+
       <section className="content-section">
         <ol className="process-list process-list-detailed">
           {researchSteps.map((step, index) => (

@@ -1,5 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { messages, type Locale } from "../i18n";
+import { PreferenceControls, useSitePreferences } from "../preferences";
 
 export type SiteSection =
   | "home"
@@ -11,18 +15,48 @@ export type SiteSection =
   | "download"
   | "contact";
 
+const guideLabels: Record<Locale, string> = {
+  ko: "사용법",
+  en: "Guide",
+  ja: "使い方",
+  "zh-CN": "使用指南",
+  ar: "دليل الاستخدام",
+  es: "Guía",
+  fr: "Guide",
+  de: "Anleitung",
+};
+
 const navigation: Array<{
   key: SiteSection;
-  label: string;
   href: string;
 }> = [
-  { key: "product", label: "제품", href: "/product" },
-  { key: "features", label: "기능", href: "/features" },
-  { key: "guide", label: "사용법", href: "/how-to-use" },
-  { key: "security", label: "보안", href: "/security" },
-  { key: "pricing", label: "결제", href: "/pricing" },
-  { key: "contact", label: "문의", href: "/contact" },
+  { key: "product", href: "/product" },
+  { key: "features", href: "/features" },
+  { key: "guide", href: "/how-to-use" },
+  { key: "security", href: "/security" },
+  { key: "pricing", href: "/pricing" },
+  { key: "contact", href: "/contact" },
 ];
+
+function getNavigationLabel(key: SiteSection, locale: Locale) {
+  const copy = messages[locale];
+  switch (key) {
+    case "product":
+      return copy.nav.product;
+    case "features":
+      return copy.nav.features;
+    case "guide":
+      return guideLabels[locale];
+    case "security":
+      return copy.nav.security;
+    case "pricing":
+      return copy.nav.payments;
+    case "contact":
+      return copy.nav.contact;
+    default:
+      return "AIWORK";
+  }
+}
 
 export default function SiteHeader({
   active = "home",
@@ -31,10 +65,13 @@ export default function SiteHeader({
   active?: SiteSection;
   context?: string;
 }) {
+  const { locale } = useSitePreferences();
+  const copy = messages[locale];
+
   return (
     <>
       <header className="topbar section-topbar">
-        <Link className="brand" href="/" aria-label="AIWORK 홈페이지">
+        <Link className="brand" href="/" aria-label={copy.aria.home}>
           <Image
             className="brand-avatar"
             src="/images/aiwork-anime-profile-v1.webp"
@@ -49,7 +86,7 @@ export default function SiteHeader({
 
         <nav
           className="main-nav section-nav"
-          aria-label="AIWORK 주요 페이지"
+          aria-label={copy.aria.mainNavigation}
         >
           {navigation.map((item) => (
             <Link
@@ -58,17 +95,20 @@ export default function SiteHeader({
               key={item.key}
               aria-current={active === item.key ? "page" : undefined}
             >
-              {item.label}
+              {getNavigationLabel(item.key, locale)}
             </Link>
           ))}
         </nav>
 
-        <Link className="install-small" href="/download">
-          설치 안내
-        </Link>
+        <div className="header-actions">
+          <PreferenceControls />
+          <Link className="install-small" href="/download">
+            {copy.nav.install}
+          </Link>
+        </div>
       </header>
 
-      <nav className="section-mobile-nav" aria-label="AIWORK 모바일 메뉴">
+      <nav className="section-mobile-nav" aria-label={copy.aria.mainNavigation}>
         {navigation.map((item) => (
           <Link
             className={active === item.key ? "active" : ""}
@@ -76,7 +116,7 @@ export default function SiteHeader({
             key={item.key}
             aria-current={active === item.key ? "page" : undefined}
           >
-            {item.label}
+            {getNavigationLabel(item.key, locale)}
           </Link>
         ))}
       </nav>

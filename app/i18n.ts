@@ -34,7 +34,7 @@ export const localeInfo: Record<
   de: { nativeName: "Deutsch", shortName: "DE", htmlLang: "de" },
 };
 
-type MessageSet = {
+export type MessageSet = {
   metadata: { title: string; description: string };
   language: { trigger: string; title: string; note: string };
   nav: {
@@ -246,9 +246,9 @@ export const messages: Record<Locale, MessageSet> = {
         },
         {
           label: "MEMORY",
-          title: "AI·Memory는 로드맵",
+          title: "기록 Library는 현재, AI Memory는 로드맵",
           description:
-            "AI 분석·RAG·장기 Memory는 Backend 또는 로컬 Provider 경계에서 후속 개발합니다.",
+            "Source·Memory·Research 분류와 Library 저장은 현재 기능입니다. AI 분석·RAG·자동 장기 Memory는 후속 개발합니다.",
         },
       ],
     },
@@ -427,8 +427,8 @@ export const messages: Record<Locale, MessageSet> = {
         },
         {
           label: "MEMORY",
-          title: "AI and Memory are roadmap",
-          description: "AI analysis, RAG, and long-term Memory will be built behind backend or local-provider boundaries.",
+          title: "Record Library now; AI Memory is roadmap",
+          description: "Source, Memory, and Research record types with Library storage are current. AI analysis, RAG, and automatic long-term Memory remain roadmap items.",
         },
       ],
     },
@@ -607,9 +607,9 @@ export const messages: Record<Locale, MessageSet> = {
         },
         {
           label: "MEMORY",
-          title: "AI・Memoryはロードマップ",
+          title: "記録Libraryは現在、AI Memoryはロードマップ",
           description:
-            "AI分析・RAG・長期MemoryはBackendまたはローカルProvider境界で後続開発します。",
+            "Source・Memory・Researchの分類とLibrary保存は現在の機能です。AI分析・RAG・自動長期Memoryはロードマップです。",
         },
       ],
     },
@@ -785,8 +785,8 @@ export const messages: Record<Locale, MessageSet> = {
         },
         {
           label: "MEMORY",
-          title: "AI与Memory属于路线图",
-          description: "AI分析、RAG与长期Memory将在Backend或本地Provider边界后续开发。",
+          title: "记录Library现已提供，AI Memory仍在路线图中",
+          description: "Source、Memory、Research分类与Library存储是当前功能；AI分析、RAG和自动长期Memory仍属于后续路线图。",
         },
       ],
     },
@@ -965,9 +965,9 @@ export const messages: Record<Locale, MessageSet> = {
         },
         {
           label: "MEMORY",
-          title: "AI وMemory ضمن خارطة الطريق",
+          title: "مكتبة السجلات متاحة الآن وAI Memory ضمن خارطة الطريق",
           description:
-            "سيُطوّر تحليل AI وRAG والذاكرة طويلة الأمد خلف حدود Backend أو Provider محلي.",
+            "تصنيفات Source وMemory وResearch وحفظها في Library متاحة حاليًا، أما تحليل AI وRAG والذاكرة التلقائية طويلة الأمد فهي ضمن خارطة الطريق.",
         },
       ],
     },
@@ -1163,9 +1163,9 @@ export const messages: Record<Locale, MessageSet> = {
         },
         {
           label: "MEMORY",
-          title: "IA y Memory son hoja de ruta",
+          title: "Library de registros disponible; AI Memory en la hoja de ruta",
           description:
-            "El análisis con IA, RAG y Memory a largo plazo se desarrollará tras límites Backend o Provider local.",
+            "Los tipos Source, Memory y Research y su almacenamiento en Library ya están disponibles. El análisis con IA, RAG y la memoria automática a largo plazo siguen en la hoja de ruta.",
         },
       ],
     },
@@ -1370,9 +1370,9 @@ export const messages: Record<Locale, MessageSet> = {
         },
         {
           label: "MEMORY",
-          title: "IA et Memory sont sur la feuille de route",
+          title: "Library de dossiers disponible, AI Memory en feuille de route",
           description:
-            "L’analyse IA, RAG et Memory durable seront développés derrière des limites Backend ou Provider local.",
+            "Les catégories Source, Memory et Research et leur stockage dans Library sont disponibles. L’analyse IA, RAG et la mémoire automatique durable restent sur la feuille de route.",
         },
       ],
     },
@@ -1581,9 +1581,9 @@ export const messages: Record<Locale, MessageSet> = {
         },
         {
           label: "MEMORY",
-          title: "KI und Memory sind Roadmap",
+          title: "Datensatz-Library verfügbar, AI Memory bleibt Roadmap",
           description:
-            "KI-Analyse, RAG und langfristiges Memory werden hinter Backend- oder lokalen Provider-Grenzen entwickelt.",
+            "Source-, Memory- und Research-Kategorien mit Library-Speicherung sind verfügbar. KI-Analyse, RAG und automatisches Langzeit-Memory bleiben auf der Roadmap.",
         },
       ],
     },

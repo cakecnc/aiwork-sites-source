@@ -14,7 +14,7 @@ const releases = [
     title: "AIWORK Browser",
     status: "공개 출시 준비",
     description:
-      "사용자가 요청한 현재 탭을 수집하고 선택한 저장소로 연결하는 Chrome 확장프로그램입니다.",
+      "사용자가 요청한 현재 페이지를 안전 미리보기하고, 승인한 Source·Memory·Research 기록을 Google Drive appDataFolder에 저장하는 Chrome 확장프로그램입니다.",
   },
   {
     label: "DESKTOP",
@@ -99,8 +99,8 @@ export default function DownloadPage() {
           <p>제품이 공개되기 전에 시작 절차와 데이터 처리 원칙을 미리 볼 수 있습니다.</p>
         </div>
         <div className="detail-actions">
-          <Link className="primary-button" href="/how-to-use">
-            사용법 보기 <span>↗</span>
+          <Link className="primary-button" href="/how-to-use/browser">
+            Browser 사용법 <span>↗</span>
           </Link>
           <Link className="secondary-button" href="/contact">
             도입 상담

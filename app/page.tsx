@@ -1,36 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  localeInfo,
-  messages,
-  supportedLocales,
-  type Locale,
-  type ThemeKey,
-} from "./i18n";
+import { messages } from "./i18n";
 import SiteFooter from "./components/SiteFooter";
-
-const themeKeys: ThemeKey[] = [
-  "system",
-  "light",
-  "dark",
-  "aurora",
-  "editorial",
-  "console",
-  "synthwave",
-];
-
-const themeColors: Record<ThemeKey, string[]> = {
-  system: ["#f8fafc", "#111827", "#7357ff"],
-  light: ["#ffffff", "#182033", "#2563eb"],
-  dark: ["#090d18", "#eaf0ff", "#8b5cf6"],
-  aurora: ["#07091a", "#a78bfa", "#22d3ee"],
-  editorial: ["#f4f0e7", "#17336b", "#dc6b3f"],
-  console: ["#101614", "#62f5c3", "#1f332d"],
-  synthwave: ["#07071b", "#ff3dbb", "#18d8ff"],
-};
+import SiteHeader from "./components/SiteHeader";
+import { useSitePreferences } from "./preferences";
 
 const sourceIcons = ["⌘", "◇", "✉", "▤"];
 const taskIcons = ["▥", "◇", "✓"];
@@ -45,112 +21,12 @@ const paymentLinks = [
 const supportLink =
   "https://www.paypal.com/ncp/payment/R3NBTNC3KYCVE";
 
-const defaultColors = {
-  accent: "#ff3dbb",
-  secondary: "#18d8ff",
-  background: "#07071b",
-};
-
-function isTheme(value: string | null): value is ThemeKey {
-  return Boolean(value && themeKeys.includes(value as ThemeKey));
-}
-
-function isLocale(value: string | null): value is Locale {
-  return Boolean(value && supportedLocales.includes(value as Locale));
-}
-
-function isHexColor(value: unknown): value is string {
-  return typeof value === "string" && /^#[0-9a-f]{6}$/iu.test(value);
-}
-
-function detectLocale(): Locale {
-  const queryLocale = new URLSearchParams(window.location.search).get("lang");
-  if (isLocale(queryLocale)) return queryLocale;
-
-  const savedLocale = localStorage.getItem("aiwork-locale");
-  if (isLocale(savedLocale)) return savedLocale;
-
-  const browserLanguage = navigator.language.toLowerCase();
-  if (browserLanguage.startsWith("ar")) return "ar";
-  if (browserLanguage.startsWith("es")) return "es";
-  if (browserLanguage.startsWith("fr")) return "fr";
-  if (browserLanguage.startsWith("de")) return "de";
-  if (browserLanguage.startsWith("ja")) return "ja";
-  if (browserLanguage.startsWith("zh")) return "zh-CN";
-  if (browserLanguage.startsWith("en")) return "en";
-  return "ko";
-}
-
-function replaceName(template: string, name: string) {
-  return template.replace("{name}", name);
-}
-
 export default function Home() {
-  const [theme, setTheme] = useState<ThemeKey>("synthwave");
-  const [locale, setLocale] = useState<Locale>("ko");
-  const [themeOpen, setThemeOpen] = useState(false);
-  const [languageOpen, setLanguageOpen] = useState(false);
-  const [customOpen, setCustomOpen] = useState(false);
-  const [customEnabled, setCustomEnabled] = useState(false);
-  const [custom, setCustom] = useState(defaultColors);
-
+  const { locale, ready } = useSitePreferences();
   const copy = messages[locale];
-  const localeMeta = localeInfo[locale];
 
   useEffect(() => {
-    const frame = window.requestAnimationFrame(() => {
-      const savedTheme = localStorage.getItem("aiwork-theme");
-      if (isTheme(savedTheme)) setTheme(savedTheme);
-
-      try {
-        const savedColors = localStorage.getItem("aiwork-custom-colors");
-        if (savedColors) {
-          const parsed = JSON.parse(savedColors);
-          if (
-            isHexColor(parsed?.accent) &&
-            isHexColor(parsed?.secondary) &&
-            isHexColor(parsed?.background)
-          ) {
-            setCustom(parsed);
-            setCustomEnabled(true);
-          }
-        }
-      } catch {
-        localStorage.removeItem("aiwork-custom-colors");
-      }
-
-      setLocale(detectLocale());
-    });
-
-    return () => window.cancelAnimationFrame(frame);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("aiwork-theme", theme);
-    document.documentElement.dataset.theme = theme;
-  }, [theme]);
-
-  useEffect(() => {
-    const root = document.documentElement;
-
-    if (customEnabled) {
-      root.style.setProperty("--custom-accent", custom.accent);
-      root.style.setProperty("--custom-secondary", custom.secondary);
-      root.style.setProperty("--custom-background", custom.background);
-      root.dataset.custom = "true";
-    } else {
-      delete root.dataset.custom;
-      root.style.removeProperty("--custom-accent");
-      root.style.removeProperty("--custom-secondary");
-      root.style.removeProperty("--custom-background");
-    }
-  }, [custom, customEnabled]);
-
-  useEffect(() => {
-    localStorage.setItem("aiwork-locale", locale);
-    document.documentElement.lang = localeMeta.htmlLang;
-    document.documentElement.dir = locale === "ar" ? "rtl" : "ltr";
-    document.documentElement.dataset.locale = locale;
+    if (!ready) return;
     document.title = copy.metadata.title;
 
     let description = document.querySelector<HTMLMetaElement>(
@@ -162,225 +38,14 @@ export default function Home() {
       document.head.appendChild(description);
     }
     description.content = copy.metadata.description;
-
-    const url = new URL(window.location.href);
-    if (locale === "ko") {
-      url.searchParams.delete("lang");
-    } else {
-      url.searchParams.set("lang", locale);
-    }
-    window.history.replaceState({}, "", url);
-
-    return () => {
-      document.documentElement.lang = "ko";
-      document.documentElement.dir = "ltr";
-      delete document.documentElement.dataset.locale;
-    };
-  }, [copy.metadata.description, copy.metadata.title, locale, localeMeta.htmlLang]);
-
-  useEffect(() => {
-    const closeMenus = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setThemeOpen(false);
-        setLanguageOpen(false);
-        setCustomOpen(false);
-      }
-    };
-    window.addEventListener("keydown", closeMenus);
-    return () => window.removeEventListener("keydown", closeMenus);
-  }, []);
-
-  const customStyle = useMemo(
-    () =>
-      ({
-        "--custom-accent": custom.accent,
-        "--custom-secondary": custom.secondary,
-        "--custom-background": custom.background,
-      }) as React.CSSProperties,
-    [custom],
-  );
-
-  function chooseTheme(next: ThemeKey) {
-    setTheme(next);
-    setThemeOpen(false);
-  }
-
-  function chooseLocale(next: Locale) {
-    setLocale(next);
-    setLanguageOpen(false);
-  }
-
-  function saveCustom() {
-    localStorage.setItem("aiwork-custom-colors", JSON.stringify(custom));
-    setCustomEnabled(true);
-    setCustomOpen(false);
-  }
-
-  function resetCustom() {
-    setCustom(defaultColors);
-    setCustomEnabled(false);
-    localStorage.removeItem("aiwork-custom-colors");
-  }
+  }, [copy.metadata.description, copy.metadata.title, ready]);
 
   return (
-    <main className="site-shell" id="main-content" style={customStyle}>
+    <main className="site-shell" id="main-content">
       <div className="ambient ambient-one" />
       <div className="ambient ambient-two" />
 
-      <header className="topbar">
-        <Link className="brand" href="/" aria-label={copy.aria.home}>
-          <Image
-            className="brand-avatar"
-            src="/images/aiwork-anime-profile-v1.webp"
-            alt=""
-            width="40"
-            height="40"
-            unoptimized
-          />
-          <span>AIWORK</span>
-          <small>work, connected.</small>
-        </Link>
-
-        <nav className="main-nav" aria-label={copy.aria.mainNavigation}>
-          <Link href="/product">{copy.nav.product}</Link>
-          <Link href="/features">{copy.nav.features}</Link>
-          <Link href="/how-to-use">GUIDE</Link>
-          <Link href="/security">{copy.nav.security}</Link>
-          <Link href="/pricing">{copy.nav.payments}</Link>
-          <Link href="/contact">{copy.nav.contact}</Link>
-        </nav>
-
-        <div className="header-actions">
-          <div className="language-anchor">
-            <button
-              className="language-trigger"
-              type="button"
-              aria-expanded={languageOpen}
-              aria-label={copy.aria.languageMenu}
-              onClick={() => {
-                setLanguageOpen((value) => !value);
-                setThemeOpen(false);
-              }}
-            >
-              <span aria-hidden="true">◎</span>
-              <b>{localeMeta.shortName}</b>
-              <span className="chevron">{languageOpen ? "▲" : "▼"}</span>
-            </button>
-
-            {languageOpen && (
-              <div className="language-menu" role="menu">
-                <div className="theme-menu-head">
-                  <div>
-                    <strong>{copy.language.title}</strong>
-                    <span>{copy.language.note}</span>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setLanguageOpen(false)}
-                    aria-label={copy.aria.close}
-                  >
-                    ×
-                  </button>
-                </div>
-                <div className="language-list">
-                  {supportedLocales.map((item) => (
-                    <button
-                      className={`language-option ${locale === item ? "active" : ""}`}
-                      type="button"
-                      role="menuitem"
-                      key={item}
-                      onClick={() => chooseLocale(item)}
-                      aria-label={replaceName(
-                        copy.aria.selectLanguage,
-                        localeInfo[item].nativeName,
-                      )}
-                    >
-                      <span>{localeInfo[item].shortName}</span>
-                      <strong>{localeInfo[item].nativeName}</strong>
-                      {locale === item && <b>✓</b>}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div className="theme-anchor">
-            <button
-              className="theme-trigger"
-              type="button"
-              aria-expanded={themeOpen}
-              aria-label={copy.aria.themeMenu}
-              onClick={() => {
-                setThemeOpen((value) => !value);
-                setLanguageOpen(false);
-              }}
-            >
-              <span className="palette-icon">◐</span>
-              <span className="trigger-label">{copy.themeMenu.trigger}</span>
-              <span className="chevron">{themeOpen ? "▲" : "▼"}</span>
-            </button>
-            {themeOpen && (
-              <div className="theme-menu">
-                <div className="theme-menu-head">
-                  <div>
-                    <strong>{copy.themeMenu.title}</strong>
-                    <span>{copy.themeMenu.note}</span>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setThemeOpen(false)}
-                    aria-label={copy.aria.close}
-                  >
-                    ×
-                  </button>
-                </div>
-                <div className="theme-grid">
-                  {themeKeys.map((item) => (
-                    <button
-                      className={`theme-option ${theme === item ? "active" : ""}`}
-                      type="button"
-                      key={item}
-                      onClick={() => chooseTheme(item)}
-                      aria-label={replaceName(
-                        copy.aria.selectTheme,
-                        copy.themes[item].name,
-                      )}
-                    >
-                      <span className="swatches">
-                        {themeColors[item].map((color) => (
-                          <i key={color} style={{ background: color }} />
-                        ))}
-                      </span>
-                      <strong>{copy.themes[item].name}</strong>
-                      <small>{copy.themes[item].note}</small>
-                      {theme === item && <b>✓</b>}
-                    </button>
-                  ))}
-                </div>
-                <button
-                  className="custom-link"
-                  type="button"
-                  onClick={() => {
-                    setThemeOpen(false);
-                    setCustomOpen(true);
-                  }}
-                >
-                  <span>✦</span>
-                  <span>
-                    <strong>{copy.themeMenu.customTitle}</strong>
-                    <small>{copy.themeMenu.customNote}</small>
-                  </span>
-                  <b>→</b>
-                </button>
-              </div>
-            )}
-          </div>
-          <Link className="install-small" href="/download">
-            {copy.nav.install}
-          </Link>
-        </div>
-      </header>
+      <SiteHeader active="home" />
 
       <section className="hero" id="home">
         <div className="eyebrow">
@@ -621,79 +286,6 @@ export default function Home() {
       </section>
 
       <SiteFooter />
-
-      {customOpen && (
-        <div
-          className="custom-overlay"
-          role="dialog"
-          aria-modal="true"
-          aria-label={copy.aria.customColorDialog}
-        >
-          <button
-            className="overlay-close"
-            aria-label={copy.aria.close}
-            onClick={() => setCustomOpen(false)}
-          />
-          <section className="custom-panel">
-            <div className="custom-head">
-              <div>
-                <span>{copy.customColors.eyebrow}</span>
-                <h2>{copy.customColors.title}</h2>
-                <p>{copy.customColors.description}</p>
-              </div>
-              <button
-                type="button"
-                onClick={() => setCustomOpen(false)}
-                aria-label={copy.aria.close}
-              >
-                ×
-              </button>
-            </div>
-            <div className="custom-preview" style={{ background: custom.background }}>
-              <span style={{ background: custom.accent }}>AIWORK</span>
-              <strong style={{ color: custom.secondary }}>
-                {copy.customColors.previewTagline}
-              </strong>
-              <i
-                style={{
-                  background: `linear-gradient(90deg, ${custom.accent}, ${custom.secondary})`,
-                }}
-              />
-            </div>
-            <div className="color-controls">
-              {(
-                [
-                  ["accent", copy.customColors.accent],
-                  ["secondary", copy.customColors.secondary],
-                  ["background", copy.customColors.background],
-                ] as const
-              ).map(([key, label]) => (
-                <label key={key}>
-                  <span>
-                    {label}
-                    <small>{custom[key].toUpperCase()}</small>
-                  </span>
-                  <input
-                    type="color"
-                    value={custom[key]}
-                    onChange={(event) =>
-                      setCustom({ ...custom, [key]: event.target.value })
-                    }
-                  />
-                </label>
-              ))}
-            </div>
-            <div className="custom-actions">
-              <button type="button" onClick={resetCustom}>
-                {copy.customColors.reset}
-              </button>
-              <button type="button" className="save-custom" onClick={saveCustom}>
-                {copy.customColors.apply}
-              </button>
-            </div>
-          </section>
-        </div>
-      )}
     </main>
   );
 }

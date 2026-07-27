@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
+import {
+  KoreanPrivacyDetails,
+  PrivacyHero,
+} from "../components/PrivacyLocale";
 import SiteFooter from "../components/SiteFooter";
+import SiteHeader from "../components/SiteHeader";
 
 export const metadata: Metadata = {
   title: "AIWORK Browser 개인정보처리방침",
@@ -18,47 +22,22 @@ export default function PrivacyPolicy() {
       <div className="ambient ambient-one" />
       <div className="ambient ambient-two" />
 
-      <header className="privacy-topbar">
-        <Link className="brand" href="/" aria-label="AIWORK 홈페이지">
-          <Image
-            className="brand-avatar"
-            src="/images/aiwork-anime-profile-v1.webp"
-            alt=""
-            width="40"
-            height="40"
-            unoptimized
-          />
-          <span>AIWORK</span>
-          <small>Privacy Center</small>
-        </Link>
-        <Link className="privacy-home-link" href="/">
-          홈으로 돌아가기 <span aria-hidden="true">↗</span>
-        </Link>
-      </header>
+      <SiteHeader active="home" context="Privacy Center" />
 
       <article className="privacy-document">
-        <header className="privacy-hero">
-          <span className="section-kicker">AIWORK BROWSER · PRIVACY</span>
-          <h1>개인정보처리방침</h1>
-          <p>
-            AIWORK Browser는 사용자가 직접 요청한 현재 탭만 처리합니다. 이 문서는
-            확장프로그램이 어떤 데이터를 언제 읽고, 어디에 얼마나 보관하며, 사용자가
-            이를 어떻게 삭제하거나 철회할 수 있는지 설명합니다.
-          </p>
-          <div className="policy-meta" aria-label="정책 정보">
-            <span>정책 버전 <b>{policyVersion}</b></span>
-            <span>시행일 <time dateTime={effectiveDate}>{effectiveDate}</time></span>
-            <span>제품 버전 <b>AIWORK Browser 1.0</b></span>
-          </div>
-        </header>
+        <PrivacyHero
+          policyVersion={policyVersion}
+          effectiveDate={effectiveDate}
+        />
 
-        <nav className="privacy-toc" aria-label="개인정보처리방침 목차">
-          <a href="#scope">처리 범위</a>
-          <a href="#storage">저장과 보존</a>
-          <a href="#drive">Google Drive</a>
-          <a href="#control">삭제와 철회</a>
-          <a href="#english">English summary</a>
-        </nav>
+        <KoreanPrivacyDetails>
+          <nav className="privacy-toc" aria-label="개인정보처리방침 목차">
+            <a href="#scope">처리 범위</a>
+            <a href="#storage">저장과 보존</a>
+            <a href="#drive">Google Drive</a>
+            <a href="#control">삭제와 철회</a>
+            <a href="#english">English summary</a>
+          </nav>
 
         <section className="privacy-section privacy-highlight" id="scope">
           <div>
@@ -274,7 +253,7 @@ export default function PrivacyPolicy() {
           </div>
         </section>
 
-        <section className="privacy-section" id="changes">
+          <section className="privacy-section" id="changes">
           <div>
             <span className="privacy-number">07</span>
             <h2>정책 변경과 문의</h2>
@@ -292,7 +271,8 @@ export default function PrivacyPolicy() {
               {" "}· 공식 홈페이지: <Link href="/">https://aiwork.to</Link>
             </p>
           </div>
-        </section>
+          </section>
+        </KoreanPrivacyDetails>
 
         <section className="english-summary" id="english" lang="en">
           <span className="section-kicker">ENGLISH SUMMARY</span>

@@ -133,8 +133,9 @@ const detailRoutes = [
   ["/pricing", "GLOBAL PAYMENTS", "아직 일반 출시되지 않았습니다"],
   ["/download", "DOWNLOAD &amp; RELEASE", "배포 파일 준비 중"],
   ["/contact", "CONTACT AIWORK", "운영 사업자 정보"],
-  ["/how-to-use", "HOW TO USE AIWORK", "로드맵 안내"],
-  ["/how-to-use/getting-started", "GETTING STARTED", "현재 미구현"],
+  ["/how-to-use", "HOW TO USE AIWORK", "Browser 사용 흐름 6단계"],
+  ["/how-to-use/browser", "AIWORK BROWSER 1.0", "Drive 연결 해제"],
+  ["/how-to-use/getting-started", "GETTING STARTED", "첫 수집 체크리스트"],
   ["/how-to-use/documents", "DOCUMENTS", "현재 파일 업로드 기능 없음"],
   ["/how-to-use/web-research", "WEB RESEARCH", "현재 자동 Research 기능 없음"],
   ["/how-to-use/daum-email", "DAUM EMAIL", "현재 연결 화면이 없습니다"],
@@ -157,6 +158,27 @@ test("renders every section as an individual page", async () => {
     assert.match(html, /140-81-50087/);
     assert.match(html, /What’s past is prologue/);
     assert.match(html, /aiwork-anime-profile-v1\.webp/);
+    assert.match(html, /aiwork-preference-boot/);
+    assert.match(html, /aria-controls="aiwork-language-menu"/);
+    assert.match(html, /aria-controls="aiwork-theme-menu"/);
+  }
+});
+
+test("renders one global preference bootstrap and controls on public routes", async () => {
+  for (const pathname of ["/", "/privacy", ...detailRoutes.map(([route]) => route)]) {
+    const response = await render(pathname);
+    assert.equal(response.status, 200, `${pathname} must render`);
+    const html = await response.text();
+
+    assert.equal(
+      html.match(/id="aiwork-preference-boot"/g)?.length,
+      1,
+      `${pathname} must render exactly one preference bootstrap`,
+    );
+    assert.match(html, /aiwork-theme/);
+    assert.match(html, /aiwork-locale/);
+    assert.match(html, /aria-controls="aiwork-language-menu"/);
+    assert.match(html, /aria-controls="aiwork-theme-menu"/);
   }
 });
 

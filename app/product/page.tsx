@@ -65,6 +65,34 @@ export default function ProductPage() {
     >
       <section className="content-section">
         <div className="content-heading">
+          <span>CURRENT · BROWSER 1.0 RC</span>
+          <h2>지금 검증된 Browser 기능</h2>
+          <p>
+            아래 기능은 승인된 1.0 RC에 포함되어 있으며, Chrome Web Store 공개
+            배포 절차를 진행 중입니다.
+          </p>
+        </div>
+        <div className="content-grid content-grid-three">
+          <article className="fact-card">
+            <small>CAPTURE</small>
+            <h3>명시적 현재 페이지 수집</h3>
+            <p>Toolbar·단축키·Context Menu로 현재 페이지 또는 선택 영역을 수집합니다.</p>
+          </article>
+          <article className="fact-card">
+            <small>PREVIEW</small>
+            <h3>안전 미리보기와 분류</h3>
+            <p>민감정보 패턴과 경고를 확인하고 템플릿·메모·태그와 기록 종류를 선택합니다.</p>
+          </article>
+          <article className="fact-card">
+            <small>LIBRARY</small>
+            <h3>Drive 저장과 기록 관리</h3>
+            <p>승인한 기록을 appDataFolder에 저장하고 Library·Queue·설정에서 관리합니다.</p>
+          </article>
+        </div>
+      </section>
+
+      <section className="content-section">
+        <div className="content-heading">
           <span>PRODUCT FLOW</span>
           <h2>업무가 이어지는 네 단계</h2>
           <p>
@@ -137,8 +165,8 @@ export default function ProductPage() {
           <p>출시 전에도 AIWORK가 지향하는 사용 방식과 기능 상태를 볼 수 있습니다.</p>
         </div>
         <div className="detail-actions">
-          <Link className="primary-button" href="/how-to-use">
-            사용법 보기 <span>↗</span>
+          <Link className="primary-button" href="/how-to-use/browser">
+            Browser 사용법 <span>↗</span>
           </Link>
           <Link className="secondary-button" href="/download">
             출시 상태 확인

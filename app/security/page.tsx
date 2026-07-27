@@ -114,6 +114,15 @@ export default function SecurityPage() {
         </div>
       </section>
 
+      <section className="warning-panel" role="note">
+        <strong>보조 안전장치</strong>
+        <p>
+          [REDACTED] 치환과 프롬프트 인젝션 경고는 패턴 기반 보조 장치입니다.
+          모든 민감정보를 완전히 제거한다고 보장하지 않으므로 사용자가 미리보기를
+          직접 확인하고 필요하면 저장을 중단해야 합니다.
+        </p>
+      </section>
+
       <section className="callout-panel">
         <div>
           <span>AIWORK BROWSER</span>

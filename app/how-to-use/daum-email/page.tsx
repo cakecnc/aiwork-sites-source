@@ -93,6 +93,22 @@ export default function DaumEmailGuidePage() {
         </p>
       </section>
 
+      <section className="callout-panel">
+        <div>
+          <span>CURRENT MANUAL FLOW</span>
+          <h2>현재 화면만 일반 페이지처럼 수집합니다.</h2>
+        </div>
+        <p>
+          Daum Mail·Naver Mail 계정이나 메일함에 연결하지 않습니다. 사용자가 현재
+          보고 있는 메일 페이지에서 직접 Browser 수집을 실행한 경우에만 화면에
+          보이는 범위를 미리보기로 준비할 수 있습니다. 계정·앱 비밀번호는 입력하지
+          마세요.
+        </p>
+        <Link className="secondary-button" href="/how-to-use/browser">
+          Browser 수집 방법 <span>↗</span>
+        </Link>
+      </section>
+
       <section className="content-section">
         <div className="content-heading">
           <span>READ-ONLY SETUP</span>
