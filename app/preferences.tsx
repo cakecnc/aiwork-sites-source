@@ -57,7 +57,7 @@ type PreferencesContextValue = {
   ready: boolean;
   setLocale: (locale: Locale) => void;
   setTheme: (theme: ThemeKey) => void;
-  applyCustomColors: (colors: CustomColors) => void;
+  applyCustomColors: (colors: CustomColors) => boolean;
   resetCustomColors: () => void;
 };
 
@@ -75,6 +75,61 @@ function isHexColor(value: unknown): value is string {
   return typeof value === "string" && /^#[0-9a-f]{6}$/iu.test(value);
 }
 
+function relativeLuminance(color: string) {
+  const channels = [
+    Number.parseInt(color.slice(1, 3), 16),
+    Number.parseInt(color.slice(3, 5), 16),
+    Number.parseInt(color.slice(5, 7), 16),
+  ].map((channel) => {
+    const value = channel / 255;
+    return value <= 0.04045
+      ? value / 12.92
+      : ((value + 0.055) / 1.055) ** 2.4;
+  });
+
+  return channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722;
+}
+
+function contrastRatio(first: string, second: string) {
+  const lighter = Math.max(
+    relativeLuminance(first),
+    relativeLuminance(second),
+  );
+  const darker = Math.min(
+    relativeLuminance(first),
+    relativeLuminance(second),
+  );
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
+function readableTextColor(background: string) {
+  return contrastRatio("#ffffff", background)
+    >= contrastRatio("#111827", background)
+    ? "#ffffff"
+    : "#111827";
+}
+
+function hasAccessibleContrast(colors: CustomColors) {
+  if (
+    !isHexColor(colors.accent) ||
+    !isHexColor(colors.secondary) ||
+    !isHexColor(colors.background)
+  ) {
+    return false;
+  }
+
+  return (
+    contrastRatio(readableTextColor(colors.background), colors.background)
+      >= 4.5
+    && contrastRatio(colors.secondary, colors.background) >= 4.5
+    && contrastRatio(
+      readableTextColor(colors.accent),
+      colors.accent,
+    ) >= 4.5
+    && contrastRatio(colors.accent, colors.background) >= 3
+  );
+}
+
 function readCustomColors(): CustomColors | null {
   try {
     const raw = localStorage.getItem("aiwork-custom-colors");
@@ -89,11 +144,16 @@ function readCustomColors(): CustomColors | null {
       localStorage.removeItem("aiwork-custom-colors");
       return null;
     }
-    return {
+    const colors = {
       accent: parsed.accent,
       secondary: parsed.secondary,
       background: parsed.background,
     };
+    if (!hasAccessibleContrast(colors)) {
+      localStorage.removeItem("aiwork-custom-colors");
+      return null;
+    }
+    return colors;
   } catch {
     localStorage.removeItem("aiwork-custom-colors");
     return null;
@@ -107,12 +167,22 @@ function applyCustomToDocument(colors: CustomColors | null) {
     root.style.removeProperty("--custom-accent");
     root.style.removeProperty("--custom-secondary");
     root.style.removeProperty("--custom-background");
+    root.style.removeProperty("--custom-text");
+    root.style.removeProperty("--custom-accent-text");
     return;
   }
 
   root.style.setProperty("--custom-accent", colors.accent);
   root.style.setProperty("--custom-secondary", colors.secondary);
   root.style.setProperty("--custom-background", colors.background);
+  root.style.setProperty(
+    "--custom-text",
+    readableTextColor(colors.background),
+  );
+  root.style.setProperty(
+    "--custom-accent-text",
+    readableTextColor(colors.accent),
+  );
   root.dataset.custom = "true";
 }
 
@@ -210,17 +280,14 @@ export function SitePreferencesProvider({ children }: { children: ReactNode }) {
   }
 
   function applyCustomColors(next: CustomColors) {
-    if (
-      !isHexColor(next.accent) ||
-      !isHexColor(next.secondary) ||
-      !isHexColor(next.background)
-    ) {
-      return;
+    if (!hasAccessibleContrast(next)) {
+      return false;
     }
     setCustomColors(next);
     setCustomEnabled(true);
     localStorage.setItem("aiwork-custom-colors", JSON.stringify(next));
     applyCustomToDocument(next);
+    return true;
   }
 
   function resetCustomColors() {
@@ -280,25 +347,29 @@ export function PreferenceControls() {
   const [customOpen, setCustomOpen] = useState(false);
   const [customDraft, setCustomDraft] =
     useState<CustomColors>(customColors);
+  const [customError, setCustomError] = useState("");
   const languageButton = useRef<HTMLButtonElement>(null);
   const themeButton = useRef<HTMLButtonElement>(null);
-  const customButton = useRef<HTMLButtonElement>(null);
   const customCloseButton = useRef<HTMLButtonElement>(null);
+  const customDialog = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
-    if (customOpen) {
+    const dialog = customDialog.current;
+    if (!dialog) return;
+
+    if (customOpen && !dialog.open) {
+      dialog.showModal();
       customCloseButton.current?.focus();
+      return;
+    }
+    if (!customOpen && dialog.open) {
+      dialog.close();
     }
   }, [customOpen]);
 
   useEffect(() => {
     const closeMenus = (event: KeyboardEvent) => {
       if (event.key !== "Escape") return;
-      if (customOpen) {
-        setCustomOpen(false);
-        customButton.current?.focus();
-        return;
-      }
       if (themeOpen) {
         setThemeOpen(false);
         themeButton.current?.focus();
@@ -310,7 +381,13 @@ export function PreferenceControls() {
     };
     window.addEventListener("keydown", closeMenus);
     return () => window.removeEventListener("keydown", closeMenus);
-  }, [customOpen, languageOpen, themeOpen]);
+  }, [languageOpen, themeOpen]);
+
+  function closeCustomDialog() {
+    setCustomOpen(false);
+    setCustomError("");
+    themeButton.current?.focus();
+  }
 
   return (
     <>
@@ -457,12 +534,12 @@ export function PreferenceControls() {
                 ))}
               </div>
               <button
-                ref={customButton}
                 className="custom-link"
                 type="button"
                 onClick={() => {
                   setThemeOpen(false);
                   setCustomDraft(customColors);
+                  setCustomError("");
                   setCustomOpen(true);
                 }}
               >
@@ -478,22 +555,21 @@ export function PreferenceControls() {
         </div>
       </div>
 
-      {customOpen && (
-        <div
-          className="custom-overlay"
-          role="dialog"
-          aria-modal="true"
-          aria-label={copy.aria.customColorDialog}
-        >
-          <button
-            className="overlay-close"
-            aria-label={copy.aria.close}
-            onClick={() => {
-              setCustomOpen(false);
-              customButton.current?.focus();
-            }}
-          />
-          <section className="custom-panel">
+      <dialog
+        ref={customDialog}
+        className="custom-overlay"
+        aria-label={copy.aria.customColorDialog}
+        onCancel={(event) => {
+          event.preventDefault();
+          closeCustomDialog();
+        }}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) {
+            closeCustomDialog();
+          }
+        }}
+      >
+        <section className="custom-panel">
             <div className="custom-head">
               <div>
                 <span>{copy.customColors.eyebrow}</span>
@@ -503,10 +579,7 @@ export function PreferenceControls() {
               <button
                 ref={customCloseButton}
                 type="button"
-                onClick={() => {
-                  setCustomOpen(false);
-                  customButton.current?.focus();
-                }}
+                onClick={closeCustomDialog}
                 aria-label={copy.aria.close}
               >
                 ×
@@ -516,7 +589,14 @@ export function PreferenceControls() {
               className="custom-preview"
               style={{ background: customDraft.background }}
             >
-              <span style={{ background: customDraft.accent }}>AIWORK</span>
+              <span
+                style={{
+                  background: customDraft.accent,
+                  color: readableTextColor(customDraft.accent),
+                }}
+              >
+                AIWORK
+              </span>
               <strong style={{ color: customDraft.secondary }}>
                 {copy.customColors.previewTagline}
               </strong>
@@ -542,22 +622,29 @@ export function PreferenceControls() {
                   <input
                     type="color"
                     value={customDraft[key]}
-                    onChange={(event) =>
+                    onChange={(event) => {
+                      setCustomError("");
                       setCustomDraft({
                         ...customDraft,
                         [key]: event.target.value,
-                      })
-                    }
+                      });
+                    }}
                   />
                 </label>
               ))}
             </div>
+            {customError && (
+              <p className="custom-error" role="alert">
+                {customError}
+              </p>
+            )}
             <div className="custom-actions">
               <button
                 type="button"
                 onClick={() => {
                   resetCustomColors();
                   setCustomDraft(defaultColors);
+                  setCustomError("");
                 }}
               >
                 {copy.customColors.reset}
@@ -566,17 +653,18 @@ export function PreferenceControls() {
                 type="button"
                 className="save-custom"
                 onClick={() => {
-                  applyCustomColors(customDraft);
-                  setCustomOpen(false);
-                  customButton.current?.focus();
+                  if (!applyCustomColors(customDraft)) {
+                    setCustomError(copy.customColors.contrastError);
+                    return;
+                  }
+                  closeCustomDialog();
                 }}
               >
                 {copy.customColors.apply}
               </button>
             </div>
-          </section>
-        </div>
-      )}
+        </section>
+      </dialog>
     </>
   );
 }

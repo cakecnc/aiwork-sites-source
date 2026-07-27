@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "AIWORK 주요 기능 | 자료·기억·승인 중심 업무",
   description:
     "AIWORK의 로컬 우선 작업 공간, 자료 기반 답변, 프로젝트 기억, 브라우저와 이메일 워크플로의 제공 상태를 확인합니다.",
+  alternates: { canonical: "/features" },
 };
 
 const features = [

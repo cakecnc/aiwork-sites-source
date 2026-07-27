@@ -50,6 +50,20 @@ function withSecurityHeaders(response: Response, requestUrl: URL): Response {
       "max-age=31536000; includeSubDomains",
     );
   }
+  if (requestUrl.pathname.endsWith(".webp")) {
+    secured.headers.set("Content-Type", "image/webp");
+  }
+  if (requestUrl.pathname.startsWith("/_next/static/")) {
+    secured.headers.set(
+      "Cache-Control",
+      "public, max-age=31536000, immutable",
+    );
+  } else if (requestUrl.pathname.startsWith("/images/")) {
+    secured.headers.set(
+      "Cache-Control",
+      "public, max-age=604800, stale-while-revalidate=86400",
+    );
+  }
   return secured;
 }
 
@@ -62,6 +76,17 @@ function withSecurityHeaders(response: Response, requestUrl: URL): Response {
 const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
+
+    if (url.hostname === "www.aiwork.to") {
+      url.hostname = "aiwork.to";
+      return withSecurityHeaders(
+        new Response(null, {
+          status: 308,
+          headers: { Location: url.toString() },
+        }),
+        url,
+      );
+    }
 
     if (url.pathname === "/_vinext/image") {
       const allowedWidths = [...DEFAULT_DEVICE_SIZES, ...DEFAULT_IMAGE_SIZES];

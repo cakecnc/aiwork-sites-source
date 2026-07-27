@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "AIWORK 웹 조사 사용법 | 출처 기반 리서치",
   description:
     "조사 목적 설정, URL·검색 주제 추가, 출처·날짜 검토와 보고서 전환까지 AIWORK 웹 조사 흐름을 설명합니다.",
+  alternates: { canonical: "/how-to-use/web-research" },
 };
 
 const researchSteps = [

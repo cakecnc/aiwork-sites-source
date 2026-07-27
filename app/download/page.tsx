@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "AIWORK 설치 안내 | 배포판 준비 상태",
   description:
     "AIWORK Browser, 데스크톱 앱과 Business Workspace의 현재 배포 준비 상태 및 출시 알림 신청 방법을 안내합니다.",
+  alternates: { canonical: "/download" },
 };
 
 const releases = [
@@ -29,6 +30,37 @@ const releases = [
     status: "개발 중",
     description:
       "팀과 회사의 업무 맥락, 승인 흐름과 관리 기능을 위한 별도 제공 범위를 검토하고 있습니다.",
+  },
+];
+
+const releaseChecks = [
+  {
+    label: "AUTOMATED",
+    title: "코드 검증",
+    status: "통과",
+    description:
+      "Lint·TypeScript·자동 테스트와 Store 빌드 보안 검사를 최신 작업본에서 통과했습니다.",
+  },
+  {
+    label: "MACOS",
+    title: "설치·Toolbar·Side Panel",
+    status: "실기기 확인",
+    description:
+      "분리된 Chrome 프로필에서 확장 설치, Options, Toolbar와 Side Panel 실행을 화면으로 확인했습니다.",
+  },
+  {
+    label: "GOOGLE DRIVE",
+    title: "OAuth·저장·삭제",
+    status: "진단 대기",
+    description:
+      "OAuth 연결 오류를 안전한 지원 코드로 구분하는 기능까지 구현했습니다. 실제 계정의 저장·삭제 E2E 합격은 아직 남아 있습니다.",
+  },
+  {
+    label: "CHROME WEB STORE",
+    title: "공개 배포",
+    status: "제출 전",
+    description:
+      "Store 패키지 준비와 공개 심사 제출은 다른 단계입니다. 현재 일반 사용자가 설치할 수 있는 공개 항목은 없습니다.",
   },
 ];
 
@@ -59,6 +91,29 @@ export default function DownloadPage() {
         </div>
         <div className="content-grid content-grid-three">
           {releases.map((item) => (
+            <article className="fact-card" key={item.label}>
+              <div className="card-status-row">
+                <small>{item.label}</small>
+                <span className="mini-status">{item.status}</span>
+              </div>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="content-section">
+        <div className="content-heading">
+          <span>VERIFICATION · 2026-07-28</span>
+          <h2>출시 전 검증 현황</h2>
+          <p>
+            자동 검증과 실기기 검증을 분리해 표시합니다. 남은 Google OAuth·Drive
+            검증과 Store 심사가 끝나기 전에는 공개 출시로 표기하지 않습니다.
+          </p>
+        </div>
+        <div className="content-grid content-grid-four">
+          {releaseChecks.map((item) => (
             <article className="fact-card" key={item.label}>
               <div className="card-status-row">
                 <small>{item.label}</small>

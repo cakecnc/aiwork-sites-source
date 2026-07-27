@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: "AIWORK Browser 개인정보처리방침",
   description:
     "AIWORK Browser의 현재 탭 수집, 로컬 저장, Google Drive appDataFolder 사용과 삭제·철회 절차를 설명합니다.",
+  alternates: { canonical: "/privacy" },
 };
 
 const policyVersion = "2026-07-26";

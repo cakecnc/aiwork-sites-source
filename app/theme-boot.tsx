@@ -14,6 +14,36 @@ const preferenceBoot = String.raw`
     de: ["de","ltr"]
   };
   const isHex = (value) => typeof value === "string" && /^#[0-9a-f]{6}$/i.test(value);
+  const luminance = (color) => {
+    const channels = [
+      parseInt(color.slice(1, 3), 16),
+      parseInt(color.slice(3, 5), 16),
+      parseInt(color.slice(5, 7), 16)
+    ].map((channel) => {
+      const value = channel / 255;
+      return value <= 0.04045
+        ? value / 12.92
+        : Math.pow((value + 0.055) / 1.055, 2.4);
+    });
+    return channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722;
+  };
+  const contrast = (first, second) => {
+    const lighter = Math.max(luminance(first), luminance(second));
+    const darker = Math.min(luminance(first), luminance(second));
+    return (lighter + 0.05) / (darker + 0.05);
+  };
+  const readableText = (background) =>
+    contrast("#ffffff", background) >= contrast("#111827", background)
+      ? "#ffffff"
+      : "#111827";
+  const accessibleColors = (colors) =>
+    isHex(colors.accent) &&
+    isHex(colors.secondary) &&
+    isHex(colors.background) &&
+    contrast(readableText(colors.background), colors.background) >= 4.5 &&
+    contrast(colors.secondary, colors.background) >= 4.5 &&
+    contrast(readableText(colors.accent), colors.accent) >= 4.5 &&
+    contrast(colors.accent, colors.background) >= 3;
 
   try {
     const storedTheme = localStorage.getItem("aiwork-theme");
@@ -43,14 +73,12 @@ const preferenceBoot = String.raw`
     const rawColors = localStorage.getItem("aiwork-custom-colors");
     if (rawColors) {
       const colors = JSON.parse(rawColors);
-      if (
-        isHex(colors.accent) &&
-        isHex(colors.secondary) &&
-        isHex(colors.background)
-      ) {
+      if (accessibleColors(colors)) {
         root.style.setProperty("--custom-accent", colors.accent);
         root.style.setProperty("--custom-secondary", colors.secondary);
         root.style.setProperty("--custom-background", colors.background);
+        root.style.setProperty("--custom-text", readableText(colors.background));
+        root.style.setProperty("--custom-accent-text", readableText(colors.accent));
         root.dataset.custom = "true";
       } else {
         localStorage.removeItem("aiwork-custom-colors");

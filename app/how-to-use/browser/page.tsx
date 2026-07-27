@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "AIWORK Browser 1.0 사용법 | 현재 페이지 수집과 Drive 저장",
   description:
     "AIWORK Browser 1.0 RC의 설치 조건, 페이지 수집, 안전 미리보기, 템플릿·메모·태그, Source·Memory·Research 분류, Drive 저장과 삭제 방법을 안내합니다.",
+  alternates: { canonical: "/how-to-use/browser" },
 };
 
 const browserSteps = [
@@ -71,6 +72,29 @@ const recordTypes = [
   },
 ];
 
+const driveDiagnostics = [
+  {
+    label: "AUTH_REQUIRED",
+    title: "계정 재연결 필요",
+    body: "테스트 Chrome 프로필에서 승인한 Google 계정으로 다시 연결합니다. Chrome 동기화는 필요하지 않습니다.",
+  },
+  {
+    label: "OAUTH_CONFIGURATION",
+    title: "OAuth 설정 확인",
+    body: "공식 확장 ID, OAuth Client와 테스트 사용자 설정을 개발자가 확인해야 합니다.",
+  },
+  {
+    label: "DRIVE_API_DISABLED",
+    title: "Drive API 활성화 필요",
+    body: "Google Cloud 프로젝트에서 Drive API가 활성화됐는지 개발자가 확인해야 합니다.",
+  },
+  {
+    label: "DRIVE_SCOPE_REQUIRED",
+    title: "appDataFolder 권한 필요",
+    body: "AIWORK 전용 숨김 앱 데이터 범위의 권한 화면을 읽고 승인 여부를 선택합니다.",
+  },
+];
+
 export default function BrowserGuidePage() {
   return (
     <DetailPage
@@ -97,6 +121,26 @@ export default function BrowserGuidePage() {
           비공식 파일을 설치하거나 Google 계정, 비밀번호, API 키 또는 인증 코드를
           입력하지 마세요.
         </p>
+      </section>
+
+      <section className="content-section">
+        <div className="content-heading">
+          <span>SAFE CONNECTION DIAGNOSTICS</span>
+          <h2>Drive 연결 오류는 지원 코드로 확인합니다</h2>
+          <p>
+            설정의 ‘Drive 연결 진단’은 권한과 Drive API 도달 여부만 확인합니다.
+            액세스 토큰·이메일·파일 내용은 화면이나 지원 코드에 표시하지 않습니다.
+          </p>
+        </div>
+        <div className="content-grid content-grid-four">
+          {driveDiagnostics.map((item) => (
+            <article className="fact-card" key={item.label}>
+              <small>{item.label}</small>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="content-section">

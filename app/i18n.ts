@@ -147,11 +147,13 @@ export type MessageSet = {
     accent: string;
     secondary: string;
     background: string;
+    contrastError: string;
     reset: string;
     apply: string;
   };
   aria: {
     home: string;
+    skipToContent: string;
     mainNavigation: string;
     close: string;
     themeMenu: string;
@@ -330,11 +332,14 @@ export const messages: Record<Locale, MessageSet> = {
       accent: "포인트 컬러",
       secondary: "보조 컬러",
       background: "배경 컬러",
+      contrastError:
+        "색상 대비가 부족합니다. 배경과 보조색, 배경과 포인트색의 차이를 더 크게 조정해 주세요.",
       reset: "기본값 복원",
       apply: "컬러 적용하기",
     },
     aria: {
       home: "AIWORK 홈",
+      skipToContent: "본문으로 바로가기",
       mainNavigation: "주요 메뉴",
       close: "닫기",
       themeMenu: "테마 메뉴",
@@ -510,11 +515,14 @@ export const messages: Record<Locale, MessageSet> = {
       accent: "Accent color",
       secondary: "Secondary color",
       background: "Background color",
+      contrastError:
+        "These colors do not have enough contrast. Increase the difference between the background, accent, and secondary colors.",
       reset: "Restore defaults",
       apply: "Apply colors",
     },
     aria: {
       home: "AIWORK home",
+      skipToContent: "Skip to main content",
       mainNavigation: "Main navigation",
       close: "Close",
       themeMenu: "Theme menu",
@@ -691,11 +699,14 @@ export const messages: Record<Locale, MessageSet> = {
       accent: "アクセントカラー",
       secondary: "サブカラー",
       background: "背景カラー",
+      contrastError:
+        "色のコントラストが不足しています。背景色とアクセント・サブカラーの差を大きくしてください。",
       reset: "初期設定に戻す",
       apply: "カラーを適用",
     },
     aria: {
       home: "AIWORKホーム",
+      skipToContent: "本文へ移動",
       mainNavigation: "メインナビゲーション",
       close: "閉じる",
       themeMenu: "テーマメニュー",
@@ -868,11 +879,14 @@ export const messages: Record<Locale, MessageSet> = {
       accent: "强调色",
       secondary: "辅助色",
       background: "背景色",
+      contrastError:
+        "颜色对比度不足。请增大背景色与强调色、辅助色之间的差异。",
       reset: "恢复默认",
       apply: "应用颜色",
     },
     aria: {
       home: "AIWORK 首页",
+      skipToContent: "跳到主要内容",
       mainNavigation: "主导航",
       close: "关闭",
       themeMenu: "主题菜单",
@@ -1057,11 +1071,14 @@ export const messages: Record<Locale, MessageSet> = {
       accent: "اللون الرئيسي",
       secondary: "اللون الثانوي",
       background: "لون الخلفية",
+      contrastError:
+        "تباين الألوان غير كافٍ. زد الفرق بين الخلفية واللونين الرئيسي والثانوي.",
       reset: "استعادة الإعدادات الافتراضية",
       apply: "تطبيق الألوان",
     },
     aria: {
       home: "الصفحة الرئيسية لـ AIWORK",
+      skipToContent: "الانتقال إلى المحتوى الرئيسي",
       mainNavigation: "التنقل الرئيسي",
       close: "إغلاق",
       themeMenu: "قائمة السمات",
@@ -1260,11 +1277,14 @@ export const messages: Record<Locale, MessageSet> = {
       accent: "Color de acento",
       secondary: "Color secundario",
       background: "Color de fondo",
+      contrastError:
+        "Los colores no tienen suficiente contraste. Aumenta la diferencia entre el fondo y los colores de acento y secundario.",
       reset: "Restaurar valores",
       apply: "Aplicar colores",
     },
     aria: {
       home: "Inicio de AIWORK",
+      skipToContent: "Saltar al contenido principal",
       mainNavigation: "Navegación principal",
       close: "Cerrar",
       themeMenu: "Menú de temas",
@@ -1468,11 +1488,14 @@ export const messages: Record<Locale, MessageSet> = {
       accent: "Couleur d’accent",
       secondary: "Couleur secondaire",
       background: "Couleur d’arrière-plan",
+      contrastError:
+        "Le contraste est insuffisant. Augmentez l’écart entre l’arrière-plan et les couleurs d’accent et secondaire.",
       reset: "Rétablir les valeurs",
       apply: "Appliquer les couleurs",
     },
     aria: {
       home: "Accueil AIWORK",
+      skipToContent: "Aller au contenu principal",
       mainNavigation: "Navigation principale",
       close: "Fermer",
       themeMenu: "Menu des thèmes",
@@ -1678,11 +1701,14 @@ export const messages: Record<Locale, MessageSet> = {
       accent: "Akzentfarbe",
       secondary: "Sekundärfarbe",
       background: "Hintergrundfarbe",
+      contrastError:
+        "Der Farbkontrast ist zu gering. Vergrößern Sie den Unterschied zwischen Hintergrund, Akzent- und Sekundärfarbe.",
       reset: "Standard wiederherstellen",
       apply: "Farben anwenden",
     },
     aria: {
       home: "AIWORK-Startseite",
+      skipToContent: "Zum Hauptinhalt springen",
       mainNavigation: "Hauptnavigation",
       close: "Schließen",
       themeMenu: "Designmenü",

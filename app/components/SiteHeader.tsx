@@ -70,6 +70,9 @@ export default function SiteHeader({
 
   return (
     <>
+      <a className="skip-link" href="#main-content">
+        {copy.aria.skipToContent}
+      </a>
       <header className="topbar section-topbar">
         <Link className="brand" href="/" aria-label={copy.aria.home}>
           <Image

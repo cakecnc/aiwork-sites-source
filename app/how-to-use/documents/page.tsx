@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "AIWORK 문서 사용법 | 회사 자료 활용하기",
   description:
     "회사 문서의 처리 범위를 정하고 질문·요약·근거 확인·선택적 저장으로 이어가는 AIWORK 문서 활용 흐름을 안내합니다.",
+  alternates: { canonical: "/how-to-use/documents" },
 };
 
 const documentSteps = [

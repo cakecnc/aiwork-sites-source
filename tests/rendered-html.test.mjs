@@ -40,7 +40,7 @@ function assertSecurityHeaders(response) {
   );
 }
 
-async function render(pathname = "/") {
+async function render(pathname = "/", hostname = "localhost") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set(
     "test",
@@ -49,7 +49,7 @@ async function render(pathname = "/") {
   const { default: worker } = await import(workerUrl.href);
 
   return worker.fetch(
-    new Request(`https://localhost${pathname}`, {
+    new Request(`https://${hostname}${pathname}`, {
       headers: { accept: "text/html" },
     }),
     {
@@ -75,6 +75,14 @@ test("renders honest release-candidate product status", async () => {
   assertSecurityHeaders(response);
 
   const html = await response.text();
+  assert.match(
+    html,
+    /<link(?=[^>]*\brel=["']canonical["'])(?=[^>]*\bhref=["']https:\/\/aiwork\.to\/["'])[^>]*>/i,
+  );
+  assert.match(html, /property=["']og:title["']/i);
+  assert.match(html, /name=["']twitter:card["']/i);
+  assert.match(html, /"@type":"Organization"/);
+  assert.match(html, /"@type":"WebSite"/);
   assert.doesNotMatch(html, developmentPreviewMeta);
   assert.match(html, /AIWORK/);
   assert.match(html, /Release Candidate/);
@@ -148,6 +156,15 @@ test("renders every section as an individual page", async () => {
     assertSecurityHeaders(response);
 
     const html = await response.text();
+    const canonicalPath = pathname.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    assert.match(
+      html,
+      new RegExp(
+        `<link(?=[^>]*\\brel=["']canonical["'])(?=[^>]*\\bhref=["']https://aiwork\\.to${canonicalPath}["'])[^>]*>`,
+        "i",
+      ),
+      `${pathname} canonical URL is missing`,
+    );
     assert.match(html, new RegExp(marker, "i"), `${pathname} marker is missing`);
     assert.match(
       html,
@@ -162,6 +179,44 @@ test("renders every section as an individual page", async () => {
     assert.match(html, /aria-controls="aiwork-language-menu"/);
     assert.match(html, /aria-controls="aiwork-theme-menu"/);
   }
+});
+
+test("serves crawl metadata and canonical host redirects", async () => {
+  const robots = await render("/robots.txt");
+  assert.equal(robots.status, 200);
+  assert.match(await robots.text(), /Sitemap:\s*https:\/\/aiwork\.to\/sitemap\.xml/i);
+
+  const sitemap = await render("/sitemap.xml");
+  assert.equal(sitemap.status, 200);
+  const sitemapXml = await sitemap.text();
+  assert.match(sitemapXml, /<loc>https:\/\/aiwork\.to\/?<\/loc>/i);
+  assert.match(sitemapXml, /<loc>https:\/\/aiwork\.to\/privacy<\/loc>/i);
+
+  const manifest = await render("/manifest.webmanifest");
+  assert.equal(manifest.status, 200);
+  assert.match(manifest.headers.get("content-type") ?? "", /json/i);
+  assert.match(await manifest.text(), /"name"\s*:\s*"AIWORK"/);
+
+  const redirect = await render("/how-to-use?ref=test", "www.aiwork.to");
+  assert.equal(redirect.status, 308);
+  assert.equal(
+    redirect.headers.get("location"),
+    "https://aiwork.to/how-to-use?ref=test",
+  );
+  assertSecurityHeaders(redirect);
+
+  const assetHeaders = await readFile(
+    new URL("../dist/client/_headers", import.meta.url),
+    "utf8",
+  );
+  assert.match(
+    assetHeaders,
+    /\/images\/\*[\s\S]*max-age=604800/i,
+  );
+  assert.match(
+    assetHeaders,
+    /\/assets\/\*[\s\S]*max-age=31536000,\s*immutable/i,
+  );
 });
 
 test("renders one global preference bootstrap and controls on public routes", async () => {

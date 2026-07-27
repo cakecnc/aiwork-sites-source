@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "AIWORK Browser 사용법 | 수집·미리보기·Drive 저장",
   description:
     "AIWORK Browser 1.0 RC의 설치 전 확인, 현재 페이지 수집, 안전 미리보기, Source·Memory·Research 분류, Drive 저장과 삭제·연결 해제 방법을 안내합니다.",
+  alternates: { canonical: "/how-to-use" },
 };
 
 const steps = [

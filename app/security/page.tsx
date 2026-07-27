@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "AIWORK 보안 | 통제 가능한 연결",
   description:
     "AIWORK의 로컬 우선 처리, 최소 데이터 저장, 읽기 전용 연결, 사용자 승인과 비신뢰 입력 처리 원칙을 설명합니다.",
+  alternates: { canonical: "/security" },
 };
 
 const principles = [

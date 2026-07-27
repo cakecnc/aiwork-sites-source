@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "AIWORK Daum 메일 설계 안내 | 현재 미구현",
   description:
     "현재 Browser RC에 구현되지 않은 Daum 메일 읽기 전용 연동의 보안 설계와 향후 검증 순서를 안내합니다.",
+  alternates: { canonical: "/how-to-use/daum-email" },
 };
 
 const setupSteps = [

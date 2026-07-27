@@ -117,11 +117,11 @@ export default function Home() {
             <small>{copy.status.current}</small>
             <strong>{copy.workspace.nextWork}</strong>
             {copy.workspace.tasks.map((item, index) => (
-              <button key={item}>
+              <div className="studio-task" key={item}>
                 <span>{taskIcons[index]}</span>
                 {item}
                 <b>＋</b>
-              </button>
+              </div>
             ))}
             <div className="source-badge">
               {copy.workspace.evidenceLabel}

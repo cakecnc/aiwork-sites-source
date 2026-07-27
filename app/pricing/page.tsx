@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "AIWORK 결제 안내 | 사전 구매와 디지털 상품",
   description:
     "AIWORK Professional·Business 사전 구매 및 네이버 스마트스토어 실무팩의 제공 범위와 결제 전 확인 사항을 안내합니다.",
+  alternates: { canonical: "/pricing" },
 };
 
 const plans = [

@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "AIWORK 문의 | 도입·결제·출시 상담",
   description:
     "AIWORK 도입, 출시 알림, 사전 구매와 Business Workspace에 관한 문의 방법 및 운영 사업자 정보를 안내합니다.",
+  alternates: { canonical: "/contact" },
 };
 
 const inquiries = [

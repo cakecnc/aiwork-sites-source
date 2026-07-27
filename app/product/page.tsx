@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "AIWORK 제품 방향 | Browser RC와 플랫폼 로드맵",
   description:
     "현재 구현된 AIWORK Browser RC와 문서·웹·이메일·프로젝트 플랫폼 로드맵을 구분해 소개합니다.",
+  alternates: { canonical: "/product" },
 };
 
 const productLayers = [

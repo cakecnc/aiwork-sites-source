@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "AIWORK Browser 시작하기 | 설치·동의·첫 수집",
   description:
     "AIWORK Browser 1.0 RC의 설치 조건, 초기 동의, 언어·테마 설정, Drive 연결과 첫 페이지 수집 준비를 안내합니다.",
+  alternates: { canonical: "/how-to-use/getting-started" },
 };
 
 const steps = [
