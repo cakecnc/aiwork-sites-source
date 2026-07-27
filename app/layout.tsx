@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ThemeBoot from "./theme-boot";
 import { SitePreferencesProvider } from "./preferences";
+import { SUPPORT_EMAIL } from "./site-config";
 
 const siteUrl = new URL("https://aiwork.to");
 
@@ -69,7 +70,7 @@ const structuredData = [
     name: "주식회사 씨엔씨코퍼레이션",
     alternateName: "C&C Corporation",
     url: "https://aiwork.to",
-    email: "cakecnc@daum.net",
+    email: SUPPORT_EMAIL,
     telephone: "080-664-7077",
     address: {
       "@type": "PostalAddress",

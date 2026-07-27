@@ -11,6 +11,7 @@ import {
 } from "../browser-guide-i18n";
 import { messages, type MessageSet } from "../i18n";
 import { useSitePreferences } from "../preferences";
+import { SUPPORT_EMAIL } from "../site-config";
 
 type DetailPageProps = {
   active: SiteSection;
@@ -198,7 +199,7 @@ function InternationalBody({
           <div className="detail-actions">
             <a
               className="primary-button"
-              href={`mailto:cakecnc@daum.net?subject=${encodeURIComponent(
+              href={`mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(
                 "AIWORK release update",
               )}`}
             >
@@ -216,7 +217,7 @@ function InternationalBody({
             <p>{copy.payments.supportDescription}</p>
           </div>
           <address>
-            <a href="mailto:cakecnc@daum.net">cakecnc@daum.net</a>
+            <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
             <a href="tel:0806647077">080-664-7077</a>
           </address>
         </section>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { messages, type Locale } from "../i18n";
 import { useSitePreferences } from "../preferences";
+import { SUPPORT_EMAIL } from "../site-config";
 
 export const shakespeareNotice =
   "As Shakespeare reminds us, “What’s past is prologue.” In that spirit, certain portions of this document have been prepared with reference to AI-assisted materials. All rights, licenses, and editorial responsibility pertaining to this work are retained by its author, Sungjae Lim, Director of Planning.";
@@ -108,7 +109,7 @@ export default function SiteFooter() {
         <span>
           {labels.support} <a href="tel:0806647077">080-664-7077</a>
           {" · "}
-          <a href="mailto:cakecnc@daum.net">cakecnc@daum.net</a>
+          <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
         </span>
       </address>
 

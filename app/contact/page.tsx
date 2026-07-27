@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import DetailPage from "../components/DetailPage";
+import PurchaseInquiryForm from "../components/PurchaseInquiryForm";
+import { SUPPORT_EMAIL } from "../site-config";
 
 export const metadata: Metadata = {
-  title: "AIWORK 문의 | 도입·결제·출시 상담",
+  title: "AIWORK 문의 | 도입·구매·출시 상담",
   description:
-    "AIWORK 도입, 출시 알림, 사전 구매와 Business Workspace에 관한 문의 방법 및 운영 사업자 정보를 안내합니다.",
+    "AIWORK 도입, 출시 알림, 구매 문의와 Business Workspace에 관한 문의 방법 및 운영 사업자 정보를 안내합니다.",
   alternates: { canonical: "/contact" },
 };
 
@@ -23,10 +25,10 @@ const inquiries = [
     subject: "AIWORK 도입 상담",
   },
   {
-    label: "PAYMENT",
-    title: "결제 전 확인",
-    description: "사전 구매 범위, 디지털 상품 제공 방식과 거래 확인 절차를 문의합니다.",
-    subject: "AIWORK 결제 전 문의",
+    label: "PURCHASE",
+    title: "구매 문의",
+    description: "제공 범위, 디지털 상품 구성과 구매 절차를 먼저 확인합니다.",
+    subject: "AIWORK 구매 문의",
   },
 ];
 
@@ -63,7 +65,7 @@ export default function ContactPage() {
               <p>{item.description}</p>
               <a
                 className="secondary-button"
-                href={`mailto:cakecnc@daum.net?subject=${encodeURIComponent(
+                href={`mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(
                   item.subject,
                 )}&body=${encodeURIComponent(
                   "이름:\n회사명:\n현재 사용 도구:\n관심 기능:\n도입 목적:\n희망 일정:\n",
@@ -76,6 +78,18 @@ export default function ContactPage() {
         </div>
       </section>
 
+      <section className="content-section" id="purchase-inquiry">
+        <div className="content-heading readable-copy">
+          <span>PURCHASE INQUIRY</span>
+          <h2>구매 전에 제공 범위를 확인하세요</h2>
+          <p>
+            관심 상품과 필요한 기능을 남기면 운영자가 현재 제공 상태와 일정을
+            확인해 답변합니다. 이 등록은 구매 또는 결제 완료가 아닙니다.
+          </p>
+        </div>
+        <PurchaseInquiryForm />
+      </section>
+
       <section className="contact-information">
         <div>
           <span className="section-kicker">CONTACT</span>
@@ -83,7 +97,7 @@ export default function ContactPage() {
           <p>평일 업무시간 기준으로 확인 후 순차 답변합니다.</p>
         </div>
         <address>
-          <a href="mailto:cakecnc@daum.net">cakecnc@daum.net</a>
+          <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
           <a href="tel:0806647077">080-664-7077</a>
         </address>
       </section>

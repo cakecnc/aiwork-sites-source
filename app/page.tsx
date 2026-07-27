@@ -7,19 +7,16 @@ import { messages } from "./i18n";
 import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
 import { useSitePreferences } from "./preferences";
+import {
+  DONATION_URL,
+  PURCHASE_PRODUCTS,
+  SUPPORT_EMAIL,
+  purchaseInquiryHref,
+} from "./site-config";
 
 const sourceIcons = ["⌘", "◇", "✉", "▤"];
 const taskIcons = ["▥", "◇", "✓"];
 const featureIcons = ["↗", "⌁", "◫"];
-
-const paymentLinks = [
-  "https://www.paypal.com/ncp/payment/TF7HCLYC5PM8S",
-  "https://www.paypal.com/ncp/payment/WTD5ZEKLT5GJS",
-  "https://www.paypal.com/ncp/payment/H5SXU7HJ8GVRE",
-];
-
-const supportLink =
-  "https://www.paypal.com/ncp/payment/R3NBTNC3KYCVE";
 
 export default function Home() {
   const { locale, ready } = useSitePreferences();
@@ -229,14 +226,12 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <a
+              <Link
                 className={index === 0 ? "primary-button payment-button" : "secondary-button payment-button"}
-                href={paymentLinks[index]}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={purchaseInquiryHref(PURCHASE_PRODUCTS[index].id)}
               >
                 {product.action} <span>↗</span>
-              </a>
+              </Link>
             </article>
           ))}
         </div>
@@ -255,7 +250,7 @@ export default function Home() {
           </div>
           <a
             className="secondary-button"
-            href={supportLink}
+            href={DONATION_URL}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -275,7 +270,7 @@ export default function Home() {
         <div>
           <a
             className="primary-button"
-            href={`mailto:cakecnc@daum.net?subject=${encodeURIComponent("AIWORK release update")}`}
+            href={`mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent("AIWORK release update")}`}
           >
             {copy.cta.releaseAlert} <span>↗</span>
           </a>

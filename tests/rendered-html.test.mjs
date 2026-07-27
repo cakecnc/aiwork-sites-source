@@ -5,10 +5,10 @@ import test from "node:test";
 const developmentPreviewMeta =
   /<meta(?=[^>]*\bname=["']codex-preview["'])(?=[^>]*\bcontent=["']development["'])[^>]*>/i;
 
-const payments = [
-  { id: "TF7HCLYC5PM8S", price: "USD 19" },
-  { id: "WTD5ZEKLT5GJS", price: "USD 49" },
-  { id: "H5SXU7HJ8GVRE", price: "USD 29" },
+const removedProductPayments = [
+  "TF7HCLYC5PM8S",
+  "WTD5ZEKLT5GJS",
+  "H5SXU7HJ8GVRE",
 ];
 
 function assertSecurityHeaders(response) {
@@ -90,22 +90,22 @@ test("renders honest release-candidate product status", async () => {
   assert.match(html, /로드맵/);
   assert.doesNotMatch(html, /AIWORK ASSISTANT/);
   assert.doesNotMatch(html, /근거 자료[\s\S]{0,20}>8</);
-  const releaseNotice =
-    "Professional과 Business는 아직 일반 출시되지 않았습니다";
-  assert.notEqual(html.indexOf(releaseNotice), -1);
-  assert.ok(
-    html.indexOf(releaseNotice) < html.indexOf(payments[0].id),
-    "Pre-release terms must appear before the first payment link",
-  );
-  let previousPaymentIndex = -1;
-  for (const payment of payments) {
-    const priceIndex = html.indexOf(payment.price, previousPaymentIndex + 1);
-    const linkIndex = html.indexOf(payment.id, priceIndex);
-    assert.ok(priceIndex > previousPaymentIndex, `${payment.price} is missing or out of order`);
-    assert.ok(linkIndex > priceIndex, `${payment.id} is not mapped to ${payment.price}`);
-    previousPaymentIndex = linkIndex;
+  assert.match(html, /Professional과 Business는 아직 일반 출시되지 않았습니다/);
+  assert.match(html, /\/contact\?product=professional#purchase-inquiry/);
+  assert.match(html, /\/contact\?product=business#purchase-inquiry/);
+  assert.match(html, /\/contact\?product=smartstore-pack#purchase-inquiry/);
+  for (const paymentId of removedProductPayments) {
+    assert.doesNotMatch(
+      html,
+      new RegExp(paymentId),
+      `Product payment ${paymentId} must not be exposed`,
+    );
   }
-  assert.match(html, /R3NBTNC3KYCVE/);
+  assert.match(
+    html,
+    /https:\/\/www\.paypal\.com\/ncp\/payment\/R3NBTNC3KYCVE/,
+  );
+  assert.match(html, /support@aiwork\.to/);
 });
 
 test("renders the public AIWORK Browser privacy policy", async () => {
@@ -120,7 +120,7 @@ test("renders the public AIWORK Browser privacy policy", async () => {
 
   const html = await response.text();
   assert.match(html, /AIWORK Browser 개인정보처리방침/);
-  assert.match(html, /정책 버전[\s\S]{0,120}2026-07-26/);
+  assert.match(html, /정책 버전[\s\S]{0,120}2026-07-28/);
   assert.match(html, /activeTab/);
   assert.match(html, /drive\.appdata/);
   assert.match(html, /appDataFolder/);
@@ -128,7 +128,11 @@ test("renders the public AIWORK Browser privacy policy", async () => {
   assert.match(html, /__cf_bm/);
   assert.match(html, /광고·맞춤형[\s\S]{0,80}추적 쿠키/);
   assert.match(html, /ENGLISH SUMMARY/);
-  assert.match(html, /cakecnc@daum\.net/);
+  assert.match(html, /support@aiwork\.to/);
+  assert.match(html, /90일 만료값/);
+  assert.match(html, /다음 접근이나 서비스 자료 삭제 시점/);
+  assert.match(html, /Turnstile은 봇 방지를 위해 토큰·IP/);
+  assert.match(html, /Resend는 운영자 전달을 위해 이름·회사명/);
   assert.match(html, /주식회사 씨엔씨코퍼레이션/);
   assert.match(html, /140-81-50087/);
   assert.match(html, /What’s past is prologue/);
@@ -138,11 +142,11 @@ const detailRoutes = [
   ["/product", "AIWORK PRODUCT", "플랫폼 로드맵"],
   ["/features", "CONNECTED INTELLIGENCE", "미구현 · 설계 검증"],
   ["/security", "SECURITY BY BOUNDARY", "향후 기본 허용 목표"],
-  ["/pricing", "GLOBAL PAYMENTS", "아직 일반 출시되지 않았습니다"],
+  ["/pricing", "PLANS &amp; INQUIRY", "구매 문의 접수"],
   ["/download", "DOWNLOAD &amp; RELEASE", "배포 파일 준비 중"],
-  ["/contact", "CONTACT AIWORK", "운영 사업자 정보"],
+  ["/contact", "CONTACT AIWORK", "PURCHASE INQUIRY"],
   ["/how-to-use", "HOW TO USE AIWORK", "Browser 사용 흐름 6단계"],
-  ["/how-to-use/browser", "AIWORK BROWSER 1.0", "Drive 연결 해제"],
+  ["/how-to-use/browser", "AIWORK BROWSER 1.0", "확장 아이콘은 수집"],
   ["/how-to-use/getting-started", "GETTING STARTED", "첫 수집 체크리스트"],
   ["/how-to-use/documents", "DOCUMENTS", "현재 파일 업로드 기능 없음"],
   ["/how-to-use/web-research", "WEB RESEARCH", "현재 자동 Research 기능 없음"],
@@ -179,6 +183,65 @@ test("renders every section as an individual page", async () => {
     assert.match(html, /aria-controls="aiwork-language-menu"/);
     assert.match(html, /aria-controls="aiwork-theme-menu"/);
   }
+});
+
+test("fails closed when purchase email automation is not configured", async () => {
+  const readiness = await render("/api/purchase-inquiries");
+  assert.equal(readiness.status, 200);
+  assert.deepEqual(await readiness.json(), {
+    available: false,
+    supportEmail: "support@aiwork.to",
+  });
+
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-inquiry`);
+  const { default: worker } = await import(workerUrl.href);
+  const response = await worker.fetch(
+    new Request("https://localhost/api/purchase-inquiries", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        origin: "https://localhost",
+      },
+      body: JSON.stringify({ product: "professional" }),
+    }),
+    {
+      ASSETS: {
+        fetch: async () => new Response("Not found", { status: 404 }),
+      },
+    },
+    {
+      waitUntil() {},
+      passThroughOnException() {},
+    },
+  );
+  assert.equal(response.status, 503);
+  assert.equal((await response.json()).error, "EMAIL_NOT_CONFIGURED");
+});
+
+test("keeps the inquiry endpoint bounded and idempotent", async () => {
+  const routeSource = await readFile(
+    new URL("../app/api/purchase-inquiries/route.ts", import.meta.url),
+    "utf8",
+  );
+  const schemaSource = await readFile(
+    new URL("../db/schema.ts", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(routeSource, /request\.body\.getReader\(\)/);
+  assert.match(routeSource, /reader\.cancel\(\)/);
+  assert.doesNotMatch(routeSource, /request\.text\(\)/);
+  assert.match(routeSource, /IDEMPOTENCY_CONFLICT/);
+  assert.match(routeSource, /payload_hash/);
+  assert.match(routeSource, /attempt:ip:/);
+  assert.match(routeSource, /INSERT INTO inquiry_quota_reservations/);
+  assert.match(routeSource, /email_hash = \? AND bucket = \?/);
+  assert.match(routeSource, /ip_hash = \? AND bucket = \?/);
+  assert.match(routeSource, /ON CONFLICT\("key"\) DO UPDATE/);
+  assert.match(schemaSource, /inquiry_rate_limits/);
+  assert.match(schemaSource, /inquiry_quota_reservations/);
+  assert.match(schemaSource, /payload_hash/);
 });
 
 test("serves crawl metadata and canonical host redirects", async () => {

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import DetailPage from "../components/DetailPage";
+import { SUPPORT_EMAIL } from "../site-config";
 
 export const metadata: Metadata = {
   title: "AIWORK 설치 안내 | 배포판 준비 상태",
@@ -137,7 +138,7 @@ export default function DownloadPage() {
         </div>
         <a
           className="primary-button"
-          href={`mailto:cakecnc@daum.net?subject=${encodeURIComponent(
+          href={`mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(
             "AIWORK 출시 알림 신청",
           )}&body=${encodeURIComponent(
             "AIWORK 공개 배포 및 설치 안내를 받고 싶습니다.\n\n이름/회사명(선택):\n관심 제품: AIWORK Browser / Desktop / Business",

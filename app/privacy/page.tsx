@@ -6,6 +6,7 @@ import {
 } from "../components/PrivacyLocale";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
+import { SUPPORT_EMAIL } from "../site-config";
 
 export const metadata: Metadata = {
   title: "AIWORK Browser 개인정보처리방침",
@@ -14,8 +15,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/privacy" },
 };
 
-const policyVersion = "2026-07-26";
-const effectiveDate = "2026-07-26";
+const policyVersion = "2026-07-28";
+const effectiveDate = "2026-07-28";
 
 export default function PrivacyPolicy() {
   return (
@@ -247,9 +248,20 @@ export default function PrivacyPolicy() {
               추적 쿠키나 분석 도구를 사용하지 않습니다. 다만 Sites와 Cloudflare
               호스팅 플랫폼은 서비스 보호와 봇 방지를 위해 <code>__cf_bm</code> 같은
               필수 보안 쿠키를 설정할 수 있습니다. 이 쿠키는 AIWORK의 광고,
-              사용자 프로파일링 또는 행동 분석에 사용되지 않습니다. 회원가입과 서버
-              주문 저장은 현재 사용하지 않으며, PayPal 결제 또는 이메일 문의 링크를
-              선택하면 해당 외부 서비스의 개인정보처리방침이 적용됩니다.
+              사용자 프로파일링 또는 행동 분석에 사용되지 않습니다. 구매 문의 폼은
+              이름·이메일·회사명(선택)·문의 내용을 접수와 회신 목적으로 처리합니다.
+              원문 개인정보는 데이터베이스에 저장하지 않고 발송 시점에만 메일로
+              전달하며, 데이터베이스에는 HMAC 처리한 이메일·IP, 상품, 동의 버전,
+              발송 상태를 보안·중복 방지 목적으로 90일 만료값과 함께 보관합니다.
+              만료 자료는 문의 폼 조회 또는 접수 시 삭제되므로, 이후 사이트 접근이
+              없으면 다음 접근이나 서비스 자료 삭제 시점까지 남을 수 있습니다.
+              자동 발송은 Cloudflare Turnstile 검증과 Resend 발신 도메인 인증이
+              완료된 경우에만 활성화됩니다. Turnstile은 봇 방지를 위해 토큰·IP·
+              요청 기술정보를 처리합니다. Resend는 운영자 전달을 위해 이름·회사명·
+              이메일·문의 원문을, 구매자 확인 메일을 위해 이름·이메일·상품을
+              처리합니다. 운영자에게 전달된 문의는 Daum 스마트워크 사서함에
+              보관되며, 답변 완료 후 운영 정책과 각 서비스의 개인정보처리방침에
+              따라 삭제됩니다.
             </p>
           </div>
         </section>
@@ -268,7 +280,7 @@ export default function PrivacyPolicy() {
             <p>
               운영 주체: 주식회사 씨엔씨코퍼레이션(AIWORK) · 개인정보 문의:
               {" "}
-              <a href="mailto:cakecnc@daum.net">cakecnc@daum.net</a>
+              <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
               {" "}· 공식 홈페이지: <Link href="/">https://aiwork.to</Link>
             </p>
           </div>
@@ -309,13 +321,20 @@ export default function PrivacyPolicy() {
               <code>__cf_bm</code>.
             </li>
             <li>
+              The Korean purchase-inquiry form uses Cloudflare Turnstile for
+              bot checks and Resend to deliver the full inquiry to AIWORK and
+              send a confirmation. The form does not store raw inquiry text in
+              D1; HMAC-protected abuse and delivery metadata carries a 90-day
+              expiry and is removed on the next form access after expiry.
+            </li>
+            <li>
               You can delete individual Drive records, disconnect Drive,
               revoke consent, remove all hidden app data in Google Drive, or
               remove the extension&apos;s local data.
             </li>
           </ul>
           <p>
-            Contact: <a href="mailto:cakecnc@daum.net">cakecnc@daum.net</a>
+            Contact: <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
             {" "}· Policy version {policyVersion} · Effective {effectiveDate}
           </p>
         </section>

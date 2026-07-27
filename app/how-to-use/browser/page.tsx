@@ -3,9 +3,9 @@ import Link from "next/link";
 import DetailPage from "../../components/DetailPage";
 
 export const metadata: Metadata = {
-  title: "AIWORK Browser 1.0 사용법 | 현재 페이지 수집과 Drive 저장",
+  title: "AIWORK Chrome 확장프로그램 사용법 | 현재 페이지 저장",
   description:
-    "AIWORK Browser 1.0 RC의 설치 조건, 페이지 수집, 안전 미리보기, 템플릿·메모·태그, Source·Memory·Research 분류, Drive 저장과 삭제 방법을 안내합니다.",
+    "AIWORK Chrome 확장프로그램에서 도구모음 아이콘으로 현재 페이지를 수집하고, 작은 사이드 패널에서 확인·분류·저장하는 방법을 안내합니다.",
   alternates: { canonical: "/how-to-use/browser" },
 };
 
@@ -15,24 +15,24 @@ const browserSteps = [
     body: "공개 출시 후 Chrome 116 이상에서 설치합니다. 첫 실행 때 페이지 처리 동의와 Google Drive 저장 동의를 각각 읽고 선택합니다.",
   },
   {
-    title: "현재 페이지에서 수집 실행",
-    body: "Toolbar AIWORK 아이콘, Alt+Shift+S(Windows) 또는 Control+Shift+S(Mac), 우클릭 Context Menu 중 한 가지 방법을 사용합니다.",
+    title: "Chrome 도구모음 아이콘 선택",
+    body: "저장할 페이지를 연 뒤 Chrome 도구모음의 AIWORK 아이콘을 누릅니다. 아이콘이 보이지 않으면 퍼즐 모양 확장프로그램 메뉴에서 AIWORK를 고정합니다.",
   },
   {
     title: "안전 미리보기 검토",
     body: "제목, URL, 선택 텍스트와 본문 일부를 확인합니다. [REDACTED] 치환과 프롬프트 인젝션 경고가 있으면 원문과 저장 범위를 다시 확인합니다.",
   },
   {
-    title: "템플릿과 분류 추가",
-    body: "업무 템플릿을 적용하거나 메모와 태그를 추가한 뒤 Source·Memory·Research 중 목적에 맞는 기록 종류를 선택합니다.",
+    title: "기록 종류 선택 후 저장",
+    body: "기본 화면에서는 Source·Memory·Research 중 기록 종류만 선택하고 저장합니다. 메모·태그·템플릿·Drive 도구는 필요할 때만 펼칩니다.",
   },
   {
     title: "Drive 연결과 저장 승인",
     body: "필요한 때에 Google Drive 연결을 시작합니다. drive.appdata 범위만 사용하며 승인한 기록은 AIWORK 전용 비공개 appDataFolder에 저장됩니다.",
   },
   {
-    title: "Library·Queue·설정 관리",
-    body: "Library에서 기록을 확인·삭제하고 Queue에서 저장과 제한된 재시도 상태를 확인합니다. 설정에서는 언어·테마·사용자 색상, Drive 연결과 동의를 관리합니다.",
+    title: "저장 자료와 상태 확인",
+    body: "‘저장 자료’에서 기록을 확인·삭제합니다. 저장 상태와 제한된 재시도 정보는 같은 화면의 ‘작업 큐’를 펼쳐 확인합니다.",
   },
 ];
 
@@ -108,7 +108,7 @@ export default function BrowserGuidePage() {
           안전하게 수집·저장합니다.
         </>
       }
-      description="AIWORK Browser는 사용자가 직접 실행한 현재 페이지만 처리합니다. 수집 결과를 먼저 검토하고, 필요한 기록만 분류해 Google Drive의 비공개 appDataFolder에 저장합니다."
+      description="AIWORK Browser는 Chrome 확장프로그램입니다. 도구모음 아이콘으로 현재 페이지만 수집하고, 작은 사이드 패널에서는 미리보기와 저장에 집중합니다."
       image="/images/aiwork-synthwave-hero-v2.webp"
       imageAlt="AIWORK Browser의 현재 페이지 수집과 기록 관리 콘셉트"
       imageLabel="AIWORK BROWSER 1.0 GUIDE"
@@ -121,6 +121,36 @@ export default function BrowserGuidePage() {
           비공식 파일을 설치하거나 Google 계정, 비밀번호, API 키 또는 인증 코드를
           입력하지 마세요.
         </p>
+      </section>
+
+      <section className="content-section browser-extension-explainer">
+        <div className="content-heading readable-copy">
+          <span>WHAT IS THE CHROME EXTENSION?</span>
+          <h2>확장 아이콘은 수집, 작은 패널은 확인·저장</h2>
+          <p>
+            AIWORK는 새 웹사이트를 여는 앱이 아니라 Chrome 옆면에서 사용하는
+            확장프로그램입니다. 페이지를 읽는 권한은 도구모음 아이콘·단축키·
+            우클릭 메뉴로 사용자가 직접 수집을 시작한 순간에만 부여됩니다.
+          </p>
+        </div>
+        <ol className="compact-flow" aria-label="Chrome 확장프로그램 기본 사용 흐름">
+          <li>
+            <span>1</span>
+            <strong>저장할 페이지 열기</strong>
+          </li>
+          <li>
+            <span>2</span>
+            <strong>AIWORK 아이콘 누르기</strong>
+          </li>
+          <li>
+            <span>3</span>
+            <strong>미리보기 확인</strong>
+          </li>
+          <li>
+            <span>4</span>
+            <strong>종류 선택 후 저장</strong>
+          </li>
+        </ol>
       </section>
 
       <section className="content-section">
@@ -170,8 +200,9 @@ export default function BrowserGuidePage() {
           <span>CAPTURE METHODS</span>
           <h2>상황에 맞는 수집 방법을 선택하세요</h2>
           <p>
-            사이드 패널은 Alt+Shift+A로 열 수 있습니다. 실제 페이지 읽기는 현재
-            활성 탭에서 수집을 실행한 순간에만 시작됩니다.
+            사이드 패널 안의 안내 버튼은 페이지 권한을 새로 요청하지 않습니다.
+            실제 페이지 읽기는 현재 탭에서 AIWORK 도구모음 아이콘·수집 단축키·
+            우클릭 메뉴를 실행한 순간에만 시작됩니다.
           </p>
         </div>
         <div className="content-grid content-grid-three">
@@ -219,7 +250,7 @@ export default function BrowserGuidePage() {
       <section className="content-section">
         <div className="content-heading">
           <span>RECORD TYPES</span>
-          <h2>세 가지 기록 분류</h2>
+          <h2>저장할 때 하나만 고르는 세 가지 기록 분류</h2>
           <p>
             분류 이름은 AI 기능의 실행을 뜻하지 않습니다. 사용자가 Library에서
             자료를 구분하기 위한 기록 종류입니다.
