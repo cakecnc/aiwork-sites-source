@@ -5368,3 +5368,168 @@ a { color: inherit; text-decoration: none; }
     max-width: calc(100% - 60px);
   }
 }
+
+/* AIWORK v22 — contact typography calibration */
+
+.contact-information {
+  grid-template-columns: minmax(0, 1fr) minmax(300px, .82fr);
+  gap: clamp(32px, 4vw, 56px);
+}
+
+.contact-information .section-kicker,
+.company-panel > div > span {
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: .14em;
+}
+
+.contact-information h2 {
+  margin: 14px 0 10px;
+  font-size: clamp(30px, 2.5vw, 34px);
+  line-height: 1.24;
+  letter-spacing: -.025em;
+  font-weight: 600;
+  word-break: keep-all;
+  text-wrap: balance;
+}
+
+.contact-information p {
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.contact-information address {
+  gap: 10px;
+}
+
+.contact-information address a {
+  font-size: clamp(22px, 2vw, 26px);
+  line-height: 1.25;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.contact-information address a:last-child {
+  font-size: clamp(21px, 1.85vw, 24px);
+}
+
+.company-panel {
+  grid-template-columns: minmax(360px, 1.12fr) minmax(320px, 1fr) auto;
+  gap: 28px;
+}
+
+.company-panel h2 {
+  margin: 14px 0 0;
+  font-size: 30px;
+  line-height: 1.27;
+  letter-spacing: -.025em;
+  font-weight: 550;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  text-wrap: balance;
+}
+
+.company-panel dl {
+  gap: 12px;
+}
+
+.company-panel dl > div {
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 16px;
+}
+
+.company-panel dt {
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 650;
+}
+
+.company-panel dd {
+  font-size: 14px;
+  line-height: 1.55;
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.company-panel > .secondary-button {
+  min-height: 48px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+@media (max-width: 1040px) {
+  .company-panel {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .company-panel h2 {
+    max-width: 20ch;
+  }
+}
+
+@media (max-width: 860px) {
+  .contact-information {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .contact-information address {
+    justify-items: start;
+  }
+}
+
+@media (max-width: 620px) {
+  .contact-information .section-kicker,
+  .company-panel > div > span {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .contact-information h2 {
+    margin: 11px 0 8px;
+    font-size: 27px;
+    line-height: 1.24;
+  }
+
+  .contact-information p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .contact-information address a,
+  .contact-information address a:last-child {
+    font-size: 20px;
+    line-height: 1.3;
+  }
+
+  .company-panel {
+    gap: 22px;
+  }
+
+  .company-panel h2 {
+    max-width: 14ch;
+    margin-top: 10px;
+    font-size: 24px;
+    line-height: 1.28;
+  }
+
+  .company-panel dl {
+    gap: 14px;
+  }
+
+  .company-panel dl > div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .company-panel dt {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .company-panel dd {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}

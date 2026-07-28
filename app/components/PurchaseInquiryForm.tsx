@@ -39,6 +39,25 @@ function selectedProductFromUrl(): PurchaseProductId {
     : "professional";
 }
 
+function createRequestKey() {
+  if (typeof globalThis.crypto?.randomUUID === "function") {
+    return globalThis.crypto.randomUUID();
+  }
+
+  const values = new Uint32Array(4);
+  if (typeof globalThis.crypto?.getRandomValues === "function") {
+    globalThis.crypto.getRandomValues(values);
+  } else {
+    for (let index = 0; index < values.length; index += 1) {
+      values[index] = Math.floor(Math.random() * 0xffffffff);
+    }
+  }
+
+  return `${Date.now().toString(36)}-${Array.from(values, (value) =>
+    value.toString(36),
+  ).join("-")}`;
+}
+
 export default function PurchaseInquiryForm() {
   const [product, setProduct] = useState<PurchaseProductId>("professional");
   const [readiness, setReadiness] = useState<Readiness>({ available: false });
@@ -54,7 +73,7 @@ export default function PurchaseInquiryForm() {
 
   useEffect(() => {
     startedAt.current = Date.now();
-    requestKey.current = crypto.randomUUID();
+    requestKey.current = createRequestKey();
     const frame = window.requestAnimationFrame(() => {
       setProduct(selectedProductFromUrl());
     });
@@ -149,7 +168,7 @@ export default function PurchaseInquiryForm() {
     }
 
     const data = new FormData(form);
-    requestKey.current ||= crypto.randomUUID();
+    requestKey.current ||= createRequestKey();
     setSubmitting(true);
     setStatus({ tone: "neutral", message: "구매 문의를 안전하게 접수하는 중입니다." });
     try {
@@ -185,7 +204,7 @@ export default function PurchaseInquiryForm() {
       form.reset();
       setProduct("professional");
       startedAt.current = Date.now();
-      requestKey.current = crypto.randomUUID();
+      requestKey.current = createRequestKey();
     } catch (error) {
       setStatus({
         tone: "error",
