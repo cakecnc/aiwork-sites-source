@@ -44,9 +44,11 @@ export default function Home() {
       <SiteHeader active="home" context={home.brandContext} />
 
       <section className="hero home-hero" id="home">
-        <ProductMark className="home-product-mark" />
-        <div className="eyebrow">
-          <span /> {home.hero.eyebrow}
+        <div className="home-hero-intro">
+          <ProductMark className="home-product-mark" />
+          <div className="eyebrow">
+            <span /> {home.hero.eyebrow}
+          </div>
         </div>
         <h1>
           {home.hero.title[0]}

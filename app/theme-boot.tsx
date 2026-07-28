@@ -70,8 +70,10 @@ const preferenceBoot = String.raw`
     root.lang = localeMeta[locale][0];
     root.dir = localeMeta[locale][1];
 
+    const customActive =
+      localStorage.getItem("aiwork-custom-enabled") === "true";
     const rawColors = localStorage.getItem("aiwork-custom-colors");
-    if (rawColors) {
+    if (customActive && rawColors) {
       const colors = JSON.parse(rawColors);
       if (accessibleColors(colors)) {
         root.style.setProperty("--custom-accent", colors.accent);
@@ -79,10 +81,17 @@ const preferenceBoot = String.raw`
         root.style.setProperty("--custom-background", colors.background);
         root.style.setProperty("--custom-text", readableText(colors.background));
         root.style.setProperty("--custom-accent-text", readableText(colors.accent));
+        root.style.setProperty(
+          "--custom-color-scheme",
+          readableText(colors.background) === "#ffffff" ? "dark" : "light"
+        );
         root.dataset.custom = "true";
       } else {
         localStorage.removeItem("aiwork-custom-colors");
+        localStorage.removeItem("aiwork-custom-enabled");
       }
+    } else {
+      delete root.dataset.custom;
     }
   } catch {
     root.dataset.theme = "light";

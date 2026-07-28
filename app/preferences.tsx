@@ -49,6 +49,9 @@ export const defaultColors: CustomColors = {
   background: "#07071b",
 };
 
+const CUSTOM_THEME_ACTIVE_KEY = "aiwork-custom-enabled";
+const CUSTOM_THEME_COLORS_KEY = "aiwork-custom-colors";
+
 type PreferencesContextValue = {
   locale: Locale;
   theme: ThemeKey;
@@ -132,7 +135,7 @@ function hasAccessibleContrast(colors: CustomColors) {
 
 function readCustomColors(): CustomColors | null {
   try {
-    const raw = localStorage.getItem("aiwork-custom-colors");
+    const raw = localStorage.getItem(CUSTOM_THEME_COLORS_KEY);
     if (!raw) return null;
 
     const parsed = JSON.parse(raw) as Partial<CustomColors>;
@@ -141,7 +144,8 @@ function readCustomColors(): CustomColors | null {
       !isHexColor(parsed.secondary) ||
       !isHexColor(parsed.background)
     ) {
-      localStorage.removeItem("aiwork-custom-colors");
+      localStorage.removeItem(CUSTOM_THEME_COLORS_KEY);
+      localStorage.removeItem(CUSTOM_THEME_ACTIVE_KEY);
       return null;
     }
     const colors = {
@@ -150,12 +154,14 @@ function readCustomColors(): CustomColors | null {
       background: parsed.background,
     };
     if (!hasAccessibleContrast(colors)) {
-      localStorage.removeItem("aiwork-custom-colors");
+      localStorage.removeItem(CUSTOM_THEME_COLORS_KEY);
+      localStorage.removeItem(CUSTOM_THEME_ACTIVE_KEY);
       return null;
     }
     return colors;
   } catch {
-    localStorage.removeItem("aiwork-custom-colors");
+    localStorage.removeItem(CUSTOM_THEME_COLORS_KEY);
+    localStorage.removeItem(CUSTOM_THEME_ACTIVE_KEY);
     return null;
   }
 }
@@ -169,6 +175,7 @@ function applyCustomToDocument(colors: CustomColors | null) {
     root.style.removeProperty("--custom-background");
     root.style.removeProperty("--custom-text");
     root.style.removeProperty("--custom-accent-text");
+    root.style.removeProperty("--custom-color-scheme");
     return;
   }
 
@@ -182,6 +189,10 @@ function applyCustomToDocument(colors: CustomColors | null) {
   root.style.setProperty(
     "--custom-accent-text",
     readableTextColor(colors.accent),
+  );
+  root.style.setProperty(
+    "--custom-color-scheme",
+    readableTextColor(colors.background) === "#ffffff" ? "dark" : "light",
   );
   root.dataset.custom = "true";
 }
@@ -201,14 +212,19 @@ export function SitePreferencesProvider({ children }: { children: ReactNode }) {
       const bootLocale = root.dataset.locale;
       const bootTheme = root.dataset.theme;
       const storedCustom = readCustomColors();
+      const customActive =
+        localStorage.getItem(CUSTOM_THEME_ACTIVE_KEY) === "true";
 
       setLocaleState(isLocale(bootLocale) ? bootLocale : "ko");
       setThemeState(isTheme(bootTheme) ? bootTheme : "light");
-      if (storedCustom) {
+      if (customActive && storedCustom) {
         setCustomColors(storedCustom);
         setCustomEnabled(true);
         applyCustomToDocument(storedCustom);
       } else {
+        if (customActive) {
+          localStorage.removeItem(CUSTOM_THEME_ACTIVE_KEY);
+        }
         setCustomEnabled(false);
         applyCustomToDocument(null);
       }
@@ -257,9 +273,14 @@ export function SitePreferencesProvider({ children }: { children: ReactNode }) {
       if (event.key === "aiwork-locale" && isLocale(event.newValue)) {
         setLocaleState(event.newValue);
       }
-      if (event.key === "aiwork-custom-colors") {
+      if (
+        event.key === CUSTOM_THEME_COLORS_KEY ||
+        event.key === CUSTOM_THEME_ACTIVE_KEY
+      ) {
         const next = readCustomColors();
-        if (next) {
+        const nextEnabled =
+          localStorage.getItem(CUSTOM_THEME_ACTIVE_KEY) === "true";
+        if (next && nextEnabled) {
           setCustomColors(next);
           setCustomEnabled(true);
         } else {
@@ -276,6 +297,9 @@ export function SitePreferencesProvider({ children }: { children: ReactNode }) {
   }
 
   function chooseTheme(next: ThemeKey) {
+    setCustomEnabled(false);
+    localStorage.removeItem(CUSTOM_THEME_ACTIVE_KEY);
+    applyCustomToDocument(null);
     setThemeState(next);
   }
 
@@ -285,7 +309,8 @@ export function SitePreferencesProvider({ children }: { children: ReactNode }) {
     }
     setCustomColors(next);
     setCustomEnabled(true);
-    localStorage.setItem("aiwork-custom-colors", JSON.stringify(next));
+    localStorage.setItem(CUSTOM_THEME_COLORS_KEY, JSON.stringify(next));
+    localStorage.setItem(CUSTOM_THEME_ACTIVE_KEY, "true");
     applyCustomToDocument(next);
     return true;
   }
@@ -293,7 +318,8 @@ export function SitePreferencesProvider({ children }: { children: ReactNode }) {
   function resetCustomColors() {
     setCustomColors(defaultColors);
     setCustomEnabled(false);
-    localStorage.removeItem("aiwork-custom-colors");
+    localStorage.removeItem(CUSTOM_THEME_COLORS_KEY);
+    localStorage.removeItem(CUSTOM_THEME_ACTIVE_KEY);
     applyCustomToDocument(null);
   }
 
@@ -335,6 +361,7 @@ export function PreferenceControls() {
     locale,
     theme,
     customColors,
+    customEnabled,
     setLocale,
     setTheme,
     applyCustomColors,
@@ -507,10 +534,12 @@ export function PreferenceControls() {
               <div className="theme-grid">
                 {themeKeys.map((item) => (
                   <button
-                    className={`theme-option ${theme === item ? "active" : ""}`}
+                    className={`theme-option ${
+                      !customEnabled && theme === item ? "active" : ""
+                    }`}
                     type="button"
                     role="menuitemradio"
-                    aria-checked={theme === item}
+                    aria-checked={!customEnabled && theme === item}
                     key={item}
                     onClick={() => {
                       setTheme(item);
@@ -529,13 +558,14 @@ export function PreferenceControls() {
                     </span>
                     <strong>{copy.themes[item].name}</strong>
                     <small>{copy.themes[item].note}</small>
-                    {theme === item && <b>✓</b>}
+                    {!customEnabled && theme === item && <b>✓</b>}
                   </button>
                 ))}
               </div>
               <button
-                className="custom-link"
+                className={`custom-link ${customEnabled ? "active" : ""}`}
                 type="button"
+                aria-pressed={customEnabled}
                 onClick={() => {
                   setThemeOpen(false);
                   setCustomDraft(customColors);

@@ -193,7 +193,7 @@ test("renders every section as an individual page", async () => {
     assert.match(html, /140-81-50087/);
     assert.match(html, /What’s past is prologue/);
     assert.match(html, /aiwork-product-mark/);
-    assert.match(html, /favicon-company-v1\.png/);
+    assert.match(html, /favicon-company-rounded-v2\.png/);
     assert.match(html, /aiwork-preference-boot/);
     assert.match(html, /aria-controls="aiwork-language-menu"/);
     assert.match(html, /aria-controls="aiwork-theme-menu"/);
@@ -315,14 +315,49 @@ test("renders one global preference bootstrap and controls on public routes", as
   }
 });
 
-test("uses the company logo only for the browser favicon", async () => {
+test("switches the page background with presets and exits custom mode", async () => {
+  const [preferences, bootstrap, styles] = await Promise.all([
+    readFile(new URL("../app/preferences.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/theme-boot.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(preferences, /CUSTOM_THEME_ACTIVE_KEY/);
+  assert.match(
+    preferences,
+    /function chooseTheme[\s\S]*setCustomEnabled\(false\)[\s\S]*removeItem\(CUSTOM_THEME_ACTIVE_KEY\)[\s\S]*applyCustomToDocument\(null\)/,
+  );
+  assert.match(bootstrap, /aiwork-custom-enabled/);
+  assert.match(styles, /body\s*{[\s\S]*background-color:\s*var\(--bg\)/);
+  assert.match(styles, /\.home-shell\s*{[\s\S]*background:\s*var\(--bg\)/);
+
+  for (const theme of [
+    "light",
+    "dark",
+    "aurora",
+    "editorial",
+    "console",
+    "synthwave",
+    "system",
+  ]) {
+    assert.match(
+      styles,
+      new RegExp(`:root\\[data-theme="${theme}"\\][\\s\\S]*?--bg:`),
+      `${theme} must define its own page background`,
+    );
+  }
+});
+
+test("uses the rounded company logo only for the browser favicon", async () => {
   await access(
     new URL(
-      "../public/favicon-company-v1.png",
+      "../public/favicon-company-rounded-v2.png",
       import.meta.url,
     ),
   );
-  await access(new URL("../public/favicon.ico", import.meta.url));
+  await access(
+    new URL("../public/favicon-company-rounded-v2.ico", import.meta.url),
+  );
   await access(
     new URL("../public/images/aiwork-product-mark.svg", import.meta.url),
   );

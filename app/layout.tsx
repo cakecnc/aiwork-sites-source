@@ -51,16 +51,16 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/favicon-company-v1.png",
+        url: "/favicon-company-rounded-v2.png",
         type: "image/png",
         sizes: "256x256",
       },
       {
-        url: "/favicon.ico",
+        url: "/favicon-company-rounded-v2.ico",
         type: "image/x-icon",
       },
     ],
-    shortcut: "/favicon-company-v1.png",
+    shortcut: "/favicon-company-rounded-v2.png",
     apple: "/images/aiwork-product-mark-192.png",
   },
 };
