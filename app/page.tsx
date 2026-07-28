@@ -9,7 +9,6 @@ import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
 import { useSitePreferences } from "./preferences";
 import {
-  DONATION_URL,
   PURCHASE_PRODUCTS,
   SUPPORT_EMAIL,
   purchaseInquiryHref,
@@ -267,21 +266,6 @@ export default function Home() {
           ))}
         </div>
 
-        <div className="support-card">
-          <ProductMark className="support-product-mark" />
-          <div>
-            <span>{copy.payments.supportTitle}</span>
-            <p>{copy.payments.supportDescription}</p>
-          </div>
-          <a
-            className="secondary-button"
-            href={DONATION_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {copy.payments.supportAction} <span>↗</span>
-          </a>
-        </div>
       </section>
 
       <section className="cta-section home-cta" id="download">

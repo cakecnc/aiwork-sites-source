@@ -202,6 +202,46 @@ test("renders every section as an individual page", async () => {
   }
 });
 
+test("renders the site-wide AIWORK support card exactly once per page", async () => {
+  const publicRoutes = [
+    "/",
+    "/privacy",
+    ...detailRoutes.map(([pathname]) => pathname),
+  ];
+
+  for (const pathname of publicRoutes) {
+    const response = await render(pathname);
+    assert.equal(response.status, 200, `${pathname} must render`);
+
+    const html = await response.text();
+    assert.equal(
+      html.match(/data-sitewide-support=["']true["']/g)?.length,
+      1,
+      `${pathname} must render exactly one site-wide support card`,
+    );
+    assert.equal(
+      html.match(
+        /href=["']https:\/\/www\.paypal\.com\/ncp\/payment\/R3NBTNC3KYCVE["']/g,
+      )?.length,
+      1,
+      `${pathname} must render exactly one PayPal support action`,
+    );
+  }
+
+  const styles = await readFile(
+    new URL("../app/globals.css", import.meta.url),
+    "utf8",
+  );
+  assert.match(
+    styles,
+    /\.site-footer\s*>\s*\.sitewide-support\s*{[\s\S]*?grid-template-columns:\s*auto minmax\(0,\s*1fr\) auto;/,
+  );
+  assert.match(
+    styles,
+    /@media \(max-width:\s*860px\)[\s\S]*?\.site-footer\s*>\s*\.sitewide-support\s*{[\s\S]*?grid-template-columns:\s*auto minmax\(0,\s*1fr\);[\s\S]*?\.site-footer\s*>\s*\.sitewide-support\s*>\s*a\s*{[\s\S]*?grid-column:\s*1\s*\/\s*-1;/,
+  );
+});
+
 test("fails closed when purchase email automation is not configured", async () => {
   const readiness = await render("/api/purchase-inquiries");
   assert.equal(readiness.status, 200);

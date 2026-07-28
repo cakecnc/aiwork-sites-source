@@ -5533,3 +5533,40 @@ a { color: inherit; text-decoration: none; }
     line-height: 1.5;
   }
 }
+
+/* AIWORK v24 — one responsive support card across every public page */
+
+.site-footer > .sitewide-support {
+  width: 100%;
+  margin: 0 0 4px;
+  grid-column: 1 / -1;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+.sitewide-support > div {
+  min-width: 0;
+}
+
+.sitewide-support p {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 860px) {
+  .site-footer > .sitewide-support {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .site-footer > .sitewide-support > a {
+    width: 100%;
+    min-height: 44px;
+    grid-column: 1 / -1;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 620px) {
+  .site-footer > .sitewide-support {
+    padding: 16px;
+    gap: 12px;
+  }
+}

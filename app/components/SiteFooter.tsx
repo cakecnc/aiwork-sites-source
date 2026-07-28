@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { messages, type Locale } from "../i18n";
 import { useSitePreferences } from "../preferences";
-import { SUPPORT_EMAIL } from "../site-config";
+import { DONATION_URL, SUPPORT_EMAIL } from "../site-config";
 import ProductMark from "./ProductMark";
 
 export const shakespeareNotice =
@@ -75,6 +75,26 @@ export default function SiteFooter() {
 
   return (
     <footer className="site-footer" id="site-footer">
+      <section
+        className="support-card sitewide-support"
+        data-sitewide-support="true"
+        aria-labelledby="sitewide-support-title"
+      >
+        <ProductMark className="support-product-mark" />
+        <div>
+          <span id="sitewide-support-title">{copy.payments.supportTitle}</span>
+          <p>{copy.payments.supportDescription}</p>
+        </div>
+        <a
+          className="secondary-button"
+          href={DONATION_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {copy.payments.supportAction} <span>↗</span>
+        </a>
+      </section>
+
       <div className="footer-intro">
         <Link className="brand footer-brand" href="/">
           <ProductMark className="footer-product-mark" />
