@@ -2,6 +2,7 @@ const preferenceBoot = String.raw`
 (() => {
   const root = document.documentElement;
   const themes = new Set(["system","light","dark","aurora","editorial","console","synthwave"]);
+  const characters = new Set(["aiwork","planner"]);
   const locales = new Set(["ko","en","ja","zh-CN","ar","es","fr","de"]);
   const localeMeta = {
     ko: ["ko","ltr"],
@@ -48,6 +49,13 @@ const preferenceBoot = String.raw`
   try {
     const storedTheme = localStorage.getItem("aiwork-theme");
     root.dataset.theme = themes.has(storedTheme) ? storedTheme : "light";
+    const storedCharacter = localStorage.getItem("aiwork-character");
+    root.dataset.character = characters.has(storedCharacter)
+      ? storedCharacter
+      : "aiwork";
+    if (storedCharacter && !characters.has(storedCharacter)) {
+      localStorage.removeItem("aiwork-character");
+    }
 
     const queryLocale = new URLSearchParams(location.search).get("lang");
     const storedLocale = localStorage.getItem("aiwork-locale");
@@ -95,6 +103,7 @@ const preferenceBoot = String.raw`
     }
   } catch {
     root.dataset.theme = "light";
+    root.dataset.character = "aiwork";
     root.dataset.locale = "ko";
     root.lang = "ko";
     root.dir = "ltr";

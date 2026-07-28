@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import {
   createContext,
   useContext,
@@ -9,6 +10,12 @@ import {
   type ReactNode,
 } from "react";
 import { usePathname } from "next/navigation";
+import {
+  characterKeys,
+  characterPickerCopy,
+  characterProfiles,
+  type CharacterKey,
+} from "./characters";
 import {
   localeInfo,
   messages,
@@ -51,15 +58,18 @@ export const defaultColors: CustomColors = {
 
 const CUSTOM_THEME_ACTIVE_KEY = "aiwork-custom-enabled";
 const CUSTOM_THEME_COLORS_KEY = "aiwork-custom-colors";
+const CHARACTER_STORAGE_KEY = "aiwork-character";
 
 type PreferencesContextValue = {
   locale: Locale;
   theme: ThemeKey;
+  character: CharacterKey;
   customColors: CustomColors;
   customEnabled: boolean;
   ready: boolean;
   setLocale: (locale: Locale) => void;
   setTheme: (theme: ThemeKey) => void;
+  setCharacter: (character: CharacterKey) => void;
   applyCustomColors: (colors: CustomColors) => boolean;
   resetCustomColors: () => void;
 };
@@ -72,6 +82,12 @@ function isTheme(value: string | null | undefined): value is ThemeKey {
 
 function isLocale(value: string | null | undefined): value is Locale {
   return Boolean(value && supportedLocales.includes(value as Locale));
+}
+
+function isCharacter(
+  value: string | null | undefined,
+): value is CharacterKey {
+  return Boolean(value && characterKeys.includes(value as CharacterKey));
 }
 
 function isHexColor(value: unknown): value is string {
@@ -201,6 +217,8 @@ export function SitePreferencesProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [locale, setLocaleState] = useState<Locale>("ko");
   const [theme, setThemeState] = useState<ThemeKey>("light");
+  const [character, setCharacterState] =
+    useState<CharacterKey>("aiwork");
   const [customColors, setCustomColors] =
     useState<CustomColors>(defaultColors);
   const [customEnabled, setCustomEnabled] = useState(false);
@@ -211,12 +229,16 @@ export function SitePreferencesProvider({ children }: { children: ReactNode }) {
       const root = document.documentElement;
       const bootLocale = root.dataset.locale;
       const bootTheme = root.dataset.theme;
+      const bootCharacter = root.dataset.character;
       const storedCustom = readCustomColors();
       const customActive =
         localStorage.getItem(CUSTOM_THEME_ACTIVE_KEY) === "true";
 
       setLocaleState(isLocale(bootLocale) ? bootLocale : "ko");
       setThemeState(isTheme(bootTheme) ? bootTheme : "light");
+      setCharacterState(
+        isCharacter(bootCharacter) ? bootCharacter : "aiwork",
+      );
       if (customActive && storedCustom) {
         setCustomColors(storedCustom);
         setCustomEnabled(true);
@@ -240,6 +262,13 @@ export function SitePreferencesProvider({ children }: { children: ReactNode }) {
     root.dataset.theme = theme;
     localStorage.setItem("aiwork-theme", theme);
   }, [ready, theme]);
+
+  useEffect(() => {
+    if (!ready) return;
+    const root = document.documentElement;
+    root.dataset.character = character;
+    localStorage.setItem(CHARACTER_STORAGE_KEY, character);
+  }, [character, ready]);
 
   useEffect(() => {
     if (!ready) return;
@@ -274,6 +303,12 @@ export function SitePreferencesProvider({ children }: { children: ReactNode }) {
         setLocaleState(event.newValue);
       }
       if (
+        event.key === CHARACTER_STORAGE_KEY
+        && isCharacter(event.newValue)
+      ) {
+        setCharacterState(event.newValue);
+      }
+      if (
         event.key === CUSTOM_THEME_COLORS_KEY ||
         event.key === CUSTOM_THEME_ACTIVE_KEY
       ) {
@@ -303,6 +338,10 @@ export function SitePreferencesProvider({ children }: { children: ReactNode }) {
     setThemeState(next);
   }
 
+  function chooseCharacter(next: CharacterKey) {
+    setCharacterState(next);
+  }
+
   function applyCustomColors(next: CustomColors) {
     if (!hasAccessibleContrast(next)) {
       return false;
@@ -328,11 +367,13 @@ export function SitePreferencesProvider({ children }: { children: ReactNode }) {
       value={{
         locale,
         theme,
+        character,
         customColors,
         customEnabled,
         ready,
         setLocale: chooseLocale,
         setTheme: chooseTheme,
+        setCharacter: chooseCharacter,
         applyCustomColors,
         resetCustomColors,
       }}
@@ -360,15 +401,18 @@ export function PreferenceControls() {
   const {
     locale,
     theme,
+    character,
     customColors,
     customEnabled,
     setLocale,
     setTheme,
+    setCharacter,
     applyCustomColors,
     resetCustomColors,
   } = useSitePreferences();
   const copy = messages[locale];
   const localeMeta = localeInfo[locale];
+  const characterCopy = characterPickerCopy[locale];
   const [themeOpen, setThemeOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
   const [customOpen, setCustomOpen] = useState(false);
@@ -504,8 +548,19 @@ export function PreferenceControls() {
               setLanguageOpen(false);
             }}
           >
-            <span className="palette-icon" aria-hidden="true">
-              ◐
+            <span className="theme-trigger-character" aria-hidden="true">
+              {characterKeys.map((item) => (
+                <Image
+                  className="theme-trigger-character-layer"
+                  data-character-layer={item}
+                  src={characterProfiles[item].thumbnailSrc}
+                  alt=""
+                  width={64}
+                  height={64}
+                  unoptimized
+                  key={item}
+                />
+              ))}
             </span>
             <span className="trigger-label">{copy.themeMenu.trigger}</span>
             <span className="chevron" aria-hidden="true">
@@ -580,6 +635,61 @@ export function PreferenceControls() {
                 </span>
                 <b aria-hidden="true">→</b>
               </button>
+              <section
+                className="character-picker"
+                role="group"
+                aria-labelledby="aiwork-character-picker-title"
+              >
+                <div className="character-picker-head">
+                  <strong id="aiwork-character-picker-title">
+                    {characterCopy.title}
+                  </strong>
+                  <span>{characterCopy.note}</span>
+                </div>
+                <div className="character-grid">
+                  {characterKeys.map((item) => (
+                    <button
+                      className={`character-option ${
+                        character === item ? "active" : ""
+                      }`}
+                      type="button"
+                      role="menuitemradio"
+                      aria-checked={character === item}
+                      key={item}
+                      onClick={() => {
+                        setCharacter(item);
+                        setThemeOpen(false);
+                        themeButton.current?.focus();
+                      }}
+                      aria-label={replaceName(
+                        characterCopy.selectLabel,
+                        characterCopy.options[item].name,
+                      )}
+                    >
+                      <span
+                        className="character-option-image"
+                        data-character={item}
+                        aria-hidden="true"
+                      >
+                        <Image
+                          src={characterProfiles[item].thumbnailSrc}
+                          alt=""
+                          width={128}
+                          height={128}
+                          unoptimized
+                        />
+                      </span>
+                      <span>
+                        <strong>
+                          {characterCopy.options[item].name}
+                        </strong>
+                        <small>{characterCopy.options[item].note}</small>
+                      </span>
+                      {character === item && <b aria-hidden="true">✓</b>}
+                    </button>
+                  ))}
+                </div>
+              </section>
             </div>
           )}
         </div>

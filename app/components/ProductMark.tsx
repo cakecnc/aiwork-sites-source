@@ -8,12 +8,15 @@ import {
   useState,
   type PointerEvent as ReactPointerEvent,
 } from "react";
+import { characterKeys, characterProfiles } from "../characters";
+import { useSitePreferences } from "../preferences";
 
 export default function ProductMark({
   className = "",
 }: {
   className?: string;
 }) {
+  const { character } = useSitePreferences();
   const [isTouchWinking, setIsTouchWinking] = useState(false);
   const touchWinkTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -46,31 +49,40 @@ export default function ProductMark({
   return (
     <span
       className={`product-mark${isTouchWinking ? " is-touch-winking" : ""}${className ? ` ${className}` : ""}`}
+      data-character={character}
       aria-hidden="true"
       onPointerUp={triggerTouchWink}
     >
-      <Image
-        className="product-mark-image product-mark-image-open"
-        src="/images/aiwork-assistant-open.webp"
-        alt=""
-        width={1024}
-        height={1024}
-        decoding="async"
-        draggable="false"
-        loading="eager"
-        unoptimized
-      />
-      <Image
-        className="product-mark-image product-mark-image-wink"
-        src="/images/aiwork-assistant-wink.webp"
-        alt=""
-        width={1024}
-        height={1024}
-        decoding="async"
-        draggable="false"
-        loading="eager"
-        unoptimized
-      />
+      {characterKeys.map((item) => (
+        <span
+          className="product-mark-character"
+          data-character-layer={item}
+          key={item}
+        >
+          <Image
+            className="product-mark-image product-mark-image-open"
+            src={characterProfiles[item].openSrc}
+            alt=""
+            width={1024}
+            height={1024}
+            decoding="async"
+            draggable="false"
+            loading="eager"
+            unoptimized
+          />
+          <Image
+            className="product-mark-image product-mark-image-wink"
+            src={characterProfiles[item].winkSrc}
+            alt=""
+            width={1024}
+            height={1024}
+            decoding="async"
+            draggable="false"
+            loading="eager"
+            unoptimized
+          />
+        </span>
+      ))}
     </span>
   );
 }

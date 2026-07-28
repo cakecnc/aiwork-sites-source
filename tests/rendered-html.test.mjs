@@ -447,10 +447,17 @@ test("uses the rounded company logo only for the browser favicon", async () => {
   await access(
     new URL("../public/images/aiwork-assistant-wink.webp", import.meta.url),
   );
+  await access(
+    new URL("../public/images/aiwork-planner-open.webp", import.meta.url),
+  );
+  await access(
+    new URL("../public/images/aiwork-agent-yellow.webp", import.meta.url),
+  );
 });
 
 test("changes the assistant from open eyes to a wink on pointer interaction", async () => {
-  const [productMark, styles] = await Promise.all([
+  const [characters, productMark, styles] = await Promise.all([
+    readFile(new URL("../app/characters.ts", import.meta.url), "utf8"),
     readFile(
       new URL("../app/components/ProductMark.tsx", import.meta.url),
       "utf8",
@@ -458,8 +465,12 @@ test("changes the assistant from open eyes to a wink on pointer interaction", as
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
 
-  assert.match(productMark, /aiwork-assistant-open\.webp/);
-  assert.match(productMark, /aiwork-assistant-wink\.webp/);
+  assert.match(characters, /aiwork-assistant-open\.webp/);
+  assert.match(characters, /aiwork-assistant-wink\.webp/);
+  assert.match(characters, /aiwork-planner-open\.webp/);
+  assert.match(characters, /aiwork-agent-yellow\.webp/);
+  assert.match(productMark, /characterKeys\.map/);
+  assert.match(productMark, /data-character-layer=\{item\}/);
   assert.match(productMark, /product-mark-image-open/);
   assert.match(productMark, /product-mark-image-wink/);
   assert.match(productMark, /onPointerUp=\{triggerTouchWink\}/);
@@ -480,6 +491,58 @@ test("changes the assistant from open eyes to a wink on pointer interaction", as
   assert.match(
     styles,
     /@media \(hover: none\) and \(pointer: coarse\)[\s\S]*?\.product-mark:active \.product-mark-image-open[\s\S]*?opacity:\s*0;[\s\S]*?\.product-mark:active \.product-mark-image-wink[\s\S]*?opacity:\s*1;/,
+  );
+});
+
+test("persists one site-wide character selection inside the theme menu", async () => {
+  const [characters, preferences, bootstrap, styles] = await Promise.all([
+    readFile(new URL("../app/characters.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/preferences.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/theme-boot.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(characters, /characterKeys = \["aiwork", "planner"\]/);
+  assert.match(characters, /characterPickerCopy: Record<Locale/);
+  assert.match(preferences, /CHARACTER_STORAGE_KEY = "aiwork-character"/);
+  assert.match(preferences, /character:\s*CharacterKey/);
+  assert.match(preferences, /setCharacter:\s*\(character:\s*CharacterKey\)/);
+  assert.match(
+    preferences,
+    /root\.dataset\.character = character;[\s\S]*localStorage\.setItem\(CHARACTER_STORAGE_KEY, character\)/,
+  );
+  assert.match(
+    preferences,
+    /event\.key === CHARACTER_STORAGE_KEY[\s\S]*setCharacterState\(event\.newValue\)/,
+  );
+  assert.match(preferences, /id="aiwork-character-picker-title"/);
+  assert.match(preferences, /className="character-grid"/);
+  assert.match(preferences, /role="menuitemradio"/);
+  assert.match(preferences, /className="theme-trigger-character-layer"/);
+  assert.match(bootstrap, /const characters = new Set\(\["aiwork","planner"\]\)/);
+  assert.match(bootstrap, /localStorage\.getItem\("aiwork-character"\)/);
+  assert.match(bootstrap, /root\.dataset\.character = characters\.has/);
+  assert.match(styles, /\.character-grid\s*{[\s\S]*grid-template-columns:\s*repeat\(2,/);
+  assert.match(styles, /\.character-option\s*{[\s\S]*min-height:\s*82px;/);
+  assert.match(
+    styles,
+    /@media \(max-width:\s*620px\)[\s\S]*?\.character-option\s*{[\s\S]*?min-height:\s*78px;/,
+  );
+  assert.match(
+    styles,
+    /@media \(max-width:\s*360px\)[\s\S]*?\.character-grid\s*{[\s\S]*?grid-template-columns:\s*1fr;/,
+  );
+  assert.match(
+    styles,
+    /:root\[data-character="planner"\] \.product-mark\s*{[\s\S]*--mark-scale:\s*1\.04;/,
+  );
+  assert.match(
+    styles,
+    /:root\[data-character="planner"\] \.product-mark-character\[data-character-layer="planner"\]\s*{[\s\S]*display:\s*block;/,
+  );
+  assert.match(
+    styles,
+    /:root\[data-character="planner"\] \.theme-trigger-character-layer\[data-character-layer="planner"\]\s*{[\s\S]*display:\s*block !important;/,
   );
 });
 
