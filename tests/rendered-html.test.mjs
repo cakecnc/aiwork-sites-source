@@ -193,6 +193,8 @@ test("renders every section as an individual page", async () => {
     assert.match(html, /140-81-50087/);
     assert.match(html, /What’s past is prologue/);
     assert.match(html, /aiwork-wink-assistant/);
+    assert.match(html, /aiwork-assistant-open\.webp/);
+    assert.match(html, /aiwork-assistant-wink\.webp/);
     assert.match(html, /favicon-company-rounded-v2\.png/);
     assert.match(html, /aiwork-preference-boot/);
     assert.match(html, /aria-controls="aiwork-language-menu"/);
@@ -398,6 +400,46 @@ test("uses the rounded company logo only for the browser favicon", async () => {
       "../public/images/aiwork-wink-assistant-512.png",
       import.meta.url,
     ),
+  );
+  await access(
+    new URL("../public/images/aiwork-assistant-open.webp", import.meta.url),
+  );
+  await access(
+    new URL("../public/images/aiwork-assistant-wink.webp", import.meta.url),
+  );
+});
+
+test("changes the assistant from open eyes to a wink on pointer interaction", async () => {
+  const [productMark, styles] = await Promise.all([
+    readFile(
+      new URL("../app/components/ProductMark.tsx", import.meta.url),
+      "utf8",
+    ),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(productMark, /aiwork-assistant-open\.webp/);
+  assert.match(productMark, /aiwork-assistant-wink\.webp/);
+  assert.match(productMark, /product-mark-image-open/);
+  assert.match(productMark, /product-mark-image-wink/);
+  assert.match(productMark, /onPointerUp=\{triggerTouchWink\}/);
+  assert.match(productMark, /event\.pointerType === "mouse"/);
+  assert.match(productMark, /\}, 720\);/);
+  assert.match(
+    styles,
+    /\.product-mark\.is-touch-winking \.product-mark-image-open\s*{\s*opacity:\s*0;/,
+  );
+  assert.match(
+    styles,
+    /\.product-mark\.is-touch-winking \.product-mark-image-wink\s*{\s*opacity:\s*1;/,
+  );
+  assert.match(
+    styles,
+    /@media \(hover: hover\) and \(pointer: fine\)[\s\S]*?\.product-mark:hover \.product-mark-image-open[\s\S]*?opacity:\s*0;[\s\S]*?\.product-mark:hover \.product-mark-image-wink[\s\S]*?opacity:\s*1;/,
+  );
+  assert.match(
+    styles,
+    /@media \(hover: none\) and \(pointer: coarse\)[\s\S]*?\.product-mark:active \.product-mark-image-open[\s\S]*?opacity:\s*0;[\s\S]*?\.product-mark:active \.product-mark-image-wink[\s\S]*?opacity:\s*1;/,
   );
 });
 

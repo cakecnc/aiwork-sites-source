@@ -3585,6 +3585,8 @@ a { color: inherit; text-decoration: none; }
 }
 
 .product-mark img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   display: block;
@@ -3595,6 +3597,24 @@ a { color: inherit; text-decoration: none; }
   transform-origin: 50% var(--mark-origin-y);
   image-rendering: auto;
   user-select: none;
+}
+
+.product-mark-image-open {
+  z-index: 1;
+  opacity: 1;
+}
+
+.product-mark-image-wink {
+  z-index: 2;
+  opacity: 0;
+}
+
+.product-mark.is-touch-winking .product-mark-image-open {
+  opacity: 0;
+}
+
+.product-mark.is-touch-winking .product-mark-image-wink {
+  opacity: 1;
 }
 
 .product-mark::after {
@@ -4519,7 +4539,12 @@ a { color: inherit; text-decoration: none; }
   padding-bottom: 40px;
 }
 
-.product-mark img,
+.product-mark img {
+  transition:
+    transform 140ms ease,
+    opacity 90ms linear;
+}
+
 .home-workbench,
 .home-role-grid article,
 .home-capability-grid article,
@@ -4540,6 +4565,18 @@ a { color: inherit; text-decoration: none; }
 }
 
 @media (hover: hover) and (pointer: fine) {
+  .product-mark:hover .product-mark-image-open,
+  .brand:hover .product-mark-image-open,
+  .support-card:hover .product-mark-image-open {
+    opacity: 0;
+  }
+
+  .product-mark:hover .product-mark-image-wink,
+  .brand:hover .product-mark-image-wink,
+  .support-card:hover .product-mark-image-wink {
+    opacity: 1;
+  }
+
   .product-mark:hover img,
   .brand:hover .product-mark img,
   .support-card:hover .product-mark img {
@@ -4767,6 +4804,30 @@ a { color: inherit; text-decoration: none; }
   }
 }
 
+.brand:focus-visible .product-mark-image-open,
+.support-card:focus-within .product-mark-image-open {
+  opacity: 0;
+}
+
+.brand:focus-visible .product-mark-image-wink,
+.support-card:focus-within .product-mark-image-wink {
+  opacity: 1;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .product-mark:active .product-mark-image-open,
+  .brand:active .product-mark-image-open,
+  .support-card:active .product-mark-image-open {
+    opacity: 0;
+  }
+
+  .product-mark:active .product-mark-image-wink,
+  .brand:active .product-mark-image-wink,
+  .support-card:active .product-mark-image-wink {
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .product-mark img,
   .home-workbench,
@@ -4782,6 +4843,10 @@ a { color: inherit; text-decoration: none; }
   .secondary-button,
   .install-small {
     transform: none !important;
+  }
+
+  .product-mark img {
+    transition-duration: 0ms;
   }
 }
 
