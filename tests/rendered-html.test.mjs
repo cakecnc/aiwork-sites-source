@@ -64,7 +64,7 @@ async function render(pathname = "/", hostname = "localhost") {
   );
 }
 
-test("renders honest release-candidate product status", async () => {
+test("renders the safe AI work orchestration homepage", async () => {
   const response = await render("/");
 
   assert.equal(response.status, 200);
@@ -85,11 +85,25 @@ test("renders honest release-candidate product status", async () => {
   assert.match(html, /"@type":"WebSite"/);
   assert.doesNotMatch(html, developmentPreviewMeta);
   assert.match(html, /AIWORK/);
-  assert.match(html, /Release Candidate/);
-  assert.match(html, /현재 탭/);
-  assert.match(html, /로드맵/);
+  assert.match(html, /AI가 이해하고/);
+  assert.match(html, /AIWORK가 안전하게 실행합니다/);
+  assert.match(html, /AI Agent 본체 미구현/);
+  assert.match(html, /맥락/);
+  assert.match(html, /문서 비교/);
+  assert.match(html, /검수·전달/);
+  assert.match(html, /현재 탭 수집·미리보기/);
+  assert.match(html, /Drive appDataFolder 저장/);
+  assert.match(html, /공식 홈페이지·구매 문의/);
+  assert.match(html, /개인 AI 프로필/);
+  assert.match(html, /Daum Email·Gemma4/);
+  assert.match(html, /Agent Runtime·외부 실행/);
+  assert.match(html, /Browser RC 구현 · AI Agent 본체 미구현/);
+  assert.match(html, /후속 실행 엔진 상태/);
+  assert.match(html, /OpenClaw Gateway/);
+  assert.match(html, /Desktop Helper 직접 조작/);
+  assert.match(html, /비밀번호·API 키·토큰·쿠키를 저장하지 않습니다/);
   assert.doesNotMatch(html, /AIWORK ASSISTANT/);
-  assert.doesNotMatch(html, /근거 자료[\s\S]{0,20}>8</);
+  assert.doesNotMatch(html, /Ai-byMrL/i);
   assert.match(html, /Professional과 Business는 아직 일반 출시되지 않았습니다/);
   assert.match(html, /\/contact\?product=professional#purchase-inquiry/);
   assert.match(html, /\/contact\?product=business#purchase-inquiry/);

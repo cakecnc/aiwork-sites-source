@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { homeWorkbenchMessages } from "./home-workbench-i18n";
 import { messages } from "./i18n";
 import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
@@ -14,17 +15,19 @@ import {
   purchaseInquiryHref,
 } from "./site-config";
 
-const sourceIcons = ["⌘", "◇", "✉", "▤"];
-const taskIcons = ["▥", "◇", "✓"];
-const featureIcons = ["↗", "⌁", "◫"];
+const contextIcons = ["AI", "⌁", "≠", "◇"];
+const roleIcons = ["01", "AI", "✓"];
+const actionIcons = ["R", "↗", "@"];
+const capabilityIcons = ["⌁", "≠", "R", "@", "↗", "▣"];
 
 export default function Home() {
   const { locale, ready } = useSitePreferences();
   const copy = messages[locale];
+  const home = homeWorkbenchMessages[locale];
 
   useEffect(() => {
     if (!ready) return;
-    document.title = copy.metadata.title;
+    document.title = home.metadata.title;
 
     let description = document.querySelector<HTMLMetaElement>(
       'meta[name="description"]',
@@ -34,40 +37,36 @@ export default function Home() {
       description.name = "description";
       document.head.appendChild(description);
     }
-    description.content = copy.metadata.description;
-  }, [copy.metadata.description, copy.metadata.title, ready]);
+    description.content = home.metadata.description;
+  }, [home.metadata.description, home.metadata.title, ready]);
 
   return (
-    <main className="site-shell" id="main-content">
+    <main className="site-shell home-shell" id="main-content">
       <div className="ambient ambient-one" />
       <div className="ambient ambient-two" />
 
-      <SiteHeader active="home" />
+      <SiteHeader active="home" context={home.brandContext} />
 
-      <section className="hero" id="home">
+      <section className="hero home-hero" id="home">
         <div className="eyebrow">
-          <span /> {copy.hero.eyebrow}
+          <span /> {home.hero.eyebrow}
         </div>
         <h1>
-          {copy.hero.title[0]}
+          {home.hero.title[0]}
           <br />
-          <em>{copy.hero.title[1]}</em>
+          <em>{home.hero.title[1]}</em>
         </h1>
-        <p>
-          {copy.hero.description[0]}
-          <br className="desktop-only" />
-          {copy.hero.description[1]}
-        </p>
+        <p>{home.hero.description}</p>
         <div className="hero-actions">
-          <Link className="primary-button" href="/download">
-            {copy.hero.primaryAction} <span>↗</span>
-          </Link>
-          <Link className="secondary-button" href="/product">
-            {copy.hero.secondaryAction} <span>↓</span>
-          </Link>
+          <a className="primary-button" href="#how-it-works">
+            {home.hero.primaryAction} <span>↓</span>
+          </a>
+          <a className="secondary-button" href="#capabilities">
+            {home.hero.secondaryAction} <span>↗</span>
+          </a>
         </div>
         <div className="trust-row">
-          {copy.hero.trust.map((item) => (
+          {home.hero.trust.map((item) => (
             <span key={item}>
               <i>✓</i> {item}
             </span>
@@ -75,27 +74,30 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="product-panel" id="product">
-        <div className="panel-topline">
-          <span>{copy.status.productVision}</span>
+      <section className="home-workbench" id="product" aria-labelledby="workbench-title">
+        <div className="home-workbench-topline">
+          <span id="workbench-title">{home.workbench.eyebrow}</span>
           <span className="live">
-            <i /> {copy.status.releaseCandidate}
+            <i /> {home.workbench.status}
           </span>
         </div>
-        <div className="workspace-grid">
-          <aside className="source-column">
-            <small>{copy.status.current}</small>
-            {copy.workspace.sources.map((source, index) => (
-              <div className={index === 0 ? "source active" : "source"} key={source}>
-                <span>{sourceIcons[index]}</span>
-                {source}
-              </div>
-            ))}
+        <div className="home-workbench-grid">
+          <aside className="home-context-column">
+            <small>{home.workbench.contextTitle}</small>
+            <div className="home-context-list">
+              {home.workbench.contexts.map((context, index) => (
+                <div className={index === 0 ? "active" : ""} key={context}>
+                  <span>{contextIcons[index]}</span>
+                  <strong>{context}</strong>
+                </div>
+              ))}
+            </div>
           </aside>
-          <div className="conversation-column">
-            <small>{copy.status.browserCapture}</small>
-            <div className="user-bubble">{copy.workspace.userPrompt}</div>
-            <div className="ai-response">
+
+          <div className="home-conversation-column">
+            <small>{home.workbench.conversationTitle}</small>
+            <div className="home-user-prompt">{home.workbench.prompt}</div>
+            <div className="home-ai-answer">
               <Image
                 className="assistant-avatar"
                 src="/images/aiwork-anime-profile-v1.webp"
@@ -105,83 +107,117 @@ export default function Home() {
                 unoptimized
               />
               <div>
-                <strong>{copy.workspace.responseTitle}</strong>
-                <p>{copy.workspace.responseBody}</p>
+                <strong>{home.workbench.responseTitle}</strong>
+                <p>{home.workbench.responseBody}</p>
               </div>
             </div>
+            <ol className="home-mini-flow" aria-label={home.workflow.title}>
+              {home.workflow.steps.map((step, index) => (
+                <li className={index === 0 ? "complete" : ""} key={step.number}>
+                  <span>{step.number}</span>
+                  <b>{step.title}</b>
+                </li>
+              ))}
+            </ol>
           </div>
-          <aside className="studio-column">
-            <small>{copy.status.current}</small>
-            <strong>{copy.workspace.nextWork}</strong>
-            {copy.workspace.tasks.map((item, index) => (
-              <div className="studio-task" key={item}>
-                <span>{taskIcons[index]}</span>
-                {item}
-                <b>＋</b>
-              </div>
-            ))}
-            <div className="source-badge">
-              {copy.workspace.evidenceLabel}
+
+          <aside className="home-actions-column">
+            <small>{home.workbench.actionTitle}</small>
+            <div className="home-action-list">
+              {home.workbench.actions.map((action, index) => (
+                <div key={action}>
+                  <span>{actionIcons[index]}</span>
+                  <strong>{action}</strong>
+                  <b>ROADMAP</b>
+                </div>
+              ))}
             </div>
+            <div className="home-evidence">{home.workbench.evidence}</div>
           </aside>
         </div>
       </section>
 
-      <section className="feature-section" id="workflow">
-        <div className="section-heading">
-          <span>{copy.features.eyebrow}</span>
-          <h2>
-            {copy.features.title[0]}
-            <br />
-            {copy.features.title[1]}
-          </h2>
+      <section className="home-role-section" id="roles">
+        <div className="home-section-heading">
+          <span>{home.roles.eyebrow}</span>
+          <div>
+            <h2>{home.roles.title}</h2>
+            <p>{home.roles.description}</p>
+          </div>
         </div>
-        <div className="feature-grid">
-          {copy.features.cards.map((card, index) => (
-            <article key={card.label}>
-              <span className="feature-icon">{featureIcons[index]}</span>
-              <small>
-                {card.label} · {index === 0 ? copy.status.current : copy.status.roadmap}
-              </small>
+        <div className="home-role-grid">
+          {home.roles.cards.map((card, index) => (
+            <article key={card.title}>
+              <span>{roleIcons[index]}</span>
               <h3>{card.title}</h3>
               <p>{card.description}</p>
-              <Link
-                href={
-                  index === 0
-                    ? "/features"
-                    : index === 1
-                      ? "/how-to-use"
-                      : "/security"
-                }
-              >
-                {copy.features.details} →
-              </Link>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="workflow-section" id="how-it-works">
-        <div>
-          <span className="section-kicker">{copy.workflow.eyebrow}</span>
-          <h2>
-            {copy.workflow.title[0]}
-            <br />
-            {copy.workflow.title[1]}
-          </h2>
-          <p>{copy.workflow.description}</p>
+      <section className="home-flow-section" id="how-it-works">
+        <div className="home-flow-copy">
+          <span>{home.workflow.eyebrow}</span>
+          <h2>{home.workflow.title}</h2>
+          <p>{home.workflow.description}</p>
         </div>
-        <div className="steps">
-          {copy.workflow.steps.map((step) => (
-            <article key={step.number}>
+        <ol className="home-flow-list">
+          {home.workflow.steps.map((step) => (
+            <li key={step.number}>
               <span>{step.number}</span>
               <div>
                 <h3>{step.title}</h3>
                 <p>{step.description}</p>
               </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section className="home-capability-section" id="capabilities">
+        <div className="home-section-heading">
+          <span>{home.capabilities.eyebrow}</span>
+          <div>
+            <h2>{home.capabilities.title}</h2>
+            <p>{home.capabilities.description}</p>
+          </div>
+        </div>
+        <div className="home-capability-grid">
+          {home.capabilities.cards.map((card, index) => (
+            <article key={card.title}>
+              <div className="home-capability-card-top">
+                <span>{capabilityIcons[index]}</span>
+                <b>{card.status}</b>
+              </div>
+              <h3>{card.title}</h3>
+              <p>{card.description}</p>
             </article>
           ))}
         </div>
+      </section>
+
+      <section className="home-boundary-section" id="security">
+        <div className="home-boundary-copy">
+          <span>{home.boundary.eyebrow}</span>
+          <h2>{home.boundary.title}</h2>
+          <p>{home.boundary.description}</p>
+        </div>
+        <div className="home-boundary-grid">
+          {home.boundary.items.map((item, index) => (
+            <article key={item.title}>
+              <span>0{index + 1}</span>
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+        <details className="home-runtime-details">
+          <summary>{home.boundary.advancedSummary}</summary>
+          <p>{home.boundary.advancedBody}</p>
+        </details>
       </section>
 
       <section className="payment-section" id="payments">
@@ -227,7 +263,11 @@ export default function Home() {
                 ))}
               </ul>
               <Link
-                className={index === 0 ? "primary-button payment-button" : "secondary-button payment-button"}
+                className={
+                  index === 0
+                    ? "primary-button payment-button"
+                    : "secondary-button payment-button"
+                }
                 href={purchaseInquiryHref(PURCHASE_PRODUCTS[index].id)}
               >
                 {product.action} <span>↗</span>
@@ -259,25 +299,24 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="cta-section" id="download">
-        <span>{copy.cta.eyebrow}</span>
-        <h2>
-          {copy.cta.title[0]}
-          <br />
-          {copy.cta.title[1]}
-        </h2>
-        <p>{copy.cta.description}</p>
+      <section className="cta-section home-cta" id="download">
+        <span>{home.cta.eyebrow}</span>
+        <h2>{home.cta.title}</h2>
+        <p>{home.cta.description}</p>
         <div>
-          <a
-            className="primary-button"
-            href={`mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent("AIWORK release update")}`}
-          >
-            {copy.cta.releaseAlert} <span>↗</span>
-          </a>
+          <Link className="primary-button" href="/features">
+            {home.cta.primaryAction} <span>↗</span>
+          </Link>
           <Link className="secondary-button" href="/contact">
-            {copy.cta.consultation}
+            {home.cta.secondaryAction}
           </Link>
         </div>
+        <a
+          className="home-release-email"
+          href={`mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent("AIWORK release update")}`}
+        >
+          {copy.cta.releaseAlert}
+        </a>
       </section>
 
       <SiteFooter />

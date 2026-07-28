@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "AIWORK",
     short_name: "AIWORK",
     description:
-      "사용자가 직접 실행한 현재 페이지를 저장 전 미리보기하고 승인한 기록만 보관하는 AIWORK 공식 홈페이지",
+      "AIWORK Browser RC와 승인 기반 Workbench 제품 비전을 소개하는 AIWORK 공식 홈페이지",
     start_url: "/",
     display: "standalone",
     background_color: "#07071b",

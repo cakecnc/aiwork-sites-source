@@ -20,9 +20,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: siteUrl,
   applicationName: "AIWORK",
-  title: "AIWORK Browser | Chrome 확장프로그램 Release Candidate",
+  title: "AIWORK | AI가 이해하고, AIWORK가 안전하게 실행합니다",
   description:
-    "사용자가 명시적으로 실행한 현재 탭을 수집하고 민감정보를 제거한 뒤, 승인된 자료만 Google Drive appDataFolder에 저장하는 Chrome 확장프로그램 Release Candidate입니다.",
+    "현재 공개된 AIWORK Browser RC와 승인 기반 Workbench 제품 비전을 소개합니다. AI Agent 본체·메일 자동화·화면 직접 조작은 아직 제공되지 않습니다.",
   alternates: {
     canonical: "/",
   },
@@ -31,24 +31,24 @@ export const metadata: Metadata = {
     locale: "ko_KR",
     url: "/",
     siteName: "AIWORK",
-    title: "AIWORK Browser | 현재 페이지를 안전한 업무 자료로",
+    title: "AIWORK | 안전한 AI 업무 실행 조정자",
     description:
-      "사용자가 직접 실행한 현재 페이지를 저장 전 미리보기하고, 승인한 기록만 Google Drive의 AIWORK 전용 영역에 보관합니다.",
+      "현재는 사용자 실행형 Browser RC를 제공하며, 선택 AI·문서·메일·실행을 잇는 Workbench는 후속 제품 비전입니다.",
     images: [
       {
-        url: "/images/aiwork-synthwave-hero-v2.png",
+        url: "/images/aiwork-synthwave-hero-v2.webp",
         width: 1672,
         height: 941,
-        alt: "AIWORK Browser의 연결형 업무 공간",
+        alt: "AIWORK의 안전한 AI 업무 Workbench",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "AIWORK Browser | 현재 페이지를 안전한 업무 자료로",
+    title: "AIWORK | AI가 이해하고, AIWORK가 안전하게 실행합니다",
     description:
-      "사용자가 직접 실행한 현재 페이지를 저장 전 미리보기하고 승인한 기록만 보관합니다.",
-    images: ["/images/aiwork-synthwave-hero-v2.png"],
+      "공식 홈페이지와 사용자 실행형 Browser RC를 제공하며 AI Agent Runtime은 아직 구현되지 않았습니다.",
+    images: ["/images/aiwork-synthwave-hero-v2.webp"],
   },
   robots: {
     index: true,
