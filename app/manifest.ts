@@ -13,8 +13,8 @@ export default function manifest(): MetadataRoute.Manifest {
     lang: "ko",
     icons: [
       {
-        src: "/images/aiwork-plugin-icon.png",
-        sizes: "512x512",
+        src: "/images/cnc-company-logo.png",
+        sizes: "1206x623",
         type: "image/png",
       },
     ],

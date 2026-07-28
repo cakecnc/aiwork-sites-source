@@ -109,9 +109,6 @@ export default function BrowserGuidePage() {
         </>
       }
       description="AIWORK Browser는 Chrome 확장프로그램입니다. 도구모음 아이콘으로 현재 페이지만 수집하고, 작은 사이드 패널에서는 미리보기와 저장에 집중합니다."
-      image="/images/aiwork-synthwave-hero-v2.webp"
-      imageAlt="AIWORK Browser의 현재 페이지 수집과 기록 관리 콘셉트"
-      imageLabel="AIWORK BROWSER 1.0 GUIDE"
       imageTone="wide"
     >
       <section className="warning-panel" role="note">

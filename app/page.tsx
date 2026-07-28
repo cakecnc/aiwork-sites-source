@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { homeWorkbenchMessages } from "./home-workbench-i18n";
 import { messages } from "./i18n";
+import CompanyLogo from "./components/CompanyLogo";
 import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
 import { useSitePreferences } from "./preferences";
@@ -44,17 +44,7 @@ export default function Home() {
       <SiteHeader active="home" context={home.brandContext} />
 
       <section className="hero home-hero" id="home">
-        <div className="home-plugin-mark">
-          <Image
-            className="home-plugin-icon"
-            src="/images/aiwork-plugin-icon.png"
-            alt="C&C Corporation"
-            width={112}
-            height={112}
-            priority
-            unoptimized
-          />
-        </div>
+        <CompanyLogo className="home-company-logo" />
         <div className="eyebrow">
           <span /> {home.hero.eyebrow}
         </div>
@@ -105,14 +95,7 @@ export default function Home() {
             <small>{home.workbench.conversationTitle}</small>
             <div className="home-user-prompt">{home.workbench.prompt}</div>
             <div className="home-ai-answer">
-              <Image
-                className="assistant-avatar product-icon"
-                src="/images/aiwork-plugin-icon.png"
-                alt={copy.aria.assistantAvatar}
-                width="42"
-                height="42"
-                unoptimized
-              />
+              <CompanyLogo className="assistant-logo" />
               <div>
                 <strong>{home.workbench.responseTitle}</strong>
                 <p>{home.workbench.responseBody}</p>
@@ -283,14 +266,7 @@ export default function Home() {
         </div>
 
         <div className="support-card">
-          <Image
-            className="product-icon"
-            src="/images/aiwork-plugin-icon.png"
-            alt=""
-            width="64"
-            height="64"
-            unoptimized
-          />
+          <CompanyLogo className="support-logo" />
           <div>
             <span>{copy.payments.supportTitle}</span>
             <p>{copy.payments.supportDescription}</p>

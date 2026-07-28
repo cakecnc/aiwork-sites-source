@@ -62,9 +62,6 @@ export default function SecurityPage() {
         </>
       }
       description="AIWORK는 로컬 우선 처리, 최소 데이터 저장, 읽기 전용 연결과 명시적 사용자 승인을 핵심 보안 원칙으로 삼습니다."
-      image="/images/aiwork-synthwave-hero-v2.webp"
-      imageAlt="보안 경계를 상징하는 AIWORK 네온 연결 이미지"
-      imageLabel="CONTROLLED CONNECTION"
       imageTone="wide"
     >
       <section className="content-section">

@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, type ReactNode } from "react";
 import Link from "next/link";
+import CompanyLogo from "./CompanyLogo";
 import SiteFooter from "./SiteFooter";
 import SiteHeader, { type SiteSection } from "./SiteHeader";
 import {
@@ -338,14 +338,7 @@ export default function DetailPage({
             aria-label={isKorean ? "AIWORK Browser RC 제품 화면" : "AIWORK Browser RC product screen"}
           >
             <div className="browser-preview-titlebar">
-              <Image
-                src="/images/aiwork-plugin-icon.png"
-                alt=""
-                width="28"
-                height="28"
-                priority
-                unoptimized
-              />
+              <CompanyLogo className="preview-company-logo" />
               <strong>AIWORK Browser</strong>
               <span>1.0 RC</span>
             </div>

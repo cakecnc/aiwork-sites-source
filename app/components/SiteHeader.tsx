@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { messages, type Locale } from "../i18n";
 import { PreferenceControls, useSitePreferences } from "../preferences";
+import CompanyLogo from "./CompanyLogo";
 
 export type SiteSection =
   | "home"
@@ -75,14 +75,7 @@ export default function SiteHeader({
       </a>
       <header className="topbar section-topbar">
         <Link className="brand" href="/" aria-label={copy.aria.home}>
-          <Image
-            className="brand-avatar"
-            src="/images/aiwork-plugin-icon.png"
-            alt=""
-            width="40"
-            height="40"
-            unoptimized
-          />
+          <CompanyLogo className="brand-company-logo" />
           <span>AIWORK</span>
           <small>{context}</small>
         </Link>

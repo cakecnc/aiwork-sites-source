@@ -46,9 +46,6 @@ export default function WebResearchGuidePage() {
         </>
       }
       description="자동 웹 검색·AI 분석·보고서 작성은 현재 Browser RC에 구현되지 않았습니다. 아래 내용은 후속 Research 기능을 위한 업무 사례입니다."
-      image="/images/aiwork-synthwave-hero-v2.webp"
-      imageAlt="웹 리서치와 출처 연결을 표현한 AIWORK 콘셉트"
-      imageLabel="SOURCE-AWARE RESEARCH"
       imageTone="wide"
     >
       <section className="warning-panel" role="note">

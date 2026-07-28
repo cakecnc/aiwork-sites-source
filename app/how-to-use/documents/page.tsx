@@ -33,9 +33,6 @@ export default function DocumentsGuidePage() {
         </>
       }
       description="문서 업로드·분석·RAG는 현재 Browser RC에 구현되지 않았습니다. 아래 내용은 후속 문서 기능의 처리 원칙과 지원 목표입니다."
-      image="/images/aiwork-synthwave-hero-v2.webp"
-      imageAlt="문서와 업무가 연결되는 AIWORK 콘셉트 이미지"
-      imageLabel="DOCUMENT WORKFLOW CONCEPT"
       imageTone="wide"
     >
       <section className="warning-panel" role="note">

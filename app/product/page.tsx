@@ -59,9 +59,6 @@ export default function ProductPage() {
         </>
       }
       description="현재 구현 범위는 사용자가 실행한 현재 탭 수집·미리보기와 승인 후 Drive 저장입니다. 문서·AI 추론·RAG·이메일·업무 자동화는 후속 플랫폼 로드맵입니다."
-      image="/images/aiwork-synthwave-hero-v2.webp"
-      imageAlt="AIWORK의 미래지향적인 연결형 업무 공간 콘셉트"
-      imageLabel="AIWORK PRODUCT CONCEPT"
       imageTone="wide"
     >
       <section className="content-section">

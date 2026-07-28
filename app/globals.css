@@ -2848,39 +2848,9 @@ a { color: inherit; text-decoration: none; }
     linear-gradient(180deg, color-mix(in srgb, var(--bg) 92%, var(--accent) 8%), var(--bg) 34%);
 }
 
-.home-plugin-mark {
-  width: 112px;
-  height: 112px;
-  margin: 0 auto 24px;
-  padding: 12px;
-  border: 1px solid color-mix(in srgb, #e84793 42%, var(--line));
-  border-radius: 30px;
-  background:
-    radial-gradient(circle at 38% 28%, rgba(255, 255, 255, .16), transparent 38%),
-    color-mix(in srgb, var(--surface) 86%, transparent);
-  box-shadow:
-    0 18px 50px rgba(0, 0, 0, .2),
-    0 0 46px color-mix(in srgb, #e84793 18%, transparent);
-  display: grid;
-  place-items: center;
-  backdrop-filter: blur(16px);
-}
-
-.home-plugin-icon {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  filter: drop-shadow(0 8px 18px rgba(232, 71, 147, .2));
-}
-
 .home-hero > p {
   max-width: 760px;
   margin-inline: auto;
-}
-
-:root[data-theme="synthwave"] .home-plugin-mark {
-  margin-inline: 0;
-  background: rgba(10, 8, 35, .56);
 }
 
 :root[data-theme="synthwave"] .home-hero > p {
@@ -3446,14 +3416,6 @@ a { color: inherit; text-decoration: none; }
 }
 
 @media (max-width: 620px) {
-  .home-plugin-mark {
-    width: 88px;
-    height: 88px;
-    margin-bottom: 18px;
-    padding: 9px;
-    border-radius: 24px;
-  }
-
   .home-workbench,
   .home-role-section,
   .home-flow-section,
@@ -3525,5 +3487,369 @@ a { color: inherit; text-decoration: none; }
   .home-cta > div,
   .home-cta > div > a {
     width: 100%;
+  }
+}
+
+/* Final AIWORK brand direction */
+
+.company-logo {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  flex: 0 0 auto;
+  background: #ffffff;
+}
+
+.company-logo-image {
+  width: 170%;
+  max-width: none;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: block;
+  transform: translate(-50%, -50%);
+}
+
+.brand-company-logo {
+  width: 92px;
+  height: 46px;
+}
+
+.footer-company-logo {
+  width: 96px;
+  height: 50px;
+}
+
+.home-company-logo {
+  width: 190px;
+  height: 120px;
+  margin: 0 0 32px;
+}
+
+.assistant-logo {
+  width: 88px;
+  height: 52px;
+}
+
+.support-logo {
+  width: 108px;
+  height: 64px;
+}
+
+.preview-company-logo {
+  width: 56px;
+  height: 32px;
+}
+
+.browser-preview-titlebar {
+  grid-template-columns: 56px 1fr auto;
+}
+
+.home-shell {
+  background: var(--bg);
+}
+
+.home-shell .home-hero,
+:root[data-theme="synthwave"] .home-shell .home-hero {
+  width: min(1180px, calc(100% - 40px));
+  min-height: 0;
+  margin: 0 auto;
+  padding: 106px 0 76px;
+  display: block;
+  overflow: visible;
+  text-align: left;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.home-shell .home-hero::before,
+.home-shell .home-hero::after {
+  content: none;
+}
+
+.home-shell .eyebrow {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--accent);
+}
+
+.home-shell .eyebrow span {
+  width: 18px;
+  height: 2px;
+  border-radius: 0;
+  background: var(--accent);
+  box-shadow: none;
+}
+
+.home-shell .home-hero h1,
+:root[data-theme="synthwave"] .home-shell .home-hero h1 {
+  max-width: 940px;
+  margin: 30px 0 24px;
+  font-size: clamp(52px, 7vw, 86px);
+  color: var(--text);
+  text-shadow: none;
+}
+
+.home-shell .home-hero h1 em {
+  color: var(--accent);
+  background: none;
+}
+
+.home-shell .home-hero > p,
+:root[data-theme="synthwave"] .home-shell .home-hero > p {
+  max-width: 760px;
+  margin: 0;
+  color: var(--muted);
+  text-shadow: none;
+}
+
+.home-shell .hero-actions,
+.home-shell .trust-row,
+:root[data-theme="synthwave"] .home-shell .hero-actions,
+:root[data-theme="synthwave"] .home-shell .trust-row {
+  justify-content: flex-start;
+}
+
+.home-workbench {
+  margin-bottom: 124px;
+  border-color: var(--line);
+  border-radius: 6px;
+  background: var(--surface-solid);
+  box-shadow: 0 20px 55px rgba(15, 42, 70, .11);
+  backdrop-filter: none;
+}
+
+.home-workbench-topline {
+  min-height: 50px;
+  padding-inline: 20px;
+  background: var(--surface-soft);
+}
+
+.home-context-list,
+.home-action-list {
+  gap: 0;
+}
+
+.home-context-list > div,
+.home-action-list > div {
+  min-height: 58px;
+  padding: 12px 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+}
+
+.home-context-list > div.active {
+  padding-inline: 10px;
+  border: 0;
+  border-inline-start: 3px solid var(--accent);
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+}
+
+.home-context-list span,
+.home-action-list span {
+  border: 0;
+  border-radius: 4px;
+  background: var(--surface-soft);
+  color: var(--accent);
+}
+
+.home-user-prompt {
+  border-radius: 4px;
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+.home-mini-flow {
+  gap: 0;
+  border-block: 1px solid var(--line);
+}
+
+.home-mini-flow li,
+.home-mini-flow li.complete {
+  border: 0;
+  border-inline-end: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+}
+
+.home-mini-flow li:last-child {
+  border-inline-end: 0;
+}
+
+.home-mini-flow li.complete::after {
+  width: 100%;
+  border-radius: 0;
+  background: var(--accent);
+}
+
+.home-role-section,
+.home-capability-section {
+  padding-bottom: 124px;
+}
+
+.home-role-grid {
+  gap: 0;
+  border-block: 1px solid var(--line);
+}
+
+.home-role-grid article {
+  min-height: 245px;
+  padding: 30px;
+  border: 0;
+  border-inline-end: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+}
+
+.home-role-grid article:last-child {
+  border-inline-end: 0;
+}
+
+.home-role-grid article > span {
+  width: auto;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  color: var(--accent);
+  place-items: start;
+  font-family: var(--font-geist-mono), monospace;
+}
+
+.home-flow-section {
+  margin-bottom: 124px;
+  padding: 70px 0;
+  border: 0;
+  border-block: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+}
+
+.home-flow-list li > span {
+  color: var(--accent);
+  font-family: var(--font-geist-mono), monospace;
+}
+
+.home-capability-grid {
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.home-capability-grid article {
+  min-height: 0;
+  padding: 22px 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  display: grid;
+  grid-template-columns: minmax(180px, .65fr) minmax(180px, .55fr) minmax(260px, 1.3fr);
+  gap: 28px;
+  align-items: center;
+}
+
+.home-capability-card-top {
+  display: contents;
+}
+
+.home-capability-grid h3 {
+  margin: 0;
+}
+
+.home-capability-card-top b {
+  max-width: 190px;
+  justify-self: start;
+  padding: 7px 9px;
+  border-radius: 3px;
+  border-color: color-mix(in srgb, var(--accent) 24%, var(--line));
+  background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+  color: var(--accent);
+  text-align: left;
+}
+
+.home-boundary-section {
+  margin-bottom: 0;
+  padding: 74px 0;
+  border: 0;
+  border-block: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+}
+
+.home-boundary-grid {
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.home-boundary-grid article {
+  min-height: 190px;
+  padding: 26px;
+  border: 0;
+  border-inline-end: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+}
+
+.home-boundary-grid article:last-child {
+  border-inline-end: 0;
+}
+
+@media (max-width: 860px) {
+  .home-capability-grid article {
+    grid-template-columns: minmax(160px, .8fr) minmax(160px, .8fr) minmax(220px, 1.4fr);
+    gap: 18px;
+  }
+
+  .home-role-grid article,
+  .home-boundary-grid article {
+    border-inline-end: 0;
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+@media (max-width: 620px) {
+  .brand-company-logo {
+    width: 72px;
+    height: 38px;
+  }
+
+  .home-company-logo {
+    width: 154px;
+    height: 98px;
+    margin-bottom: 26px;
+  }
+
+  .home-shell .home-hero,
+  :root[data-theme="synthwave"] .home-shell .home-hero {
+    width: calc(100% - 32px);
+    padding: 76px 0 54px;
+  }
+
+  .home-shell .home-hero h1,
+  :root[data-theme="synthwave"] .home-shell .home-hero h1 {
+    font-size: clamp(42px, 13vw, 58px);
+  }
+
+  .home-capability-grid article {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .home-capability-card-top {
+    display: flex;
+  }
+
+  .home-role-grid h3,
+  .home-capability-grid h3,
+  .home-boundary-grid h3 {
+    margin-top: 34px;
   }
 }
