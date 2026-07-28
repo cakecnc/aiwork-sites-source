@@ -13,12 +13,12 @@ export default function manifest(): MetadataRoute.Manifest {
     lang: "ko",
     icons: [
       {
-        src: "/images/aiwork-product-mark-192.png",
+        src: "/images/aiwork-wink-assistant-192.png",
         sizes: "192x192",
         type: "image/png",
       },
       {
-        src: "/images/aiwork-product-mark-512.png",
+        src: "/images/aiwork-wink-assistant-512.png",
         sizes: "512x512",
         type: "image/png",
       },

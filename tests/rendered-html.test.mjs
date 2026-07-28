@@ -192,7 +192,7 @@ test("renders every section as an individual page", async () => {
     assert.match(html, /주식회사 씨엔씨코퍼레이션/);
     assert.match(html, /140-81-50087/);
     assert.match(html, /What’s past is prologue/);
-    assert.match(html, /aiwork-product-mark/);
+    assert.match(html, /aiwork-wink-assistant/);
     assert.match(html, /favicon-company-rounded-v2\.png/);
     assert.match(html, /aiwork-preference-boot/);
     assert.match(html, /aria-controls="aiwork-language-menu"/);
@@ -348,6 +348,32 @@ test("switches the page background with presets and exits custom mode", async ()
   }
 });
 
+test("keeps detail pages compact on desktop and single-column on mobile", async () => {
+  const styles = await readFile(
+    new URL("../app/globals.css", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(
+    styles,
+    /\.detail-hero\s*{[\s\S]*?min-height:\s*0;[\s\S]*?padding:\s*64px 0 56px;/,
+  );
+  assert.match(
+    styles,
+    /\.content-section\s*{[\s\S]*?padding:\s*clamp\(56px,\s*6vw,\s*72px\) 0;/,
+  );
+  assert.match(
+    styles,
+    /\.process-list\s*{[\s\S]*?grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\);/,
+  );
+  assert.match(
+    styles,
+    /@media \(max-width:\s*860px\)[\s\S]*?\.process-list,[\s\S]*?grid-template-columns:\s*1fr;/,
+  );
+  assert.match(styles, /\.detail-hero\s*{\s*padding:\s*40px 0;/);
+  assert.match(styles, /\.content-section\s*{\s*padding:\s*42px 0;/);
+});
+
 test("uses the rounded company logo only for the browser favicon", async () => {
   await access(
     new URL(
@@ -359,6 +385,18 @@ test("uses the rounded company logo only for the browser favicon", async () => {
     new URL("../public/favicon-company-rounded-v2.ico", import.meta.url),
   );
   await access(
-    new URL("../public/images/aiwork-product-mark.svg", import.meta.url),
+    new URL("../public/images/aiwork-wink-assistant.webp", import.meta.url),
+  );
+  await access(
+    new URL(
+      "../public/images/aiwork-wink-assistant-192.png",
+      import.meta.url,
+    ),
+  );
+  await access(
+    new URL(
+      "../public/images/aiwork-wink-assistant-512.png",
+      import.meta.url,
+    ),
   );
 });
