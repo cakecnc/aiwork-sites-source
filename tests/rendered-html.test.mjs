@@ -459,8 +459,22 @@ test("keeps localized header controls and the product mark from overlapping", as
   );
   assert.match(
     styles,
-    /\.home-hero-intro \.eyebrow\s*{[\s\S]*?max-width:\s*calc\(100% - 72px\);[\s\S]*?overflow-wrap:\s*anywhere;/,
+    /\.home-hero-intro \.eyebrow\s*{[\s\S]*?max-width:\s*calc\(100% - 80px\);[\s\S]*?overflow-wrap:\s*anywhere;/,
   );
+  assert.match(styles, /\.brand-product-mark\s*{\s*--mark-size:\s*40px;/);
+  assert.match(styles, /\.home-product-mark\s*{\s*--mark-size:\s*64px;/);
+  assert.match(styles, /\.assistant-product-mark\s*{\s*--mark-size:\s*44px;/);
+  assert.match(styles, /\.support-product-mark\s*{\s*--mark-size:\s*54px;/);
+  assert.match(styles, /\.preview-product-mark\s*{\s*--mark-size:\s*32px;/);
+  assert.match(
+    styles,
+    /\.browser-preview-titlebar\s*{\s*grid-template-columns:\s*32px 1fr auto;/,
+  );
+  assert.match(
+    styles,
+    /@media \(max-width:\s*620px\)[\s\S]*?\.brand-product-mark\s*{\s*--mark-size:\s*34px;[\s\S]*?\.home-product-mark\s*{\s*--mark-size:\s*54px;/,
+  );
+  assert.match(styles, /max-width:\s*calc\(100% - 66px\);/);
   assert.match(
     styles,
     /\.theme-menu,[\s\S]*?\.language-menu\s*{[\s\S]*?inset-inline-end:\s*0;/,

@@ -3561,7 +3561,7 @@ a { color: inherit; text-decoration: none; }
 /* Final AIWORK product identity */
 
 .product-mark {
-  --mark-size: 36px;
+  --mark-size: 40px;
   --mark-scale: 1.24;
   --mark-origin-y: 43%;
   width: var(--mark-size);
@@ -3627,18 +3627,18 @@ a { color: inherit; text-decoration: none; }
 }
 
 .brand-product-mark {
-  --mark-size: 36px;
+  --mark-size: 40px;
   --mark-scale: 1.32;
 }
 
 .footer-product-mark {
-  --mark-size: 32px;
+  --mark-size: 36px;
   --mark-scale: 1.32;
   box-shadow: none;
 }
 
 .home-product-mark {
-  --mark-size: 56px;
+  --mark-size: 64px;
   --mark-scale: 1.1;
   margin: 0;
   box-shadow:
@@ -3648,24 +3648,24 @@ a { color: inherit; text-decoration: none; }
 }
 
 .assistant-product-mark {
-  --mark-size: 40px;
+  --mark-size: 44px;
   --mark-scale: 1.26;
   box-shadow: 0 1px 3px color-mix(in srgb, var(--text) 12%, transparent);
 }
 
 .support-product-mark {
-  --mark-size: 48px;
+  --mark-size: 54px;
   --mark-scale: 1.16;
 }
 
 .preview-product-mark {
-  --mark-size: 28px;
+  --mark-size: 32px;
   --mark-scale: 1.45;
   box-shadow: none;
 }
 
 .browser-preview-titlebar {
-  grid-template-columns: 28px 1fr auto;
+  grid-template-columns: 32px 1fr auto;
 }
 
 .home-shell {
@@ -3997,11 +3997,11 @@ a { color: inherit; text-decoration: none; }
   }
 
   .brand-product-mark {
-    --mark-size: 30px;
+    --mark-size: 34px;
   }
 
   .home-product-mark {
-    --mark-size: 48px;
+    --mark-size: 54px;
   }
 
   .home-hero-intro {
@@ -5268,7 +5268,7 @@ a { color: inherit; text-decoration: none; }
 
 .home-hero-intro .eyebrow {
   min-width: 0;
-  max-width: calc(100% - 72px);
+  max-width: calc(100% - 80px);
   line-height: 1.35;
   white-space: normal;
   overflow-wrap: anywhere;
@@ -5365,7 +5365,7 @@ a { color: inherit; text-decoration: none; }
   }
 
   .home-hero-intro .eyebrow {
-    max-width: calc(100% - 60px);
+    max-width: calc(100% - 66px);
   }
 }
 
