@@ -192,7 +192,7 @@ test("renders every section as an individual page", async () => {
     assert.match(html, /주식회사 씨엔씨코퍼레이션/);
     assert.match(html, /140-81-50087/);
     assert.match(html, /What’s past is prologue/);
-    assert.match(html, /aiwork-anime-profile-v1\.webp/);
+    assert.match(html, /aiwork-plugin-icon\.png/);
     assert.match(html, /aiwork-preference-boot/);
     assert.match(html, /aria-controls="aiwork-language-menu"/);
     assert.match(html, /aria-controls="aiwork-theme-menu"/);
@@ -314,29 +314,11 @@ test("renders one global preference bootstrap and controls on public routes", as
   }
 });
 
-test("keeps every branded image referenced by the website", async () => {
-  const css = await readFile(
-    new URL("../app/globals.css", import.meta.url),
-    "utf8",
+test("keeps the current product brand icon available", async () => {
+  await access(
+    new URL(
+      "../public/images/aiwork-plugin-icon.png",
+      import.meta.url,
+    ),
   );
-  const heroReference = css.match(
-    /url\(["']?(\/images\/aiwork-synthwave-hero-v2\.(?:png|webp))["']?\)/i,
-  )?.[1];
-
-  assert.ok(heroReference, "Synthwave hero reference must be present");
-  await Promise.all([
-    access(
-      new URL(
-        "../public/images/aiwork-anime-profile-192.png",
-        import.meta.url,
-      ),
-    ),
-    access(
-      new URL(
-        "../public/images/aiwork-anime-profile-v1.webp",
-        import.meta.url,
-      ),
-    ),
-    access(new URL(`../public${heroReference}`, import.meta.url)),
-  ]);
 });

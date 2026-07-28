@@ -77,7 +77,7 @@ export default function SiteHeader({
         <Link className="brand" href="/" aria-label={copy.aria.home}>
           <Image
             className="brand-avatar"
-            src="/images/aiwork-anime-profile-v1.webp"
+            src="/images/aiwork-plugin-icon.png"
             alt=""
             width="40"
             height="40"

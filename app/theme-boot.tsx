@@ -47,7 +47,7 @@ const preferenceBoot = String.raw`
 
   try {
     const storedTheme = localStorage.getItem("aiwork-theme");
-    root.dataset.theme = themes.has(storedTheme) ? storedTheme : "synthwave";
+    root.dataset.theme = themes.has(storedTheme) ? storedTheme : "light";
 
     const queryLocale = new URLSearchParams(location.search).get("lang");
     const storedLocale = localStorage.getItem("aiwork-locale");
@@ -85,7 +85,7 @@ const preferenceBoot = String.raw`
       }
     }
   } catch {
-    root.dataset.theme = "synthwave";
+    root.dataset.theme = "light";
     root.dataset.locale = "ko";
     root.lang = "ko";
     root.dir = "ltr";

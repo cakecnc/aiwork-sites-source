@@ -79,7 +79,7 @@ export default function SiteFooter() {
         <Link className="brand footer-brand" href="/">
           <Image
             className="brand-avatar"
-            src="/images/aiwork-anime-profile-v1.webp"
+            src="/images/aiwork-plugin-icon.png"
             alt=""
             width="36"
             height="36"

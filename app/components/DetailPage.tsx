@@ -281,9 +281,6 @@ export default function DetailPage({
   title,
   description,
   status,
-  image = "/images/aiwork-anime-profile-v1.webp",
-  imageAlt = "윙크하며 안내하는 AIWORK 에이전트",
-  imageLabel = "AIWORK GUIDE AGENT",
   imageTone = "agent",
   children,
 }: DetailPageProps) {
@@ -308,9 +305,6 @@ export default function DetailPage({
 
   return (
     <main className="site-shell detail-shell" id="main-content">
-      <div className="ambient ambient-one" />
-      <div className="ambient ambient-two" />
-
       <SiteHeader active={active} />
 
       <article className="detail-page">
@@ -338,16 +332,50 @@ export default function DetailPage({
             <p>{isKorean ? description : internationalHero.description}</p>
           </div>
 
-          <div className={`detail-visual detail-visual-${imageTone}`}>
-            <Image
-              src={image}
-              alt={isKorean ? imageAlt : copy.aria.assistantAvatar}
-              width={imageTone === "wide" ? 1672 : 1024}
-              height={imageTone === "wide" ? 941 : 1024}
-              priority
-              unoptimized
-            />
-            <span>{imageLabel}</span>
+          <div
+            className={`detail-visual detail-visual-${imageTone}`}
+            role="img"
+            aria-label={isKorean ? "AIWORK Browser RC 제품 화면" : "AIWORK Browser RC product screen"}
+          >
+            <div className="browser-preview-titlebar">
+              <Image
+                src="/images/aiwork-plugin-icon.png"
+                alt=""
+                width="28"
+                height="28"
+                priority
+                unoptimized
+              />
+              <strong>AIWORK Browser</strong>
+              <span>1.0 RC</span>
+            </div>
+            <div className="browser-preview-body">
+              <aside>
+                <small>{isKorean ? "기록 종류" : "Record type"}</small>
+                <b>{isKorean ? "자료" : "Source"}</b>
+                <span>{isKorean ? "기억" : "Memory"}</span>
+                <span>{isKorean ? "리서치" : "Research"}</span>
+              </aside>
+              <section>
+                <div className="browser-preview-status">
+                  <span>{isKorean ? "현재 탭" : "Current tab"}</span>
+                  <b>{isKorean ? "사용자 실행" : "User invoked"}</b>
+                </div>
+                <h3>{isKorean ? "저장 전 안전 미리보기" : "Safe preview before storage"}</h3>
+                <div className="browser-preview-field">
+                  <small>URL</small>
+                  <span>https://example.com/current-page</span>
+                </div>
+                <div className="browser-preview-field">
+                  <small>{isKorean ? "선택 영역" : "Selection"}</small>
+                  <span>{isKorean ? "민감정보 패턴을 제거한 미리보기" : "Preview after sensitive-pattern redaction"}</span>
+                </div>
+                <button type="button" tabIndex={-1}>
+                  {isKorean ? "승인 후 저장" : "Approve and save"}
+                </button>
+              </section>
+            </div>
+            <span className="detail-visual-label">AIWORK BROWSER 1.0 RC</span>
           </div>
         </header>
 

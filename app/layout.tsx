@@ -34,21 +34,14 @@ export const metadata: Metadata = {
     title: "AIWORK | 안전한 AI 업무 실행 조정자",
     description:
       "현재는 사용자 실행형 Browser RC를 제공하며, 선택 AI·문서·메일·실행을 잇는 Workbench는 후속 제품 비전입니다.",
-    images: [
-      {
-        url: "/images/aiwork-synthwave-hero-v2.webp",
-        width: 1672,
-        height: 941,
-        alt: "AIWORK의 안전한 AI 업무 Workbench",
-      },
-    ],
+    images: ["/images/aiwork-plugin-icon.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "AIWORK | AI가 이해하고, AIWORK가 안전하게 실행합니다",
     description:
       "공식 홈페이지와 사용자 실행형 Browser RC를 제공하며 AI Agent Runtime은 아직 구현되지 않았습니다.",
-    images: ["/images/aiwork-synthwave-hero-v2.webp"],
+    images: ["/images/aiwork-plugin-icon.png"],
   },
   robots: {
     index: true,
@@ -56,9 +49,9 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.webmanifest",
   icons: {
-    icon: "/images/aiwork-anime-profile-192.png",
-    shortcut: "/images/aiwork-anime-profile-192.png",
-    apple: "/images/aiwork-anime-profile-192.png",
+    icon: "/images/aiwork-plugin-icon.png",
+    shortcut: "/images/aiwork-plugin-icon.png",
+    apple: "/images/aiwork-plugin-icon.png",
   },
 };
 

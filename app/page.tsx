@@ -18,7 +18,6 @@ import {
 const contextIcons = ["AI", "⌁", "≠", "◇"];
 const roleIcons = ["01", "AI", "✓"];
 const actionIcons = ["R", "↗", "@"];
-const capabilityIcons = ["⌁", "≠", "R", "@", "↗", "▣"];
 
 export default function Home() {
   const { locale, ready } = useSitePreferences();
@@ -42,12 +41,20 @@ export default function Home() {
 
   return (
     <main className="site-shell home-shell" id="main-content">
-      <div className="ambient ambient-one" />
-      <div className="ambient ambient-two" />
-
       <SiteHeader active="home" context={home.brandContext} />
 
       <section className="hero home-hero" id="home">
+        <div className="home-plugin-mark">
+          <Image
+            className="home-plugin-icon"
+            src="/images/aiwork-plugin-icon.png"
+            alt="C&C Corporation"
+            width={112}
+            height={112}
+            priority
+            unoptimized
+          />
+        </div>
         <div className="eyebrow">
           <span /> {home.hero.eyebrow}
         </div>
@@ -99,8 +106,8 @@ export default function Home() {
             <div className="home-user-prompt">{home.workbench.prompt}</div>
             <div className="home-ai-answer">
               <Image
-                className="assistant-avatar"
-                src="/images/aiwork-anime-profile-v1.webp"
+                className="assistant-avatar product-icon"
+                src="/images/aiwork-plugin-icon.png"
                 alt={copy.aria.assistantAvatar}
                 width="42"
                 height="42"
@@ -184,13 +191,12 @@ export default function Home() {
           </div>
         </div>
         <div className="home-capability-grid">
-          {home.capabilities.cards.map((card, index) => (
+          {home.capabilities.cards.map((card) => (
             <article key={card.title}>
               <div className="home-capability-card-top">
-                <span>{capabilityIcons[index]}</span>
+                <h3>{card.title}</h3>
                 <b>{card.status}</b>
               </div>
-              <h3>{card.title}</h3>
               <p>{card.description}</p>
             </article>
           ))}
@@ -278,7 +284,8 @@ export default function Home() {
 
         <div className="support-card">
           <Image
-            src="/images/aiwork-anime-profile-v1.webp"
+            className="product-icon"
+            src="/images/aiwork-plugin-icon.png"
             alt=""
             width="64"
             height="64"

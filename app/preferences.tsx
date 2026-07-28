@@ -189,7 +189,7 @@ function applyCustomToDocument(colors: CustomColors | null) {
 export function SitePreferencesProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [locale, setLocaleState] = useState<Locale>("ko");
-  const [theme, setThemeState] = useState<ThemeKey>("synthwave");
+  const [theme, setThemeState] = useState<ThemeKey>("light");
   const [customColors, setCustomColors] =
     useState<CustomColors>(defaultColors);
   const [customEnabled, setCustomEnabled] = useState(false);
@@ -203,7 +203,7 @@ export function SitePreferencesProvider({ children }: { children: ReactNode }) {
       const storedCustom = readCustomColors();
 
       setLocaleState(isLocale(bootLocale) ? bootLocale : "ko");
-      setThemeState(isTheme(bootTheme) ? bootTheme : "synthwave");
+      setThemeState(isTheme(bootTheme) ? bootTheme : "light");
       if (storedCustom) {
         setCustomColors(storedCustom);
         setCustomEnabled(true);
