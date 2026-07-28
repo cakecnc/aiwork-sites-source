@@ -4271,3 +4271,899 @@ a { color: inherit; text-decoration: none; }
     padding: 20px;
   }
 }
+
+/* AIWORK v19 — centered density and pointer motion */
+
+.home-shell .home-hero,
+:root[data-theme="synthwave"] .home-shell .home-hero {
+  padding: 54px 0 40px;
+  text-align: center;
+}
+
+.home-hero-intro {
+  max-width: 760px;
+  margin-inline: auto;
+  justify-content: center;
+  padding-bottom: 14px;
+}
+
+.home-shell .home-hero h1,
+:root[data-theme="synthwave"] .home-shell .home-hero h1 {
+  max-width: 960px;
+  margin: 24px auto 16px;
+  font-size: clamp(46px, 5.7vw, 72px);
+  line-height: 1.04;
+  letter-spacing: -.052em;
+}
+
+.home-shell .home-hero > p,
+:root[data-theme="synthwave"] .home-shell .home-hero > p {
+  max-width: 720px;
+  margin-inline: auto;
+  line-height: 1.56;
+  letter-spacing: -.012em;
+}
+
+.home-shell .hero-actions,
+.home-shell .trust-row,
+:root[data-theme="synthwave"] .home-shell .hero-actions,
+:root[data-theme="synthwave"] .home-shell .trust-row {
+  justify-content: center;
+}
+
+.home-shell .hero-actions {
+  margin-top: 24px;
+}
+
+.home-shell .trust-row {
+  width: min(780px, 100%);
+  margin: 24px auto 0;
+}
+
+.home-workbench {
+  margin-bottom: 78px;
+  transform-origin: 50% 25%;
+}
+
+.home-workbench-grid {
+  min-height: 0;
+}
+
+.home-workbench-grid > * {
+  padding: 22px;
+}
+
+.home-context-list,
+.home-action-list {
+  margin-top: 15px;
+}
+
+.home-context-list > div,
+.home-action-list > div {
+  min-height: 50px;
+  padding-block: 9px;
+}
+
+.home-user-prompt {
+  margin: 24px 0 18px auto;
+  padding: 14px 16px;
+  line-height: 1.52;
+}
+
+.home-ai-answer p {
+  line-height: 1.55;
+}
+
+.home-mini-flow {
+  margin-top: 24px;
+}
+
+.home-role-section,
+.home-capability-section {
+  padding-bottom: 78px;
+}
+
+.home-section-heading {
+  max-width: 820px;
+  margin: 0 auto 28px;
+  display: block;
+  text-align: center;
+}
+
+.home-section-heading > span,
+.home-flow-copy > span,
+.home-boundary-copy > span {
+  display: block;
+  padding-top: 0;
+  margin-bottom: 11px;
+}
+
+.home-section-heading h2,
+.home-flow-copy h2,
+.home-boundary-copy h2 {
+  margin-inline: auto;
+  font-size: clamp(32px, 4.2vw, 50px);
+  line-height: 1.08;
+  letter-spacing: -.045em;
+}
+
+.home-section-heading p,
+.home-flow-copy > p,
+.home-boundary-copy > p {
+  margin: 12px auto 0;
+  line-height: 1.56;
+  letter-spacing: -.008em;
+}
+
+.home-role-grid article {
+  min-height: 188px;
+  padding: 24px;
+  align-items: center;
+  text-align: center;
+}
+
+.home-role-grid h3,
+.home-boundary-grid h3 {
+  margin: 26px 0 8px;
+}
+
+.home-role-grid p,
+.home-capability-grid p,
+.home-boundary-grid p {
+  line-height: 1.55;
+}
+
+.home-flow-section {
+  margin-bottom: 78px;
+  padding: 48px 0;
+  grid-template-columns: 1fr;
+  gap: 26px;
+}
+
+.home-flow-copy,
+.home-boundary-copy {
+  max-width: 820px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.home-flow-list {
+  width: min(980px, 100%);
+  margin-inline: auto;
+}
+
+.home-flow-list li {
+  padding: 15px 0;
+}
+
+.home-flow-list p {
+  line-height: 1.5;
+}
+
+.home-capability-grid article {
+  padding: 17px 0;
+}
+
+.home-boundary-section {
+  padding: 48px 0;
+}
+
+.home-boundary-grid {
+  margin-top: 30px;
+}
+
+.home-boundary-grid article {
+  min-height: 164px;
+  padding: 22px;
+  align-items: center;
+  text-align: center;
+}
+
+.home-shell .payment-section {
+  padding-top: 78px;
+}
+
+.home-shell .payment-heading {
+  margin-bottom: 26px;
+  display: block;
+  text-align: center;
+}
+
+.home-shell .payment-heading h2 {
+  margin: 12px 0;
+  font-size: clamp(32px, 4.2vw, 50px);
+  line-height: 1.08;
+  letter-spacing: -.045em;
+}
+
+.home-shell .payment-heading > div:first-child > p {
+  margin-inline: auto;
+  line-height: 1.56;
+}
+
+.home-shell .payment-status {
+  width: fit-content;
+  min-width: 220px;
+  margin: 18px auto 0;
+  text-align: start;
+}
+
+.home-shell .price-card {
+  min-height: 350px;
+  padding: 23px;
+}
+
+.home-shell .price-card li,
+.home-shell .support-card p,
+.home-cta p {
+  line-height: 1.52;
+}
+
+.home-shell .cta-section {
+  margin-top: 78px;
+  padding: 62px 20px;
+}
+
+.home-shell .cta-section h2 {
+  margin-bottom: 12px;
+  line-height: 1.08;
+  letter-spacing: -.045em;
+}
+
+.home-shell .cta-section > div {
+  margin-top: 24px;
+}
+
+.home-shell .site-footer {
+  margin-top: 54px;
+  padding-bottom: 40px;
+}
+
+.product-mark img,
+.home-workbench,
+.home-role-grid article,
+.home-capability-grid article,
+.home-boundary-grid article,
+.price-card,
+.support-card,
+.detail-visual,
+.fact-card,
+.guide-card,
+.primary-button,
+.secondary-button,
+.install-small {
+  transition:
+    transform 140ms ease,
+    border-color 140ms ease,
+    background-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .product-mark:hover img,
+  .brand:hover .product-mark img,
+  .support-card:hover .product-mark img {
+    transform:
+      scale(var(--mark-scale))
+      translateY(-2%)
+      rotate(-2deg);
+  }
+
+  .home-workbench:hover,
+  .detail-visual:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--accent) 28%, var(--line));
+    box-shadow:
+      0 26px 66px rgba(0, 0, 0, .16),
+      0 0 0 1px color-mix(in srgb, var(--accent) 8%, transparent);
+  }
+
+  .home-role-grid article:hover,
+  .home-boundary-grid article:hover,
+  .price-card:hover,
+  .support-card:hover,
+  .fact-card:hover,
+  .guide-card:hover {
+    transform: translateY(-2px);
+    background: color-mix(in srgb, var(--surface) 94%, var(--accent) 6%);
+  }
+
+  .home-capability-grid article:hover {
+    transform: translateX(3px);
+    border-bottom-color: color-mix(in srgb, var(--accent) 42%, var(--line));
+  }
+
+  .primary-button:hover,
+  .secondary-button:hover,
+  .install-small:hover {
+    transform: translateY(-1px);
+  }
+}
+
+@media (max-width: 860px) {
+  .home-shell .home-hero,
+  :root[data-theme="synthwave"] .home-shell .home-hero {
+    padding-top: 48px;
+  }
+
+  .home-role-grid article,
+  .home-boundary-grid article {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 620px) {
+  .home-shell .home-hero,
+  :root[data-theme="synthwave"] .home-shell .home-hero {
+    padding: 34px 0 26px;
+  }
+
+  .home-hero-intro {
+    padding-bottom: 11px;
+  }
+
+  .home-shell .home-hero h1,
+  :root[data-theme="synthwave"] .home-shell .home-hero h1 {
+    margin: 17px auto 12px;
+    font-size: clamp(34px, 10.5vw, 44px);
+    line-height: 1.06;
+    letter-spacing: -.045em;
+  }
+
+  .home-shell .home-hero > p,
+  :root[data-theme="synthwave"] .home-shell .home-hero > p {
+    font-size: 14px;
+    line-height: 1.48;
+  }
+
+  .home-shell .hero-actions {
+    margin-top: 17px;
+  }
+
+  .home-shell .trust-row {
+    margin-top: 17px;
+  }
+
+  .home-shell .trust-row span {
+    padding-block: 7px;
+    line-height: 1.35;
+  }
+
+  .home-workbench {
+    margin-bottom: 48px;
+  }
+
+  .home-workbench-grid > * {
+    padding: 15px;
+  }
+
+  .home-context-list,
+  .home-action-list {
+    margin-top: 11px;
+  }
+
+  .home-context-list > div,
+  .home-action-list > div {
+    min-height: 46px;
+    padding-block: 7px;
+  }
+
+  .home-user-prompt {
+    margin: 17px 0 14px auto;
+    padding: 11px 13px;
+    line-height: 1.45;
+  }
+
+  .home-mini-flow {
+    margin-top: 17px;
+  }
+
+  .home-role-section,
+  .home-capability-section {
+    padding-bottom: 48px;
+  }
+
+  .home-section-heading {
+    margin-bottom: 19px;
+  }
+
+  .home-section-heading > span,
+  .home-flow-copy > span,
+  .home-boundary-copy > span {
+    margin-bottom: 8px;
+  }
+
+  .home-section-heading h2,
+  .home-flow-copy h2,
+  .home-boundary-copy h2 {
+    font-size: 28px;
+    line-height: 1.1;
+  }
+
+  .home-section-heading p,
+  .home-flow-copy > p,
+  .home-boundary-copy > p,
+  .home-role-grid p,
+  .home-capability-grid p,
+  .home-boundary-grid p,
+  .home-flow-list p,
+  .home-ai-answer p,
+  .home-runtime-details p {
+    line-height: 1.48;
+  }
+
+  .home-role-grid article,
+  .home-boundary-grid article {
+    padding: 17px;
+  }
+
+  .home-role-grid h3,
+  .home-boundary-grid h3 {
+    margin-top: 17px;
+  }
+
+  .home-flow-section {
+    margin-bottom: 48px;
+    padding: 34px 0;
+    gap: 18px;
+  }
+
+  .home-flow-list li {
+    padding: 12px 0;
+  }
+
+  .home-capability-grid article {
+    padding: 15px 0;
+  }
+
+  .home-boundary-section {
+    padding: 34px 0;
+  }
+
+  .home-boundary-grid {
+    margin-top: 21px;
+  }
+
+  .home-shell .payment-section {
+    padding-top: 48px;
+  }
+
+  .home-shell .payment-heading {
+    margin-bottom: 19px;
+  }
+
+  .home-shell .payment-heading h2 {
+    margin: 9px 0;
+    font-size: 30px;
+  }
+
+  .home-shell .payment-heading > div:first-child > p,
+  .home-shell .price-card li,
+  .home-shell .support-card p,
+  .home-cta p {
+    line-height: 1.48;
+  }
+
+  .home-shell .payment-status {
+    margin-top: 14px;
+  }
+
+  .home-shell .price-card {
+    padding: 18px;
+  }
+
+  .home-shell .cta-section {
+    margin-top: 48px;
+    padding: 40px 8px;
+  }
+
+  .home-shell .cta-section > div {
+    margin-top: 18px;
+  }
+
+  .home-shell .site-footer {
+    margin-top: 42px;
+    padding-bottom: 30px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-mark img,
+  .home-workbench,
+  .home-role-grid article,
+  .home-capability-grid article,
+  .home-boundary-grid article,
+  .price-card,
+  .support-card,
+  .detail-visual,
+  .fact-card,
+  .guide-card,
+  .primary-button,
+  .secondary-button,
+  .install-small {
+    transform: none !important;
+  }
+}
+
+/* AIWORK v19 — balanced type scale and final responsive refinements */
+
+.home-shell .payment-section,
+.home-shell .cta-section,
+.home-shell .site-footer {
+  content-visibility: visible;
+  contain-intrinsic-size: none;
+}
+
+.home-shell .home-hero h1,
+:root[data-theme="synthwave"] .home-shell .home-hero h1 {
+  font-size: clamp(42px, 5vw, 64px);
+  line-height: 1.07;
+  letter-spacing: -.04em;
+}
+
+.home-workbench-topline,
+.home-workbench-grid small {
+  font-size: 11px;
+  letter-spacing: .08em;
+}
+
+.home-context-list strong,
+.home-action-list strong {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.home-context-list span,
+.home-action-list span {
+  font-size: 11px;
+}
+
+.home-user-prompt {
+  font-size: 14px;
+}
+
+.home-ai-answer strong {
+  font-size: 14px;
+}
+
+.home-ai-answer p {
+  font-size: 13px;
+}
+
+.home-mini-flow span,
+.home-mini-flow b {
+  font-size: 10px;
+}
+
+.home-action-list b {
+  font-size: 9px;
+}
+
+.home-evidence {
+  font-size: 11px;
+}
+
+.home-section-heading > span,
+.home-flow-copy > span,
+.home-boundary-copy > span {
+  font-size: 11px;
+  letter-spacing: .11em;
+}
+
+.home-section-heading h2,
+.home-flow-copy h2,
+.home-boundary-copy h2,
+.home-shell .payment-heading h2,
+.home-shell .cta-section h2 {
+  font-size: clamp(30px, 3.6vw, 44px);
+  line-height: 1.11;
+  letter-spacing: -.032em;
+}
+
+.home-role-grid h3,
+.home-capability-grid h3,
+.home-boundary-grid h3 {
+  font-size: 18px;
+}
+
+.home-role-grid p,
+.home-capability-grid p,
+.home-boundary-grid p {
+  font-size: 14px;
+}
+
+.home-flow-list h3 {
+  font-size: 16px;
+}
+
+.home-flow-list p,
+.home-runtime-details summary,
+.home-runtime-details p {
+  font-size: 12px;
+}
+
+.home-shell .payment-heading > div:first-child > p {
+  font-size: 14px;
+}
+
+.home-shell .payment-status > span,
+.home-shell .section-kicker {
+  font-size: 11px;
+  letter-spacing: .1em;
+}
+
+.home-shell .payment-status strong {
+  font-size: 13px;
+}
+
+.home-shell .price-card > small {
+  min-height: 0;
+  font-size: 13px;
+}
+
+.home-shell .price strong {
+  font-size: 34px;
+}
+
+.home-shell .price-card li,
+.home-shell .support-card p,
+.home-cta p {
+  font-size: 13px;
+}
+
+.home-shell .payment-disclaimer {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.home-shell .site-footer,
+.home-shell .footer-legal p {
+  font-size: 12px;
+}
+
+.home-shell .footer-legal p {
+  line-height: 1.58;
+}
+
+.detail-hero-copy h1 {
+  font-size: clamp(40px, 5vw, 60px);
+  line-height: 1.08;
+  letter-spacing: -.04em;
+}
+
+.detail-hero-copy > p {
+  font-size: 16px;
+  line-height: 1.58;
+}
+
+.content-heading h2,
+.detail-cta h2,
+.callout-panel h2,
+.release-panel h2,
+.contact-information h2,
+.company-panel h2,
+.prompt-example h2,
+.case-study-panel h2 {
+  font-size: clamp(28px, 3.4vw, 42px);
+  line-height: 1.13;
+  letter-spacing: -.03em;
+}
+
+.status-pill,
+.mini-status,
+.content-heading > span,
+.detail-cta > div:first-child > span,
+.callout-panel > div > span,
+.company-panel > div > span,
+.fact-card small,
+.guide-card small {
+  font-size: 11px;
+}
+
+.detail-visual > span {
+  font-size: 10px;
+}
+
+.fact-card p,
+.guide-card p {
+  font-size: 14px;
+  line-height: 1.56;
+}
+
+.privacy-hero h1 {
+  font-size: clamp(40px, 5vw, 60px);
+  line-height: 1.09;
+  letter-spacing: -.035em;
+}
+
+.privacy-hero > p {
+  font-size: 16px;
+  line-height: 1.62;
+}
+
+@media (min-width: 1041px) {
+  .section-topbar {
+    display: grid;
+    grid-template-columns: minmax(250px, 1fr) auto minmax(250px, 1fr);
+  }
+
+  .section-topbar .brand {
+    justify-self: start;
+  }
+
+  .section-topbar .section-nav {
+    justify-self: center;
+  }
+
+  .section-topbar .header-actions {
+    justify-self: end;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
+  .product-mark:hover img,
+  .brand:hover .product-mark img,
+  .support-card:hover .product-mark img {
+    transform: scale(var(--mark-scale));
+  }
+}
+
+:root:lang(ko) .home-shell .home-hero h1,
+:root:lang(ja) .home-shell .home-hero h1,
+:root:lang(zh-CN) .home-shell .home-hero h1,
+:root:lang(ko) .detail-hero-copy h1,
+:root:lang(ja) .detail-hero-copy h1,
+:root:lang(zh-CN) .detail-hero-copy h1 {
+  line-height: 1.11;
+  letter-spacing: -.025em;
+}
+
+:root:lang(ko) .home-section-heading h2,
+:root:lang(ko) .home-flow-copy h2,
+:root:lang(ko) .home-boundary-copy h2,
+:root:lang(ko) .home-shell .payment-heading h2,
+:root:lang(ko) .home-shell .cta-section h2,
+:root:lang(ko) .content-heading h2,
+:root:lang(ja) .home-section-heading h2,
+:root:lang(ja) .home-flow-copy h2,
+:root:lang(ja) .home-boundary-copy h2,
+:root:lang(ja) .home-shell .payment-heading h2,
+:root:lang(ja) .home-shell .cta-section h2,
+:root:lang(ja) .content-heading h2,
+:root:lang(zh-CN) .home-section-heading h2,
+:root:lang(zh-CN) .home-flow-copy h2,
+:root:lang(zh-CN) .home-boundary-copy h2,
+:root:lang(zh-CN) .home-shell .payment-heading h2,
+:root:lang(zh-CN) .home-shell .cta-section h2,
+:root:lang(zh-CN) .content-heading h2 {
+  line-height: 1.15;
+  letter-spacing: -.018em;
+}
+
+@media (max-width: 620px) {
+  .section-topbar {
+    height: 64px;
+    padding-inline: 12px;
+  }
+
+  .section-mobile-nav {
+    margin-top: 8px;
+    padding: 6px;
+  }
+
+  .home-shell .home-hero h1,
+  :root[data-theme="synthwave"] .home-shell .home-hero h1 {
+    font-size: clamp(34px, 9.8vw, 40px);
+    line-height: 1.1;
+    letter-spacing: -.028em;
+  }
+
+  .home-section-heading h2,
+  .home-flow-copy h2,
+  .home-boundary-copy h2 {
+    font-size: 27px;
+    line-height: 1.14;
+  }
+
+  .home-shell .payment-heading h2,
+  .home-shell .cta-section h2 {
+    font-size: 28px;
+    line-height: 1.14;
+  }
+
+  .detail-hero-copy h1,
+  .privacy-hero h1 {
+    font-size: clamp(34px, 9.5vw, 40px);
+    line-height: 1.12;
+    letter-spacing: -.02em;
+  }
+
+  .content-heading h2,
+  .detail-cta h2,
+  .callout-panel h2,
+  .release-panel h2,
+  .contact-information h2,
+  .company-panel h2,
+  .prompt-example h2,
+  .case-study-panel h2 {
+    font-size: 27px;
+    line-height: 1.15;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-mark img {
+    transform: scale(var(--mark-scale)) !important;
+  }
+}
+
+/* AIWORK v19 — final visual type calibration */
+
+.brand small,
+.home-shell .trust-row span,
+.home-mini-flow span,
+.home-mini-flow b,
+.home-action-list b,
+.home-capability-card-top b,
+.recommended,
+.home-shell .price span,
+.site-footer .footer-legal small {
+  font-size: 11px;
+}
+
+.home-shell .home-hero h1,
+:root[data-theme="synthwave"] .home-shell .home-hero h1 {
+  font-size: clamp(40px, 4.6vw, 58px);
+}
+
+.home-section-heading h2,
+.home-flow-copy h2,
+.home-boundary-copy h2,
+.home-shell .payment-heading h2,
+.home-shell .cta-section h2 {
+  font-size: clamp(29px, 3.2vw, 40px);
+}
+
+.detail-hero-copy h1,
+.privacy-hero h1 {
+  font-size: clamp(38px, 4.6vw, 54px);
+}
+
+.content-heading h2,
+.detail-cta h2,
+.callout-panel h2,
+.release-panel h2,
+.contact-information h2,
+.company-panel h2,
+.prompt-example h2,
+.case-study-panel h2 {
+  font-size: clamp(27px, 3.2vw, 38px);
+}
+
+@media (max-width: 620px) {
+  .home-shell .home-hero h1,
+  :root[data-theme="synthwave"] .home-shell .home-hero h1 {
+    font-size: clamp(33px, 9.2vw, 38px);
+  }
+
+  .home-section-heading h2,
+  .home-flow-copy h2,
+  .home-boundary-copy h2,
+  .home-shell .payment-heading h2,
+  .home-shell .cta-section h2,
+  .content-heading h2,
+  .detail-cta h2,
+  .callout-panel h2,
+  .release-panel h2,
+  .contact-information h2,
+  .company-panel h2,
+  .prompt-example h2,
+  .case-study-panel h2 {
+    font-size: 26px;
+  }
+
+  .detail-hero-copy h1,
+  .privacy-hero h1 {
+    font-size: clamp(32px, 9vw, 38px);
+  }
+}
