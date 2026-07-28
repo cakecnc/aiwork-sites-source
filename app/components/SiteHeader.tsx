@@ -73,7 +73,7 @@ export default function SiteHeader({
       <a className="skip-link" href="#main-content">
         {copy.aria.skipToContent}
       </a>
-      <header className="topbar section-topbar">
+      <header className="topbar section-topbar" data-locale={locale}>
         <Link className="brand" href="/" aria-label={copy.aria.home}>
           <ProductMark className="brand-product-mark" />
           <span>AIWORK</span>

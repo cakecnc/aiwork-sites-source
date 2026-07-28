@@ -400,3 +400,35 @@ test("uses the rounded company logo only for the browser favicon", async () => {
     ),
   );
 });
+
+test("keeps localized header controls and the product mark from overlapping", async () => {
+  const [header, styles] = await Promise.all([
+    readFile(
+      new URL("../app/components/SiteHeader.tsx", import.meta.url),
+      "utf8",
+    ),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(header, /data-locale=\{locale\}/);
+  assert.match(
+    styles,
+    /\.section-topbar\s*>\s*\*,[\s\S]*?min-width:\s*0;/,
+  );
+  assert.match(
+    styles,
+    /\.home-hero-intro \.eyebrow\s*{[\s\S]*?max-width:\s*calc\(100% - 72px\);[\s\S]*?overflow-wrap:\s*anywhere;/,
+  );
+  assert.match(
+    styles,
+    /\.theme-menu,[\s\S]*?\.language-menu\s*{[\s\S]*?inset-inline-end:\s*0;/,
+  );
+  assert.match(
+    styles,
+    /@media \(max-width:\s*1240px\)[\s\S]*?\.section-topbar \.main-nav\s*{[\s\S]*?display:\s*none;[\s\S]*?\.section-mobile-nav\s*{[\s\S]*?display:\s*flex;/,
+  );
+  assert.match(
+    styles,
+    /@media \(min-width:\s*1241px\)[\s\S]*?\.section-topbar:not\(\[data-locale="ko"\]\) \.section-nav\s*{[\s\S]*?gap:\s*13px;/,
+  );
+});
