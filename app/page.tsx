@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { homeWorkbenchMessages } from "./home-workbench-i18n";
 import { messages } from "./i18n";
-import CompanyLogo from "./components/CompanyLogo";
+import ProductMark from "./components/ProductMark";
 import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
 import { useSitePreferences } from "./preferences";
@@ -44,7 +44,7 @@ export default function Home() {
       <SiteHeader active="home" context={home.brandContext} />
 
       <section className="hero home-hero" id="home">
-        <CompanyLogo className="home-company-logo" />
+        <ProductMark className="home-product-mark" />
         <div className="eyebrow">
           <span /> {home.hero.eyebrow}
         </div>
@@ -95,7 +95,7 @@ export default function Home() {
             <small>{home.workbench.conversationTitle}</small>
             <div className="home-user-prompt">{home.workbench.prompt}</div>
             <div className="home-ai-answer">
-              <CompanyLogo className="assistant-logo" />
+              <ProductMark className="assistant-product-mark" />
               <div>
                 <strong>{home.workbench.responseTitle}</strong>
                 <p>{home.workbench.responseBody}</p>
@@ -266,7 +266,7 @@ export default function Home() {
         </div>
 
         <div className="support-card">
-          <CompanyLogo className="support-logo" />
+          <ProductMark className="support-product-mark" />
           <div>
             <span>{copy.payments.supportTitle}</span>
             <p>{copy.payments.supportDescription}</p>

@@ -3490,60 +3490,69 @@ a { color: inherit; text-decoration: none; }
   }
 }
 
-/* Final AIWORK brand direction */
+/* Final AIWORK product identity */
 
-.company-logo {
-  position: relative;
+.product-mark {
   display: block;
-  overflow: hidden;
   flex: 0 0 auto;
-  background: #ffffff;
+  color: var(--text);
 }
 
-.company-logo-image {
-  width: 170%;
-  max-width: none;
-  height: auto;
-  position: absolute;
-  left: 50%;
-  top: 50%;
+.product-mark svg {
+  width: 100%;
+  height: 100%;
   display: block;
-  transform: translate(-50%, -50%);
 }
 
-.brand-company-logo {
-  width: 92px;
-  height: 46px;
+.product-mark-field {
+  fill: #102a43;
 }
 
-.footer-company-logo {
-  width: 96px;
-  height: 50px;
+.product-mark-a {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 4;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
 }
 
-.home-company-logo {
-  width: 190px;
-  height: 120px;
-  margin: 0 0 32px;
+.product-mark-node {
+  fill: #3da9fc;
 }
 
-.assistant-logo {
-  width: 88px;
-  height: 52px;
+.brand-product-mark {
+  width: 34px;
+  height: 34px;
 }
 
-.support-logo {
-  width: 108px;
-  height: 64px;
-}
-
-.preview-company-logo {
-  width: 56px;
+.footer-product-mark {
+  width: 32px;
   height: 32px;
 }
 
+.home-product-mark {
+  width: 86px;
+  height: 86px;
+  margin: 0 0 32px;
+}
+
+.assistant-product-mark {
+  width: 38px;
+  height: 38px;
+}
+
+.support-product-mark {
+  width: 48px;
+  height: 48px;
+}
+
+.preview-product-mark {
+  width: 28px;
+  height: 28px;
+}
+
 .browser-preview-titlebar {
-  grid-template-columns: 56px 1fr auto;
+  grid-template-columns: 28px 1fr auto;
 }
 
 .home-shell {
@@ -3816,14 +3825,14 @@ a { color: inherit; text-decoration: none; }
 }
 
 @media (max-width: 620px) {
-  .brand-company-logo {
-    width: 72px;
-    height: 38px;
+  .brand-product-mark {
+    width: 30px;
+    height: 30px;
   }
 
-  .home-company-logo {
-    width: 154px;
-    height: 98px;
+  .home-product-mark {
+    width: 72px;
+    height: 72px;
     margin-bottom: 26px;
   }
 

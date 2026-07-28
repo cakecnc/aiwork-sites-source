@@ -4,7 +4,7 @@ import Link from "next/link";
 import { messages, type Locale } from "../i18n";
 import { useSitePreferences } from "../preferences";
 import { SUPPORT_EMAIL } from "../site-config";
-import CompanyLogo from "./CompanyLogo";
+import ProductMark from "./ProductMark";
 
 export const shakespeareNotice =
   "As Shakespeare reminds us, “What’s past is prologue.” In that spirit, certain portions of this document have been prepared with reference to AI-assisted materials. All rights, licenses, and editorial responsibility pertaining to this work are retained by its author, Sungjae Lim, Director of Planning.";
@@ -77,7 +77,7 @@ export default function SiteFooter() {
     <footer className="site-footer" id="site-footer">
       <div className="footer-intro">
         <Link className="brand footer-brand" href="/">
-          <CompanyLogo className="footer-company-logo" />
+          <ProductMark className="footer-product-mark" />
           <span>AIWORK</span>
         </Link>
         <p>{copy.footer.tagline}</p>

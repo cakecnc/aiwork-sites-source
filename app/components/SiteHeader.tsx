@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { messages, type Locale } from "../i18n";
 import { PreferenceControls, useSitePreferences } from "../preferences";
-import CompanyLogo from "./CompanyLogo";
+import ProductMark from "./ProductMark";
 
 export type SiteSection =
   | "home"
@@ -75,7 +75,7 @@ export default function SiteHeader({
       </a>
       <header className="topbar section-topbar">
         <Link className="brand" href="/" aria-label={copy.aria.home}>
-          <CompanyLogo className="brand-company-logo" />
+          <ProductMark className="brand-product-mark" />
           <span>AIWORK</span>
           <small>{context}</small>
         </Link>

@@ -192,7 +192,8 @@ test("renders every section as an individual page", async () => {
     assert.match(html, /주식회사 씨엔씨코퍼레이션/);
     assert.match(html, /140-81-50087/);
     assert.match(html, /What’s past is prologue/);
-    assert.match(html, /cnc-company-logo\.png/);
+    assert.match(html, /aiwork-product-mark/);
+    assert.match(html, /favicon-company-v1\.png/);
     assert.match(html, /aiwork-preference-boot/);
     assert.match(html, /aria-controls="aiwork-language-menu"/);
     assert.match(html, /aria-controls="aiwork-theme-menu"/);
@@ -314,11 +315,15 @@ test("renders one global preference bootstrap and controls on public routes", as
   }
 });
 
-test("keeps the current company logo available", async () => {
+test("uses the company logo only for the browser favicon", async () => {
   await access(
     new URL(
-      "../public/images/cnc-company-logo.png",
+      "../public/favicon-company-v1.png",
       import.meta.url,
     ),
+  );
+  await access(new URL("../public/favicon.ico", import.meta.url));
+  await access(
+    new URL("../public/images/aiwork-product-mark.svg", import.meta.url),
   );
 });

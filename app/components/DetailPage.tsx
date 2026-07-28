@@ -2,7 +2,7 @@
 
 import { useEffect, type ReactNode } from "react";
 import Link from "next/link";
-import CompanyLogo from "./CompanyLogo";
+import ProductMark from "./ProductMark";
 import SiteFooter from "./SiteFooter";
 import SiteHeader, { type SiteSection } from "./SiteHeader";
 import {
@@ -338,7 +338,7 @@ export default function DetailPage({
             aria-label={isKorean ? "AIWORK Browser RC 제품 화면" : "AIWORK Browser RC product screen"}
           >
             <div className="browser-preview-titlebar">
-              <CompanyLogo className="preview-company-logo" />
+              <ProductMark className="preview-product-mark" />
               <strong>AIWORK Browser</strong>
               <span>1.0 RC</span>
             </div>
