@@ -95,12 +95,14 @@ test("renders the safe AI work orchestration homepage", async () => {
   assert.match(html, /Drive appDataFolder 저장/);
   assert.match(html, /공식 홈페이지·구매 문의/);
   assert.match(html, /개인 AI 프로필/);
-  assert.match(html, /Daum Email·Gemma4/);
-  assert.match(html, /Agent Runtime·외부 실행/);
+  assert.match(html, /이메일 연결/);
+  assert.match(html, /수신은 Read-only가 기본/);
+  assert.match(html, /사용자 선택형 AI/);
+  assert.match(html, /특정 모델에 고정하지 않고/);
+  assert.doesNotMatch(html, /Daum Email(?:·| &amp;| & )Gemma4/);
   assert.match(html, /Browser RC 구현 · AI Agent 본체 미구현/);
-  assert.match(html, /후속 실행 엔진 상태/);
-  assert.match(html, /OpenClaw Gateway/);
-  assert.match(html, /Desktop Helper 직접 조작/);
+  assert.match(html, /독립 기능의 검증 상태/);
+  assert.match(html, /한 기능을 선택해도 다른 외부 기능은 자동 활성화되지 않습니다/);
   assert.match(html, /비밀번호·API 키·토큰·쿠키를 저장하지 않습니다/);
   assert.doesNotMatch(html, /AIWORK ASSISTANT/);
   assert.doesNotMatch(html, /Ai-byMrL/i);
@@ -164,7 +166,7 @@ const detailRoutes = [
   ["/how-to-use/getting-started", "GETTING STARTED", "첫 수집 체크리스트"],
   ["/how-to-use/documents", "DOCUMENTS", "현재 파일 업로드 기능 없음"],
   ["/how-to-use/web-research", "WEB RESEARCH", "현재 자동 Research 기능 없음"],
-  ["/how-to-use/daum-email", "DAUM EMAIL", "현재 연결 화면이 없습니다"],
+  ["/how-to-use/daum-email", "EMAIL PROVIDER GUIDE", "현재 연결 화면이 없습니다"],
 ];
 
 test("renders every section as an individual page", async () => {
@@ -200,6 +202,24 @@ test("renders every section as an individual page", async () => {
     assert.match(html, /aria-controls="aiwork-language-menu"/);
     assert.match(html, /aria-controls="aiwork-theme-menu"/);
   }
+});
+
+test("publishes email and AI as independent, not-yet-implemented capabilities", async () => {
+  const featuresResponse = await render("/features");
+  assert.equal(featuresResponse.status, 200);
+  const featuresHtml = await featuresResponse.text();
+  assert.match(featuresHtml, /읽기 전용 기본·승인 후 발송/);
+  assert.match(featuresHtml, /최종 발신 계정·수신자·제목·본문·첨부/);
+  assert.match(featuresHtml, /Local·Cloud AI 직접 선택/);
+  assert.match(featuresHtml, /특정 모델에 고정하지 않습니다/);
+  assert.doesNotMatch(featuresHtml, /Daum Email(?:·| &amp;| & )Gemma4/);
+
+  const guideResponse = await render("/how-to-use/daum-email");
+  assert.equal(guideResponse.status, 200);
+  const guideHtml = await guideResponse.text();
+  assert.match(guideHtml, /Daum은 검증 중인 이메일 Provider 후보 중 하나/);
+  assert.match(guideHtml, /승인 ID의 원자적 소비/);
+  assert.doesNotMatch(guideHtml, /Gemma4/);
 });
 
 test("renders the site-wide AIWORK support card exactly once per page", async () => {

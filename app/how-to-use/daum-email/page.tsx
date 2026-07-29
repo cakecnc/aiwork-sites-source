@@ -3,9 +3,9 @@ import Link from "next/link";
 import DetailPage from "../../components/DetailPage";
 
 export const metadata: Metadata = {
-  title: "AIWORK Daum 메일 설계 안내 | 현재 미구현",
+  title: "AIWORK 이메일 연결 설계 안내 | Daum Provider 후보",
   description:
-    "현재 Browser RC에 구현되지 않은 Daum 메일 읽기 전용 연동의 보안 설계와 향후 검증 순서를 안내합니다.",
+    "이메일은 읽기 전용이 기본이며 최종 내용을 사용자가 승인한 한 건만 발송하는 정책과, 현재 미구현인 Daum Provider 후보의 검증 범위를 안내합니다.",
   alternates: { canonical: "/how-to-use/daum-email" },
 };
 
@@ -55,7 +55,7 @@ const phases = [
   {
     status: "후속 계획",
     title: "단건 승인 후 발송",
-    body: "발송은 읽기 전용 검증과 별도 안전 기준을 통과한 뒤에만 검토하는 단계입니다.",
+    body: "최종 발신 계정·수신자·제목·본문·첨부를 확인한 승인 한 건만 원자적으로 소비해 발송하도록 검증하는 단계입니다.",
   },
   {
     status: "후속 계획",
@@ -73,16 +73,16 @@ export default function DaumEmailGuidePage() {
   return (
     <DetailPage
       active="guide"
-      eyebrow="GUIDE 04 · DAUM EMAIL"
+      eyebrow="EMAIL PROVIDER GUIDE · DAUM CANDIDATE"
       status="현재 미구현 · 설계 참고"
       title={
         <>
-          Daum 메일을
+          이메일은 읽기 전용부터.
           <br />
-          읽기 전용으로 연결.
+          발송은 최종 승인 후.
         </>
       }
-      description="Daum IMAP·SMTP·메일 검색·분류는 현재 Browser RC에 구현되지 않았습니다. 구현·보안 검증 완료 전에는 AIWORK에 계정 또는 앱 비밀번호를 입력하지 마세요."
+      description="Daum은 검증 중인 이메일 Provider 후보 중 하나이며 AIWORK의 필수 서비스가 아닙니다. 실제 IMAP·SMTP·메일 검색·분류는 현재 Browser RC에 구현되지 않았습니다."
       imageLabel="SAFE EMAIL GUIDE"
     >
       <section className="warning-panel" role="note">
@@ -155,8 +155,9 @@ export default function DaumEmailGuidePage() {
         </div>
         <p>
           초기 검증에서는 SMTP 발송, 삭제, 플래그 변경, 첨부 실행을 허용하지 않는
-          것이 기준입니다. 보내기 기능이 추가되더라도 수신자 확인과 단건 승인을
-          별도로 거쳐야 합니다.
+          것이 기준입니다. 보내기 기능은 최종 발신 계정·수신자·제목·본문·첨부를
+          확인한 건별 승인과 승인 ID의 원자적 소비를 별도로 검증한 뒤에만 추가할
+          수 있습니다.
         </p>
         <Link className="secondary-button" href="/security">
           AIWORK 보안 원칙 <span>↗</span>

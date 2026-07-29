@@ -61,10 +61,17 @@ const features = [
   },
   {
     status: "미구현 · 설계 검증",
-    label: "EMAIL",
-    title: "읽기 전용 이메일 정리",
+    label: "EMAIL CONNECTIONS",
+    title: "읽기 전용 기본·승인 후 발송",
     description:
-      "Daum 메일 읽기 전용 검색·분류는 설계 자료만 검토 중이며 현재 Browser RC에 구현되지 않았습니다. 발송 기능도 제공하지 않습니다.",
+      "수신·조회·분류는 Read-only가 기본입니다. 최종 발신 계정·수신자·제목·본문·첨부를 사용자가 확인한 한 건만 발송하도록 계약을 검증 중이며, 실제 네트워크·발송 기능은 없습니다.",
+  },
+  {
+    status: "미구현 · 계약 검증",
+    label: "USER-SELECTED AI",
+    title: "Local·Cloud AI 직접 선택",
+    description:
+      "특정 모델에 고정하지 않습니다. 사용자가 작업별로 Local Runtime 또는 직접 연결한 Cloud Provider와 Model을 선택하고, 외부 전송 범위와 비용 상한을 확인하도록 계약을 검증 중입니다.",
   },
   {
     status: "연구 중",
@@ -133,7 +140,7 @@ export default function FeaturesPage() {
         <div>
           <span>LEARN BY DOING</span>
           <h2>기능별 사용 흐름을 먼저 살펴보세요.</h2>
-          <p>현재 Browser 사용법과 후속 프로젝트·문서·웹 조사·Daum 메일 안내를 구분했습니다.</p>
+          <p>현재 Browser 사용법과 후속 프로젝트·문서·조사·이메일 Provider 안내를 구분했습니다.</p>
         </div>
         <div className="detail-actions">
           <Link className="primary-button" href="/how-to-use/browser">
