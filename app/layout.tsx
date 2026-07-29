@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   applicationName: "AIWORK",
   title: "AIWORK | AI가 이해하고, AIWORK가 안전하게 실행합니다",
   description:
-    "현재 공개된 AIWORK Browser RC와 승인 기반 Workbench 제품 비전을 소개합니다. AI Agent 본체·메일 자동화·화면 직접 조작은 아직 제공되지 않습니다.",
+    "공개된 AIWORK Browser RC와 내부 구현·로컬 검증을 마친 승인 기반 Local Workbench를 소개합니다. 이메일·AI·외부 실행은 별도 활성화가 필요합니다.",
   alternates: {
     canonical: "/",
   },
@@ -33,14 +33,14 @@ export const metadata: Metadata = {
     siteName: "AIWORK",
     title: "AIWORK | 안전한 AI 업무 실행 조정자",
     description:
-      "현재는 사용자 실행형 Browser RC를 제공하며, 선택 AI·문서·메일·실행을 잇는 Workbench는 후속 제품 비전입니다.",
+      "Browser RC는 공개 범위이며, 자료·근거·승인·결과물·감사를 잇는 Local Workbench는 내부 구현·로컬 검증 상태입니다.",
     images: ["/images/aiwork-wink-assistant-512.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "AIWORK | AI가 이해하고, AIWORK가 안전하게 실행합니다",
     description:
-      "공식 홈페이지와 사용자 실행형 Browser RC를 제공하며 AI Agent Runtime은 아직 구현되지 않았습니다.",
+      "공식 홈페이지와 Browser RC를 제공하며 Local Workbench는 내부 구현·로컬 검증 상태입니다. 외부 Adapter는 활성화 전입니다.",
     images: ["/images/aiwork-wink-assistant-512.png"],
   },
   robots: {

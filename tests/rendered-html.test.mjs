@@ -87,7 +87,7 @@ test("renders the safe AI work orchestration homepage", async () => {
   assert.match(html, /AIWORK/);
   assert.match(html, /AI가 이해하고/);
   assert.match(html, /AIWORK가 안전하게 실행합니다/);
-  assert.match(html, /AI Agent 본체 미구현/);
+  assert.match(html, /Local Workbench 내부 검증/);
   assert.match(html, /맥락/);
   assert.match(html, /문서 비교/);
   assert.match(html, /검수·전달/);
@@ -96,11 +96,13 @@ test("renders the safe AI work orchestration homepage", async () => {
   assert.match(html, /공식 홈페이지·구매 문의/);
   assert.match(html, /개인 AI 프로필/);
   assert.match(html, /이메일 연결/);
-  assert.match(html, /수신은 Read-only가 기본/);
+  assert.match(html, /Read-only 수신과 최종 내용을 사용자가 승인한 한 건만 발송/);
   assert.match(html, /사용자 선택형 AI/);
   assert.match(html, /특정 모델에 고정하지 않고/);
   assert.doesNotMatch(html, /Daum Email(?:·| &amp;| & )Gemma4/);
-  assert.match(html, /Browser RC 구현 · AI Agent 본체 미구현/);
+  assert.match(html, /Browser RC 공개 범위 · Local Workbench 구현·로컬 검증/);
+  assert.match(html, /내부 구현 · 활성화 필요/);
+  assert.doesNotMatch(html, /AI Agent 본체 미구현/);
   assert.match(html, /독립 기능의 검증 상태/);
   assert.match(html, /한 기능을 선택해도 다른 외부 기능은 자동 활성화되지 않습니다/);
   assert.match(html, /비밀번호·API 키·토큰·쿠키를 저장하지 않습니다/);
@@ -156,7 +158,7 @@ test("renders the public AIWORK Browser privacy policy", async () => {
 
 const detailRoutes = [
   ["/product", "AIWORK PRODUCT", "플랫폼 로드맵"],
-  ["/features", "CONNECTED INTELLIGENCE", "미구현 · 설계 검증"],
+  ["/features", "CONNECTED INTELLIGENCE", "내부 구현 · 로컬 검증"],
   ["/security", "SECURITY BY BOUNDARY", "향후 기본 허용 목표"],
   ["/pricing", "PLANS &amp; INQUIRY", "구매 문의 접수"],
   ["/download", "DOWNLOAD &amp; RELEASE", "배포 파일 준비 중"],
@@ -204,7 +206,7 @@ test("renders every section as an individual page", async () => {
   }
 });
 
-test("publishes email and AI as independent, not-yet-implemented capabilities", async () => {
+test("publishes email and AI as independent activation-required capabilities", async () => {
   const featuresResponse = await render("/features");
   assert.equal(featuresResponse.status, 200);
   const featuresHtml = await featuresResponse.text();
@@ -212,6 +214,9 @@ test("publishes email and AI as independent, not-yet-implemented capabilities", 
   assert.match(featuresHtml, /최종 발신 계정·수신자·제목·본문·첨부/);
   assert.match(featuresHtml, /Local·Cloud AI 직접 선택/);
   assert.match(featuresHtml, /특정 모델에 고정하지 않습니다/);
+  assert.match(featuresHtml, /자료 → 근거 → 승인 → 결과물/);
+  assert.match(featuresHtml, /내부 구현 · 활성화 필요/);
+  assert.match(featuresHtml, /실제 Model Adapter는 활성화 전/);
   assert.doesNotMatch(featuresHtml, /Daum Email(?:·| &amp;| & )Gemma4/);
 
   const guideResponse = await render("/how-to-use/daum-email");
