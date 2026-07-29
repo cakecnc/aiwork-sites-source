@@ -85,6 +85,7 @@ test("renders the safe AI work orchestration homepage", async () => {
   assert.match(html, /"@type":"WebSite"/);
   assert.doesNotMatch(html, developmentPreviewMeta);
   assert.match(html, /AIWORK/);
+  assert.match(html, /data-page-transition=["']enter["']/);
   assert.match(html, /AI가 이해하고/);
   assert.match(html, /AIWORK가 안전하게 실행합니다/);
   assert.match(html, /Local Workbench 내부 검증/);
@@ -124,6 +125,36 @@ test("renders the safe AI work orchestration homepage", async () => {
     /https:\/\/www\.paypal\.com\/ncp\/payment\/R3NBTNC3KYCVE/,
   );
   assert.match(html, /support@aiwork\.to/);
+});
+
+test("ships accessible page transition and loading fallbacks", async () => {
+  const response = await render("/features");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /data-page-transition=["']enter["']/);
+  assert.match(html, /route-enter-progress/);
+
+  const styles = await readFile(
+    new URL("../app/globals.css", import.meta.url),
+    "utf8",
+  );
+  assert.match(styles, /\.route-enter-progress/);
+  assert.match(styles, /@keyframes aiwork-page-enter/);
+  assert.match(styles, /@keyframes aiwork-loading-progress/);
+  assert.match(
+    styles,
+    /@media \(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.route-enter-progress\s*{[\s\S]*?display:\s*none;/,
+  );
+
+  const loadingSource = await readFile(
+    new URL("../app/loading.tsx", import.meta.url),
+    "utf8",
+  );
+  assert.match(loadingSource, /aria-busy=["']true["']/);
+  assert.match(loadingSource, /role=["']status["']/);
+  assert.match(loadingSource, /aria-live=["']polite["']/);
+  assert.match(loadingSource, /페이지를 안전하게 준비하고 있습니다/);
 });
 
 test("renders the public AIWORK Browser privacy policy", async () => {
