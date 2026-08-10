@@ -10,12 +10,23 @@ fi
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-git -C "$PROJECT_ROOT" fetch --prune origin main staging prod >/dev/null
+get_remote_sha() {
+  local branch="$1"
+  git -C "$PROJECT_ROOT" ls-remote --refs origin "refs/heads/$branch" | awk 'NR==1 {print $1}'
+}
 
-main_sha="$(git -C "$PROJECT_ROOT" rev-parse origin/main)"
-staging_sha="$(git -C "$PROJECT_ROOT" rev-parse origin/staging)"
-prod_sha="$(git -C "$PROJECT_ROOT" rev-parse origin/prod)"
-target_sha="$(git -C "$PROJECT_ROOT" rev-parse "origin/$target")"
+main_sha="$(get_remote_sha main)"
+staging_sha="$(get_remote_sha staging)"
+prod_sha="$(get_remote_sha prod)"
+target_sha="$(get_remote_sha "$target")"
+
+if [ -z "$main_sha" ] || [ -z "$target_sha" ] || [ -z "$staging_sha" ] || [ -z "$prod_sha" ]; then
+  echo "원격 브랜치 SHA 조회 실패(브랜치 미존재 가능):"
+  [ -z "$main_sha" ] && echo "  - origin/main: not found"
+  [ -z "$staging_sha" ] && echo "  - origin/staging: not found"
+  [ -z "$prod_sha" ] && echo "  - origin/prod: not found"
+  exit 1
+fi
 
 echo "Remote branch SHA"
 printf 'main   : %s\n' "$main_sha"
