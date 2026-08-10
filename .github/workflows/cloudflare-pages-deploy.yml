@@ -1,0 +1,40 @@
+name: cloudflare-pages-deploy
+
+on:
+  push:
+    branches:
+      - staging
+      - prod
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm ci
+      - name: Build and validate
+        run: npm run build
+      - name: Deploy to Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_PAGES_PROJECT_NAME: ${{ vars.CLOUDFLARE_PAGES_PROJECT_NAME }}
+        run: |
+          if [ -z "$CLOUDFLARE_PAGES_PROJECT_NAME" ]; then
+            echo "Set repository variable CLOUDFLARE_PAGES_PROJECT_NAME"
+            exit 1
+          fi
+          npx wrangler pages deploy dist \
+            --project-name "$CLOUDFLARE_PAGES_PROJECT_NAME" \
+            --branch "${GITHUB_REF_NAME}" \
+            --commit-hash "${GITHUB_SHA}" \
+            --commit-message "${{ github.event.head_commit.message }}"
+          echo "deploy_target=\${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+          echo "deploy_sha=\${GITHUB_SHA}" >> "$GITHUB_OUTPUT"

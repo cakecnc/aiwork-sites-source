@@ -13,7 +13,10 @@
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "validate:artifact": "bash scripts/validate-artifact.sh",
     "lint": "bash scripts/sites-env.sh -- eslint . --ignore-pattern dist --ignore-pattern .next",
-    "db:generate": "bash scripts/sites-env.sh -- drizzle-kit generate"
+    "db:generate": "bash scripts/sites-env.sh -- drizzle-kit generate",
+    "deploy:staging": "bash scripts/deploy-main-to-branch.sh staging",
+    "deploy:prod": "bash scripts/deploy-main-to-branch.sh prod",
+    "deploy:check": "bash scripts/check-deploy-sha.sh"
   },
   "dependencies": {
     "drizzle-orm": "0.45.2",
@@ -44,5 +47,5 @@
     "sharp": "0.35.3"
   },
   "type": "module",
-  "displayName": "AIWORK \uacf5\uc2dd \ud648\ud398\uc774\uc9c0"
+  "displayName": "AIWORK 공식 홈페이지"
 }
