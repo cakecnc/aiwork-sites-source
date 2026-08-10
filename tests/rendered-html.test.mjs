@@ -124,7 +124,7 @@ test("renders the safe AI work orchestration homepage", async () => {
     html,
     /https:\/\/www\.paypal\.com\/ncp\/payment\/R3NBTNC3KYCVE/,
   );
-  assert.match(html, /support@aiwork\.to/);
+  assert.match(html, /cakecnc@daum\.net/);
 });
 
 test("ships accessible page transition and loading fallbacks", async () => {
@@ -177,7 +177,7 @@ test("renders the public AIWORK Browser privacy policy", async () => {
   assert.match(html, /__cf_bm/);
   assert.match(html, /광고·맞춤형[\s\S]{0,80}추적 쿠키/);
   assert.match(html, /ENGLISH SUMMARY/);
-  assert.match(html, /support@aiwork\.to/);
+  assert.match(html, /cakecnc@daum\.net/);
   assert.match(html, /90일 만료값/);
   assert.match(html, /다음 접근이나 서비스 자료 삭제 시점/);
   assert.match(html, /Turnstile은 봇 방지를 위해 토큰·IP/);
@@ -303,7 +303,7 @@ test("fails closed when purchase email automation is not configured", async () =
   assert.equal(readiness.status, 200);
   assert.deepEqual(await readiness.json(), {
     available: false,
-    supportEmail: "support@aiwork.to",
+    supportEmail: "cakecnc@daum.net",
   });
 
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);

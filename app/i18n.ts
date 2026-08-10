@@ -311,7 +311,7 @@ export const messages: Record<Locale, MessageSet> = {
         "AIWORK 개발, 문서화, 서비스 개선과 사용자 지원을 위한 자발적 후원입니다.",
       supportAction: "PayPal로 후원",
       disclaimer:
-        "Professional과 Business는 아직 일반 출시되지 않았습니다. Chrome Extension은 공개 출시 후, Google Drive 기능은 Google OAuth 승인 완료 후 제공됩니다. 구매 문의를 등록하거나 support@aiwork.to로 제공 범위와 일정을 먼저 확인해 주세요. 문의 등록은 구매·결제 완료를 뜻하지 않습니다.",
+        "Professional과 Business는 아직 일반 출시되지 않았습니다. Chrome Extension은 공개 출시 후, Google Drive 기능은 Google OAuth 승인 완료 후 제공됩니다. 구매 문의를 등록하거나 cakecnc@daum.net으로 제공 범위와 일정을 먼저 확인해 주세요. 문의 등록은 구매·결제 완료를 뜻하지 않습니다.",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",
@@ -494,7 +494,7 @@ export const messages: Record<Locale, MessageSet> = {
         "Voluntary contributions support AIWORK development, documentation, service improvements, and user support.",
       supportAction: "Support with PayPal",
       disclaimer:
-        "Professional and Business are not yet generally available. The Chrome Extension will be provided after public release, and Google Drive features after Google OAuth approval. Send a purchase inquiry or confirm scope and timing at support@aiwork.to. An inquiry is not a completed purchase or payment.",
+        "Professional and Business are not yet generally available. The Chrome Extension will be provided after public release, and Google Drive features after Google OAuth approval. Send a purchase inquiry or confirm scope and timing at cakecnc@daum.net. An inquiry is not a completed purchase or payment.",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",
@@ -678,7 +678,7 @@ export const messages: Record<Locale, MessageSet> = {
         "AIWORKの開発、文書化、サービス改善、ユーザーサポートのための任意の支援です。",
       supportAction: "PayPalで支援",
       disclaimer:
-        "ProfessionalとBusinessはまだ一般公開されていません。Chrome Extensionは公開後、Google Drive機能はGoogle OAuth承認後に提供されます。購入相談を送信するか、support@aiwork.toで提供範囲と時期をご確認ください。相談の送信は購入・決済完了を意味しません。",
+        "ProfessionalとBusinessはまだ一般公開されていません。Chrome Extensionは公開後、Google Drive機能はGoogle OAuth承認後に提供されます。購入相談を送信するか、cakecnc@daum.netで提供範囲と時期をご確認ください。相談の送信は購入・決済完了を意味しません。",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",
@@ -858,7 +858,7 @@ export const messages: Record<Locale, MessageSet> = {
         "自愿支持将用于 AIWORK 开发、文档、服务改进与用户支持。",
       supportAction: "通过 PayPal 支持",
       disclaimer:
-        "Professional 和 Business 尚未正式公开发布。Chrome Extension 将在公开发布后提供，Google Drive 功能将在 Google OAuth 获批后提供。请提交购买咨询或通过 support@aiwork.to 确认范围和时间。提交咨询并不表示购买或付款完成。",
+        "Professional 和 Business 尚未正式公开发布。Chrome Extension 将在公开发布后提供，Google Drive 功能将在 Google OAuth 获批后提供。请提交购买咨询或通过 cakecnc@daum.net 确认范围和时间。提交咨询并不表示购买或付款完成。",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",
@@ -1050,7 +1050,7 @@ export const messages: Record<Locale, MessageSet> = {
         "مساهمات طوعية لدعم تطوير AIWORK وتوثيقه وتحسين الخدمة ودعم المستخدمين.",
       supportAction: "ادعم عبر PayPal",
       disclaimer:
-        "لم يُطرح Professional وBusiness للعامة بعد. سيتوفر Chrome Extension بعد الإطلاق العام، وستتوفر ميزات Google Drive بعد موافقة Google OAuth. أرسل استفسار شراء أو أكّد النطاق والموعد عبر support@aiwork.to. إرسال الاستفسار لا يعني إتمام الشراء أو الدفع.",
+        "لم يُطرح Professional وBusiness للعامة بعد. سيتوفر Chrome Extension بعد الإطلاق العام، وستتوفر ميزات Google Drive بعد موافقة Google OAuth. أرسل استفسار شراء أو أكّد النطاق والموعد عبر cakecnc@daum.net. إرسال الاستفسار لا يعني إتمام الشراء أو الدفع.",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",
@@ -1255,7 +1255,7 @@ export const messages: Record<Locale, MessageSet> = {
         "Las aportaciones voluntarias apoyan el desarrollo, la documentación, la mejora del servicio y la atención a usuarios de AIWORK.",
       supportAction: "Apoyar con PayPal",
       disclaimer:
-        "Professional y Business aún no están disponibles de forma general. Chrome Extension se entregará tras el lanzamiento público y Google Drive tras la aprobación de Google OAuth. Envía una consulta o confirma alcance y fecha en support@aiwork.to. La consulta no implica que la compra o el pago estén completados.",
+        "Professional y Business aún no están disponibles de forma general. Chrome Extension se entregará tras el lanzamiento público y Google Drive tras la aprobación de Google OAuth. Envía una consulta o confirma alcance y fecha en cakecnc@daum.net. La consulta no implica que la compra o el pago estén completados.",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",
@@ -1466,7 +1466,7 @@ export const messages: Record<Locale, MessageSet> = {
         "Les contributions volontaires soutiennent le développement, la documentation, l’amélioration du service et l’assistance aux utilisateurs d’AIWORK.",
       supportAction: "Soutenir via PayPal",
       disclaimer:
-        "Professional et Business ne sont pas encore disponibles au public. Chrome Extension sera fourni après le lancement public et Google Drive après l’approbation Google OAuth. Envoyez une demande ou confirmez le périmètre et le calendrier à support@aiwork.to. Une demande ne constitue pas un achat ou paiement finalisé.",
+        "Professional et Business ne sont pas encore disponibles au public. Chrome Extension sera fourni après le lancement public et Google Drive après l’approbation Google OAuth. Envoyez une demande ou confirmez le périmètre et le calendrier à cakecnc@daum.net. Une demande ne constitue pas un achat ou paiement finalisé.",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",
@@ -1680,7 +1680,7 @@ export const messages: Record<Locale, MessageSet> = {
         "Freiwillige Beiträge unterstützen die Entwicklung, Dokumentation, Serviceverbesserung und Nutzerbetreuung von AIWORK.",
       supportAction: "Mit PayPal unterstützen",
       disclaimer:
-        "Professional und Business sind noch nicht allgemein verfügbar. Chrome Extension wird nach der öffentlichen Veröffentlichung, Google Drive nach der Google-OAuth-Genehmigung bereitgestellt. Senden Sie eine Kaufanfrage oder bestätigen Sie Umfang und Termin unter support@aiwork.to. Eine Anfrage ist kein abgeschlossener Kauf oder Zahlungsvorgang.",
+        "Professional und Business sind noch nicht allgemein verfügbar. Chrome Extension wird nach der öffentlichen Veröffentlichung, Google Drive nach der Google-OAuth-Genehmigung bereitgestellt. Senden Sie eine Kaufanfrage oder bestätigen Sie Umfang und Termin unter cakecnc@daum.net. Eine Anfrage ist kein abgeschlossener Kauf oder Zahlungsvorgang.",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",

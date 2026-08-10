@@ -1,4 +1,4 @@
-export const SUPPORT_EMAIL = "support@aiwork.to";
+export const SUPPORT_EMAIL = "cakecnc@daum.net";
 
 export const DONATION_URL =
   "https://www.paypal.com/ncp/payment/R3NBTNC3KYCVE";
