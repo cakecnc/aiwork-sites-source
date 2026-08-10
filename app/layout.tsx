@@ -106,6 +106,7 @@ export default function RootLayout({
     <html lang="ko" suppressHydrationWarning>
       <head>
         <ThemeBoot />
+        <script src="/security-hardening.js" defer />
         <script type="application/ld+json">
           {JSON.stringify(structuredData).replace(/</g, "\\u003c")}
         </script>
