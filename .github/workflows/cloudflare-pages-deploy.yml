@@ -25,10 +25,10 @@ jobs:
       - name: Deploy to Cloudflare Pages
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_PAGES_PROJECT_NAME: ${{ vars.CLOUDFLARE_PAGES_PROJECT_NAME || 'aiwork-official-site' }}
+          CLOUDFLARE_PAGES_PROJECT_NAME: ${{ vars.CLOUDFLARE_PAGES_PROJECT_NAME }}
         run: |
           if [ -z "$CLOUDFLARE_PAGES_PROJECT_NAME" ]; then
-            echo "Set repository variable CLOUDFLARE_PAGES_PROJECT_NAME or confirm fallback value."
+            echo "Set repository variable CLOUDFLARE_PAGES_PROJECT_NAME"
             exit 1
           fi
           npx wrangler pages deploy dist \
