@@ -109,6 +109,10 @@ const worker = {
       return withSecurityHeaders(imageResponse, url);
     }
 
+    if (url.pathname === "/webmcp.js" || url.pathname === "/security-hardening.js") {
+      return withSecurityHeaders(await env.ASSETS.fetch(new Request(url)), url);
+    }
+
     return withSecurityHeaders(await handler.fetch(request, env, ctx), url);
   },
 };
