@@ -126,14 +126,23 @@ test("renders the safe AI work orchestration homepage", async () => {
   );
   assert.match(html, /cakecnc@daum\.net/);
   assert.match(html, /src=["']\/security-hardening\.js["']/);
+  assert.match(html, /src=["']\/webmcp\.js["']/);
 
   const rightClickScript = await readFile(
     new URL("../dist/client/security-hardening.js", import.meta.url),
     "utf8",
   );
+  const webmcpScript = await readFile(
+    new URL("../dist/client/webmcp.js", import.meta.url),
+    "utf8",
+  );
   assert.match(rightClickScript, /우클릭은 사용할 수 없습니다/);
   assert.match(rightClickScript, /font-weight:700/);
   assert.match(rightClickScript, /text-align:center/);
+  assert.match(webmcpScript, /aiwork-page-context/);
+  assert.match(webmcpScript, /aiwork-page-links/);
+  assert.match(webmcpScript, /aiwork-page-sections/);
+  assert.match(webmcpScript, /registerTool/);
 });
 
 test("ships accessible page transition and loading fallbacks", async () => {

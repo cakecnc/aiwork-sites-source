@@ -107,6 +107,7 @@ export default function RootLayout({
       <head>
         <ThemeBoot />
         <script src="/security-hardening.js" defer />
+        <script src="/webmcp.js" defer />
         <script type="application/ld+json">
           {JSON.stringify(structuredData).replace(/</g, "\\u003c")}
         </script>
