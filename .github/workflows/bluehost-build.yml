@@ -1,0 +1,47 @@
+name: Bluehost build and review artifact
+on:
+  push:
+    branches: [bluehost]
+  pull_request:
+    branches: [bluehost]
+permissions:
+  contents: read
+concurrency:
+  group: bluehost-build-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install exact locked dependencies
+        run: npm ci
+      - name: Build one clean Bluehost static export
+        run: |
+          test ! -e out
+          npm run build:static
+      - name: Run regression tests and types
+        run: |
+          node --test tests/*.test.mjs tests/cinematic-engine.test.cjs
+          npx tsc --noEmit
+      - name: Freeze public artifact hashes
+        run: |
+          mkdir -p .bluehost-artifact
+          python3 deploy/artifact_inventory.py --export out --source-commit "$GITHUB_SHA" --output .bluehost-artifact/inventory.json
+          cp -R out .bluehost-artifact/payload
+          printf 'Review this exact artifact before publishing bluehost-release.\n' >> "$GITHUB_STEP_SUMMARY"
+          shasum -a 256 .bluehost-artifact/inventory.json >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bluehost-static-${{ github.sha }}
+          path: .bluehost-artifact/
+          retention-days: 14
+          if-no-files-found: error
+          include-hidden-files: true
