@@ -1,0 +1,104 @@
+/* One expanded navigation tree, present from the initial server render. */
+:root { --header-height: 72px; scroll-padding-top: calc(var(--header-height) + 20px); }
+body { padding-top: var(--header-height); }
+[id] { scroll-margin-top: calc(var(--header-height) + 20px); }
+.topbar.section-topbar.unified-header {
+  position: fixed; inset: 0 0 auto; top: 0; z-index: 100;
+  width: 100%; max-width: none; height: auto; min-height: 72px; margin: 0;
+  padding: 12px max(20px, calc((100vw - 1480px) / 2));
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px;
+  overflow: visible; border-radius: 0; border-width: 0 0 1px;
+  border-color: color-mix(in srgb, var(--accent) 26%, var(--line));
+  background: color-mix(in srgb, var(--surface-solid) 82%, transparent);
+  color: var(--text); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+}
+.unified-header .brand { flex: 0 0 auto; order: 0; }
+.unified-header .brand small { display: none; }
+.unified-header .header-panel { display: contents; }
+.unified-header .main-nav.section-nav {
+  display: flex; flex: 1 1 560px; order: 1; align-items: center;
+  justify-content: center; flex-wrap: wrap; min-width: 0; gap: 4px 14px;
+  font-size: 13px; white-space: normal;
+}
+.unified-header .section-nav a {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 40px; padding: 8px 3px; text-align: center;
+  white-space: normal; overflow-wrap: anywhere; line-height: 1.35;
+}
+.unified-header .header-actions {
+  display: flex; flex: 0 1 auto; order: 2; align-items: center;
+  min-width: 0; margin-inline-start: auto; gap: 8px;
+}
+.unified-header .preference-actions { flex: 0 0 auto; gap: 8px; }
+.unified-header .install-small {
+  display: inline-flex; justify-content: center; height: auto; min-height: 40px;
+  max-inline-size: 150px; padding: 8px 12px; line-height: 1.3;
+  text-align: center; white-space: normal; overflow-wrap: anywhere;
+}
+.unified-header .theme-menu,.unified-header .language-menu {
+  z-index: 105; max-height: calc(100dvh - var(--header-height) - 24px);
+  overflow-y: auto; overscroll-behavior: contain; white-space: normal;
+}
+@media (max-width: 1320px) {
+  :root { --header-height: 118px; }
+  .topbar.section-topbar.unified-header { gap: 4px 16px; padding: 10px 20px 6px; }
+  .unified-header .main-nav.section-nav {
+    display: grid; flex-basis: 100%; order: 3;
+    grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 4px;
+    padding-top: 4px; border-top: 1px solid var(--line); font-size: 12px;
+  }
+  .unified-header .theme-menu,.unified-header .language-menu {
+    position: fixed; top: calc(var(--header-height) + 8px); bottom: auto;
+    inset-inline-start: auto; inset-inline-end: 12px;
+    max-width: calc(100vw - 24px);
+  }
+}
+@media (max-width: 700px) {
+  :root { --header-height: 156px; }
+  .topbar.section-topbar.unified-header { padding: 8px 12px 6px; gap: 4px 10px; }
+  .unified-header .main-nav.section-nav { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 4px; }
+  .unified-header .section-nav a { min-height: 38px; padding: 7px 4px; font-size: 11px; }
+  .unified-header .brand { gap: 7px; }
+  .unified-header .brand > span { font-size: 14px; }
+  .unified-header .brand-product-mark { --mark-size: 32px; }
+  .unified-header .header-actions,.unified-header .preference-actions { gap: 5px; }
+  .unified-header .theme-trigger,.unified-header .language-trigger { height: 38px; padding-inline: 8px; gap: 5px; }
+  .unified-header .language-trigger { min-width: 52px; }
+  .unified-header .trigger-label { display: none; }
+  .unified-header .install-small { min-height: 38px; max-inline-size: 88px; padding: 6px 8px; font-size: 10px; }
+  .unified-header .theme-menu,.unified-header .language-menu { width: calc(100vw - 24px); }
+}
+@media (max-width: 359px) {
+  :root { --header-height: 194px; }
+  .unified-header .header-actions { justify-content: flex-end; flex-basis: 100%; }
+}
+.back-to-top { position: fixed; z-index: 80; inset-inline-end: 20px; bottom: max(24px,env(safe-area-inset-bottom)); padding: 12px 16px; border: 1px solid var(--accent); border-radius: 5px; background: var(--surface-solid); color: var(--text); font: 600 13px/1.4 monospace; cursor: pointer; }
+.back-to-top[hidden] { display: none; }
+/* Boundary light never changes layout, the text color, or the hit area. */
+[data-proximity-glow] {
+  --proximity-strength: 0;
+  outline: 1px solid color-mix(in srgb, var(--accent) calc(var(--proximity-strength) * 70%), transparent);
+  outline-offset: 2px;
+  box-shadow: 0 0 calc(var(--proximity-strength) * 24px) color-mix(in srgb,var(--accent) calc(var(--proximity-strength) * 38%),transparent);
+  transition: outline-color 120ms linear, box-shadow 120ms linear;
+}
+[data-proximity-glow]:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; box-shadow: 0 0 18px var(--matrix-glow); }
+@media (hover: none) { [data-proximity-glow]:active { outline: 2px solid var(--accent); } }
+@media (prefers-reduced-motion: reduce) { [data-proximity-glow] { transition: none !important; } }
+/* Retain the independent tool content and controls; use the global random glyph layer only. */
+.hashcat-page .matrix-rain { display: none; }
+body { padding-bottom: 88px; }
+[data-proximity-glow] { box-shadow: 0 0 calc(var(--proximity-strength) * 24px) color-mix(in srgb,var(--accent) calc(var(--proximity-strength) * 38%),transparent) !important; }
+[data-proximity-glow]:focus-visible { box-shadow: 0 0 18px var(--matrix-glow) !important; }
+
+/* V12 motion repair: keep existing card movement smooth alongside proximity light.
+   No new displacement, touch hover, or reduced-motion animation is introduced. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  :is(.home-workbench,.detail-visual,.home-role-grid article,
+    .home-capability-grid article,.home-boundary-grid article,
+    .price-card,.support-card,.fact-card,.guide-card)[data-proximity-glow] {
+    transition: transform 140ms ease, border-color 140ms ease,
+      background-color 140ms ease, outline-color 120ms linear,
+      box-shadow 120ms linear;
+  }
+}

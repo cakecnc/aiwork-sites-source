@@ -1,3 +1,4 @@
+export const dynamic = "force-static";
 import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
@@ -5,7 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "AIWORK",
     short_name: "AIWORK",
     description:
-      "AIWORK Browser RC와 승인 기반 Workbench 제품 비전을 소개하는 AIWORK 공식 홈페이지",
+      "Local Workbench와 활성화가 필요한 Browser RC의 현재 상태를 구분해 소개하는 AIWORK 공식 홈페이지",
     start_url: "/",
     display: "standalone",
     background_color: "#f7f9fc",

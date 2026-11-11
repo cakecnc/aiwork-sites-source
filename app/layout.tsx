@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "./matrix-theme.css";
+import GlobalInteractions from "./components/GlobalInteractions";
+import "./header-flow.css";
+import CinematicMatrix from "./components/CinematicMatrix";
+import "./cinematic-theme.css";
+import "./glow-cap.css";
 import ThemeBoot from "./theme-boot";
 import { SitePreferencesProvider } from "./preferences";
 import { SUPPORT_EMAIL } from "./site-config";
@@ -20,9 +26,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: siteUrl,
   applicationName: "AIWORK",
-  title: "AIWORK | AI가 이해하고, AIWORK가 안전하게 실행합니다",
+  title: "AIWORK Browser | 웹 탐색과 AI 대화를 한 화면에서",
   description:
-    "공개된 AIWORK Browser RC와 내부 구현·로컬 검증을 마친 승인 기반 Local Workbench를 소개합니다. 이메일·AI·외부 실행은 별도 활성화가 필요합니다.",
+    "macOS에서 실행을 확인한 AIWORK Browser 개발 빌드. 독립 브라우저, NetGhost 프로필, 지원 데이터 가져오기와 선택형 Ollama 대화의 현재 구현·연결 조건·출시 준비 상태를 안내합니다.",
   alternates: {
     canonical: "/",
   },
@@ -31,16 +37,16 @@ export const metadata: Metadata = {
     locale: "ko_KR",
     url: "/",
     siteName: "AIWORK",
-    title: "AIWORK | 안전한 AI 업무 실행 조정자",
+    title: "AIWORK Browser | 독립 브라우저와 선택형 AI 대화",
     description:
-      "Browser RC는 공개 범위이며, 자료·근거·승인·결과물·감사를 잇는 Local Workbench는 내부 구현·로컬 검증 상태입니다.",
+      "macOS에서 실행을 확인한 AIWORK Browser 개발 빌드. 독립 브라우저, NetGhost 프로필, 지원 데이터 가져오기와 선택형 Ollama 대화의 현재 구현·연결 조건·출시 준비 상태를 안내합니다.",
     images: ["/images/aiwork-wink-assistant-512.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "AIWORK | AI가 이해하고, AIWORK가 안전하게 실행합니다",
+    title: "AIWORK Browser | 웹 탐색과 AI 대화를 한 화면에서",
     description:
-      "공식 홈페이지와 Browser RC를 제공하며 Local Workbench는 내부 구현·로컬 검증 상태입니다. 외부 Adapter는 활성화 전입니다.",
+      "macOS에서 실행을 확인한 AIWORK Browser 개발 빌드. 독립 브라우저, NetGhost 프로필, 지원 데이터 가져오기와 선택형 Ollama 대화의 현재 구현·연결 조건·출시 준비 상태를 안내합니다.",
     images: ["/images/aiwork-wink-assistant-512.png"],
   },
   robots: {
@@ -103,7 +109,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" suppressHydrationWarning>
+    <html lang="ko" data-theme="console" suppressHydrationWarning>
       <head>
         <ThemeBoot />
         <script src="/security-hardening.js" defer />
@@ -115,7 +121,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SitePreferencesProvider>{children}</SitePreferencesProvider>
+        <SitePreferencesProvider>
+          <CinematicMatrix />
+          <GlobalInteractions />
+          <div className="aiwork-cinematic-content">{children}</div>
+        </SitePreferencesProvider>
       </body>
     </html>
   );

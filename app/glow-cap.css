@@ -1,0 +1,166 @@
+/* Approved intensity cap: every v14 luminous layer is 70% of its prior alpha.
+   Dark text outlines, text colors, blur radii, target scopes and motion stay unchanged. */
+:root body :is(
+  .aiwork-cinematic-content button,
+  .aiwork-cinematic-content a:is(.primary-button,.secondary-button,.install-small,.hashcat-primary,.hashcat-paypal,.research-paypal),
+  .aiwork-cinematic-content .section-nav a,
+  .cinematic-motion-control,.back-to-top
+):not(:disabled,[aria-disabled="true"],[hidden],[inert],[inert] *,.browser-preview *):is(:active,:focus-visible),
+:root body :is(
+  .aiwork-cinematic-content button,
+  .aiwork-cinematic-content a:is(.primary-button,.secondary-button,.install-small,.hashcat-primary,.hashcat-paypal,.research-paypal),
+  .aiwork-cinematic-content .section-nav a,
+  .cinematic-motion-control,.back-to-top
+):not(:disabled,[aria-disabled="true"],[hidden],[inert],[inert] *,.browser-preview *):is(:active,:focus-visible) :is(span,strong,b,em,small) {
+  text-shadow: .6px 0 #000,-.6px 0 #000,0 .6px #000,0 -.6px #000,0 0 4px rgb(184 255 205 / 70%),0 0 12px rgb(49 255 128 / 70%),0 0 28px rgb(49 255 128 / 66.5%);
+}
+@media (hover: hover) and (pointer: fine) {
+:root:where(:not([data-aiwork-input="off"])) body :is(
+    .aiwork-cinematic-content button,
+    .aiwork-cinematic-content a:is(.primary-button,.secondary-button,.install-small,.hashcat-primary,.hashcat-paypal,.research-paypal),
+    .aiwork-cinematic-content .section-nav a,
+    .cinematic-motion-control,.back-to-top
+  ):not(:disabled,[aria-disabled="true"],[hidden],[inert],[inert] *,.browser-preview *):hover,
+:root:where(:not([data-aiwork-input="off"])) body :is(
+    .aiwork-cinematic-content button,
+    .aiwork-cinematic-content a:is(.primary-button,.secondary-button,.install-small,.hashcat-primary,.hashcat-paypal,.research-paypal),
+    .aiwork-cinematic-content .section-nav a,
+    .cinematic-motion-control,.back-to-top
+  ):not(:disabled,[aria-disabled="true"],[hidden],[inert],[inert] *,.browser-preview *):hover :is(span,strong,b,em,small),
+:root:where(:not([data-aiwork-input="off"])) body .aiwork-cinematic-content :is(
+    h1,h2,h3,h4,h5,h6,p,span,strong,b,em,small,i,bdi,
+    li,dt,dd,caption,th,td,time,blockquote,summary,legend,figcaption,
+    code,pre,kbd,samp,a,label:not(:has(> span)),
+    input:not([type="checkbox"],[type="radio"],[type="range"],[type="color"],[type="hidden"]),
+    textarea,select,option,.eyebrow,.home-user-prompt,.home-evidence
+  ):not(:disabled,:disabled *,[aria-disabled="true"],[aria-disabled="true"] *,
+    [hidden],[hidden] *,[inert],[inert] *,.honeypot,.honeypot *,
+    .aiwork-cinematic-scene,.aiwork-cinematic-scene *
+  ):not(:where(
+    button *,a:is(.primary-button,.secondary-button,.install-small,.hashcat-primary,.hashcat-paypal,.research-paypal),
+    a:is(.primary-button,.secondary-button,.install-small,.hashcat-primary,.hashcat-paypal,.research-paypal) *,
+    .section-nav a,.section-nav a *,.brand,.hashcat-brand,
+    .product-mark,.product-mark *,.swatches,.swatches *,
+    .compact-flow > li,.research-results > li
+  )):not(:has(> :where(div,section,article,ul,ol,li,p,h1,h2,h3,h4,h5,h6))):hover:not(:has(:hover)),
+:root:where(:not([data-aiwork-input="off"])) body .aiwork-cinematic-content :is(input,textarea):not(
+    :disabled,[aria-disabled="true"],[hidden],[hidden] *,[inert],[inert] *,
+    [aria-disabled="true"] *,.honeypot *
+  ):hover::placeholder,
+:root:where(:not([data-aiwork-input="off"])) body .aiwork-cinematic-content input[type="file"]:not(
+    :disabled,[aria-disabled="true"],[hidden],[hidden] *,[inert],[inert] *,
+    [aria-disabled="true"] *,.honeypot *
+  ):hover::file-selector-button {
+  text-shadow: .6px 0 #000,-.6px 0 #000,0 .6px #000,0 -.6px #000,0 0 4px rgb(184 255 205 / 70%),0 0 12px rgb(49 255 128 / 70%),0 0 28px rgb(49 255 128 / 66.5%);
+}
+}
+:root:where([data-aiwork-input="mouse"]) body :is(
+    .aiwork-cinematic-content button,
+    .aiwork-cinematic-content a:is(.primary-button,.secondary-button,.install-small,.hashcat-primary,.hashcat-paypal,.research-paypal),
+    .aiwork-cinematic-content .section-nav a,
+    .cinematic-motion-control,.back-to-top
+  ):not(:disabled,[aria-disabled="true"],[hidden],[inert],[inert] *,.browser-preview *):hover,
+:root:where([data-aiwork-input="mouse"]) body :is(
+    .aiwork-cinematic-content button,
+    .aiwork-cinematic-content a:is(.primary-button,.secondary-button,.install-small,.hashcat-primary,.hashcat-paypal,.research-paypal),
+    .aiwork-cinematic-content .section-nav a,
+    .cinematic-motion-control,.back-to-top
+  ):not(:disabled,[aria-disabled="true"],[hidden],[inert],[inert] *,.browser-preview *):hover :is(span,strong,b,em,small),
+:root:where([data-aiwork-input="mouse"]) body .aiwork-cinematic-content :is(
+    h1,h2,h3,h4,h5,h6,p,span,strong,b,em,small,i,bdi,
+    li,dt,dd,caption,th,td,time,blockquote,summary,legend,figcaption,
+    code,pre,kbd,samp,a,label:not(:has(> span)),
+    input:not([type="checkbox"],[type="radio"],[type="range"],[type="color"],[type="hidden"]),
+    textarea,select,option,.eyebrow,.home-user-prompt,.home-evidence
+  ):not(:disabled,:disabled *,[aria-disabled="true"],[aria-disabled="true"] *,
+    [hidden],[hidden] *,[inert],[inert] *,.honeypot,.honeypot *,
+    .aiwork-cinematic-scene,.aiwork-cinematic-scene *
+  ):not(:where(
+    button *,a:is(.primary-button,.secondary-button,.install-small,.hashcat-primary,.hashcat-paypal,.research-paypal),
+    a:is(.primary-button,.secondary-button,.install-small,.hashcat-primary,.hashcat-paypal,.research-paypal) *,
+    .section-nav a,.section-nav a *,.brand,.hashcat-brand,
+    .product-mark,.product-mark *,.swatches,.swatches *,
+    .compact-flow > li,.research-results > li
+  )):not(:has(> :where(div,section,article,ul,ol,li,p,h1,h2,h3,h4,h5,h6))):hover:not(:has(:hover)),
+:root:where([data-aiwork-input="mouse"]) body .aiwork-cinematic-content :is(input,textarea):not(
+    :disabled,[aria-disabled="true"],[hidden],[hidden] *,[inert],[inert] *,
+    [aria-disabled="true"] *,.honeypot *
+  ):hover::placeholder,
+:root:where([data-aiwork-input="mouse"]) body .aiwork-cinematic-content input[type="file"]:not(
+    :disabled,[aria-disabled="true"],[hidden],[hidden] *,[inert],[inert] *,
+    [aria-disabled="true"] *,.honeypot *
+  ):hover::file-selector-button {
+  text-shadow: .6px 0 #000,-.6px 0 #000,0 .6px #000,0 -.6px #000,0 0 4px rgb(184 255 205 / 70%),0 0 12px rgb(49 255 128 / 70%),0 0 28px rgb(49 255 128 / 66.5%);
+}
+
+/* Touch does not need hover: a small, steady halo is visible before contact.
+   Preserve resting text colors and button surfaces for their existing contrast. */
+@media (hover: none), (pointer: coarse) {
+:root:where(:not([data-aiwork-input="mouse"])) body .aiwork-cinematic-content :is(
+    h1,h2,h3,h4,h5,h6,p,span,strong,b,em,small,i,bdi,
+    li,dt,dd,caption,th,td,time,blockquote,summary,legend,figcaption,
+    code,pre,kbd,samp,a,label:not(:has(> span)),
+    input:not([type="checkbox"],[type="radio"],[type="range"],[type="color"],[type="hidden"]),
+    textarea,select,option,.eyebrow,.home-user-prompt,.home-evidence
+  ):not(:disabled,:disabled *,[aria-disabled="true"],[aria-disabled="true"] *,
+    [hidden],[hidden] *,[inert],[inert] *,.honeypot,.honeypot *,
+    .aiwork-cinematic-scene,.aiwork-cinematic-scene *
+  ):not(:where(
+    button *,a:is(.primary-button,.secondary-button,.install-small,.hashcat-primary,.hashcat-paypal,.research-paypal),
+    a:is(.primary-button,.secondary-button,.install-small,.hashcat-primary,.hashcat-paypal,.research-paypal) *,
+    .section-nav a,.section-nav a *,.brand,.hashcat-brand,
+    .product-mark,.product-mark *,.swatches,.swatches *,
+    .compact-flow > li,.research-results > li
+  )):not(:has(> :where(div,section,article,ul,ol,li,p,h1,h2,h3,h4,h5,h6))),
+:root:where(:not([data-aiwork-input="mouse"])) body :is(
+  .aiwork-cinematic-content button,
+  .aiwork-cinematic-content a:is(.primary-button,.secondary-button,.install-small,.hashcat-primary,.hashcat-paypal,.research-paypal),
+  .aiwork-cinematic-content .section-nav a,
+  .cinematic-motion-control,.back-to-top
+):not(:disabled,[aria-disabled="true"],[hidden],[inert],[inert] *,.browser-preview *),
+:root:where(:not([data-aiwork-input="mouse"])) body :is(
+  .aiwork-cinematic-content button,
+  .aiwork-cinematic-content a:is(.primary-button,.secondary-button,.install-small,.hashcat-primary,.hashcat-paypal,.research-paypal),
+  .aiwork-cinematic-content .section-nav a,
+  .cinematic-motion-control,.back-to-top
+):not(:disabled,[aria-disabled="true"],[hidden],[inert],[inert] *,.browser-preview *) :is(span,strong,b,em,small) {
+  text-shadow: .6px 0 #000,-.6px 0 #000,0 .6px #000,0 -.6px #000,0 0 6px rgb(49 255 128 / 49%),0 0 14px rgb(49 255 128 / 28%);
+}
+}
+
+/* Contact feedback ends with :active; keyboard focus uses the same static light.
+   No hover, animation, new event handlers, or layout properties on touch. */
+:root body .aiwork-cinematic-content :is(
+    h1,h2,h3,h4,h5,h6,p,span,strong,b,em,small,i,bdi,
+    li,dt,dd,caption,th,td,time,blockquote,summary,legend,figcaption,
+    code,pre,kbd,samp,a,label:not(:has(> span)),
+    input:not([type="checkbox"],[type="radio"],[type="range"],[type="color"],[type="hidden"]),
+    textarea,select,option,.eyebrow,.home-user-prompt,.home-evidence
+  ):not(:disabled,:disabled *,[aria-disabled="true"],[aria-disabled="true"] *,
+    [hidden],[hidden] *,[inert],[inert] *,.honeypot,.honeypot *,
+    .aiwork-cinematic-scene,.aiwork-cinematic-scene *
+  ):not(:where(
+    button *,a:is(.primary-button,.secondary-button,.install-small,.hashcat-primary,.hashcat-paypal,.research-paypal),
+    a:is(.primary-button,.secondary-button,.install-small,.hashcat-primary,.hashcat-paypal,.research-paypal) *,
+    .section-nav a,.section-nav a *,.brand,.hashcat-brand,
+    .product-mark,.product-mark *,.swatches,.swatches *,
+    .compact-flow > li,.research-results > li
+  )):not(:has(> :where(div,section,article,ul,ol,li,p,h1,h2,h3,h4,h5,h6))):is(:active,:focus-visible):not(:has(:active)) {
+  -webkit-text-stroke: .8px #000;
+  paint-order: stroke fill;
+  text-shadow: .6px 0 #000,-.6px 0 #000,0 .6px #000,0 -.6px #000,0 0 4px rgb(184 255 205 / 70%),0 0 12px rgb(49 255 128 / 70%),0 0 28px rgb(49 255 128 / 66.5%);
+}
+:root body :is(
+  .aiwork-cinematic-content button,
+  .aiwork-cinematic-content a:is(.primary-button,.secondary-button,.install-small,.hashcat-primary,.hashcat-paypal,.research-paypal),
+  .aiwork-cinematic-content .section-nav a,
+  .cinematic-motion-control,.back-to-top
+):not(:disabled,[aria-disabled="true"],[hidden],[inert],[inert] *,.browser-preview *):is(:active,:focus-visible),
+:root body :is(
+  .aiwork-cinematic-content button,
+  .aiwork-cinematic-content a:is(.primary-button,.secondary-button,.install-small,.hashcat-primary,.hashcat-paypal,.research-paypal),
+  .aiwork-cinematic-content .section-nav a,
+  .cinematic-motion-control,.back-to-top
+):not(:disabled,[aria-disabled="true"],[hidden],[inert],[inert] *,.browser-preview *):is(:active,:focus-visible) :is(span,strong,b,em,small) {
+  text-shadow: .6px 0 #000,-.6px 0 #000,0 .6px #000,0 -.6px #000,0 0 4px rgb(184 255 205 / 70%),0 0 12px rgb(49 255 128 / 70%),0 0 28px rgb(49 255 128 / 66.5%);
+}

@@ -11,14 +11,7 @@ export const supportedLocales = [
 
 export type Locale = (typeof supportedLocales)[number];
 
-export type ThemeKey =
-  | "system"
-  | "light"
-  | "dark"
-  | "aurora"
-  | "editorial"
-  | "console"
-  | "synthwave";
+export type ThemeKey = "console" | "aurora";
 
 export const localeInfo: Record<
   Locale,
@@ -186,13 +179,8 @@ export const messages: Record<Locale, MessageSet> = {
       install: "출시 알림",
     },
     themes: {
-      system: { name: "시스템", note: "기기 설정에 맞춤" },
-      light: { name: "라이트", note: "맑고 선명하게" },
-      dark: { name: "다크", note: "차분하고 편안하게" },
       aurora: { name: "프리미엄 오로라", note: "딥네이비 · 퍼플" },
-      editorial: { name: "에디토리얼 워크플로", note: "아이보리 · 블루" },
-      console: { name: "운영 콘솔", note: "차콜 · 민트" },
-      synthwave: { name: "신스웨이브", note: "마젠타 · 시안" },
+      console: { name: "원본", note: "매트릭스 · 녹광" },
     },
     themeMenu: {
       trigger: "테마",
@@ -288,7 +276,7 @@ export const messages: Record<Locale, MessageSet> = {
           name: "AIWORK Professional",
           price: "USD 19",
           billing: "출시 전 · 제공 범위 확인",
-          features: ["정식 출시 전 구매 문의", "Chrome Extension은 공개 출시 후 제공", "Google Drive는 OAuth 승인 후 활성화"],
+          features: ["정식 출시 전 구매 문의", "Pro 이용자는 Hashcat · Studio 추가 이용료 없음", "현재 데스크톱 Pro는 서명 라이선스로 활성화"],
           action: "Professional 구매 문의",
         },
         {
@@ -311,12 +299,12 @@ export const messages: Record<Locale, MessageSet> = {
         "AIWORK 개발, 문서화, 서비스 개선과 사용자 지원을 위한 자발적 후원입니다.",
       supportAction: "PayPal로 후원",
       disclaimer:
-        "Professional과 Business는 아직 일반 출시되지 않았습니다. Chrome Extension은 공개 출시 후, Google Drive 기능은 Google OAuth 승인 완료 후 제공됩니다. 구매 문의를 등록하거나 cakecnc@daum.net으로 제공 범위와 일정을 먼저 확인해 주세요. 문의 등록은 구매·결제 완료를 뜻하지 않습니다.",
+        "Professional과 Business는 아직 일반 출시되지 않았습니다. AIWORK Pro에는 Hashcat·Studio 무료 사용 혜택이 포함됩니다. 현재 데스크톱 Pro는 서명된 라이선스로 활성화하며 자동 결제·제품 간 권한 연동은 별도 준비 단계입니다. 제공 범위와 일정은 구매 문의에서 확인해 주세요. 문의 등록은 구매·결제 완료를 뜻하지 않습니다.",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",
       title: ["업무가 있는 곳에서", "AIWORK를 시작하세요."],
-      description: "Chrome 확장프로그램과 데스크톱 앱을 준비하고 있습니다.",
+      description: "macOS 개발 빌드를 구현했으며 일반 공개 배포를 준비하고 있습니다.",
       releaseAlert: "출시 알림 신청",
       consultation: "도입 상담",
     },
@@ -370,13 +358,8 @@ export const messages: Record<Locale, MessageSet> = {
       install: "Release updates",
     },
     themes: {
-      system: { name: "System", note: "Matches your device" },
-      light: { name: "Light", note: "Crisp and clear" },
-      dark: { name: "Dark", note: "Calm and comfortable" },
       aurora: { name: "Premium Aurora", note: "Deep navy · purple" },
-      editorial: { name: "Editorial Workflow", note: "Ivory · blue" },
-      console: { name: "Operations Console", note: "Charcoal · mint" },
-      synthwave: { name: "Synthwave", note: "Magenta · cyan" },
+      console: { name: "Original", note: "Matrix · green glow" },
     },
     themeMenu: {
       trigger: "Theme",
@@ -471,7 +454,7 @@ export const messages: Record<Locale, MessageSet> = {
           name: "AIWORK Professional",
           price: "USD 19",
           billing: "pre-release · scope review",
-          features: ["Pre-release inquiry", "Chrome Extension after public release", "Google Drive after OAuth approval"],
+          features: ["Pre-release inquiry", "Hashcat and Studio included with Pro", "Desktop Pro uses signed-license activation"],
           action: "Ask about Professional",
         },
         {
@@ -494,12 +477,12 @@ export const messages: Record<Locale, MessageSet> = {
         "Voluntary contributions support AIWORK development, documentation, service improvements, and user support.",
       supportAction: "Support with PayPal",
       disclaimer:
-        "Professional and Business are not yet generally available. The Chrome Extension will be provided after public release, and Google Drive features after Google OAuth approval. Send a purchase inquiry or confirm scope and timing at cakecnc@daum.net. An inquiry is not a completed purchase or payment.",
+        "Professional and Business are not yet generally available. AIWORK Pro includes Hashcat and Studio at no additional charge. Current desktop activation uses a signed license; automated checkout activation and cross-product linking remain separate work. Confirm scope and timing through a purchase inquiry. An inquiry is not a completed purchase or payment.",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",
       title: ["Start AIWORK", "wherever work happens."],
-      description: "The Chrome extension and desktop app are coming soon.",
+      description: "The macOS development build is implemented; general public distribution is being prepared.",
       releaseAlert: "Get release updates",
       consultation: "Talk to our team",
     },
@@ -553,13 +536,8 @@ export const messages: Record<Locale, MessageSet> = {
       install: "リリース通知",
     },
     themes: {
-      system: { name: "システム", note: "端末設定に合わせる" },
-      light: { name: "ライト", note: "明るくクリア" },
-      dark: { name: "ダーク", note: "落ち着いた表示" },
       aurora: { name: "プレミアムオーロラ", note: "ディープネイビー・パープル" },
-      editorial: { name: "エディトリアルワークフロー", note: "アイボリー・ブルー" },
-      console: { name: "オペレーションコンソール", note: "チャコール・ミント" },
-      synthwave: { name: "シンセウェーブ", note: "マゼンタ・シアン" },
+      console: { name: "オリジナル", note: "マトリックス・緑の光" },
     },
     themeMenu: {
       trigger: "テーマ",
@@ -655,7 +633,7 @@ export const messages: Record<Locale, MessageSet> = {
           name: "AIWORK Professional",
           price: "USD 19",
           billing: "リリース前・範囲確認",
-          features: ["正式リリース前の事前購入", "Chrome Extensionは公開後に提供", "Google DriveはOAuth承認後に有効化"],
+          features: ["公開前のお問い合わせ", "ProはHashcat・Studioを追加料金なしで利用", "デスクトップProは署名済みライセンスで有効化"],
           action: "Professionalを相談",
         },
         {
@@ -678,12 +656,12 @@ export const messages: Record<Locale, MessageSet> = {
         "AIWORKの開発、文書化、サービス改善、ユーザーサポートのための任意の支援です。",
       supportAction: "PayPalで支援",
       disclaimer:
-        "ProfessionalとBusinessはまだ一般公開されていません。Chrome Extensionは公開後、Google Drive機能はGoogle OAuth承認後に提供されます。購入相談を送信するか、cakecnc@daum.netで提供範囲と時期をご確認ください。相談の送信は購入・決済完了を意味しません。",
+        "ProfessionalとBusinessは一般公開前です。AIWORK ProにはHashcat・Studioの追加料金なしの利用が含まれます。現在のデスクトップ版は署名済みライセンスで有効化し、決済直後の自動有効化や製品間の権限連携は別途準備中です。提供範囲と時期はお問い合わせください。問い合わせは購入や決済の完了を意味しません。",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",
       title: ["業務のある場所から", "AIWORKを始めましょう。"],
-      description: "Chrome拡張機能とデスクトップアプリを準備中です。",
+      description: "macOS開発ビルドを実装し、一般公開の配布を準備しています。",
       releaseAlert: "リリース通知を受け取る",
       consultation: "導入相談",
     },
@@ -737,13 +715,8 @@ export const messages: Record<Locale, MessageSet> = {
       install: "发布通知",
     },
     themes: {
-      system: { name: "系统", note: "跟随设备设置" },
-      light: { name: "浅色", note: "清晰明快" },
-      dark: { name: "深色", note: "沉稳舒适" },
       aurora: { name: "高级极光", note: "深海军蓝 · 紫色" },
-      editorial: { name: "编辑工作流", note: "象牙白 · 蓝色" },
-      console: { name: "运营控制台", note: "炭黑 · 薄荷绿" },
-      synthwave: { name: "合成波", note: "洋红 · 青色" },
+      console: { name: "原版", note: "矩阵 · 绿光" },
     },
     themeMenu: {
       trigger: "主题",
@@ -835,7 +808,7 @@ export const messages: Record<Locale, MessageSet> = {
           name: "AIWORK Professional",
           price: "USD 19",
           billing: "发布前 · 范围确认",
-          features: ["正式发布前预购", "Chrome Extension 在公开发布后提供", "Google Drive 在 OAuth 获批后启用"],
+          features: ["公开发布前咨询", "Pro 包含 Hashcat 和 Studio，无额外使用费", "桌面 Pro 使用签名许可证激活"],
           action: "咨询 Professional",
         },
         {
@@ -858,12 +831,12 @@ export const messages: Record<Locale, MessageSet> = {
         "自愿支持将用于 AIWORK 开发、文档、服务改进与用户支持。",
       supportAction: "通过 PayPal 支持",
       disclaimer:
-        "Professional 和 Business 尚未正式公开发布。Chrome Extension 将在公开发布后提供，Google Drive 功能将在 Google OAuth 获批后提供。请提交购买咨询或通过 cakecnc@daum.net 确认范围和时间。提交咨询并不表示购买或付款完成。",
+        "Professional 和 Business 尚未全面公开发布。AIWORK Pro 包含 Hashcat 和 Studio，无额外使用费。当前桌面版使用签名许可证激活，付款后自动激活及跨产品权限同步仍需另行准备。请通过购买咨询确认范围和时间，咨询不等于完成购买或付款。",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",
       title: ["在工作发生的地方", "开始使用 AIWORK。"],
-      description: "Chrome 扩展程序和桌面应用即将推出。",
+      description: "macOS 开发版已实现，正在准备面向公众的发布。",
       releaseAlert: "订阅发布通知",
       consultation: "咨询部署",
     },
@@ -917,13 +890,8 @@ export const messages: Record<Locale, MessageSet> = {
       install: "تحديثات الإصدار",
     },
     themes: {
-      system: { name: "النظام", note: "وفق إعدادات جهازك" },
-      light: { name: "فاتح", note: "واضح ومشرق" },
-      dark: { name: "داكن", note: "هادئ ومريح" },
       aurora: { name: "الشفق المميز", note: "كحلي داكن · أرجواني" },
-      editorial: { name: "سير العمل التحريري", note: "عاجي · أزرق" },
-      console: { name: "لوحة العمليات", note: "فحمي · نعناعي" },
-      synthwave: { name: "Synthwave", note: "ماجنتا · سماوي" },
+      console: { name: "الأصلي", note: "ماتريكس · توهج أخضر" },
     },
     themeMenu: {
       trigger: "السمة",
@@ -1019,11 +987,7 @@ export const messages: Record<Locale, MessageSet> = {
           name: "AIWORK Professional",
           price: "USD 19",
           billing: "قبل الإطلاق · مراجعة النطاق",
-          features: [
-            "شراء مسبق قبل الإطلاق الرسمي",
-            "يتوفر Chrome Extension بعد الإطلاق العام",
-            "يُفعّل Google Drive بعد موافقة OAuth",
-          ],
+          features: ["استفسار قبل الإصدار العام", "Hashcat وStudio ضمن Pro دون رسوم إضافية", "تفعيل Pro المكتبي بترخيص موقّع"],
           action: "استفسر عن Professional",
         },
         {
@@ -1050,12 +1014,12 @@ export const messages: Record<Locale, MessageSet> = {
         "مساهمات طوعية لدعم تطوير AIWORK وتوثيقه وتحسين الخدمة ودعم المستخدمين.",
       supportAction: "ادعم عبر PayPal",
       disclaimer:
-        "لم يُطرح Professional وBusiness للعامة بعد. سيتوفر Chrome Extension بعد الإطلاق العام، وستتوفر ميزات Google Drive بعد موافقة Google OAuth. أرسل استفسار شراء أو أكّد النطاق والموعد عبر cakecnc@daum.net. إرسال الاستفسار لا يعني إتمام الشراء أو الدفع.",
+        "لم يتم إطلاق Professional وBusiness للعامة بعد. يتضمن AIWORK Pro استخدام Hashcat وStudio دون رسوم إضافية. يُفعّل إصدار سطح المكتب الحالي بترخيص موقّع، أما التفعيل التلقائي بعد الدفع وربط الصلاحيات بين المنتجات فما زالا بحاجة إلى إعداد منفصل. يرجى تأكيد النطاق والتوقيت عبر الاستفسار، وهو لا يعني إتمام الشراء أو الدفع.",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",
       title: ["ابدأ مع AIWORK", "حيثما يجري العمل."],
-      description: "يتوفر Chrome Extension وتطبيق سطح المكتب قريباً.",
+      description: "نُفّذت نسخة تطوير macOS ويجري إعداد التوزيع العام.",
       releaseAlert: "احصل على تحديثات الإطلاق",
       consultation: "تحدث مع فريقنا",
     },
@@ -1109,13 +1073,8 @@ export const messages: Record<Locale, MessageSet> = {
       install: "Avisos de lanzamiento",
     },
     themes: {
-      system: { name: "Sistema", note: "Se adapta a tu dispositivo" },
-      light: { name: "Claro", note: "Nítido y luminoso" },
-      dark: { name: "Oscuro", note: "Sereno y cómodo" },
       aurora: { name: "Aurora Premium", note: "Azul marino · púrpura" },
-      editorial: { name: "Flujo editorial", note: "Marfil · azul" },
-      console: { name: "Consola de operaciones", note: "Carbón · menta" },
-      synthwave: { name: "Synthwave", note: "Magenta · cian" },
+      console: { name: "Original", note: "Matrix · brillo verde" },
     },
     themeMenu: {
       trigger: "Tema",
@@ -1220,11 +1179,7 @@ export const messages: Record<Locale, MessageSet> = {
           name: "AIWORK Professional",
           price: "USD 19",
           billing: "prelanzamiento · revisar alcance",
-          features: [
-            "Compra anticipada antes del lanzamiento",
-            "Chrome Extension después del lanzamiento público",
-            "Google Drive después de la aprobación OAuth",
-          ],
+          features: ["Consulta antes del lanzamiento", "Hashcat y Studio incluidos con Pro", "Pro de escritorio se activa con licencia firmada"],
           action: "Consultar Professional",
         },
         {
@@ -1255,13 +1210,13 @@ export const messages: Record<Locale, MessageSet> = {
         "Las aportaciones voluntarias apoyan el desarrollo, la documentación, la mejora del servicio y la atención a usuarios de AIWORK.",
       supportAction: "Apoyar con PayPal",
       disclaimer:
-        "Professional y Business aún no están disponibles de forma general. Chrome Extension se entregará tras el lanzamiento público y Google Drive tras la aprobación de Google OAuth. Envía una consulta o confirma alcance y fecha en cakecnc@daum.net. La consulta no implica que la compra o el pago estén completados.",
+        "Professional y Business aún no están disponibles de forma general. AIWORK Pro incluye Hashcat y Studio sin coste adicional. La versión de escritorio actual se activa con una licencia firmada; la activación automática tras el pago y el enlace entre productos requieren preparación aparte. Confirme el alcance y el calendario por consulta. Una consulta no completa una compra ni un pago.",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",
       title: ["Empieza con AIWORK", "dondequiera que trabajes."],
       description:
-        "Chrome Extension y la aplicación de escritorio estarán disponibles próximamente.",
+        "La versión de desarrollo para macOS está implementada; se prepara la distribución pública.",
       releaseAlert: "Recibir novedades",
       consultation: "Hablar con el equipo",
     },
@@ -1315,13 +1270,8 @@ export const messages: Record<Locale, MessageSet> = {
       install: "Actualités de sortie",
     },
     themes: {
-      system: { name: "Système", note: "Suit les réglages de l’appareil" },
-      light: { name: "Clair", note: "Net et lumineux" },
-      dark: { name: "Sombre", note: "Calme et confortable" },
       aurora: { name: "Aurore Premium", note: "Bleu nuit · violet" },
-      editorial: { name: "Workflow éditorial", note: "Ivoire · bleu" },
-      console: { name: "Console d’exploitation", note: "Anthracite · menthe" },
-      synthwave: { name: "Synthwave", note: "Magenta · cyan" },
+      console: { name: "Original", note: "Matrix · lueur verte" },
     },
     themeMenu: {
       trigger: "Thème",
@@ -1431,11 +1381,7 @@ export const messages: Record<Locale, MessageSet> = {
           name: "AIWORK Professional",
           price: "USD 19",
           billing: "prélancement · périmètre à confirmer",
-          features: [
-            "Préachat avant le lancement officiel",
-            "Chrome Extension après le lancement public",
-            "Google Drive après l’approbation OAuth",
-          ],
+          features: ["Demande avant lancement", "Hashcat et Studio inclus avec Pro", "Activation de Pro sur ordinateur par licence signée"],
           action: "Demander Professional",
         },
         {
@@ -1466,13 +1412,13 @@ export const messages: Record<Locale, MessageSet> = {
         "Les contributions volontaires soutiennent le développement, la documentation, l’amélioration du service et l’assistance aux utilisateurs d’AIWORK.",
       supportAction: "Soutenir via PayPal",
       disclaimer:
-        "Professional et Business ne sont pas encore disponibles au public. Chrome Extension sera fourni après le lancement public et Google Drive après l’approbation Google OAuth. Envoyez une demande ou confirmez le périmètre et le calendrier à cakecnc@daum.net. Une demande ne constitue pas un achat ou paiement finalisé.",
+        "Professional et Business ne sont pas encore disponibles au grand public. AIWORK Pro inclut Hashcat et Studio sans frais supplémentaires. La version de bureau actuelle utilise une licence signée ; l’activation automatique après paiement et la liaison des droits entre produits restent à préparer. Confirmez le périmètre et le calendrier par demande. Une demande ne constitue ni un achat ni un paiement.",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",
       title: ["Démarrez AIWORK", "là où le travail se fait."],
       description:
-        "Chrome Extension et l’application de bureau seront bientôt disponibles.",
+        "La version de développement macOS est implémentée ; la distribution publique est en préparation.",
       releaseAlert: "Recevoir les actualités",
       consultation: "Parler à notre équipe",
     },
@@ -1526,13 +1472,8 @@ export const messages: Record<Locale, MessageSet> = {
       install: "Release-Updates",
     },
     themes: {
-      system: { name: "System", note: "Folgt den Geräteeinstellungen" },
-      light: { name: "Hell", note: "Klar und freundlich" },
-      dark: { name: "Dunkel", note: "Ruhig und angenehm" },
       aurora: { name: "Premium Aurora", note: "Dunkelblau · Violett" },
-      editorial: { name: "Redaktions-Workflow", note: "Elfenbein · Blau" },
-      console: { name: "Betriebskonsole", note: "Anthrazit · Mint" },
-      synthwave: { name: "Synthwave", note: "Magenta · Cyan" },
+      console: { name: "Original", note: "Matrix · grünes Leuchten" },
     },
     themeMenu: {
       trigger: "Design",
@@ -1645,11 +1586,7 @@ export const messages: Record<Locale, MessageSet> = {
           name: "AIWORK Professional",
           price: "USD 19",
           billing: "vor Veröffentlichung · Umfang prüfen",
-          features: [
-            "Vorabkauf vor der Veröffentlichung",
-            "Chrome Extension nach öffentlicher Veröffentlichung",
-            "Google Drive nach OAuth-Genehmigung",
-          ],
+          features: ["Anfrage vor Veröffentlichung", "Hashcat und Studio ohne Zusatzgebühr mit Pro", "Desktop-Pro wird mit signierter Lizenz aktiviert"],
           action: "Professional anfragen",
         },
         {
@@ -1680,12 +1617,12 @@ export const messages: Record<Locale, MessageSet> = {
         "Freiwillige Beiträge unterstützen die Entwicklung, Dokumentation, Serviceverbesserung und Nutzerbetreuung von AIWORK.",
       supportAction: "Mit PayPal unterstützen",
       disclaimer:
-        "Professional und Business sind noch nicht allgemein verfügbar. Chrome Extension wird nach der öffentlichen Veröffentlichung, Google Drive nach der Google-OAuth-Genehmigung bereitgestellt. Senden Sie eine Kaufanfrage oder bestätigen Sie Umfang und Termin unter cakecnc@daum.net. Eine Anfrage ist kein abgeschlossener Kauf oder Zahlungsvorgang.",
+        "Professional und Business sind noch nicht allgemein verfügbar. AIWORK Pro umfasst Hashcat und Studio ohne zusätzliche Nutzungsgebühr. Die aktuelle Desktop-Version verwendet eine signierte Lizenz; automatische Aktivierung nach Zahlung und produktübergreifende Berechtigungen werden separat vorbereitet. Umfang und Zeitpunkt bitte per Anfrage klären. Eine Anfrage ist kein abgeschlossener Kauf oder Zahlungsvorgang.",
     },
     cta: {
       eyebrow: "AIWORK BROWSER",
       title: ["Starten Sie AIWORK", "direkt dort, wo Sie arbeiten."],
-      description: "Chrome Extension und Desktop-App sind in Vorbereitung.",
+      description: "Der macOS-Entwicklungsbuild ist implementiert; die öffentliche Verteilung wird vorbereitet.",
       releaseAlert: "Release-Updates erhalten",
       consultation: "Mit unserem Team sprechen",
     },

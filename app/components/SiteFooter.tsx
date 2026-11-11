@@ -74,7 +74,7 @@ export default function SiteFooter() {
   const labels = footerLabels[locale];
 
   return (
-    <footer className="site-footer" id="site-footer">
+    <footer className="site-footer" id="site-footer" data-cinematic-surface="footer">
       <section
         className="support-card sitewide-support"
         data-sitewide-support="true"

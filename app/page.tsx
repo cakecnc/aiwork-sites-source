@@ -1,9 +1,14 @@
 "use client";
 
+import "./home-spacing.css";
+
+import AvailabilityNotice from "./components/AvailabilityNotice";
+import { ActualScreenshots, ProAccessNotice } from "./components/ProductEvidence";
+
 import { useEffect } from "react";
 import Link from "next/link";
 import { homeWorkbenchMessages } from "./home-workbench-i18n";
-import { messages } from "./i18n";
+import { messages, type Locale } from "./i18n";
 import ProductMark from "./components/ProductMark";
 import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
@@ -17,6 +22,209 @@ import {
 const contextIcons = ["AI", "⌁", "≠", "◇"];
 const roleIcons = ["01", "AI", "✓"];
 const actionIcons = ["R", "↗", "@"];
+
+type DigitalProductsCopy = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  digitalLabel: string;
+  shippingLabel: string;
+  termLabel: string;
+  action: string;
+  products: Array<{
+    name: string;
+    price: string;
+    description: string;
+    href: string;
+  }>;
+};
+
+const digitalProductsCopy: Record<Locale, DigitalProductsCopy> = {
+  ko: {
+    eyebrow: "C&C DIGITAL TOOLS",
+    title: "전문 작업을 위한 디지털 도구",
+    description: "결제 확인 후 등록 코드를 발급하는 1년 이용권입니다. 실물 상품이 아니므로 배송지 입력과 배송비가 없습니다.",
+    digitalLabel: "디지털 콘텐츠",
+    shippingLabel: "실물 배송 없음 · 배송비 0원",
+    termLabel: "1년 이용권",
+    action: "제품 자세히 보기",
+    products: [
+      {
+        name: "Research Pro",
+        price: "$120 / 1년",
+        description: "출처 중심 조사 흐름과 다국어 안내를 갖춘 전문 리서치 도구입니다.",
+        href: "/research",
+      },
+      {
+        name: "Hashcat Pro",
+        price: "$55 / 1년",
+        description: "승인된 로컬 보안 점검을 안전하게 안내하며 파일을 서버로 전송하지 않습니다.",
+        href: "/hashcat",
+      },
+    ],
+  },
+  en: {
+    eyebrow: "C&C DIGITAL TOOLS",
+    title: "Digital tools for focused professional work",
+    description: "One-year access is activated by a registration code after payment verification. Nothing is shipped, so no delivery address or shipping fee is required.",
+    digitalLabel: "Digital content",
+    shippingLabel: "No physical delivery · No shipping fee",
+    termLabel: "1-year access",
+    action: "View product details",
+    products: [
+      {
+        name: "Research Pro",
+        price: "$120 / year",
+        description: "A professional research workspace with evidence-led steps and multilingual guidance.",
+        href: "/research",
+      },
+      {
+        name: "Hashcat Pro",
+        price: "$55 / year",
+        description: "Guidance for authorized local security checks without uploading files to a server.",
+        href: "/hashcat",
+      },
+    ],
+  },
+  ja: {
+    eyebrow: "C&C DIGITAL TOOLS",
+    title: "専門作業のためのデジタルツール",
+    description: "支払い確認後に登録コードを発行する1年間の利用権です。物理配送、配送先入力、送料はありません。",
+    digitalLabel: "デジタルコンテンツ",
+    shippingLabel: "物理配送なし・送料0円",
+    termLabel: "1年間利用",
+    action: "製品詳細を見る",
+    products: [
+      {
+        name: "Research Pro",
+        price: "$120 / 1年",
+        description: "根拠を重視した調査フローと多言語ガイドを備えた専門リサーチツールです。",
+        href: "/research",
+      },
+      {
+        name: "Hashcat Pro",
+        price: "$55 / 1年",
+        description: "ファイルをサーバーへ送信せず、許可されたローカルセキュリティ確認を案内します。",
+        href: "/hashcat",
+      },
+    ],
+  },
+  "zh-CN": {
+    eyebrow: "C&C DIGITAL TOOLS",
+    title: "面向专业工作的数字工具",
+    description: "付款核验后发放注册码，使用期为一年。无需实物配送、收货地址或运费。",
+    digitalLabel: "数字内容",
+    shippingLabel: "无实物配送 · 运费为0",
+    termLabel: "一年使用权",
+    action: "查看产品详情",
+    products: [
+      {
+        name: "Research Pro",
+        price: "$120 / 年",
+        description: "提供以证据为核心的研究流程和多语言指南。",
+        href: "/research",
+      },
+      {
+        name: "Hashcat Pro",
+        price: "$55 / 年",
+        description: "用于经授权的本地安全检查，文件不会上传到服务器。",
+        href: "/hashcat",
+      },
+    ],
+  },
+  ar: {
+    eyebrow: "C&C DIGITAL TOOLS",
+    title: "أدوات رقمية للعمل المهني",
+    description: "صلاحية رقمية لمدة عام تُفعّل برمز تسجيل بعد التحقق من الدفع. لا يوجد شحن مادي أو عنوان تسليم أو رسوم شحن.",
+    digitalLabel: "محتوى رقمي",
+    shippingLabel: "لا شحن مادي · رسوم الشحن صفر",
+    termLabel: "صلاحية سنة",
+    action: "عرض تفاصيل المنتج",
+    products: [
+      {
+        name: "Research Pro",
+        price: "$120 / سنة",
+        description: "مساحة بحث احترافية بخطوات قائمة على الأدلة وإرشادات متعددة اللغات.",
+        href: "/research",
+      },
+      {
+        name: "Hashcat Pro",
+        price: "$55 / سنة",
+        description: "إرشادات لفحوص أمنية محلية مصرح بها دون رفع الملفات إلى الخادم.",
+        href: "/hashcat",
+      },
+    ],
+  },
+  es: {
+    eyebrow: "C&C DIGITAL TOOLS",
+    title: "Herramientas digitales para trabajo profesional",
+    description: "Acceso digital por un año mediante un código emitido tras verificar el pago. No hay entrega física, dirección de envío ni gastos de envío.",
+    digitalLabel: "Contenido digital",
+    shippingLabel: "Sin entrega física · Envío gratis",
+    termLabel: "Acceso por 1 año",
+    action: "Ver detalles",
+    products: [
+      {
+        name: "Research Pro",
+        price: "$120 / año",
+        description: "Un espacio profesional de investigación con pasos basados en evidencia y guía multilingüe.",
+        href: "/research",
+      },
+      {
+        name: "Hashcat Pro",
+        price: "$55 / año",
+        description: "Guía para comprobaciones locales de seguridad autorizadas sin subir archivos al servidor.",
+        href: "/hashcat",
+      },
+    ],
+  },
+  fr: {
+    eyebrow: "C&C DIGITAL TOOLS",
+    title: "Des outils numériques pour le travail professionnel",
+    description: "Accès numérique d’un an activé par un code après vérification du paiement. Aucun produit physique, aucune adresse de livraison et aucun frais de port.",
+    digitalLabel: "Contenu numérique",
+    shippingLabel: "Aucune livraison · Frais de port 0",
+    termLabel: "Accès 1 an",
+    action: "Voir le produit",
+    products: [
+      {
+        name: "Research Pro",
+        price: "$120 / an",
+        description: "Un espace de recherche professionnel fondé sur les sources avec un guide multilingue.",
+        href: "/research",
+      },
+      {
+        name: "Hashcat Pro",
+        price: "$55 / an",
+        description: "Un guide pour les contrôles de sécurité locaux autorisés, sans téléversement de fichiers.",
+        href: "/hashcat",
+      },
+    ],
+  },
+  de: {
+    eyebrow: "C&C DIGITAL TOOLS",
+    title: "Digitale Werkzeuge für professionelle Aufgaben",
+    description: "Ein Jahr digitaler Zugriff per Registrierungscode nach Zahlungsprüfung. Kein physischer Versand, keine Lieferadresse und keine Versandkosten.",
+    digitalLabel: "Digitaler Inhalt",
+    shippingLabel: "Kein Versand · 0 Versandkosten",
+    termLabel: "1 Jahr Zugriff",
+    action: "Produktdetails ansehen",
+    products: [
+      {
+        name: "Research Pro",
+        price: "$120 / Jahr",
+        description: "Ein professioneller Recherchebereich mit belegorientiertem Ablauf und mehrsprachiger Anleitung.",
+        href: "/research",
+      },
+      {
+        name: "Hashcat Pro",
+        price: "$55 / Jahr",
+        description: "Anleitung für autorisierte lokale Sicherheitsprüfungen ohne Datei-Upload auf einen Server.",
+        href: "/hashcat",
+      },
+    ],
+  },
+};
 
 export default function Home() {
   const { locale, ready } = useSitePreferences();
@@ -41,6 +249,7 @@ export default function Home() {
   return (
     <main className="site-shell home-shell" id="main-content">
       <SiteHeader active="home" context={home.brandContext} />
+      <AvailabilityNotice />
 
       <section className="hero home-hero" id="home">
         <div className="home-hero-intro">
@@ -63,11 +272,39 @@ export default function Home() {
             {home.hero.secondaryAction} <span>↗</span>
           </a>
         </div>
+        <nav className="hero-actions" aria-label={digitalProductsCopy[locale].title}>
+          <Link className="secondary-button" href="/research">RESEARCH <span aria-hidden="true">↗</span></Link>
+          <Link className="secondary-button" href="/hashcat">HASHCAT <span aria-hidden="true">↗</span></Link>
+        </nav>
         <div className="trust-row">
           {home.hero.trust.map((item) => (
             <span key={item}>
               <i>✓</i> {item}
             </span>
+          ))}
+        </div>
+      </section>
+
+      <ActualScreenshots />
+      <ProAccessNotice />
+
+      <section className="home-capability-section" id="capabilities">
+        <div className="home-section-heading">
+          <span>{home.capabilities.eyebrow}</span>
+          <div>
+            <h2>{home.capabilities.title}</h2>
+            <p>{home.capabilities.description}</p>
+          </div>
+        </div>
+        <div className="home-capability-grid">
+          {home.capabilities.cards.map((card) => (
+            <article key={card.title}>
+              <div className="home-capability-card-top">
+                <h3>{card.title}</h3>
+                <b>{card.status}</b>
+              </div>
+              <p>{card.description}</p>
+            </article>
           ))}
         </div>
       </section>
@@ -80,8 +317,19 @@ export default function Home() {
           </span>
         </div>
         <div className="home-workbench-grid">
-          <aside className="home-context-column">
+          <div className="home-browser-column">
+            <div className="home-browser-bar" aria-hidden="true">
+              <i />
+              <i />
+              <i />
+              <span>aiwork.to</span>
+            </div>
             <small>{home.workbench.contextTitle}</small>
+            <div className="home-browser-page">
+              <span>AIWORK BROWSER</span>
+              <h3>{home.hero.title.join(" ")}</h3>
+              <p>{home.hero.description}</p>
+            </div>
             <div className="home-context-list">
               {home.workbench.contexts.map((context, index) => (
                 <div className={index === 0 ? "active" : ""} key={context}>
@@ -90,9 +338,9 @@ export default function Home() {
                 </div>
               ))}
             </div>
-          </aside>
+          </div>
 
-          <div className="home-conversation-column">
+          <aside className="home-conversation-column">
             <small>{home.workbench.conversationTitle}</small>
             <div className="home-user-prompt">{home.workbench.prompt}</div>
             <div className="home-ai-answer">
@@ -102,24 +350,13 @@ export default function Home() {
                 <p>{home.workbench.responseBody}</p>
               </div>
             </div>
-            <ol className="home-mini-flow" aria-label={home.workflow.title}>
-              {home.workflow.steps.map((step, index) => (
-                <li className={index === 0 ? "complete" : ""} key={step.number}>
-                  <span>{step.number}</span>
-                  <b>{step.title}</b>
-                </li>
-              ))}
-            </ol>
-          </div>
-
-          <aside className="home-actions-column">
-            <small>{home.workbench.actionTitle}</small>
+            <small className="home-status-title">{home.workbench.actionTitle}</small>
             <div className="home-action-list">
               {home.workbench.actions.map((action, index) => (
                 <div key={action}>
                   <span>{actionIcons[index]}</span>
                   <strong>{action}</strong>
-                  <b>ROADMAP</b>
+                  <b>{["LOCAL BUILD", "OPT-IN", "LOCAL BUILD"][index]}</b>
                 </div>
               ))}
             </div>
@@ -166,22 +403,33 @@ export default function Home() {
         </ol>
       </section>
 
-      <section className="home-capability-section" id="capabilities">
+      <section className="home-capability-section home-digital-section" id="digital-tools">
         <div className="home-section-heading">
-          <span>{home.capabilities.eyebrow}</span>
+          <span>{digitalProductsCopy[locale].eyebrow}</span>
           <div>
-            <h2>{home.capabilities.title}</h2>
-            <p>{home.capabilities.description}</p>
+            <h2>{digitalProductsCopy[locale].title}</h2>
+            <p>{digitalProductsCopy[locale].description}</p>
           </div>
         </div>
-        <div className="home-capability-grid">
-          {home.capabilities.cards.map((card) => (
-            <article key={card.title}>
+        <div className="home-capability-grid home-digital-grid">
+          {digitalProductsCopy[locale].products.map((product) => (
+            <article className="home-digital-card" key={product.name}>
               <div className="home-capability-card-top">
-                <h3>{card.title}</h3>
-                <b>{card.status}</b>
+                <h3><Link href={product.href}>{product.name}</Link></h3>
+                <b>{product.price}</b>
               </div>
-              <p>{card.description}</p>
+              <p>{product.description}</p>
+              <div className="home-digital-meta" aria-label={digitalProductsCopy[locale].digitalLabel}>
+                <span>{digitalProductsCopy[locale].digitalLabel}</span>
+                <span>{digitalProductsCopy[locale].shippingLabel}</span>
+                <span>{digitalProductsCopy[locale].termLabel}</span>
+              </div>
+              <a
+                className="secondary-button home-digital-action"
+                href={product.href}
+              >
+                {digitalProductsCopy[locale].action} <span>↗</span>
+              </a>
             </article>
           ))}
         </div>

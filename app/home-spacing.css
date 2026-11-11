@@ -1,0 +1,83 @@
+/* Homepage density only. Product copy, image proportions and cinematic effects stay intact. */
+:root body .aiwork-cinematic-content .home-shell {
+  --product-evidence-padding: 32px 24px;
+}
+:root body .aiwork-cinematic-content .home-shell .home-hero {
+  padding-block: 28px 32px;
+  margin-bottom: 0;
+}
+:root body .aiwork-cinematic-content .home-shell #actual-screenshots {
+  content-visibility: visible;
+  contain-intrinsic-size: none;
+}
+:root body .aiwork-cinematic-content .home-shell #pro-access {
+  padding: 28px;
+}
+:root body .aiwork-cinematic-content .home-shell :is(.home-role-section, .home-capability-section) {
+  padding-bottom: 48px;
+}
+:root body .aiwork-cinematic-content .home-shell .home-workbench {
+  margin-bottom: 48px;
+}
+:root body .aiwork-cinematic-content .home-shell .home-flow-section {
+  padding-block: 32px;
+  margin-bottom: 48px;
+}
+:root body .aiwork-cinematic-content .home-shell .home-digital-section {
+  padding-bottom: 40px;
+}
+:root body .aiwork-cinematic-content .home-shell .home-boundary-section {
+  padding-block: 32px;
+}
+:root body .aiwork-cinematic-content .home-shell .payment-section {
+  padding-top: 40px;
+}
+:root body .aiwork-cinematic-content .home-shell .cta-section {
+  margin-top: 48px;
+  padding-block: 36px;
+}
+:root body .aiwork-cinematic-content .home-shell .site-footer {
+  margin-top: 32px;
+  padding-block: 28px;
+}
+:root body .aiwork-cinematic-content .home-shell :is(.home-role-grid article, .home-boundary-grid article, .home-digital-card, .price-card) {
+  min-height: 0;
+}
+@media (max-width: 700px) {
+  :root body .aiwork-cinematic-content .home-shell {
+    --product-evidence-padding: 24px 12px;
+  }
+  :root body .aiwork-cinematic-content .home-shell .home-hero {
+    padding-block: 20px 24px;
+  }
+  :root body .aiwork-cinematic-content .home-shell #pro-access {
+    padding: 20px;
+  }
+  :root body .aiwork-cinematic-content .home-shell :is(.home-role-section, .home-capability-section) {
+    padding-bottom: 32px;
+  }
+  :root body .aiwork-cinematic-content .home-shell .home-workbench {
+    margin-bottom: 32px;
+  }
+  :root body .aiwork-cinematic-content .home-shell .home-flow-section {
+    padding-block: 24px;
+    margin-bottom: 32px;
+  }
+  :root body .aiwork-cinematic-content .home-shell .home-digital-section {
+    padding-bottom: 24px;
+  }
+  :root body .aiwork-cinematic-content .home-shell .home-boundary-section {
+    padding-block: 24px;
+  }
+  :root body .aiwork-cinematic-content .home-shell .payment-section {
+    padding-top: 28px;
+  }
+  :root body .aiwork-cinematic-content .home-shell .cta-section {
+    margin-top: 32px;
+    padding-block: 28px;
+  }
+  :root body .aiwork-cinematic-content .home-shell .site-footer {
+    margin-top: 24px;
+    padding-block: 24px;
+  }
+}
