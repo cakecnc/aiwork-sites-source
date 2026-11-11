@@ -8,7 +8,10 @@ const read=f=>fs.readFileSync(new URL(f,root),'utf8');
 const before=JSON.parse(read('qa/home-spacing-before.json'));
 const css=read('app/home-spacing.css');
 test('spacing update preserves every content string, screenshot and link',()=>{
- assert.equal(read('app/page.tsx').replace('\n\nimport "./home-spacing.css";',''),before['app/page.tsx']);
+ const original = before['app/page.tsx'];
+ const current = read('app/page.tsx').replace('\n\nimport "./home-spacing.css";','').replace('import PricingPlans from "./components/PricingPlans";\n','');
+ const stripPrior = s => s.replace('  PURCHASE_PRODUCTS,\n','').replace('  purchaseInquiryHref,\n','').replace(/      <section className="payment-section" id="payments">[\s\S]*?(?=      <section className="cta-section home-cta")/, '      <PricingPlans />\n\n');
+ assert.equal(current, stripPrior(original), 'Only the requested pricing block may change; all other content and spacing stay intact');
  assert.equal(read('app/components/ProductEvidence.tsx').replace('var(--product-evidence-padding, 64px 24px)','64px 24px'),before['app/components/ProductEvidence.tsx']);
 });
 test('existing cinematic, glow, header and global styles remain byte-identical',()=>{

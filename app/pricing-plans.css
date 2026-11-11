@@ -1,0 +1,25 @@
+.pro-pricing { scroll-margin-top: calc(var(--header-height, 100px) + 16px); }
+.pro-pricing .payment-heading h1 { margin: 14px 0; font-size: clamp(30px, 4vw, 48px); line-height: 1.2; }
+.pro-pricing .pro-plan-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+.pro-pricing .price-card { min-width: 0; }
+.pro-pricing .product-name { margin: 0; font-size: 20px; }
+.pro-pricing .price-card ul { min-height: 0; }
+.pro-pricing .payment-button { width: 100%; margin-top: 12px; min-height: 44px; }
+.pro-pricing .payment-button:disabled { cursor: not-allowed; opacity: .65; }
+.pro-periods { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; border: 0; padding: 0; margin: 24px 0 0; min-width: 0; }
+.pro-periods legend { margin-bottom: 10px; font-weight: 600; }
+.pro-period { display: grid; grid-template-columns: auto 1fr; gap: 8px; padding: 12px 8px; border: 1px solid var(--line); background: var(--cinematic-panel); border-radius: 4px; cursor: pointer; font-size: 13px; }
+.pro-period input { accent-color: var(--accent); width: 18px; height: 18px; margin: 0; }
+.pro-period strong { grid-column: 1 / -1; font-size: 16px; }
+.pro-period:has(input:checked) { border-color: var(--accent); }
+.pro-period:focus-within { outline: 2px solid var(--accent); outline-offset: 3px; }
+.pro-total { display: grid; gap: 6px; margin-top: 18px; padding: 14px 0; border-block: 1px solid var(--line); }
+.pro-total strong { font-size: 26px; }
+.pro-total small { color: var(--muted); }
+.pro-payment-notice, .pro-other-products { margin-top: 24px; padding: 18px; border: 1px solid var(--line); background: var(--cinematic-panel); }
+.pro-payment-notice p, .pro-other-products p { margin: 0; line-height: 1.8; overflow-wrap: anywhere; }
+.pro-payment-notice p + p { margin-top: 10px; }
+.pro-other-products h3 { margin: 0 0 10px; }
+.pro-other-products .detail-actions { flex-wrap: wrap; }
+@media (max-width: 700px) { .pro-pricing .pro-plan-grid { grid-template-columns: 1fr; } }
+@media (max-width: 380px) { .pro-periods { grid-template-columns: 1fr; } .pro-period strong { grid-column: auto; } }

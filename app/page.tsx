@@ -3,6 +3,7 @@
 import "./home-spacing.css";
 
 import AvailabilityNotice from "./components/AvailabilityNotice";
+import PricingPlans from "./components/PricingPlans";
 import { ActualScreenshots, ProAccessNotice } from "./components/ProductEvidence";
 
 import { useEffect } from "react";
@@ -14,9 +15,7 @@ import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
 import { useSitePreferences } from "./preferences";
 import {
-  PURCHASE_PRODUCTS,
   SUPPORT_EMAIL,
-  purchaseInquiryHref,
 } from "./site-config";
 
 const contextIcons = ["AI", "⌁", "≠", "◇"];
@@ -458,63 +457,7 @@ export default function Home() {
         </details>
       </section>
 
-      <section className="payment-section" id="payments">
-        <div className="payment-heading">
-          <div>
-            <span className="section-kicker">{copy.payments.eyebrow}</span>
-            <h2>
-              {copy.payments.title[0]}
-              <br />
-              {copy.payments.title[1]}
-            </h2>
-            <p>{copy.payments.description}</p>
-          </div>
-          <div className="payment-status">
-            <span>{copy.payments.statusLabel}</span>
-            <strong>
-              <i /> {copy.payments.status}
-            </strong>
-          </div>
-        </div>
-
-        <p className="payment-disclaimer">{copy.payments.disclaimer}</p>
-
-        <div className="pricing-grid">
-          {copy.payments.products.map((product, index) => (
-            <article
-              className={`price-card ${index === 0 ? "featured" : ""}`}
-              key={product.name}
-            >
-              {index === 0 && <span className="recommended">RECOMMENDED</span>}
-              <small className="product-name">{product.name}</small>
-              <div className="price">
-                <strong>
-                  <bdi dir="ltr">{product.price}</bdi>
-                </strong>
-                <span>{product.billing}</span>
-              </div>
-              <ul>
-                {product.features.map((feature) => (
-                  <li key={feature}>
-                    <i>✓</i> {feature}
-                  </li>
-                ))}
-              </ul>
-              <Link
-                className={
-                  index === 0
-                    ? "primary-button payment-button"
-                    : "secondary-button payment-button"
-                }
-                href={purchaseInquiryHref(PURCHASE_PRODUCTS[index].id)}
-              >
-                {product.action} <span>↗</span>
-              </Link>
-            </article>
-          ))}
-        </div>
-
-      </section>
+      <PricingPlans />
 
       <section className="cta-section home-cta" id="download">
         <span>{home.cta.eyebrow}</span>
