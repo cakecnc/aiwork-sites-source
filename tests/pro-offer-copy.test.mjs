@@ -15,7 +15,7 @@ test('all eight Pro offer translations use approved Pro pricing and retain separ
 test('shared translations differ only by reviewed offer blocks and the approved Pro price',()=>{
  let baseline=read('qa/product-i18n-v14.txt');const changes=JSON.parse(read('qa/product-i18n-edits.json'));assert.equal(changes.length,8);
  for(const {old:before,new:after} of changes){assert.ok(baseline.includes(before));baseline=baseline.replace(before,after);}
- assert.equal((baseline.match(/price: \"USD 19\"/g)||[]).length,8);
- baseline=baseline.replaceAll('price: \"USD 19\"','price: \"USD 18\"');
+ assert.equal((baseline.match(/price: "USD 19"/g)||[]).length,8);
+ baseline=baseline.replaceAll('price: "USD 19"','price: "USD 18"');
  assert.equal(read('app/i18n.ts'),baseline);
 });

@@ -38,7 +38,10 @@ test('homepage cards are no longer marked planned, pricing links and legal ident
  const page=read('app/page.tsx');assert.match(page,/\["LOCAL BUILD", "OPT-IN", "LOCAL BUILD"\]/);assert.doesNotMatch(page,/\["AVAILABLE", "CONNECT", "PLANNED"\]/);
  const layout=read('app/layout.tsx');assert.match(layout,/일반 공개 다운로드|공개 출시|공개 배포|출시 준비/);assert.match(layout,/https:\/\/aiwork\.to/);
  assert.ok(!productCopyFiles.includes('app/site-config.ts'));assert.ok(productCopyFiles.includes('app/i18n.ts'));
- let prior=read('qa/product-i18n-v14.txt'); for(const e of JSON.parse(read('qa/product-i18n-edits.json'))){assert.ok(prior.includes(e.old)); prior=prior.replace(e.old,e.new);} assert.equal(read('app/i18n.ts'),prior,'Only the reviewed product offer and release copy may change in shared translations');
+ let prior=read('qa/product-i18n-v14.txt'); for(const e of JSON.parse(read('qa/product-i18n-edits.json'))){assert.ok(prior.includes(e.old)); prior=prior.replace(e.old,e.new);}
+ assert.equal((prior.match(/price: "USD 19"/g)||[]).length,8);
+ prior=prior.replaceAll('price: "USD 19"','price: "USD 18"');
+ assert.equal(read('app/i18n.ts'),prior,'Only the reviewed offer, release copy and approved Pro price may change in shared translations');
 });
 
 test('linked product and guide pages use current product details rather than obsolete extension instructions',()=>{
