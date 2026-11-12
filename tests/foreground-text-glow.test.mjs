@@ -254,7 +254,7 @@ test("prompt and native file button use AAA-contrast backing without changing no
 
 test("all exported foreground text parents have an own-hover rule, including non-heading divs", () => {
   const routes = walkFiles(path.join(root, "out")).filter(file => /(?:^|\/)index\.html$/.test(file));
-  const expectedRoutes = ["404/index.html", "_not-found/index.html", "contact/index.html", "download/index.html", "features/index.html", "hashcat/index.html", "how-to-use/browser/index.html", "how-to-use/daum-email/index.html", "how-to-use/documents/index.html", "how-to-use/getting-started/index.html", "how-to-use/index.html", "how-to-use/web-research/index.html", "index.html", "pricing/index.html", "privacy/index.html", "product/index.html", "research/index.html", "security/index.html"];
+  const expectedRoutes = ["activate/index.html", "404/index.html", "_not-found/index.html", "contact/index.html", "download/index.html", "features/index.html", "hashcat/index.html", "how-to-use/browser/index.html", "how-to-use/daum-email/index.html", "how-to-use/documents/index.html", "how-to-use/getting-started/index.html", "how-to-use/index.html", "how-to-use/web-research/index.html", "index.html", "pricing/index.html", "privacy/index.html", "product/index.html", "research/index.html", "security/index.html"];
   assert.deepEqual(routes.map(route => path.relative(path.join(root, "out"), route)).sort(), expectedRoutes.sort(), "Every expected exported route must be present");
   const routeCoverage = [];
   let checked = 0;

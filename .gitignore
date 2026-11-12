@@ -1,4 +1,4 @@
-node_modules/
+node_modules
 .next/
 out/
 *.tsbuildinfo
@@ -6,3 +6,7 @@ out/
 .sites-runtime/
 .wrangler/
 .DS_Store
+server/payments/config.php
+server/payments/*.sqlite*
+server/payments/sessions/
+.payment-artifacts/

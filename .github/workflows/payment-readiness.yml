@@ -1,0 +1,47 @@
+name: Payment activation readiness
+on:
+  push:
+    branches: ['feature/paypal-activation-preparation']
+  pull_request:
+    branches: [bluehost]
+permissions:
+  contents: read
+concurrency:
+  group: payment-readiness-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  payment-core:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Verify available PHP runtime
+        run: |
+          php --version
+          php -r 'if (PHP_VERSION_ID < 80200 || !extension_loaded("pdo_sqlite") || !extension_loaded("sodium") || !extension_loaded("curl")) { exit(1); }'
+      - name: PHP syntax and synthetic payment tests
+        run: |
+          find server/payments -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+          php server/payments/tests/run.php
+          php server/payments/http/test.php
+          php server/payments/bin/preflight.php --example
+      - name: No production credentials or release artifacts
+        run: python3 server/payments/bin/check_package.py
+  site:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run build:static
+      - run: node --test tests/*.test.mjs tests/cinematic-engine.test.cjs
+      - run: npx tsc --noEmit
+      - run: npx eslint app/activate
