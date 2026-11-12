@@ -17,16 +17,16 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
-      - name: Verify available PHP runtime
+      - name: Verify Bluehost-compatible PHP 8.3 runtime
         run: |
-          php --version
-          php -r 'if (PHP_VERSION_ID < 80200 || !extension_loaded("pdo_sqlite") || !extension_loaded("sodium") || !extension_loaded("curl")) { exit(1); }'
+          php8.3 --version
+          php8.3 -r 'if (PHP_MAJOR_VERSION !== 8 || PHP_MINOR_VERSION !== 3 || !extension_loaded("pdo_sqlite") || !extension_loaded("sodium") || !extension_loaded("curl")) { exit(1); }'
       - name: PHP syntax and synthetic payment tests
         run: |
-          find server/payments -type f -name '*.php' -print0 | xargs -0 -n1 php -l
-          php server/payments/tests/run.php
-          php server/payments/http/test.php
-          php server/payments/bin/preflight.php --example
+          find server/payments -type f -name '*.php' -print0 | xargs -0 -n1 php8.3 -l
+          php8.3 server/payments/tests/run.php
+          php8.3 server/payments/http/test.php
+          php8.3 server/payments/bin/preflight.php --example
       - name: No production credentials or release artifacts
         run: python3 server/payments/bin/check_package.py
   site:
