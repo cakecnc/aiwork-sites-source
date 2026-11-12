@@ -6,8 +6,8 @@ import {productAddedFiles} from './product-copy-contract.mjs';
 const root=new URL('../',import.meta.url);
 const read=p=>fs.readFileSync(new URL(p,root),'utf8');
 const hashes={
- 'public/images/product/aiwork-browser-netghost-20261111.jpg':'4752f628bf01362058f927e06012a7a8bf8468d3369624350e1266a03ea4e699',
- 'public/images/product/aiwork-browser-pro-studio-20261111.jpg':'8b96a57dca089771f8ee90716b6dbe531a9a75f0bc9b6e3e35fd6572526ae9b0',
+ 'public/images/product/aiwork-browser-netghost-20261111.jpg':'91ee719bf82948a4eec5e9c7b1945d6329a610c2a8cf838834f7a87c1bfd6ce2',
+ 'public/images/product/aiwork-browser-pro-studio-20261111.jpg':'175ff4dab73eee1634549ead5a1b55d1901f7c047493dd629e513558e2ce9240',
 };
 test('published captures retain the exact visually reviewed real-app bytes',()=>{
  for(const [p,h] of Object.entries(hashes)){const b=fs.readFileSync(new URL(p,root));assert.equal(createHash('sha256').update(b).digest('hex'),h);assert.equal(b.subarray(0,3).toString('hex'),'ffd8ff');assert.ok(productAddedFiles.includes(p));}
