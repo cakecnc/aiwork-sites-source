@@ -12,7 +12,12 @@ test('spacing update preserves every content string, screenshot and link',()=>{
  const current = read('app/page.tsx').replace('\n\nimport "./home-spacing.css";','').replace('import PricingPlans from "./components/PricingPlans";\n','');
  const stripPrior = s => s.replace('  PURCHASE_PRODUCTS,\n','').replace('  purchaseInquiryHref,\n','').replace(/      <section className="payment-section" id="payments">[\s\S]*?(?=      <section className="cta-section home-cta")/, '      <PricingPlans />\n\n');
  assert.equal(current, stripPrior(original), 'Only the requested pricing block may change; all other content and spacing stay intact');
- assert.equal(read('app/components/ProductEvidence.tsx').replace('var(--product-evidence-padding, 64px 24px)','64px 24px'),before['app/components/ProductEvidence.tsx']);
+ const evidence=read('app/components/ProductEvidence.tsx');
+ assert.equal(evidence.split('?v=matrix-20261112').length-1,2);
+ assert.ok(evidence.includes('ACTUAL APP · MATRIX · 2026-11-12'));
+ // Normalize only the independently reviewed Matrix capture URL and caption update.
+ const previousEvidence=evidence.replaceAll('?v=matrix-20261112','').replace('ACTUAL APP · MATRIX · 2026-11-12','ACTUAL APP · 2026-11-11').replace('Matrix 테마가 활성화된 실제 AIWORK Browser 캡처입니다. 설명용 합성 이미지가 아닙니다.','설명용 합성 이미지가 아닌 실행 중인 AIWORK Browser 캡처입니다.').replace('These are captures of the running AIWORK Browser with the Matrix theme enabled, not generated product mockups.','These are captures of the running AIWORK Browser, not generated product mockups.');
+ assert.equal(previousEvidence.replace('var(--product-evidence-padding, 64px 24px)','64px 24px'),before['app/components/ProductEvidence.tsx']);
 });
 test('existing cinematic, glow, header and global styles remain byte-identical',()=>{
  for(const f of ['app/globals.css','app/cinematic-theme.css','app/matrix-theme.css','app/header-flow.css'])assert.equal(read(f),before[f]);
