@@ -89,7 +89,7 @@ $tests['fixed prices only and installation format']=function(): void {
     [$s,,$p]=fixture();
     rejects(fn()=>$s->createOrder('custom-0.01',str_repeat('a',32)),'unknown_term');
     rejects(fn()=>$s->createOrder('monthly','arbitrary'),'invalid_installation_id');
-    foreach (['monthly'=>'19.00','half_year'=>'114.00','yearly'=>'228.00'] as $term=>$amount) {
+    foreach (['monthly'=>'18.00','half_year'=>'108.00','yearly'=>'216.00'] as $term=>$amount) {
         $r=$s->createOrder($term,str_repeat('a',32));
         check($p->orders[$r['order_id']]['purchase_units'][0]['amount']['value']===$amount,'Fixed catalog price');
     }

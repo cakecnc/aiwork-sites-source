@@ -16,8 +16,8 @@ function render(locale='ko',page=false){
  return ()=>flatten(exports.default({page}));
 }
 test('monthly, six-month and annual prices use exact approved arithmetic without a discount',()=>{
- assert.equal(PRO_MONTHLY_USD,19);
- assert.deepEqual(PRO_TERMS.map(p=>[p.months,p.totalUsd]),[[1,19],[6,114],[12,228]]);
+ assert.equal(PRO_MONTHLY_USD,18);
+ assert.deepEqual(PRO_TERMS.map(p=>[p.months,p.totalUsd]),[[1,18],[6,108],[12,216]]);
  for(const p of PRO_TERMS)assert.equal(p.totalUsd,p.months*PRO_MONTHLY_USD);
 });
 test('unverified PayPal products stay closed and no query or local state grants Pro',()=>{
@@ -33,7 +33,7 @@ test('unverified PayPal products stay closed and no query or local state grants 
 });
 test('repeated period selection updates the total and accessible checked state, without charging',()=>{
  const draw=render();
- for(const [id,total] of [['yearly',228],['half-year',114],['half-year',114],['monthly',19]]){
+ for(const [id,total] of [['yearly',216],['half-year',108],['half-year',108],['monthly',18]]){
   let nodes=draw();nodes.find(n=>n.type==='input'&&n.props.value===id).props.onChange();nodes=draw();
   assert.deepEqual(nodes.filter(n=>n.type==='input'&&n.props.checked).map(n=>n.props.value),[id]);
   const panel=nodes.find(n=>n.props?.className==='pro-total');
@@ -60,4 +60,21 @@ test('homepage and pricing route share one price component while Matrix assets a
  const prior=read('qa/pricing-home-before.tsx.txt');
  const expected=prior.replace('import AvailabilityNotice from "./components/AvailabilityNotice";','import AvailabilityNotice from "./components/AvailabilityNotice";\nimport PricingPlans from "./components/PricingPlans";').replace('  PURCHASE_PRODUCTS,\n','').replace('  purchaseInquiryHref,\n','').replace(/      <section className="payment-section" id="payments">[\s\S]*?(?=      <section className="cta-section home-cta")/,'      <PricingPlans />\n\n');
  assert.equal(read('app/page.tsx'),expected);
+});
+
+test('disabled PHP checkout catalog and pricing metadata match the approved displayed totals',()=>{
+ const core=read('server/payments/src/Core.php');
+ const gateway=read('server/payments/http/Gateway.php');
+ for(const [id,months,amount] of [['monthly',1,'18.00'],['half_year',6,'108.00'],['yearly',12,'216.00']]){
+  assert.ok(core.includes(`'${id}'=>['months'=>${months},'value'=>'${amount}','currency_code'=>'USD'`));
+  assert.ok(gateway.includes(`['id'=>'${id}','months'=>${months},'amount'=>'${amount}','currency'=>'USD']`));
+ }
+ for(const file of ['app/pro-pricing.ts','app/pricing/page.tsx','server/payments/src/Core.php','server/payments/http/Gateway.php']){
+  assert.doesNotMatch(read(file),/USD (?:19|114|228)\b|'(?:19|114|228)\.00'/);
+ }
+ for(const locale of ['ko','en']){
+  const c=proPricingCopy(locale).text;
+  assert.match(c.description,/USD 18/);assert.match(c.description,/USD 108/);assert.match(c.description,/USD 216/);
+  assert.match(c.calculation,/USD 18/);
+ }
 });

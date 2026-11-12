@@ -1,6 +1,6 @@
 import type { Locale } from "./i18n";
 
-export const PRO_MONTHLY_USD = 19;
+export const PRO_MONTHLY_USD = 18;
 export const PRO_TERMS = [
   { id: "monthly", months: 1, totalUsd: PRO_MONTHLY_USD },
   { id: "half-year", months: 6, totalUsd: PRO_MONTHLY_USD * 6 },
@@ -15,13 +15,13 @@ export const PAYPAL_CHECKOUT_URLS: Record<ProTermId, string | null> = {
 };
 const ko = {
   title: "Free로 시작하고, Pro로 확장하세요.",
-  description: "AIWORK Pro는 월 USD 19입니다. 6개월 USD 114, 1년 USD 228로 월 요금을 그대로 계산하며 별도 할인은 적용하지 않습니다.",
+  description: "AIWORK Pro는 월 USD 18입니다. 6개월 USD 108, 1년 USD 216로 월 요금을 그대로 계산하며 별도 할인은 적용하지 않습니다.",
   month: "월", terms: ["1개월", "6개월", "1년"],
   freeBilling: "기본 버전 · 무료",
   freeFeatures: ["독립 브라우저·탭·북마크와 NetGhost 프로필", "프로젝트 1개", "REA 분석·재구성은 Pro 전용"],
   proFeatures: ["Free 기본 기능과 여러 프로젝트 · 라이선스별 한도", "REA 분석과 정적 웹 화면 재구성", "Hashcat · Studio 추가 이용료 없음"],
   freeAction: "Free 구현 범위 보기", period: "Pro 이용 기간", total: "선택 기간 요금",
-  calculation: "USD 19 × {months}개월 · 할인 없음",
+  calculation: "USD 18 × {months}개월 · 할인 없음",
   checkout: "PayPal로 결제", pending: "PayPal 연결 준비 중", inquiry: "Pro 도입 문의",
   availability: "현재 macOS 개발 빌드 기준입니다. 일반 공개 설치 파일은 준비 중이며, 무료 버전 표시가 즉시 다운로드 가능하다는 뜻은 아닙니다.",
   paymentNote: "정기 자동갱신 여부와 실제 PayPal 상품을 확인한 뒤 결제를 열 예정입니다. 현재 이 화면에서는 결제되거나 Pro 권한이 부여되지 않습니다.",
@@ -31,13 +31,13 @@ const ko = {
 };
 const en: typeof ko = {
   title: "Start with Free. Expand with Pro.",
-  description: "AIWORK Pro is USD 19 per month. Six months is USD 114 and one year is USD 228, calculated at the same monthly rate with no discount.",
+  description: "AIWORK Pro is USD 18 per month. Six months is USD 108 and one year is USD 216, calculated at the same monthly rate with no discount.",
   month: "month", terms: ["1 month", "6 months", "1 year"],
   freeBilling: "Basic version · Free",
   freeFeatures: ["Independent browser, tabs, bookmarks and NetGhost profiles", "1 project", "REA analysis and reconstruction require Pro"],
   proFeatures: ["Free features and multiple projects, within the license limit", "REA analysis and static web-view reconstruction", "Hashcat and Studio at no additional usage charge"],
   freeAction: "View implemented Free features", period: "Pro access period", total: "Price for the selected period",
-  calculation: "USD 19 × {months} months · No discount",
+  calculation: "USD 18 × {months} months · No discount",
   checkout: "Pay with PayPal", pending: "PayPal connection pending", inquiry: "Ask about Pro access",
   availability: "Based on the current macOS development build. A general public installer is still pending; a Free listing does not mean an immediate download is available.",
   paymentNote: "Checkout will open after the recurring-billing model and actual PayPal products are verified. This screen does not currently take payment or grant Pro access.",

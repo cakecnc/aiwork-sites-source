@@ -274,7 +274,7 @@ export const messages: Record<Locale, MessageSet> = {
       products: [
         {
           name: "AIWORK Professional",
-          price: "USD 19",
+          price: "USD 18",
           billing: "출시 전 · 제공 범위 확인",
           features: ["정식 출시 전 구매 문의", "Pro 이용자는 Hashcat · Studio 추가 이용료 없음", "현재 데스크톱 Pro는 서명 라이선스로 활성화"],
           action: "Professional 구매 문의",
@@ -452,7 +452,7 @@ export const messages: Record<Locale, MessageSet> = {
       products: [
         {
           name: "AIWORK Professional",
-          price: "USD 19",
+          price: "USD 18",
           billing: "pre-release · scope review",
           features: ["Pre-release inquiry", "Hashcat and Studio included with Pro", "Desktop Pro uses signed-license activation"],
           action: "Ask about Professional",
@@ -631,7 +631,7 @@ export const messages: Record<Locale, MessageSet> = {
       products: [
         {
           name: "AIWORK Professional",
-          price: "USD 19",
+          price: "USD 18",
           billing: "リリース前・範囲確認",
           features: ["公開前のお問い合わせ", "ProはHashcat・Studioを追加料金なしで利用", "デスクトップProは署名済みライセンスで有効化"],
           action: "Professionalを相談",
@@ -806,7 +806,7 @@ export const messages: Record<Locale, MessageSet> = {
       products: [
         {
           name: "AIWORK Professional",
-          price: "USD 19",
+          price: "USD 18",
           billing: "发布前 · 范围确认",
           features: ["公开发布前咨询", "Pro 包含 Hashcat 和 Studio，无额外使用费", "桌面 Pro 使用签名许可证激活"],
           action: "咨询 Professional",
@@ -985,7 +985,7 @@ export const messages: Record<Locale, MessageSet> = {
       products: [
         {
           name: "AIWORK Professional",
-          price: "USD 19",
+          price: "USD 18",
           billing: "قبل الإطلاق · مراجعة النطاق",
           features: ["استفسار قبل الإصدار العام", "Hashcat وStudio ضمن Pro دون رسوم إضافية", "تفعيل Pro المكتبي بترخيص موقّع"],
           action: "استفسر عن Professional",
@@ -1177,7 +1177,7 @@ export const messages: Record<Locale, MessageSet> = {
       products: [
         {
           name: "AIWORK Professional",
-          price: "USD 19",
+          price: "USD 18",
           billing: "prelanzamiento · revisar alcance",
           features: ["Consulta antes del lanzamiento", "Hashcat y Studio incluidos con Pro", "Pro de escritorio se activa con licencia firmada"],
           action: "Consultar Professional",
@@ -1379,7 +1379,7 @@ export const messages: Record<Locale, MessageSet> = {
       products: [
         {
           name: "AIWORK Professional",
-          price: "USD 19",
+          price: "USD 18",
           billing: "prélancement · périmètre à confirmer",
           features: ["Demande avant lancement", "Hashcat et Studio inclus avec Pro", "Activation de Pro sur ordinateur par licence signée"],
           action: "Demander Professional",
@@ -1584,7 +1584,7 @@ export const messages: Record<Locale, MessageSet> = {
       products: [
         {
           name: "AIWORK Professional",
-          price: "USD 19",
+          price: "USD 18",
           billing: "vor Veröffentlichung · Umfang prüfen",
           features: ["Anfrage vor Veröffentlichung", "Hashcat und Studio ohne Zusatzgebühr mit Pro", "Desktop-Pro wird mit signierter Lizenz aktiviert"],
           action: "Professional anfragen",

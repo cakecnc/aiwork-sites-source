@@ -53,9 +53,9 @@ final readonly class Config {
     }
     public static function term(string $key): array {
         return match($key) {
-            'monthly'=>['months'=>1,'value'=>'19.00','currency_code'=>'USD','sku'=>'aiwork-browser-pro-1m'],
-            'half_year'=>['months'=>6,'value'=>'114.00','currency_code'=>'USD','sku'=>'aiwork-browser-pro-6m'],
-            'yearly'=>['months'=>12,'value'=>'228.00','currency_code'=>'USD','sku'=>'aiwork-browser-pro-12m'],
+            'monthly'=>['months'=>1,'value'=>'18.00','currency_code'=>'USD','sku'=>'aiwork-browser-pro-1m'],
+            'half_year'=>['months'=>6,'value'=>'108.00','currency_code'=>'USD','sku'=>'aiwork-browser-pro-6m'],
+            'yearly'=>['months'=>12,'value'=>'216.00','currency_code'=>'USD','sku'=>'aiwork-browser-pro-12m'],
             default=>throw new PaymentException('unknown_term'),
         };
     }

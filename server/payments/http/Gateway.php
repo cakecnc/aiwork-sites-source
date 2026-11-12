@@ -46,7 +46,7 @@ final class Gateway
         if (!session_start()) throw new \RuntimeException('SESSION_FAILED');
         if (!isset($_SESSION['csrf'])) $_SESSION['csrf'] = bin2hex(random_bytes(32));
         if ($action === 'catalog') self::reply(200, ['enabled'=>true, 'environment'=>$settings['environment'], 'billing_mode'=>'one_time', 'csrf'=>$_SESSION['csrf'], 'terms'=>[
-            ['id'=>'monthly','months'=>1,'amount'=>'19.00','currency'=>'USD'], ['id'=>'half_year','months'=>6,'amount'=>'114.00','currency'=>'USD'], ['id'=>'yearly','months'=>12,'amount'=>'228.00','currency'=>'USD'],
+            ['id'=>'monthly','months'=>1,'amount'=>'18.00','currency'=>'USD'], ['id'=>'half_year','months'=>6,'amount'=>'108.00','currency'=>'USD'], ['id'=>'yearly','months'=>12,'amount'=>'216.00','currency'=>'USD'],
         ]]);
         if ($method === 'POST') {
             $csrf = $_SERVER['HTTP_X_CSRF_TOKEN'] ?? '';

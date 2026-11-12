@@ -4,7 +4,7 @@
 
 This is a **disabled implementation and deployment-preparation branch**, not an active sales launch. No real PayPal product, subscription, payment, webhook registration, production key, customer record or hosting change is created by this source.
 
-The approved display prices are USD 19 for one month, USD 114 for six months and USD 228 for twelve months. Whether these are recurring subscriptions or one-time access passes remains undecided. `mode` therefore defaults to `null`. The implemented provider path requires an explicit `one_time` configuration. `recurring` is deliberately rejected, not silently treated as a one-time sale.
+The approved display prices are USD 18 for one month, USD 108 for six months and USD 216 for twelve months. Whether these are recurring subscriptions or one-time access passes remains undecided. `mode` therefore defaults to `null`. The implemented provider path requires an explicit `one_time` configuration. `recurring` is deliberately rejected, not silently treated as a one-time sale.
 
 The existing homepage checkout URLs remain null. The new `/activate/` page starts closed and requires an enabled, validated same-origin server catalog. Publishing static files does not configure the payment server.
 
